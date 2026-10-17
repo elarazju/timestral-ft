@@ -4,6 +4,8 @@ We use its differentiable block decoder directly, never its inference_mode entry
 Refinement is left in the graph, including dependence on earlier predicted medians.
 """
 
+from functools import lru_cache
+
 import torch
 from safetensors.torch import load_file
 from timestral.config import TimestralConfig
@@ -11,6 +13,28 @@ from timestral.forecaster import TimestralForecaster
 from timestral.loading import resolve_checkpoint
 from timestral.model import TimestralModel
 from timestral.scaler import clamp_nonfinite, cumulative_welford, welford_combine
+
+
+@lru_cache(maxsize=1)
+def _mps_linear_omits_bias():
+    """Detect the M1/macOS 26 fused-linear regression without consuming RNG state.
+
+    See https://github.com/pytorch/pytorch/issues/188438. Check the operation
+    instead of assuming every OS/PyTorch combination on a chip is affected.
+    """
+    with torch.inference_mode():
+        inputs = torch.zeros(10, 6, 8, device="mps")
+        weight = torch.ones(64, 8, device="mps")
+        bias = torch.ones(64, device="mps")
+        output = torch.nn.functional.linear(inputs, weight, bias)
+        return not bool((output == 1).all())
+
+
+class _PortableLinear(torch.nn.Linear):
+    def forward(self, inputs):
+        if inputs.device.type == "mps" and self.bias is not None and _mps_linear_omits_bias():
+            return torch.nn.functional.linear(inputs, self.weight, None) + self.bias
+        return super().forward(inputs)
 
 
 def _finite_floor_sqrt(variance, minimum_scale):
@@ -102,6 +126,13 @@ class PortableTimestralModel(TimestralModel):
     Neural network compute remains on MPS. Only scaling/refinement statistics use
     CPU float64, preserving the upstream forward equations and autograd graph.
     """
+
+    def __init__(self, config):
+        super().__init__(config)
+        for module in self.modules():
+            if isinstance(module, torch.nn.Linear) and module.bias is not None:
+                # Preserve parameter objects, state-dict keys and RNG consumption.
+                module.__class__ = _PortableLinear
 
     def scale(self, inputs, observed):
         if inputs.device.type != "mps":

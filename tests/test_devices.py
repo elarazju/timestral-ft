@@ -3,6 +3,7 @@
 Set TIMESTRAL_TEST_DEVICE=mps/cuda to require that accelerator in a hardware job.
 """
 
+import copy
 import os
 
 import numpy as np
@@ -12,6 +13,7 @@ from safetensors.torch import save_file
 from timestral.forecaster import TimestralForecaster
 
 from timestral_ft import DataConfig, FineTunedModel, TrainConfig, evaluate, export, finetune
+from timestral_ft import compat as compatibility
 from timestral_ft.compat import (
     PortableForecaster,
     PortableTimestralModel,
@@ -114,6 +116,26 @@ def test_accelerator_rng_restore(accelerator):
     expected = torch.rand(50, device=accelerator)
     _restore_rng(saved, generator)
     torch.testing.assert_close(torch.rand(50, device=accelerator), expected, rtol=0, atol=0)
+
+
+@pytest.mark.parametrize("force_workaround", [False, True])
+def test_accelerator_linear_bias_and_gradients(accelerator, monkeypatch, force_workaround):
+    if force_workaround:
+        monkeypatch.setattr(compatibility, "_mps_linear_omits_bias", lambda: True)
+    cpu = compatibility._PortableLinear(8, 16)
+    device = copy.deepcopy(cpu).to(accelerator)
+    # Zero input makes an omitted bias directly observable, independent of matmul accuracy.
+    zeros = torch.zeros(10, 6, 8, device=accelerator)
+    expected_bias = cpu.bias.detach().expand(10, 6, -1)
+    torch.testing.assert_close(device(zeros).cpu(), expected_bias, rtol=1e-5, atol=1e-6)
+    inputs = torch.randn(3, 2, 8).transpose(0, 1).requires_grad_()
+    other = inputs.detach().to(accelerator).requires_grad_()
+    expected, actual = cpu(inputs), device(other)
+    torch.testing.assert_close(actual.cpu(), expected, rtol=1e-3, atol=1e-4)
+    expected.square().mean().backward()
+    actual.square().mean().backward()
+    for reference, candidate in ((inputs, other), (cpu.weight, device.weight), (cpu.bias, device.bias)):
+        torch.testing.assert_close(candidate.grad.cpu(), reference.grad, rtol=1e-3, atol=1e-4)
 
 
 @pytest.mark.parametrize("mode", ["full", "lora"])

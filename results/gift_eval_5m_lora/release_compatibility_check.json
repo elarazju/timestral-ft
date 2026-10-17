@@ -1,0 +1,10 @@
+{
+  "device": "Apple M4 Pro / MPS",
+  "torch": "2.14.1",
+  "runtime_probe_detected_bad_fused_bias": false,
+  "probe_preserves_cpu_and_mps_rng": true,
+  "real_5m_prediction_bitwise_unchanged": true,
+  "quantile_values": 3444,
+  "prediction_sha256": "4bfa677e9995e659248926af1c4d25d3f5015a7e5908e68ad533e443afa2013b",
+  "original_experiment_source_commit": "59fbbbf"
+}

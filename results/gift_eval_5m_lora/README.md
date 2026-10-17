@@ -21,3 +21,11 @@ been submitted or published; model/code links and organization fields remain
 unfilled. Weights retain the base license. Training on GIFT partitions makes
 this a **fine-tuned** method, not a zero-shot claim; base pretraining provenance
 was not independently audited. CUDA hardware has not been validated.
+
+The original experiment source is archived at commit
+[59fbbbf](https://github.com/elarazju/timestral-ft/tree/59fbbbf);
+`source_manifest.json` retains its file checksums. The subsequent release adds
+runtime detection and a GPU bias-add workaround for affected M1/macOS 26 linear
+operations. Experiment metrics and adapters are unchanged. On the original M4
+host the native path remains active, the probe preserves RNG state, and a real
+5M forecast is bitwise unchanged; see [the compatibility check](release_compatibility_check.json).

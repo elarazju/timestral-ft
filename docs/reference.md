@@ -93,6 +93,8 @@ and advancing-frame float64 statistics run on CPU. Device copies preserve the re
 This keeps the upstream equations without casting double-precision statistics to float32; the
 CPU/GPU synchronization adds overhead, so MPS can be slower than CPU for small models/windows.
 CUDA uses its native float64 statistics. Category codes stay on CPU before encoding on all devices.
+An operation probe checks for the [M1/macOS 26 fused-linear bias regression](https://github.com/pytorch/pytorch/issues/188438).
+Affected MPS runtimes compute the matrix product and bias addition separately on GPU; unaffected runtimes keep the native path.
 Checkpoints save accelerator RNG state, including MPS dropout, for same-device resume.
 Accelerator numerical parity is tested with `rtol=1e-3, atol=1e-4`; bitwise equivalence across devices
 is not expected. Exported weights retain the unchanged official CPU/CUDA format. For MPS inference,

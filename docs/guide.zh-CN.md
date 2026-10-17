@@ -43,6 +43,8 @@ MPS 模式下，网络在 Apple GPU 上计算；float64 归一化统计、分类
 在 CPU 上执行，再返回 GPU。尺度更新保留反向传播连接，不把高精度统计直接降为 float32。
 CPU/GPU 同步有开销，因此小模型、小窗口场景下 MPS 可能比 CPU 慢。
 CUDA 使用设备原生 float64；类别编码在各设备下都先保留为 CPU float64。
+运行时还会检测 [M1／macOS 26 的线性层偏置问题](https://github.com/pytorch/pytorch/issues/188438)。
+受影响的 MPS 环境在 GPU 上分别计算矩阵乘法与偏置相加；其他环境保持原计算路径。
 断点保存与恢复包含所选加速器的随机状态，包括 MPS dropout。
 
 导出权重格式保持官方兼容；官方原版推理在 MPS 上仍有 float64 限制，MPS 预测请使用本工具加载。
