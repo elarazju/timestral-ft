@@ -1,3 +1,3 @@
 * text=auto eol=lf
 # Preserve recorded result-file byte checksums across platforms.
-*.csv -text
+*.csv -text whitespace=cr-at-eol
