@@ -161,3 +161,13 @@ diagnostics compare observed 200/800-step checkpoints within the **same
 screening-selected continuation context** for each task. This conditional view
 avoids counting all short screens as if each had been extended; it is not an
 independently optimized objective comparison or a test-set gain claim.
+
+Final testing uses a separate inference batching budget: up to 32 rows and
+1,048,576 row/timestamp tokens per batch, justified by the successful full-history
+42-row inference stress check. The official predictor keeps a whole multivariate
+item even if it exceeds a soft batch budget. These settings never drop input
+rows, shorten history, or alter the frozen training/validation selection. They
+are recorded in `test_execution.json`, whose hash accompanies every test record.
+A resumed test cannot silently change those settings. Test/report runner repairs
+have separate source manifests; the original training source snapshot and
+selected weight hashes stay fixed.

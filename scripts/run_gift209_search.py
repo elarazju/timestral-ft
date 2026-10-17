@@ -48,6 +48,8 @@ def cli():
     p.add_argument('--validation-limit', type=int, default=128)
     p.add_argument('--threads', type=int, default=4)
     p.add_argument('--row-context-budget', type=int, default=65536)
+    p.add_argument('--eval-max-rows', type=int, default=32)
+    p.add_argument('--eval-max-tokens', type=int, default=2**20)
     return p.parse_args()
 
 
@@ -307,9 +309,15 @@ def test(args, protocol, inventory):
     for i in (1, 3, 4, 5):
         exec(compile(''.join(cells[i]['source']), f'{notebook}:cell{i}', 'exec'), namespace)
     os.environ['GIFT_EVAL'] = str(ROOT / '.cache/gift-eval-data')
-    namespace.update(MAX_ROWS=16, MAX_TOKENS=2**17)
+    namespace.update(MAX_ROWS=args.eval_max_rows, MAX_TOKENS=args.eval_max_tokens)
     ev.seasonal_error = seasonal_error_sliced
     device = args.device
+    execution = dict(max_rows=args.eval_max_rows, max_tokens=args.eval_max_tokens, device=device,
+                     context=32768, frozen_selection_sha256=file_sha256(args.run_dir/'frozen_selection.json'))
+    execution_path = args.results_dir/'test_execution.json'
+    if execution_path.exists() and read(execution_path) != execution:
+        raise ValueError('Test execution budget changed; do not mix execution settings in one result directory')
+    atomic_json(execution_path, execution)
     reference = pd.read_csv(ROOT / '.cache/gift-eval/results/Timestral-209M/all_results.csv').set_index('dataset')
     for task in inventory:
         key = task['key']
@@ -330,6 +338,7 @@ def test(args, protocol, inventory):
                 raise FloatingPointError(f'Non-finite test metric {key}')
             record = dict(task=key, kind=kind, metrics=metrics, device=device,
                           seconds=time.perf_counter()-started,
+                          test_execution_sha256=file_sha256(execution_path),
                           frozen_selection_sha256=file_sha256(args.run_dir / 'frozen_selection.json'))
             if kind == 'baseline':
                 record['reference_matches'] = bool(all(np.isclose(v, reference.loc[key, 'eval_metrics/'+m],
