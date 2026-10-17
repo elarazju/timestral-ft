@@ -28,6 +28,23 @@ DATA_REVISION = "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0"
 BASE_REVISION = "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f"
 
 
+def bounded_contexts(requested, max_history, input_rows, row_context_budget=65536, patch_size=32):
+    """Patch-aligned training caps determined only by history shape/resources.
+
+    This limits context times target+covariate rows in one example. It never
+    removes variates or shortens validation/test inference history.
+    """
+    if min(max_history, input_rows, row_context_budget, patch_size) < 1 or not requested:
+        raise ValueError("Context requests, history, rows and budget must be positive")
+    if any(c < patch_size or c % patch_size for c in requested):
+        raise ValueError("Requested contexts must align to a complete patch")
+    resource_cap = (row_context_budget // input_rows // patch_size) * patch_size
+    if resource_cap < patch_size:
+        raise ValueError("Row budget cannot accommodate even one history patch")
+    cap = min(math.ceil(max_history / patch_size) * patch_size, resource_cap)
+    return sorted({min(c, cap) for c in requested})
+
+
 def seasonal_error_sliced(time_series, seasonality, time_axis=0):
     """GluonTS seasonal_error, replacing contiguous range gathers with slices.
 

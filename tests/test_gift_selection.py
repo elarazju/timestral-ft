@@ -134,7 +134,7 @@ def test_search_resume_after_continuation_commit(model, tmp_path, monkeypatch):
         return dict(crps=.9 if changed else 1., mase=.9 if changed else 1., scaled_pinball=.2)
 
     monkeypatch.setattr(GiftValidation, 'measure', measure)
-    args = SimpleNamespace(run_dir=tmp_path/'run', results_dir=tmp_path/'results', contexts=[32, 64],
+    args = SimpleNamespace(run_dir=tmp_path/'run', results_dir=tmp_path/'results', contexts=[32, 64], row_context_budget=65536,
                            max_steps=4, screen_steps=2, eval_every=1, validation_limit=1, threads=2)
     args.results_dir.mkdir()
     key = 'test/D/short'
@@ -164,3 +164,14 @@ def test_search_resume_after_continuation_commit(model, tmp_path, monkeypatch):
         assert json.loads((path/'training_summary.json').read_text())['steps'] == (4 if path == winner else 2)
         if path != winner:
             assert file_sha256(path/'checkpoint.pt') == hashes[path]
+
+
+def test_context_budget_keeps_covariate_rows_and_bounds_training_memory():
+    from timestral_ft.gift import bounded_contexts
+    assert bounded_contexts([256, 2048, 8192], 100000, 1) == [256, 2048, 8192]
+    assert bounded_contexts([256, 2048, 8192], 100000, 7) == [256, 2048, 8192]
+    assert bounded_contexts([256, 2048, 8192], 100000, 42) == [256, 1536]
+    assert bounded_contexts([256, 2048, 8192], 60, 1) == [64]
+    assert bounded_contexts([256, 2048, 8192], 100000, 21) == [256, 2048, 3104]
+    with pytest.raises(ValueError, match='one history patch'):
+        bounded_contexts([256], 100, 3000)

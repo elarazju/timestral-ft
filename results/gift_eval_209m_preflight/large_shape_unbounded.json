@@ -1,0 +1,21 @@
+{
+  "shape": {
+    "targets": 7,
+    "past_covariates": 35,
+    "context": 8192,
+    "horizon": 900,
+    "batch": 1
+  },
+  "records": [
+    {
+      "iteration": 0,
+      "seconds": 76.28054920909926,
+      "loss": 0.27257633209228516,
+      "gradient_norm": 0.06743409484624863,
+      "allocated_bytes": 860704000,
+      "driver_bytes": 59286175744
+    }
+  ],
+  "stopped_for_budget": true,
+  "note": "Successful optimizer updates but excessive latency/Metal driver reservation; not a production setting"
+}

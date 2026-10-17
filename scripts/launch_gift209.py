@@ -44,8 +44,8 @@ def progress(run, results):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--python', type=Path, default=ROOT / '.cache/gift-probe-env/bin/python')
-    parser.add_argument('--run-dir', type=Path, default=ROOT / 'runs/gift-eval-209m-search-v1')
-    parser.add_argument('--results-dir', type=Path, default=ROOT / 'results/gift_eval_209m_lora')
+    parser.add_argument('--run-dir', type=Path, default=ROOT / 'runs/gift-eval-209m-search-v2')
+    parser.add_argument('--results-dir', type=Path, default=ROOT / 'results/gift_eval_209m_lora_v2')
     args = parser.parse_args()
     args.run_dir.mkdir(parents=True, exist_ok=True)
     args.results_dir.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "check": "Incomplete 97-task selection rejects testing before any test result or frozen manifest is created",
+  "exit_code": 1
+}

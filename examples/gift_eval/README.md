@@ -161,3 +161,14 @@ This runs the complete search before the paired official tests and independent
 report. It does not publish weights or submit a leaderboard entry. The default
 backend is MPS; use `--device cpu` or `--device cuda` in a new run directory to
 change the protocol. Long experiments checkpoint each optimizer step.
+
+
+For automatic CPU/MPS worker management, progress receipts, final testing,
+audit and packaging, run:
+
+```sh
+.cache/gift-probe-env/bin/python scripts/launch_gift209.py
+```
+
+The supervisor's current state is saved to
+`results/gift_eval_209m_lora_v2/progress.json`. No remote publication is performed.

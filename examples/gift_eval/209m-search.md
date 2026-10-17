@@ -21,8 +21,11 @@ validation gains do not guarantee test gains or a higher leaderboard rank.
 ## Context, budget, and objective
 
 1. Screen training context caps 256, 2048, and 8192 for 200 optimizer steps each.
-   Cap the candidates at the maximum training-prefix length rounded to a
-   32-step patch; deduplicate the resulting caps for short datasets.
+   Cap candidates at the smaller of the rounded maximum training-prefix
+   length and a per-example budget of 65,536 context timestamps times input
+   rows (targets plus past covariates), rounded down to 32-step patches.
+   Deduplicate the resulting caps. Seven-row inputs retain 8192; 21-row inputs
+   cap at 3104; 42-row inputs cap at 1536. No input rows are dropped.
 2. Use AdamW, weight decay .01, gradient clipping 1, 40-step warmup, and a cosine
    schedule with maximum 800 steps. A screen is a prefix of this schedule,
    **not** a separately scheduled 200-step run.
@@ -33,7 +36,7 @@ validation gains do not guarantee test gains or a higher leaderboard rank.
    stop after six consecutive evaluations without an improvement. Freeze the
    screening decision before continuation so an interrupted run cannot change it.
 5. Each step uses four sampled examples: batch 2 with accumulation 2, or batch 1
-   with accumulation 4 when context times total input rows exceeds 131,072.
+   with accumulation 4 when context times total input rows exceeds 32,768.
    The latter predeclared rule controls activation memory for many covariates.
 6. The training loss remains history-scaled masked pinball over 21 quantiles.
    At each validation point, record that original objective alongside official
@@ -74,8 +77,8 @@ training-prefix shape metadata for device scheduling. No 5M test scores are used
 .cache/gift-probe-env/bin/python scripts/run_gift209_search.py --stage all
 ```
 
-Default directories are `runs/gift-eval-209m-search-v1` and
-`results/gift_eval_209m_lora`. Protocols and source snapshots are immutable;
+Default directories are `runs/gift-eval-209m-search-v2` and
+`results/gift_eval_209m_lora_v2`. Protocols and source snapshots are immutable;
 changed settings require a new output directory. The training environment uses
 MPS for most tasks and CPU for short datasets; CUDA is available by explicit
 selection but has not been verified on this machine.
@@ -114,3 +117,19 @@ unset until the corresponding artifacts are actually available. The base model's
 no-test-leakage declaration is inherited, not independently proven; our own
 adaptation and checkpoint selection use training/validation only. The script
 never uploads weights, opens a leaderboard PR, or claims an official rank.
+
+
+## Resource revision before the full run
+
+The preliminary v1 screens exposed an impractical large-covariate configuration
+on this 48 GB machine: 8192 historical timestamps, seven targets, 35 covariates,
+and H=900 required about 76 seconds for one synthetic microbatch and retained
+about 59 GB in the Metal driver. This number includes cached driver allocations,
+not just live model tensors. No v1 test results were computed.
+
+Version 2 introduces the row/context budget above. The same stress shape with
+history capped at 1536 completed three finite optimizer updates in about
+1.9 seconds per warmed microbatch, retaining about 14.1 GB in the driver. These
+synthetic timing checks say nothing about forecasting quality. Complete v2
+training starts in independent directories; v1 preflight artifacts remain
+separate. Validation/test inference still uses up to 32,768 timestamps.

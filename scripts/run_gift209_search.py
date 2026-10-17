@@ -36,8 +36,8 @@ def read(path):
 def cli():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--stage', choices=['all', 'search', 'test', 'report'], default='all')
-    p.add_argument('--run-dir', type=Path, default=ROOT / 'runs/gift-eval-209m-search-v1')
-    p.add_argument('--results-dir', type=Path, default=ROOT / 'results/gift_eval_209m_lora')
+    p.add_argument('--run-dir', type=Path, default=ROOT / 'runs/gift-eval-209m-search-v2')
+    p.add_argument('--results-dir', type=Path, default=ROOT / 'results/gift_eval_209m_lora_v2')
     p.add_argument('--task', action='append')
     p.add_argument('--worker-device', choices=['cpu', 'mps', 'cuda'])
     p.add_argument('--device', default='mps')
@@ -47,6 +47,7 @@ def cli():
     p.add_argument('--eval-every', type=int, default=100)
     p.add_argument('--validation-limit', type=int, default=128)
     p.add_argument('--threads', type=int, default=4)
+    p.add_argument('--row-context-budget', type=int, default=65536)
     return p.parse_args()
 
 
@@ -82,11 +83,12 @@ def open_protocol(args):
         devices[task['key']] = ('cpu' if prior['data']['train_length_max'] <= 256
                                 and prior['data']['series'] > 1 else args.device)
     protocol = dict(
-        version=1, model=MODEL, base_model=BASE, base_revision=REVISION, base_identity=identity,
+        version=2, model=MODEL, base_model=BASE, base_revision=REVISION, base_identity=identity,
         gift_revision=GIFT_REVISION, data_revision=DATA_REVISION, seed=42,
         train=dict(contexts=args.contexts, screen_steps=args.screen_steps, max_steps=args.max_steps,
                    eval_every=args.eval_every, batch_size=2, gradient_accumulation=2,
-                   microbatch_rule='if context * (targets + past covariates) > 131072, use batch=1 accumulation=4; otherwise batch=2 accumulation=2',
+                   row_context_budget=args.row_context_budget,
+                   microbatch_rule='if context * (targets + past covariates) > row_context_budget/2, use batch=1 accumulation=4; otherwise batch=2 accumulation=2',
                    learning_rates=[1e-4, 3e-4], alternate_lr_rule='screen 3e-4 at best context iff no >=1% Pareto validation gain',
                    warmup_steps=40, weight_decay=.01, gradient_clip=1., rank=8, alpha=16., dropout=0.,
                    patience=6, validation_limit=args.validation_limit),
@@ -96,7 +98,7 @@ def open_protocol(args):
         selected_method='best Pareto validation checkpoint across screened contexts and continued winner; step zero eligible',
         budget_note='200-step screens are prefixes of the 800-step cosine schedule; no independent 200-step schedule claim',
         screen_tie_break='best accepted score, then minimum observed unconstrained geometric metric ratio, then longer context',
-        context_cap='round maximum training-prefix length up to patch=32; deduplicate resulting contexts',
+        context_cap='minimum of rounded maximum training-prefix length and floor(row_context_budget/input_rows/32)*32; deduplicate contexts',
         test_policy='freeze adapter hashes for all 97 tasks before accessing test iterators; one final paired test',
         train_devices=devices, source_sha256=sources(), python=platform.python_version(),
         torch=str(torch.__version__), numpy=np.__version__, pandas=pd.__version__)
@@ -173,7 +175,7 @@ def search_task(args, protocol, task, base):
     from gluonts.time_feature import get_seasonality
 
     from timestral_ft.artifacts import file_sha256
-    from timestral_ft.gift import GiftTrainConfig, GiftWindows, atomic_json, train_gift_task
+    from timestral_ft.gift import GiftTrainConfig, GiftWindows, atomic_json, bounded_contexts, train_gift_task
     from timestral_ft.gift_validation import GiftValidation, GiftValidationConfig
     key = task['key']
     output = task_directory(args, key)
@@ -191,10 +193,11 @@ def search_task(args, protocol, task, base):
         ds = Dataset(task['dataset'], term=task['term'], to_univariate=False)
         device = protocol['train_devices'][key]
         probe = GiftWindows(ds, 32, args.validation_limit, 42)
-        cap = math.ceil(probe.summary['train_length_max'] / 32) * 32
+        input_rows = ds.target_dim + ds.past_feat_dynamic_real_dim
+        contexts = bounded_contexts(args.contexts, probe.summary['train_length_max'], input_rows,
+                                    args.row_context_budget)
         fingerprint = probe.fingerprint
         del probe
-        contexts = sorted({min(c, cap) for c in args.contexts})
         validation = GiftValidation(output / 'baseline_validation.json',
                                     GiftValidationConfig(seasonality=get_seasonality(ds.freq)), protocol['base_identity'])
         candidates = []
@@ -203,7 +206,7 @@ def search_task(args, protocol, task, base):
             import torch
 
             directory = output / 'candidates' / f'ctx{context}_lr{lr:.0e}'
-            batch_size = 1 if context * (ds.target_dim + ds.past_feat_dynamic_real_dim) > 131072 else 2
+            batch_size = 1 if context * input_rows > args.row_context_budget / 2 else 2
             cfg = GiftTrainConfig(context_length=context, max_steps=args.max_steps, batch_size=batch_size,
                                   gradient_accumulation=4 // batch_size, learning_rate=lr, warmup_steps=40,
                                   eval_every=args.eval_every, patience=6,

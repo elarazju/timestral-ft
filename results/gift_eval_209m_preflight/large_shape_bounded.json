@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "batch_size": 1,
+  "targets": 7,
+  "past_covariates": 35,
+  "context": 1536,
+  "horizon": 900,
+  "records": [
+    {
+      "iteration": 0,
+      "seconds": 2.5245629160199314,
+      "loss": 2.2851674556732178,
+      "gradient_norm": 16.557598114013672,
+      "allocated_bytes": 858504448,
+      "driver_bytes": 14071578624
+    },
+    {
+      "iteration": 1,
+      "seconds": 1.8761841668747365,
+      "loss": 1.8771483898162842,
+      "gradient_norm": 13.64560604095459,
+      "allocated_bytes": 859421952,
+      "driver_bytes": 14079967232
+    },
+    {
+      "iteration": 2,
+      "seconds": 1.905765458010137,
+      "loss": 1.5238715410232544,
+      "gradient_norm": 11.199100494384766,
+      "allocated_bytes": 858897664,
+      "driver_bytes": 14088355840
+    }
+  ]
+}
