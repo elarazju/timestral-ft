@@ -1,0 +1,21 @@
+{
+  "task": "bizitobs_service/10S/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 133205.88867724867,
+    "MSE[0.5]": 133205.88867724867,
+    "MAE[0.5]": 83.16751984126984,
+    "MASE[0.5]": 1.632005748049882,
+    "MAPE[0.5]": 0.14944366939484127,
+    "sMAPE[0.5]": 0.09827879567625661,
+    "MSIS": 18.231833371443617,
+    "RMSE[mean]": 364.97381916686663,
+    "NRMSE[mean]": 0.2703842731585359,
+    "ND[0.5]": 0.06161315749719209,
+    "mean_weighted_sum_quantile_loss": 0.05452800942586596
+  },
+  "seconds": 39.727798625128344,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

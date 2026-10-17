@@ -1,0 +1,21 @@
+{
+  "task": "jena_weather/D/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 376.49102182539684,
+    "MSE[0.5]": 376.49102182539684,
+    "MAE[0.5]": 9.739317491319444,
+    "MASE[0.5]": 1.0438157983565999,
+    "MAPE[0.5]": 0.6409946189919099,
+    "sMAPE[0.5]": 0.45280393570188493,
+    "MSIS": 6.877325714094496,
+    "RMSE[mean]": 19.403376557326222,
+    "NRMSE[mean]": 0.116840040223591,
+    "ND[0.5]": 0.05864660947408296,
+    "mean_weighted_sum_quantile_loss": 0.04670092078881023
+  },
+  "seconds": 0.09128366713412106,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

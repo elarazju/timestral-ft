@@ -1,0 +1,21 @@
+{
+  "task": "ett1/15T/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 8.196260540674603,
+    "MSE[0.5]": 8.196260540674603,
+    "MAE[0.5]": 1.559268508184524,
+    "MASE[0.5]": 1.0057043105111434,
+    "MAPE[0.5]": 0.7586404395465118,
+    "sMAPE[0.5]": 0.39681501116071427,
+    "MSIS": 6.862758415932326,
+    "RMSE[mean]": 2.862911200277543,
+    "NRMSE[mean]": 0.5456737054552467,
+    "ND[0.5]": 0.2971981193752145,
+    "mean_weighted_sum_quantile_loss": 0.22827307799710994
+  },
+  "seconds": 8.241039999993518,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

@@ -1,0 +1,21 @@
+{
+  "task": "jena_weather/10T/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 1382.4715728715728,
+    "MSE[0.5]": 1382.4715728715728,
+    "MAE[0.5]": 9.072887919372294,
+    "MASE[0.5]": 0.5544882430663715,
+    "MAPE[0.5]": 0.6896930807916486,
+    "sMAPE[0.5]": 0.5318000522852107,
+    "MSIS": 5.307259905337438,
+    "RMSE[mean]": 37.18160261300705,
+    "NRMSE[mean]": 0.22818283434543846,
+    "ND[0.5]": 0.05568015189363096,
+    "mean_weighted_sum_quantile_loss": 0.04557348081198661
+  },
+  "seconds": 25.225985541008413,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

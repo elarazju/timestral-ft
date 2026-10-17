@@ -1,0 +1,10 @@
+{
+  "steps": 4,
+  "loop_seconds": 10.150658041937277,
+  "wall_seconds": 12.057474750094116,
+  "device": "mps",
+  "horizon": 900,
+  "targets": 2,
+  "past_covariates": 35,
+  "purpose": "Training-prefix-only performance/correctness probe; no test metrics or hyperparameter selection."
+}

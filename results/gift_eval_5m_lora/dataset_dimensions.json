@@ -1,0 +1,332 @@
+[
+  {
+    "dataset": "m4_yearly",
+    "series": 22974,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "m4_quarterly",
+    "series": 24000,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "m4_monthly",
+    "series": 48000,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "m4_weekly",
+    "series": 359,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "m4_daily",
+    "series": 4227,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "m4_hourly",
+    "series": 414,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "electricity/15T",
+    "series": 370,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "electricity/H",
+    "series": 370,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "electricity/D",
+    "series": 370,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "electricity/W",
+    "series": 370,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "solar/10T",
+    "series": 137,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "solar/H",
+    "series": 137,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "solar/D",
+    "series": 137,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "solar/W",
+    "series": 137,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "hospital",
+    "series": 767,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "covid_deaths",
+    "series": 266,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "us_births/D",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "us_births/M",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "us_births/W",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "saugeenday/D",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "saugeenday/M",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "saugeenday/W",
+    "series": 1,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "temperature_rain_with_missing",
+    "series": 32072,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/H",
+    "series": 270,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/D",
+    "series": 270,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "car_parts_with_missing",
+    "series": 2674,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "restaurant",
+    "series": 807,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "hierarchical_sales/D",
+    "series": 118,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "hierarchical_sales/W",
+    "series": 118,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "LOOP_SEATTLE/5T",
+    "series": 323,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "LOOP_SEATTLE/H",
+    "series": 323,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "LOOP_SEATTLE/D",
+    "series": 323,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "SZ_TAXI/15T",
+    "series": 156,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "SZ_TAXI/H",
+    "series": 156,
+    "targets": 1,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "M_DENSE/H",
+    "series": 30,
+    "targets": 1,
+    "past_covariates": 7
+  },
+  {
+    "dataset": "M_DENSE/D",
+    "series": 30,
+    "targets": 1,
+    "past_covariates": 7
+  },
+  {
+    "dataset": "ett1/15T",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett1/H",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett1/D",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett1/W",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett2/15T",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett2/H",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett2/D",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "ett2/W",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "jena_weather/10T",
+    "series": 1,
+    "targets": 21,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "jena_weather/H",
+    "series": 1,
+    "targets": 21,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "jena_weather/D",
+    "series": 1,
+    "targets": 21,
+    "past_covariates": 0
+  },
+  {
+    "dataset": "bitbrains_fast_storage/5T",
+    "series": 1250,
+    "targets": 2,
+    "past_covariates": 5
+  },
+  {
+    "dataset": "bitbrains_fast_storage/H",
+    "series": 1250,
+    "targets": 2,
+    "past_covariates": 5
+  },
+  {
+    "dataset": "bitbrains_rnd/5T",
+    "series": 500,
+    "targets": 2,
+    "past_covariates": 5
+  },
+  {
+    "dataset": "bitbrains_rnd/H",
+    "series": 500,
+    "targets": 2,
+    "past_covariates": 5
+  },
+  {
+    "dataset": "bizitobs_application",
+    "series": 1,
+    "targets": 2,
+    "past_covariates": 35
+  },
+  {
+    "dataset": "bizitobs_service",
+    "series": 21,
+    "targets": 2,
+    "past_covariates": 34
+  },
+  {
+    "dataset": "bizitobs_l2c/5T",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 2
+  },
+  {
+    "dataset": "bizitobs_l2c/H",
+    "series": 1,
+    "targets": 7,
+    "past_covariates": 2
+  }
+]

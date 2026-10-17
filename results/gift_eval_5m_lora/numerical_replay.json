@@ -1,0 +1,12 @@
+[
+  {
+    "task": "m4_yearly/A/short",
+    "adapter_bitwise_identical": true,
+    "maximum_adapter_difference": 0.0
+  },
+  {
+    "task": "solar/10T/long",
+    "adapter_bitwise_identical": true,
+    "maximum_adapter_difference": 0.0
+  }
+]

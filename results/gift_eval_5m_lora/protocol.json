@@ -1,0 +1,43 @@
+{
+  "model": "Timestral-FT-5M-LoRA",
+  "base_model": "mistralai/Timestral-5M",
+  "base_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+  "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+  "train_config": {
+    "context_length": 256,
+    "max_steps": 200,
+    "batch_size": 4,
+    "gradient_accumulation": 4,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "warmup_steps": 20,
+    "gradient_clip": 1.0,
+    "eval_every": 50,
+    "patience": 3,
+    "validation_limit": 512,
+    "seed": 42,
+    "device": "cpu",
+    "num_threads": 4,
+    "rank": 8,
+    "alpha": 16.0,
+    "dropout": 0.0
+  },
+  "eval_max_rows": 128,
+  "eval_max_tokens": 4194304,
+  "eval_context": 32768,
+  "test_selection": "none; checkpoint chosen only on validation loss",
+  "scope": "97 independent task-specific adapters",
+  "python": "3.12.13",
+  "torch": "2.14.1",
+  "numpy": "1.26.4",
+  "pandas": "2.2.3",
+  "validation_objective": "history-scaled masked 21-quantile pinball, up to 512 fixed sampled series",
+  "train_device_overrides": {
+    "jena_weather/10T/medium": "mps",
+    "jena_weather/H/long": "mps",
+    "bizitobs_application/10S/long": "mps",
+    "bizitobs_service/10S/medium": "mps",
+    "bizitobs_service/10S/long": "mps"
+  }
+}

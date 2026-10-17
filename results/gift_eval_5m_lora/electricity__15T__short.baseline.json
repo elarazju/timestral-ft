@@ -1,0 +1,21 @@
+{
+  "task": "electricity/15T/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 132573.97057995494,
+    "MSE[0.5]": 132573.97057995494,
+    "MAE[0.5]": 51.91354712134009,
+    "MASE[0.5]": 1.009445039770634,
+    "MAPE[0.5]": 0.1664654135028099,
+    "sMAPE[0.5]": 0.1522777459391474,
+    "MSIS": 10.738880970513971,
+    "RMSE[mean]": 364.1070866928505,
+    "NRMSE[mean]": 0.7177268415241465,
+    "ND[0.5]": 0.10233183469770128,
+    "mean_weighted_sum_quantile_loss": 0.08502662879210066
+  },
+  "seconds": 143.11278658383526,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

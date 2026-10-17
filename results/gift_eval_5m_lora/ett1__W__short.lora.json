@@ -1,0 +1,21 @@
+{
+  "task": "ett1/W/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 1006871.2857142857,
+    "MSE[0.5]": 1006871.2857142857,
+    "MAE[0.5]": 818.0576171875,
+    "MASE[0.5]": 1.4453984948752878,
+    "MAPE[0.5]": 0.6729586465018136,
+    "sMAPE[0.5]": 0.5177526473999023,
+    "MSIS": 8.355002030022531,
+    "RMSE[mean]": 1003.4297612261088,
+    "NRMSE[mean]": 0.39928865160148524,
+    "ND[0.5]": 0.32552465107272904,
+    "mean_weighted_sum_quantile_loss": 0.23975669595092716
+  },
+  "seconds": 0.3075401659589261,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "dadc56bc7bec55dbeda5b763bad3590bc297eef751ab6f066f80de9c78ae27ca"
+}

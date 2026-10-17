@@ -1,0 +1,70 @@
+{
+  "dataset": "exchange_rate",
+  "sha256": "6a4fbb561dcdee43f071a83badbeec9223a335552278348656738b556f1c2e9d",
+  "url": "https://raw.githubusercontent.com/laiguokun/multivariate-time-series-data/7f402f185cc2435b5e66aed13a3b560ed142e023/exchange_rate/exchange_rate.txt.gz",
+  "rows": 7588,
+  "columns": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+  ],
+  "train": [
+    0,
+    5311
+  ],
+  "validation": [
+    5311,
+    6071
+  ],
+  "test": [
+    6071,
+    7588
+  ],
+  "mean": [
+    0.7229358747881756,
+    1.671601238373188,
+    0.785566129919036,
+    0.755919234795707,
+    0.13668337883637732,
+    0.008887640369045378,
+    0.6048248685746563,
+    0.6267546676708718
+  ],
+  "std_ddof0": [
+    0.10310762163854703,
+    0.16755898212938228,
+    0.10352909488756137,
+    0.10453969339531399,
+    0.02614358389110788,
+    0.0011011469241223103,
+    0.09529949685465589,
+    0.055640679736433614
+  ],
+  "standardization": "fit training partition only; cast to float32 after transform",
+  "timestamps": "synthetic observation indices, no calendar inputs",
+  "frequency": "D",
+  "horizon": 96,
+  "context": 96,
+  "test_stride": 1,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "steps": 200,
+  "threads": 2,
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "device": "cpu",
+  "features": "M",
+  "covariates": [],
+  "point_estimate": "median",
+  "clip_nonnegative": false,
+  "symmetric_averaging": true,
+  "timestral_validation": "masked scaled pinball, stride horizon (toolkit default)",
+  "scope": "matched test protocol; not identical pretraining, training budgets or objectives"
+}

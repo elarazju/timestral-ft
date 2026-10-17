@@ -1,0 +1,21 @@
+{
+  "task": "loop_seattle/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 58.9720409588697,
+    "MSE[0.5]": 58.9720409588697,
+    "MAE[0.5]": 4.142837714206181,
+    "MASE[0.5]": 0.8410348321721751,
+    "MAPE[0.5]": 0.11567338488995624,
+    "sMAPE[0.5]": 0.09552090136013287,
+    "MSIS": 6.889390610023302,
+    "RMSE[mean]": 7.679325553645301,
+    "NRMSE[mean]": 0.13593187252986225,
+    "ND[0.5]": 0.07333244099959556,
+    "mean_weighted_sum_quantile_loss": 0.05899548480632082
+  },
+  "seconds": 30.942456082906574,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

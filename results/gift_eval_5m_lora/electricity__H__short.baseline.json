@@ -1,0 +1,21 @@
+{
+  "task": "electricity/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 1371645.934009009,
+    "MSE[0.5]": 1371645.934009009,
+    "MAE[0.5]": 163.82564576295044,
+    "MASE[0.5]": 0.9118292576376974,
+    "MAPE[0.5]": 0.1530396607664312,
+    "sMAPE[0.5]": 0.11316989857730277,
+    "MSIS": 10.23612027461777,
+    "RMSE[mean]": 1171.1728881804809,
+    "NRMSE[mean]": 0.5528772437918817,
+    "ND[0.5]": 0.07733740458469977,
+    "mean_weighted_sum_quantile_loss": 0.06344256866342515
+  },
+  "seconds": 1355.4457767920103,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

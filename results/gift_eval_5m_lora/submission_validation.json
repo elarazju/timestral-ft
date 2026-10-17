@@ -1,0 +1,12 @@
+{
+  "schema_valid": true,
+  "publicly_submitted": false,
+  "public_weights_and_code_available": false,
+  "remaining_publication_fields": [
+    "model_link",
+    "code_link",
+    "org",
+    "replication_code_available"
+  ],
+  "testdata_leakage_note": "Our adaptation uses official training and validation only. The base entry declares no leakage; base pretraining was not independently audited."
+}

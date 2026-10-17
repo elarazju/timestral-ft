@@ -1,0 +1,29 @@
+{
+  "files_sha256": {
+    "src/timestral_ft/__init__.py": "8b227ae936ae31e605f8f0dafaa864b0d2b3396e0e40f24119d8e64851b84296",
+    "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+    "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+    "src/timestral_ft/compat.py": "e17ea58b6ab0f64c5ac5cef1e2ce85927ee350d5e014c3426d4cf5e8aa367946",
+    "src/timestral_ft/config.py": "738231bcb44d65f04e8f559fbbd0d14b1c633f84abecbaa0ff4b5150a6733a93",
+    "src/timestral_ft/data.py": "997b8e846df750605c878430961b7b9ccfbab3f4e21e5be63a6d8f5172ddae39",
+    "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/trainer.py": "70dcf8ee9e5b15a25554d3b6927c2d94c98f6005b8450b95d67f0b87e08c5b1a",
+    "scripts/audit_validation.py": "d6b199fccf5ad5184977b6ad5e77512239b9e632a96020f5e5dfa20e42136ac2",
+    "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+    "scripts/run_etth1.py": "85310112e70ffc1461a2619de12439dbf0a8d36d853de72975ec9293c42f426b",
+    "scripts/summarize_validation.py": "318dac647352e82d01c35b380cce504afe1d4d2826e23b883054138df4a4bea7",
+    "scripts/transfer_validation.py": "8ab29c817c8279cfac428a96ea82791250258e035520966398abdb783131afd3",
+    "scripts/validate_model_shapes.py": "adc4b47320afcd5031f702b4ba2a7186fd5bf69dea0c09a7086c25cbf27253dd",
+    "scripts/validate_models.py": "f8c392f6534ca771d38d2a86e84a515ee1b0ac52eb6519bf444db0cb8b31ca20",
+    "scripts/verify_etth1_metrics.py": "86c9c906ab71df08aa4b272e38586423b6efbf616774b7826d1845c260ddfb9a",
+    "tests/conftest.py": "84f137c76dd5f66d86d20d8a4754640a3ef5e53d29f1c4ea14320d481bd043b8",
+    "tests/test_api.py": "6ce30b90922cbb60573bb58919d55e0183e013e7b6e71a5b2b558e7c5245343e",
+    "tests/test_benchmark.py": "e9e4b542069c7bbaab1efd31730c89c4b7797052806bd34b0c2e1e9737558fc8",
+    "tests/test_data.py": "035d6578cb4b2681efc284410bc7b91a212dbcb9bd2efbac8201b4602b6ad290",
+    "tests/test_devices.py": "9643711847167dd111f9017e48b06a45c9b9ba4b098d9af3d696f5832fe396e7",
+    "tests/test_integration.py": "eac76ff92e5218e1ff4941078bb3d1d4d33b392f6b8c86a559d9ba3c1b65d1d4",
+    "tests/test_training_path.py": "e6643d9feee892dc5fe005cc52879584c66ab1a700b73b8ef682ce44dba1fef0"
+  },
+  "reproduction": "Run scripts from repository root with locked dependencies; results contain pinned model/data revisions"
+}

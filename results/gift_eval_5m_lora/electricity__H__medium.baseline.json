@@ -1,0 +1,22 @@
+{
+  "task": "electricity/H/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 5728872.9030630635,
+    "MSE[0.5]": 5728872.9030630635,
+    "MAE[0.5]": 244.16613316441442,
+    "MASE[0.5]": 1.0648201833952298,
+    "MAPE[0.5]": 0.19581048506592671,
+    "sMAPE[0.5]": 0.12222940123113264,
+    "MSIS": 8.577267275083395,
+    "RMSE[mean]": 2393.506403388774,
+    "NRMSE[mean]": 0.9342643844409279,
+    "ND[0.5]": 0.09530608390234616,
+    "mean_weighted_sum_quantile_loss": 0.07543671235558415
+  },
+  "seconds": 529.1719610840082,
+  "device": "cpu",
+  "threads": 2,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

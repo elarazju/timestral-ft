@@ -1,0 +1,21 @@
+{
+  "task": "loop_seattle/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 18.65987970846233,
+    "MSE[0.5]": 18.65987970846233,
+    "MAE[0.5]": 2.946048197239422,
+    "MASE[0.5]": 0.8889911412550402,
+    "MAPE[0.5]": 0.05475872657862487,
+    "sMAPE[0.5]": 0.054462250196773816,
+    "MSIS": 7.707734212018416,
+    "RMSE[mean]": 4.3197082897416035,
+    "NRMSE[mean]": 0.0771989622476985,
+    "ND[0.5]": 0.05264981991924989,
+    "mean_weighted_sum_quantile_loss": 0.043067876419753674
+  },
+  "seconds": 5.899737667059526,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "9116226c2570a2382d5caac6f58f1447c5f0e00275443474e8988807ac3ae05e"
+}

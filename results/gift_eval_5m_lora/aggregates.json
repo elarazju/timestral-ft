@@ -1,0 +1,203 @@
+{
+  "tasks": 97,
+  "crps": {
+    "baseline_normalized_gmean": 0.4788640356783985,
+    "lora_normalized_gmean": 0.47900950614331483,
+    "relative_change_percent": 0.03037823976699272,
+    "improved": 51,
+    "regressed": 46
+  },
+  "mase": {
+    "baseline_normalized_gmean": 0.7049053597839939,
+    "lora_normalized_gmean": 0.7052096216872011,
+    "relative_change_percent": 0.04316351109892036,
+    "improved": 45,
+    "regressed": 52
+  },
+  "by_domain": {
+    "Econ/Fin": {
+      "tasks": 6,
+      "crps": {
+        "baseline_normalized_gmean": 0.7487926641472143,
+        "lora_normalized_gmean": 0.7476609607612759,
+        "relative_change_percent": -0.15113708241617507,
+        "improved": 4,
+        "regressed": 2
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.7668742197199772,
+        "lora_normalized_gmean": 0.7660475396254016,
+        "relative_change_percent": -0.10779865502290598,
+        "improved": 3,
+        "regressed": 3
+      }
+    },
+    "Energy": {
+      "tasks": 32,
+      "crps": {
+        "baseline_normalized_gmean": 0.5792217748572799,
+        "lora_normalized_gmean": 0.5796431385992683,
+        "relative_change_percent": 0.07274652996120956,
+        "improved": 17,
+        "regressed": 15
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.8159582899078719,
+        "lora_normalized_gmean": 0.815792209262559,
+        "relative_change_percent": -0.02035406066303036,
+        "improved": 16,
+        "regressed": 16
+      }
+    },
+    "Healthcare": {
+      "tasks": 5,
+      "crps": {
+        "baseline_normalized_gmean": 0.41788545695925966,
+        "lora_normalized_gmean": 0.41444866309613565,
+        "relative_change_percent": -0.8224248549188129,
+        "improved": 4,
+        "regressed": 1
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.5669180453960443,
+        "lora_normalized_gmean": 0.5625808842381074,
+        "relative_change_percent": -0.7650420008957437,
+        "improved": 4,
+        "regressed": 1
+      }
+    },
+    "Nature": {
+      "tasks": 15,
+      "crps": {
+        "baseline_normalized_gmean": 0.3288713794709599,
+        "lora_normalized_gmean": 0.3286631833443293,
+        "relative_change_percent": -0.0633062466443568,
+        "improved": 10,
+        "regressed": 5
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.6969226267452938,
+        "lora_normalized_gmean": 0.6965450352228225,
+        "relative_change_percent": -0.05417983402759008,
+        "improved": 9,
+        "regressed": 6
+      }
+    },
+    "Sales": {
+      "tasks": 4,
+      "crps": {
+        "baseline_normalized_gmean": 0.4152183648017821,
+        "lora_normalized_gmean": 0.4148620566365472,
+        "relative_change_percent": -0.08581223650957481,
+        "improved": 3,
+        "regressed": 1
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.6917481243156138,
+        "lora_normalized_gmean": 0.6917618409664014,
+        "relative_change_percent": 0.0019828967084078997,
+        "improved": 2,
+        "regressed": 2
+      }
+    },
+    "Transport": {
+      "tasks": 15,
+      "crps": {
+        "baseline_normalized_gmean": 0.4521126169514253,
+        "lora_normalized_gmean": 0.4534502439607234,
+        "relative_change_percent": 0.29586146441071826,
+        "improved": 4,
+        "regressed": 11
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.6043154570708732,
+        "lora_normalized_gmean": 0.6054874135809715,
+        "relative_change_percent": 0.19393124838784637,
+        "improved": 5,
+        "regressed": 10
+      }
+    },
+    "Web/CloudOps": {
+      "tasks": 20,
+      "crps": {
+        "baseline_normalized_gmean": 0.45503503443700694,
+        "lora_normalized_gmean": 0.45560822865297473,
+        "relative_change_percent": 0.12596705145506704,
+        "improved": 9,
+        "regressed": 11
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.652593279308738,
+        "lora_normalized_gmean": 0.6549544615353851,
+        "relative_change_percent": 0.361815283961886,
+        "improved": 6,
+        "regressed": 14
+      }
+    }
+  },
+  "by_term": {
+    "short": {
+      "tasks": 55,
+      "crps": {
+        "baseline_normalized_gmean": 0.4935265791396637,
+        "lora_normalized_gmean": 0.49311245947591914,
+        "relative_change_percent": -0.08391030620203965,
+        "improved": 33,
+        "regressed": 22
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.6734314765773654,
+        "lora_normalized_gmean": 0.6726179605029402,
+        "relative_change_percent": -0.12080161125817002,
+        "improved": 31,
+        "regressed": 24
+      }
+    },
+    "medium": {
+      "tasks": 21,
+      "crps": {
+        "baseline_normalized_gmean": 0.4617915319468679,
+        "lora_normalized_gmean": 0.46293587893746635,
+        "relative_change_percent": 0.24780597118660985,
+        "improved": 10,
+        "regressed": 11
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.7374930639162739,
+        "lora_normalized_gmean": 0.7400736650039027,
+        "relative_change_percent": 0.34991530278605243,
+        "improved": 7,
+        "regressed": 14
+      }
+    },
+    "long": {
+      "tasks": 21,
+      "crps": {
+        "baseline_normalized_gmean": 0.4588527505975362,
+        "lora_normalized_gmean": 0.4593699630423957,
+        "relative_change_percent": 0.11271861053157028,
+        "improved": 8,
+        "regressed": 13
+      },
+      "mase": {
+        "baseline_normalized_gmean": 0.759379350520971,
+        "lora_normalized_gmean": 0.7606455552879273,
+        "relative_change_percent": 0.16674205929982922,
+        "improved": 7,
+        "regressed": 14
+      }
+    }
+  },
+  "training_seconds": 12525.88097112719,
+  "training_devices": {
+    "cpu": 92,
+    "mps": 5
+  },
+  "baseline_reference_matches": 97,
+  "best_step_counts": {
+    "50": 23,
+    "100": 6,
+    "150": 4,
+    "200": 64
+  }
+}

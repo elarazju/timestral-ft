@@ -1,0 +1,21 @@
+{
+  "task": "m_dense/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 8557.671851851852,
+    "MSE[0.5]": 8557.671851851852,
+    "MAE[0.5]": 46.51623842592593,
+    "MASE[0.5]": 0.6850972115124484,
+    "MAPE[0.5]": 0.12499739842736518,
+    "sMAPE[0.5]": 0.09925500940393518,
+    "MSIS": 7.28560097783196,
+    "RMSE[mean]": 92.50768536641618,
+    "NRMSE[mean]": 0.16014448704841602,
+    "ND[0.5]": 0.08052648936826726,
+    "mean_weighted_sum_quantile_loss": 0.06601451237760496
+  },
+  "seconds": 4.54016058309935,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "eac41e39054745978cb604c42eb151822a2f1bf7dc6804017c391a1de68c506c"
+}

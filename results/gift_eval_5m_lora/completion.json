@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "training_tasks": 97,
+  "baseline_tasks": 97,
+  "lora_tasks": 97,
+  "official_schema_valid": true,
+  "publicly_submitted": false
+}

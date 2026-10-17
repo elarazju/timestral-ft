@@ -1,0 +1,21 @@
+{
+  "task": "bitbrains_rnd/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 1897571.5585865905,
+    "MSE[0.5]": 1897571.5585865905,
+    "MAE[0.5]": 144.42561591577513,
+    "MASE[0.5]": 5.831199550603761,
+    "MAPE[0.5]": 1.0588462678226382,
+    "sMAPE[0.5]": 0.43881450108218356,
+    "MSIS": 195.74185012646663,
+    "RMSE[mean]": 1377.5237052721054,
+    "NRMSE[mean]": 6.028717976776749,
+    "ND[0.5]": 0.6320771857835259,
+    "mean_weighted_sum_quantile_loss": 0.5958937529337667
+  },
+  "seconds": 28.421003333991393,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

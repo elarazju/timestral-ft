@@ -1,0 +1,22 @@
+[
+  {
+    "task": "hospital/M/short",
+    "all_11_metrics_bitwise_equal": true,
+    "max_abs_difference": 0.0
+  },
+  {
+    "task": "ett1/H/short",
+    "all_11_metrics_bitwise_equal": true,
+    "max_abs_difference": 0.0
+  },
+  {
+    "task": "ett1/H/long",
+    "all_11_metrics_bitwise_equal": true,
+    "max_abs_difference": 0.0
+  },
+  {
+    "task": "bizitobs_l2c/H/short",
+    "all_11_metrics_bitwise_equal": true,
+    "max_abs_difference": 0.0
+  }
+]

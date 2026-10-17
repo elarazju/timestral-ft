@@ -1,0 +1,21 @@
+{
+  "task": "sz_taxi/15T/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 16.68401078630571,
+    "MSE[0.5]": 16.68401078630571,
+    "MAE[0.5]": 2.7237249241643773,
+    "MASE[0.5]": 0.5435005991019163,
+    "MAPE[0.5]": 1084228751646.3373,
+    "sMAPE[0.5]": 0.3923384255396432,
+    "MSIS": 3.815297295956569,
+    "RMSE[mean]": 4.084606564444819,
+    "NRMSE[mean]": 0.38192818291431135,
+    "ND[0.5]": 0.25467992929838384,
+    "mean_weighted_sum_quantile_loss": 0.20001193920219504
+  },
+  "seconds": 4.935398959089071,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

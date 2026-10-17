@@ -1,0 +1,120 @@
+{
+  "tslib_revision": "4e938a1767106324dd753b2a44832bf870a0252e",
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "data_sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+  "existing_experiment": {
+    "OT_train_mean": 17.1282616982271,
+    "OT_train_std_ddof0": 9.176491024944333,
+    "rows": [
+      {
+        "mode": "zero-shot",
+        "raw_mae": 1.897856637980375,
+        "raw_mse": 6.135291889675455,
+        "standardized_mae": 0.20681724995114764,
+        "standardized_mse": 0.07285878774178389,
+        "windows": 30,
+        "stride": 96,
+        "context": 256,
+        "horizon": 96,
+        "target_columns": [
+          "OT"
+        ],
+        "prediction_file_sha256": "dc641489ee736a1e0e2fec07ebf141a43ccf5942a4eb4595e28a3e091029d853"
+      },
+      {
+        "mode": "full",
+        "raw_mae": 1.658970516992526,
+        "raw_mse": 4.843624331389745,
+        "standardized_mae": 0.1807848460248006,
+        "standardized_mse": 0.05751977304544074,
+        "windows": 30,
+        "stride": 96,
+        "context": 256,
+        "horizon": 96,
+        "target_columns": [
+          "OT"
+        ],
+        "prediction_file_sha256": "97ebe59fc7f2cc78424ccf49517889ee92bf9e231ce09e789036ddaa74543edb"
+      },
+      {
+        "mode": "lora",
+        "raw_mae": 1.6570159962297313,
+        "raw_mse": 4.84439598068008,
+        "standardized_mae": 0.180571853851923,
+        "standardized_mse": 0.05752893665702867,
+        "windows": 30,
+        "stride": 96,
+        "context": 256,
+        "horizon": 96,
+        "target_columns": [
+          "OT"
+        ],
+        "prediction_file_sha256": "1b871a42a24412465cdf14395f6b00857642c36bcfccf2ac10b925fa0702cf5b"
+      }
+    ],
+    "verified": "All 2880 saved labels and timestamps per mode match raw ETTh1 OT test data"
+  },
+  "scope": "Metric/protocol verification; not a reproduction of a TSLib model's training",
+  "source_paths": [
+    "data_provider/data_loader.py",
+    "exp/exp_long_term_forecasting.py",
+    "utils/metrics.py",
+    "scripts/long_term_forecast/ETT_script/TimesNet_ETTh1.sh"
+  ],
+  "important_differences": [
+    "Original-unit MAE versus train-standardized MSE/MAE",
+    "OT plus extra covariates versus M seven-target / S OT-only tasks",
+    "Context 256 versus 96 in the cited TimesNet script",
+    "Stride 96, 30 windows versus stride 1, 2785 overlapping windows",
+    "Median forecast / pinball adaptation versus point models trained with MSE"
+  ],
+  "standard_numeric_control": [
+    {
+      "model": "Timestral-5M base (zero-shot)",
+      "features": "S",
+      "columns": [
+        "OT"
+      ],
+      "context": 96,
+      "horizon": 96,
+      "stride": 1,
+      "windows": 2785,
+      "scored_values_including_overlaps": 267360,
+      "standardized_mae": 0.18253387476031666,
+      "standardized_mse": 0.0574896499566476,
+      "seconds": 1.6171580420341343,
+      "input_scale": "Per-column train [0,8640) population mean/std, then float32",
+      "point_estimate": "median",
+      "symmetric_averaging": true,
+      "clip_nonnegative": false,
+      "calendar_covariates": false
+    },
+    {
+      "model": "Timestral-5M base (zero-shot)",
+      "features": "M",
+      "columns": [
+        "HUFL",
+        "HULL",
+        "MUFL",
+        "MULL",
+        "LUFL",
+        "LULL",
+        "OT"
+      ],
+      "context": 96,
+      "horizon": 96,
+      "stride": 1,
+      "windows": 2785,
+      "scored_values_including_overlaps": 1871520,
+      "standardized_mae": 0.40120586449646684,
+      "standardized_mse": 0.4338496392582707,
+      "seconds": 5.670368374790996,
+      "input_scale": "Per-column train [0,8640) population mean/std, then float32",
+      "point_estimate": "median",
+      "symmetric_averaging": true,
+      "clip_nonnegative": false,
+      "calendar_covariates": false
+    }
+  ],
+  "control_limits": "Uses TSLib numeric task/split/scaling/window settings, but the model is the unmodified Timestral base. No TSLib model training or calendar embeddings are reproduced; these are not direct head-to-head leaderboard scores."
+}

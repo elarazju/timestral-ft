@@ -1,0 +1,10 @@
+{
+  "model": "Timestral-FT-5M-LoRA",
+  "model_type": "fine-tuned",
+  "model_dtype": "float32",
+  "model_link": null,
+  "code_link": null,
+  "org": null,
+  "testdata_leakage": "No",
+  "replication_code_available": "No"
+}

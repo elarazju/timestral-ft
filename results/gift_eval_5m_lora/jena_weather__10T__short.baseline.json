@@ -1,0 +1,21 @@
+{
+  "task": "jena_weather/10T/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 804.8746031746032,
+    "MSE[0.5]": 804.8746031746032,
+    "MAE[0.5]": 5.472094339037699,
+    "MASE[0.5]": 0.2575970553993249,
+    "MAPE[0.5]": 0.3418363504001919,
+    "sMAPE[0.5]": 0.41436129504261515,
+    "MSIS": 2.0394080827180106,
+    "RMSE[mean]": 28.370312003476506,
+    "NRMSE[mean]": 0.1762152082333886,
+    "ND[0.5]": 0.03398856675626667,
+    "mean_weighted_sum_quantile_loss": 0.026855319558051736
+  },
+  "seconds": 9.2881928330753,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

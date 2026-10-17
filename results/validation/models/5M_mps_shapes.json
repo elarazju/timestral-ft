@@ -1,0 +1,38 @@
+{
+  "size": "5M",
+  "device": "mps",
+  "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "passed": true,
+  "shapes": [
+    {
+      "context": 256,
+      "horizon": 96,
+      "targets": 7,
+      "batch": 1,
+      "full_finite_backward": true,
+      "loss": 0.29679763317108154,
+      "seconds": 1.8554551671259105
+    },
+    {
+      "context": 1024,
+      "horizon": 192,
+      "targets": 7,
+      "batch": 1,
+      "full_finite_backward": true,
+      "loss": 0.1889881193637848,
+      "seconds": 0.7354521669913083
+    },
+    {
+      "context": 256,
+      "horizon": 1024,
+      "targets": 7,
+      "batch": 1,
+      "full_finite_backward": true,
+      "loss": 0.5524976849555969,
+      "seconds": 0.5404845830053091
+    }
+  ],
+  "lora_256_96_backward": true,
+  "data_sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+  "scope": "single batch finite-gradient shape acceptance, no optimizer updates or quality claims"
+}

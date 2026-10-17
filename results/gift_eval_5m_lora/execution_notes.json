@@ -1,0 +1,46 @@
+{
+  "training_device": "CPU for all originally started tasks; five previously unstarted high-dimensional long tasks use MPS, as fixed in protocol.train_device_overrides.",
+  "evaluation_devices": "CPU for small tasks and M4; MPS for larger batches; recorded per result (early M4 records use CPU).",
+  "numerical_correction": {
+    "task": "solar/H/medium",
+    "paused_after_step": 57,
+    "first_failure_step": 58,
+    "reason": "All gradient elements finite, FP32 L2 norm overflow; recompute norm in FP64 before clipping. Real nonfinite gradients still terminate.",
+    "evidence": "numerical_boundary.json",
+    "resume": "Exact RNG/optimizer checkpoint at step 57; no task or batch skipped."
+  },
+  "additional_regression_fix": "Zero-variance advancing-frame standard deviation has unchanged forward values and a finite derivative on the scale floor.",
+  "inference_device_probe": {
+    "source": "64 electricity/15T official training prefixes only, last 24576 samples, H48, base 5M",
+    "warm_cpu_seconds": 2.128628083039075,
+    "warm_mps_seconds": 0.8179385000839829,
+    "forecast_parity_rtol": 0.001,
+    "forecast_parity_atol": 1e-05,
+    "all_quantiles_match": true
+  },
+  "interrupted_cpu_evaluation": "An incomplete electricity/15T/short CPU pass was discarded before an atomic metric record was written; rerun on MPS.",
+  "hyperparameter_policy": "Seed, sampling, objective, learning rate, step budget and checkpoint criterion fixed before test evaluation; no tuning against test metrics.",
+  "runtime_thread_policy": {
+    "OMP_WAIT_POLICY": "PASSIVE",
+    "KMP_BLOCKTIME": "0",
+    "torch_num_threads": 4,
+    "purpose": "Avoid spin-wait overhead across independent local processes; no sampling or optimization hyperparameter changes."
+  },
+  "parallel_execution": "Four independent CPU training processes, per-task advisory file locks; atomic result files. CPU/MPS evaluation workers claim independent task/kind jobs.",
+  "metric_optimization": {
+    "function": "GluonTS full-history seasonal_error",
+    "change": "Replace contiguous np.take(range(...)) with equivalent slices; no history truncation, masking or reduction changes.",
+    "parity": "seasonal_metric_parity.json (four tasks, all eleven metrics bitwise equal)"
+  },
+  "mps_norm_boundary": "The overflow regression also runs on MPS: copy gradients to CPU before FP64 conversion, avoiding the unsupported fused device/dtype copy.",
+  "hardware_selection": {
+    "rule": "At least 20 target+past-covariate rows, horizon >=480, and no existing formal checkpoint at selection time.",
+    "evidence": [
+      "cpu_heavy_probe.json",
+      "mps_heavy_probe.json"
+    ],
+    "selection_data": "official training prefixes only; runtime and input dimensions, never validation/test scores",
+    "partial_cpu_work_discarded": false,
+    "adapter_initialization": "same CPU-seeded initialization on both backends"
+  }
+}

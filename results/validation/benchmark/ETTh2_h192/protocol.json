@@ -1,0 +1,67 @@
+{
+  "dataset": "ETTh2",
+  "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b",
+  "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh2.csv",
+  "rows": 14400,
+  "columns": [
+    "HUFL",
+    "HULL",
+    "MUFL",
+    "MULL",
+    "LUFL",
+    "LULL",
+    "OT"
+  ],
+  "train": [
+    0,
+    8640
+  ],
+  "validation": [
+    8640,
+    11520
+  ],
+  "test": [
+    11520,
+    14400
+  ],
+  "mean": [
+    41.53683496078959,
+    12.273452896210882,
+    46.60977329964991,
+    10.526153112865156,
+    1.1869920139097505,
+    -2.373217913729173,
+    26.872023494265697
+  ],
+  "std_ddof0": [
+    10.448841072588486,
+    4.587112566531959,
+    16.858190332598408,
+    3.0186055666829184,
+    4.641011217319063,
+    8.460910779279644,
+    11.584718923414682
+  ],
+  "standardization": "fit training partition only; cast to float32 after transform",
+  "timestamps": "original hourly dates",
+  "frequency": "h",
+  "horizon": 192,
+  "context": 96,
+  "test_stride": 1,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "steps": 200,
+  "threads": 2,
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "device": "cpu",
+  "features": "M",
+  "covariates": [],
+  "point_estimate": "median",
+  "clip_nonnegative": false,
+  "symmetric_averaging": true,
+  "timestral_validation": "masked scaled pinball, stride horizon (toolkit default)",
+  "scope": "matched test protocol; not identical pretraining, training budgets or objectives"
+}

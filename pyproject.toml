@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "timestral-ft"
+version = "0.1.0"
+description = "Community full-parameter and LoRA fine-tuning for Timestral"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = [
+  "timestral @ git+https://github.com/mistralai/timestral.git@a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+  "torch>=2.4", "numpy>=1.24", "pandas>=2.1", "pyarrow>=15",
+  "safetensors>=0.4", "huggingface-hub>=0.23", "PyYAML>=6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.11", "build>=1"]
+
+[project.urls]
+Repository = "https://github.com/elarazju/timestral-ft"
+Documentation = "https://github.com/elarazju/timestral-ft#documentation"
+Issues = "https://github.com/elarazju/timestral-ft/issues"
+
+[project.scripts]
+timestral-ft = "timestral_ft.cli:main"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/timestral_ft"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires downloaded Timestral weights (opt-in)"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

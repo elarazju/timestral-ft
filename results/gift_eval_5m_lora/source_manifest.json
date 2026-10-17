@@ -1,0 +1,15 @@
+{
+  "src/timestral_ft/gift.py": "c2dfa27055e577cb54e7b0ca2509f113cf350aa9195d383e9cb928ae0ecae683",
+  "src/timestral_ft/compat.py": "d316e442b0c6df80f24df5c13bc798d4a17ce745abde830dd5af45eb504b0a4f",
+  "src/timestral_ft/trainer.py": "eee824c494a3400794ad3ad049bc2bc9b03dc8367add4064ac22e8aae729a1bd",
+  "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+  "scripts/run_gift_eval.py": "48f229964666e7b4bca3b4e3f78e388e88aa160c669ed9ec1a607279fa39e10c",
+  "scripts/audit_gift_eval.py": "bb1d768648830f1d3ee32710bcdecb0978fc046861f816111adca1611c9e79fc",
+  "scripts/summarize_gift_eval.py": "30a8b59a2c28e8b5b1b6e25ca52568ab261cabccfbf45a4cad83ebb9a4819e7d",
+  "tests/test_gift.py": "e522488929f5f87d64ed6410d3f5c66653e96af45c7e01b03beac52baa3614f1",
+  "tests/test_training_path.py": "61ed49701590a3fce1658ef3299cdd6bf6075f93021867baea50b1727f3bd36f",
+  "scripts/package_gift_adapters.py": "484b8a5b1bbcbe54f239869fd35c22ec947c1234c86c679eb8fdc1fb0eaf6f9e",
+  ".cache/gift-eval/notebooks/timestral.ipynb": "a04b708eaf44537d5dd10d78bb509caee38f3b27b7fc1245b86d7e066d6d731d",
+  ".cache/gift-eval/src/gift_eval/data.py": "5a3ddfd9701418a43a8a8a15090b6e654645888cdd36912e65fd4a48608da35c",
+  ".cache/gift-eval/scripts/validate_results.py": "9521e26251d4bd03ecc1b00b4d4c40e1bc73548303c081c77d1e4ca50bf4022e"
+}

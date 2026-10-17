@@ -1,0 +1,14 @@
+{
+  "python": "3.12.13 (main, Mar  3 2026, 15:35:03) [Clang 21.1.4 ]",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "device": "cpu",
+  "threads": 4,
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "data_sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+  "max_steps": 200,
+  "notes": "Single seed; adaptation demonstration. Dataset may overlap with pretraining."
+}

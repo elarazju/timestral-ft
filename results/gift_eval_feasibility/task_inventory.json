@@ -1,0 +1,584 @@
+[
+  {
+    "dataset": "m4_yearly",
+    "term": "short",
+    "key": "m4_yearly/A/short",
+    "horizon": 6
+  },
+  {
+    "dataset": "m4_quarterly",
+    "term": "short",
+    "key": "m4_quarterly/Q/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "m4_monthly",
+    "term": "short",
+    "key": "m4_monthly/M/short",
+    "horizon": 18
+  },
+  {
+    "dataset": "m4_weekly",
+    "term": "short",
+    "key": "m4_weekly/W/short",
+    "horizon": 13
+  },
+  {
+    "dataset": "m4_daily",
+    "term": "short",
+    "key": "m4_daily/D/short",
+    "horizon": 14
+  },
+  {
+    "dataset": "m4_hourly",
+    "term": "short",
+    "key": "m4_hourly/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "electricity/15T",
+    "term": "short",
+    "key": "electricity/15T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "electricity/15T",
+    "term": "medium",
+    "key": "electricity/15T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "electricity/15T",
+    "term": "long",
+    "key": "electricity/15T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "electricity/H",
+    "term": "short",
+    "key": "electricity/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "electricity/H",
+    "term": "medium",
+    "key": "electricity/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "electricity/H",
+    "term": "long",
+    "key": "electricity/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "electricity/D",
+    "term": "short",
+    "key": "electricity/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "electricity/W",
+    "term": "short",
+    "key": "electricity/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "solar/10T",
+    "term": "short",
+    "key": "solar/10T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "solar/10T",
+    "term": "medium",
+    "key": "solar/10T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "solar/10T",
+    "term": "long",
+    "key": "solar/10T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "solar/H",
+    "term": "short",
+    "key": "solar/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "solar/H",
+    "term": "medium",
+    "key": "solar/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "solar/H",
+    "term": "long",
+    "key": "solar/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "solar/D",
+    "term": "short",
+    "key": "solar/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "solar/W",
+    "term": "short",
+    "key": "solar/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "hospital",
+    "term": "short",
+    "key": "hospital/M/short",
+    "horizon": 12
+  },
+  {
+    "dataset": "covid_deaths",
+    "term": "short",
+    "key": "covid_deaths/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "us_births/D",
+    "term": "short",
+    "key": "us_births/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "us_births/M",
+    "term": "short",
+    "key": "us_births/M/short",
+    "horizon": 12
+  },
+  {
+    "dataset": "us_births/W",
+    "term": "short",
+    "key": "us_births/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "saugeenday/D",
+    "term": "short",
+    "key": "saugeen/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "saugeenday/M",
+    "term": "short",
+    "key": "saugeen/M/short",
+    "horizon": 12
+  },
+  {
+    "dataset": "saugeenday/W",
+    "term": "short",
+    "key": "saugeen/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "temperature_rain_with_missing",
+    "term": "short",
+    "key": "temperature_rain/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/H",
+    "term": "short",
+    "key": "kdd_cup_2018/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/H",
+    "term": "medium",
+    "key": "kdd_cup_2018/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/H",
+    "term": "long",
+    "key": "kdd_cup_2018/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "kdd_cup_2018_with_missing/D",
+    "term": "short",
+    "key": "kdd_cup_2018/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "car_parts_with_missing",
+    "term": "short",
+    "key": "car_parts/M/short",
+    "horizon": 12
+  },
+  {
+    "dataset": "restaurant",
+    "term": "short",
+    "key": "restaurant/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "hierarchical_sales/D",
+    "term": "short",
+    "key": "hierarchical_sales/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "hierarchical_sales/W",
+    "term": "short",
+    "key": "hierarchical_sales/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "LOOP_SEATTLE/5T",
+    "term": "short",
+    "key": "loop_seattle/5T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "LOOP_SEATTLE/5T",
+    "term": "medium",
+    "key": "loop_seattle/5T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "LOOP_SEATTLE/5T",
+    "term": "long",
+    "key": "loop_seattle/5T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "LOOP_SEATTLE/H",
+    "term": "short",
+    "key": "loop_seattle/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "LOOP_SEATTLE/H",
+    "term": "medium",
+    "key": "loop_seattle/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "LOOP_SEATTLE/H",
+    "term": "long",
+    "key": "loop_seattle/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "LOOP_SEATTLE/D",
+    "term": "short",
+    "key": "loop_seattle/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "SZ_TAXI/15T",
+    "term": "short",
+    "key": "sz_taxi/15T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "SZ_TAXI/15T",
+    "term": "medium",
+    "key": "sz_taxi/15T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "SZ_TAXI/15T",
+    "term": "long",
+    "key": "sz_taxi/15T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "SZ_TAXI/H",
+    "term": "short",
+    "key": "sz_taxi/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "M_DENSE/H",
+    "term": "short",
+    "key": "m_dense/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "M_DENSE/H",
+    "term": "medium",
+    "key": "m_dense/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "M_DENSE/H",
+    "term": "long",
+    "key": "m_dense/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "M_DENSE/D",
+    "term": "short",
+    "key": "m_dense/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "ett1/15T",
+    "term": "short",
+    "key": "ett1/15T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "ett1/15T",
+    "term": "medium",
+    "key": "ett1/15T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "ett1/15T",
+    "term": "long",
+    "key": "ett1/15T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "ett1/H",
+    "term": "short",
+    "key": "ett1/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "ett1/H",
+    "term": "medium",
+    "key": "ett1/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "ett1/H",
+    "term": "long",
+    "key": "ett1/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "ett1/D",
+    "term": "short",
+    "key": "ett1/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "ett1/W",
+    "term": "short",
+    "key": "ett1/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "ett2/15T",
+    "term": "short",
+    "key": "ett2/15T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "ett2/15T",
+    "term": "medium",
+    "key": "ett2/15T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "ett2/15T",
+    "term": "long",
+    "key": "ett2/15T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "ett2/H",
+    "term": "short",
+    "key": "ett2/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "ett2/H",
+    "term": "medium",
+    "key": "ett2/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "ett2/H",
+    "term": "long",
+    "key": "ett2/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "ett2/D",
+    "term": "short",
+    "key": "ett2/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "ett2/W",
+    "term": "short",
+    "key": "ett2/W/short",
+    "horizon": 8
+  },
+  {
+    "dataset": "jena_weather/10T",
+    "term": "short",
+    "key": "jena_weather/10T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "jena_weather/10T",
+    "term": "medium",
+    "key": "jena_weather/10T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "jena_weather/10T",
+    "term": "long",
+    "key": "jena_weather/10T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "jena_weather/H",
+    "term": "short",
+    "key": "jena_weather/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "jena_weather/H",
+    "term": "medium",
+    "key": "jena_weather/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "jena_weather/H",
+    "term": "long",
+    "key": "jena_weather/H/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "jena_weather/D",
+    "term": "short",
+    "key": "jena_weather/D/short",
+    "horizon": 30
+  },
+  {
+    "dataset": "bitbrains_fast_storage/5T",
+    "term": "short",
+    "key": "bitbrains_fast_storage/5T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bitbrains_fast_storage/5T",
+    "term": "medium",
+    "key": "bitbrains_fast_storage/5T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "bitbrains_fast_storage/5T",
+    "term": "long",
+    "key": "bitbrains_fast_storage/5T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "bitbrains_fast_storage/H",
+    "term": "short",
+    "key": "bitbrains_fast_storage/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bitbrains_rnd/5T",
+    "term": "short",
+    "key": "bitbrains_rnd/5T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bitbrains_rnd/5T",
+    "term": "medium",
+    "key": "bitbrains_rnd/5T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "bitbrains_rnd/5T",
+    "term": "long",
+    "key": "bitbrains_rnd/5T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "bitbrains_rnd/H",
+    "term": "short",
+    "key": "bitbrains_rnd/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bizitobs_application",
+    "term": "short",
+    "key": "bizitobs_application/10S/short",
+    "horizon": 60
+  },
+  {
+    "dataset": "bizitobs_application",
+    "term": "medium",
+    "key": "bizitobs_application/10S/medium",
+    "horizon": 600
+  },
+  {
+    "dataset": "bizitobs_application",
+    "term": "long",
+    "key": "bizitobs_application/10S/long",
+    "horizon": 900
+  },
+  {
+    "dataset": "bizitobs_service",
+    "term": "short",
+    "key": "bizitobs_service/10S/short",
+    "horizon": 60
+  },
+  {
+    "dataset": "bizitobs_service",
+    "term": "medium",
+    "key": "bizitobs_service/10S/medium",
+    "horizon": 600
+  },
+  {
+    "dataset": "bizitobs_service",
+    "term": "long",
+    "key": "bizitobs_service/10S/long",
+    "horizon": 900
+  },
+  {
+    "dataset": "bizitobs_l2c/5T",
+    "term": "short",
+    "key": "bizitobs_l2c/5T/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bizitobs_l2c/5T",
+    "term": "medium",
+    "key": "bizitobs_l2c/5T/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "bizitobs_l2c/5T",
+    "term": "long",
+    "key": "bizitobs_l2c/5T/long",
+    "horizon": 720
+  },
+  {
+    "dataset": "bizitobs_l2c/H",
+    "term": "short",
+    "key": "bizitobs_l2c/H/short",
+    "horizon": 48
+  },
+  {
+    "dataset": "bizitobs_l2c/H",
+    "term": "medium",
+    "key": "bizitobs_l2c/H/medium",
+    "horizon": 480
+  },
+  {
+    "dataset": "bizitobs_l2c/H",
+    "term": "long",
+    "key": "bizitobs_l2c/H/long",
+    "horizon": 720
+  }
+]

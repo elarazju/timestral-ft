@@ -1,0 +1,21 @@
+{
+  "task": "sz_taxi/H/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 7.263684395032051,
+    "MSE[0.5]": 7.263684395032051,
+    "MAE[0.5]": 1.8569268120659723,
+    "MASE[0.5]": 0.565835588506086,
+    "MAPE[0.5]": 1.2292513073000133,
+    "sMAPE[0.5]": 0.2958081563313802,
+    "MSIS": 3.953821901974225,
+    "RMSE[mean]": 2.6951223339640915,
+    "NRMSE[mean]": 0.25106727670623946,
+    "ND[0.5]": 0.17298419143092378,
+    "mean_weighted_sum_quantile_loss": 0.13609755045267144
+  },
+  "seconds": 10.83656383305788,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "4eb0dd443c20b2278a183390e7c51dc44443106ca5ec286fe30016ae3e327ed5"
+}

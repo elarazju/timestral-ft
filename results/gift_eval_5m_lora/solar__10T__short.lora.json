@@ -1,0 +1,21 @@
+{
+  "task": "solar/10T/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 21.3729621683014,
+    "MSE[0.5]": 21.3729621683014,
+    "MAE[0.5]": 2.0218548331527524,
+    "MASE[0.5]": 0.8885882159004882,
+    "MAPE[0.5]": 5.134521459557403,
+    "sMAPE[0.5]": 1.4225603229846226,
+    "MSIS": 4.403836409029145,
+    "RMSE[mean]": 4.623090110337608,
+    "NRMSE[mean]": 1.3448564124476454,
+    "ND[0.5]": 0.588157352010856,
+    "mean_weighted_sum_quantile_loss": 0.44967380028703796
+  },
+  "seconds": 74.27826070808806,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "e547b559f95cc91f9e337978841993b69d73b92c07aa940340593351034e9c69"
+}

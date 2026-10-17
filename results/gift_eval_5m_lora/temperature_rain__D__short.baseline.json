@@ -1,0 +1,21 @@
+{
+  "task": "temperature_rain/D/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 181.95076230780668,
+    "MSE[0.5]": 181.95076230780668,
+    "MAE[0.5]": 5.780187209122724,
+    "MASE[0.5]": 1.3413175112621278,
+    "MAPE[0.5]": 25.676072720737157,
+    "sMAPE[0.5]": 1.4510155819832233,
+    "MSIS": 18.597254499326457,
+    "RMSE[mean]": 13.488912569507102,
+    "NRMSE[mean]": 1.5880016496906042,
+    "ND[0.5]": 0.6804808598401957,
+    "mean_weighted_sum_quantile_loss": 0.5511672718348224
+  },
+  "seconds": 88.81981312506832,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

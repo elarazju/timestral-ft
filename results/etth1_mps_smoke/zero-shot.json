@@ -1,0 +1,31 @@
+{
+  "metrics": {
+    "mode": "zero-shot",
+    "mae": 1.8978568835494418,
+    "wql": 0.27571234500361785,
+    "coverage_80": 0.6260416666666667,
+    "observed_labels": 2880,
+    "windows": 30,
+    "backtest_seconds": 2.4543227499816567,
+    "training_seconds": 0,
+    "trainable_parameters": 0,
+    "best_step": 0
+  },
+  "metadata": {
+    "model": {
+      "base_model": "mistralai/Timestral-5M",
+      "base_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+      "trainable_parameters": 0,
+      "training_seconds": 0,
+      "mode": "zero-shot"
+    },
+    "data_fingerprint": "7742d91ac86b43c530cb651411c902774df661ddadf969b848fa2de094555af5",
+    "stride": 96,
+    "context_length": 256,
+    "prediction_length": 96,
+    "symmetric_averaging": true,
+    "clip_nonnegative": true,
+    "quantile_real_cap_k": 10000.0,
+    "aggregation": "pooled observed labels; WQL = 2*sum(pinball)/(21*sum(abs(y)))"
+  }
+}

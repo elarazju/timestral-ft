@@ -1,0 +1,18 @@
+timestral-ft is an independent community project, not affiliated with or endorsed by Mistral AI.
+
+It depends on the Timestral implementation by Mistral AI:
+https://github.com/mistralai/timestral
+Pinned revision: a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff
+Upstream code license: Apache License 2.0.
+
+timestral_ft.compat adapts the pinned Timestral advancing-frame normalization
+for a finite derivative at the standard-deviation floor, preserving its forward
+values and float64 statistics. Original implementation: Mistral AI, scaler.py.
+
+The optional GIFT-Eval integration executes the pinned Salesforce Timestral
+evaluation notebook (Apache-2.0). The equivalent sliced seasonal-error helper is
+based on GluonTS ev/ts_stats.py, Copyright Amazon.com, Inc. or its affiliates,
+licensed under Apache License 2.0.
+
+Model weights and their derivatives are licensed separately by their providers.
+The Apache-2.0 license of this repository does not apply to those weights.

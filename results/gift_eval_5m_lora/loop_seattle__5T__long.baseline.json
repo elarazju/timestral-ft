@@ -1,0 +1,22 @@
+{
+  "task": "loop_seattle/5T/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 75.80875974658869,
+    "MSE[0.5]": 75.80875974658869,
+    "MAE[0.5]": 5.003087975504529,
+    "MASE[0.5]": 0.7929535609334085,
+    "MAPE[0.5]": 0.15389029617580768,
+    "sMAPE[0.5]": 0.11429094029161829,
+    "MSIS": 5.8264030726119165,
+    "RMSE[mean]": 8.706822597629326,
+    "NRMSE[mean]": 0.15393840495052086,
+    "ND[0.5]": 0.08845561904362186,
+    "mean_weighted_sum_quantile_loss": 0.06970597190745867
+  },
+  "seconds": 824.3361272499897,
+  "device": "cpu",
+  "threads": 2,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

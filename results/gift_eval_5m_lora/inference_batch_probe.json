@@ -1,0 +1,42 @@
+{
+  "source": "Only official electricity training prefixes; 32768 history, H48, base 5M. Timing under ongoing CPU workload.",
+  "cases": [
+    {
+      "batch_rows": 128,
+      "seconds": [
+        5.33569599990733,
+        2.927087082993239
+      ],
+      "warm_rows_per_second": 43.72948134809409,
+      "driver_allocated_bytes_after_forecast": 4979376128
+    },
+    {
+      "batch_rows": 256,
+      "seconds": [
+        10.42067875014618,
+        9.006486041937023
+      ],
+      "warm_rows_per_second": 28.423960111411233,
+      "driver_allocated_bytes_after_forecast": 11789877248,
+      "parity_first_128": true
+    },
+    {
+      "batch_rows": 32,
+      "seconds": [
+        0.9825928341597319,
+        0.6850641251076013
+      ],
+      "warm_rows_per_second": 46.71095570064166,
+      "driver_allocated_bytes_after_forecast": 1242251264
+    },
+    {
+      "batch_rows": 64,
+      "seconds": [
+        1.585642624879256,
+        1.5150879169814289
+      ],
+      "warm_rows_per_second": 42.24177308965,
+      "driver_allocated_bytes_after_forecast": 2315993088
+    }
+  ]
+}

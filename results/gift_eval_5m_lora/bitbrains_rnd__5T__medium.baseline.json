@@ -1,0 +1,22 @@
+{
+  "task": "bitbrains_rnd/5T/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 2273158.9605112015,
+    "MSE[0.5]": 2273158.9605112015,
+    "MAE[0.5]": 146.40663422022175,
+    "MASE[0.5]": 4.373179634709255,
+    "MAPE[0.5]": 0.47163257310884255,
+    "sMAPE[0.5]": 0.5977902766515857,
+    "MSIS": 159.2740944419271,
+    "RMSE[mean]": 1507.699890731309,
+    "NRMSE[mean]": 6.343662087560202,
+    "ND[0.5]": 0.6160073503882944,
+    "mean_weighted_sum_quantile_loss": 0.625793188172384
+  },
+  "seconds": 386.0619565830566,
+  "device": "cpu",
+  "threads": 4,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

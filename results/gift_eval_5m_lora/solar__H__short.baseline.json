@@ -1,0 +1,21 @@
+{
+  "task": "solar/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 695.612728502369,
+    "MSE[0.5]": 695.612728502369,
+    "MAE[0.5]": 10.904142852873088,
+    "MASE[0.5]": 0.8413339933660761,
+    "MAPE[0.5]": 4.486050025855474,
+    "sMAPE[0.5]": 1.2717332641603933,
+    "MSIS": 4.147217807471334,
+    "RMSE[mean]": 26.374471151141,
+    "NRMSE[mean]": 0.9721717784657019,
+    "ND[0.5]": 0.4019303321448058,
+    "mean_weighted_sum_quantile_loss": 0.3096579617577083
+  },
+  "seconds": 14.666729666059837,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

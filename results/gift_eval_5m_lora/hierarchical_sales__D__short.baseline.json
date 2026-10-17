@@ -1,0 +1,20 @@
+{
+  "task": "hierarchical_sales/D/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 29.15223361926416,
+    "MSE[0.5]": 29.15223361926416,
+    "MAE[0.5]": 2.31607989484291,
+    "MASE[0.5]": 0.7473115387029424,
+    "MAPE[0.5]": 0.6398953662115008,
+    "sMAPE[0.5]": 1.0264494558402242,
+    "MSIS": 6.701137496094435,
+    "RMSE[mean]": 5.399280842784913,
+    "NRMSE[mean]": 1.6564395691380618,
+    "ND[0.5]": 0.7105476627002245,
+    "mean_weighted_sum_quantile_loss": 0.5769991418794729
+  },
+  "seconds": 1.5872162920422852,
+  "device": "cpu",
+  "reference_matches": true
+}

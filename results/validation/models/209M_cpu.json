@@ -1,0 +1,70 @@
+{
+  "size": "209M",
+  "device": "cpu",
+  "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+  "passed": true,
+  "total_parameters": 209312256,
+  "lora_parameters": 1105920,
+  "base_parity_max_abs_error": 0.0,
+  "finite_full_backward_loss": 0.3780815303325653,
+  "full_backward": true,
+  "lora_zero_delta": true,
+  "lora_finite_backward_and_frozen_base": true,
+  "lora_merge_parity": true,
+  "lora_merge_check": {
+    "max_abs_error": 0.000457763671875,
+    "max_abs_error_in_history_std": 0.0001267746411031112,
+    "relative_l2_error": 7.846883249840175e-07,
+    "tolerance": "rtol1e-4, atol1e-4 after division by target history population std"
+  },
+  "modes": {
+    "full": {
+      "passed": true,
+      "steps": 4,
+      "trainable_parameters": 209312256,
+      "training_seconds": 15.320451666135341,
+      "resume": "bitwise identical",
+      "official_export_max_abs_error": 0.0,
+      "official_export_check": {
+        "max_abs_error": 0.0
+      },
+      "merged_reload": true,
+      "adapter_reload": false,
+      "weights_sha256": "009df8577d90a895ffc5b789d544d6c512ac8299dfa872f7756c5698c58058d8"
+    },
+    "lora": {
+      "passed": true,
+      "steps": 4,
+      "trainable_parameters": 1105920,
+      "training_seconds": 8.666419707937166,
+      "resume": "bitwise identical",
+      "official_export_max_abs_error": 0.001251220703125,
+      "official_export_check": {
+        "max_abs_error": 0.001251220703125,
+        "max_abs_error_in_history_std": 0.00034651736496016383,
+        "relative_l2_error": 2.194643684561015e-06,
+        "tolerance": "rtol1e-4, atol1e-4 after division by target history population std"
+      },
+      "merged_reload": true,
+      "adapter_reload": true,
+      "weights_sha256": "1535951faa5d04c61521ded4edc9b124ed6b75484ca4217df12bbadb91310c90"
+    }
+  },
+  "elapsed_seconds": 64.05891808308661,
+  "test_data_sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+  "test_rows": [
+    0,
+    443
+  ],
+  "context": 63,
+  "horizon": 41,
+  "targets": [
+    "OT",
+    "HULL"
+  ],
+  "four_covariate_types": true,
+  "missing_history": true,
+  "scope": "four-step functional acceptance on a small real-data slice, not quality or capacity validation",
+  "torch": "2.14.1",
+  "platform": "macOS-26.5.2-arm64-arm-64bit"
+}

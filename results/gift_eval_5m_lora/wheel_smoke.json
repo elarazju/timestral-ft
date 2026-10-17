@@ -1,0 +1,12 @@
+{
+  "wheel": "dist/timestral_ft-0.1.0-py3-none-any.whl",
+  "current_gift_module_matches": true,
+  "imports_from_extracted_wheel": true,
+  "real_adapter_inference_shape": [
+    1,
+    1,
+    12,
+    21
+  ],
+  "finite_forecast": true
+}

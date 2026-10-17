@@ -1,0 +1,22 @@
+{
+  "task": "electricity/15T/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 312437.0044264264,
+    "MSE[0.5]": 312437.0044264264,
+    "MAE[0.5]": 57.56575272147147,
+    "MASE[0.5]": 0.8701054322102603,
+    "MAPE[0.5]": 0.12819237299011754,
+    "sMAPE[0.5]": 0.12020094237068205,
+    "MSIS": 7.178922423661327,
+    "RMSE[mean]": 558.9606465811582,
+    "NRMSE[mean]": 0.881828968533772,
+    "ND[0.5]": 0.09081703453675037,
+    "mean_weighted_sum_quantile_loss": 0.07272863102135603
+  },
+  "seconds": 1235.7428247909993,
+  "device": "cpu",
+  "threads": 2,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

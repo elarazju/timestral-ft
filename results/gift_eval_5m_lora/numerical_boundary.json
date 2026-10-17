@@ -1,0 +1,13 @@
+{
+  "step": 58,
+  "microbatch_losses": [
+    0.07300184667110443,
+    0.07841108739376068,
+    0.7645189166069031,
+    7.533581565581306e+25
+  ],
+  "all_gradient_elements_finite": true,
+  "maximum_absolute_gradient": 6.859153383682624e+25,
+  "norm_float32": "inf",
+  "norm_float64": 7.423589619430329e+26
+}

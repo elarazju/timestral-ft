@@ -1,0 +1,21 @@
+{
+  "task": "bizitobs_l2c/5T/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 87.43619260204082,
+    "MSE[0.5]": 87.43619260204082,
+    "MAE[0.5]": 5.558991350446429,
+    "MASE[0.5]": 0.5371549624113704,
+    "MAPE[0.5]": 0.3455941744231359,
+    "sMAPE[0.5]": 0.5875528762191907,
+    "MSIS": 3.103256918125348,
+    "RMSE[mean]": 9.350732196039026,
+    "NRMSE[mean]": 0.49198602198366975,
+    "ND[0.5]": 0.29248469354157003,
+    "mean_weighted_sum_quantile_loss": 0.22442094603643398
+  },
+  "seconds": 17.8870541669894,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

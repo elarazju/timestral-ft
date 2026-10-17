@@ -1,0 +1,10 @@
+{
+  "steps": 4,
+  "loop_seconds": 26.49563437514007,
+  "wall_seconds": 27.839892083080485,
+  "device": "cpu",
+  "horizon": 900,
+  "targets": 2,
+  "past_covariates": 35,
+  "purpose": "Training-prefix-only performance probe; fixed learning hyperparameters."
+}

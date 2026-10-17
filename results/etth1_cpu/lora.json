@@ -1,0 +1,125 @@
+{
+  "metrics": {
+    "mode": "lora",
+    "mae": 1.6570159962297313,
+    "wql": 0.23854007682638922,
+    "coverage_80": 0.7375,
+    "observed_labels": 2880,
+    "windows": 30,
+    "backtest_seconds": 0.5100033339112997,
+    "training_seconds": 46.373471833067015,
+    "trainable_parameters": 92160,
+    "best_step": 200
+  },
+  "metadata": {
+    "model": {
+      "base_model": "mistralai/Timestral-5M",
+      "base_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+      "base_weights_sha256": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+      "base_license_text": "Modified MIT License \n\nAttribution notice: 2026 - Mistral AI\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of the weights of this model and associated documentation files (the “Model”), to deal in the Model without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Model, and to permit persons to whom the Model is furnished to do so, subject to the following conditions: \n\n1. The above attribution notice and this permission notice shall be included in all copies or substantial portions of the Model. \n2. You are not authorized to exercise any rights under this license if the global consolidated monthly revenue of your company (or that of your employer) exceeds $20 million (or its equivalent in another currency) for the preceding month. This restriction in (b) applies to the Model and any derivatives, modifications, or combined works based on it, whether provided by Mistral AI or by a third party. You may contact Mistral AI (sales@mistral.ai) to request a commercial license, which Mistral AI may grant you at its sole discretion, or choose to use the Model on Mistral AI's hosted services available at https://mistral.ai/.\n\nTHE MODEL IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL MISTRAL AI BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MODEL OR THE USE OR OTHER DEALINGS IN THE MODEL.",
+      "upstream_revision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+      "train_config": {
+        "mode": "lora",
+        "context_length": 256,
+        "prediction_length": 96,
+        "max_steps": 200,
+        "batch_size": 4,
+        "gradient_accumulation": 4,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.01,
+        "warmup_steps": 20,
+        "gradient_clip": 1.0,
+        "eval_every": 50,
+        "patience": 3,
+        "seed": 42,
+        "device": "cpu",
+        "num_threads": 4,
+        "lora_rank": 8,
+        "lora_alpha": 16.0,
+        "lora_dropout": 0.0
+      },
+      "preprocessing": {
+        "data_config": {
+          "time_column": "date",
+          "id_column": null,
+          "target_columns": [
+            "OT"
+          ],
+          "past_covariates": [
+            "HUFL"
+          ],
+          "known_covariates": [
+            "hour_sin",
+            "hour_cos"
+          ],
+          "categorical_past_covariates": [],
+          "categorical_known_covariates": [
+            "hour_category",
+            "weekday_category"
+          ],
+          "frequency": "h"
+        },
+        "frequency": "h",
+        "vocabulary": {
+          "hour_category": {
+            "\"0\"": 1,
+            "\"1\"": 2,
+            "\"10\"": 3,
+            "\"11\"": 4,
+            "\"12\"": 5,
+            "\"13\"": 6,
+            "\"14\"": 7,
+            "\"15\"": 8,
+            "\"16\"": 9,
+            "\"17\"": 10,
+            "\"18\"": 11,
+            "\"19\"": 12,
+            "\"2\"": 13,
+            "\"20\"": 14,
+            "\"21\"": 15,
+            "\"22\"": 16,
+            "\"23\"": 17,
+            "\"3\"": 18,
+            "\"4\"": 19,
+            "\"5\"": 20,
+            "\"6\"": 21,
+            "\"7\"": 22,
+            "\"8\"": 23,
+            "\"9\"": 24
+          },
+          "weekday_category": {
+            "\"0\"": 1,
+            "\"1\"": 2,
+            "\"2\"": 3,
+            "\"3\"": 4,
+            "\"4\"": 5,
+            "\"5\"": 6,
+            "\"6\"": 7
+          }
+        }
+      },
+      "fingerprints": {
+        "train": "cbf6f705257473e2269115661ff27e10ca5bab74ba7422b7721b00cdfca3e33e",
+        "validation": "d5f21edc9e7b8dbf545373850bee1deab3a9389adb73680d523647412e09e675"
+      },
+      "trainable_parameters": 92160,
+      "total_parameters": 5301120,
+      "torch_version": "2.14.1",
+      "validated_device": "cpu",
+      "steps": 200,
+      "best_step": 200,
+      "best_validation_loss": 0.3187913417816162,
+      "training_seconds": 46.373471833067015,
+      "completed": true,
+      "artifact_type": "merged"
+    },
+    "data_fingerprint": "7742d91ac86b43c530cb651411c902774df661ddadf969b848fa2de094555af5",
+    "stride": 96,
+    "context_length": 256,
+    "prediction_length": 96,
+    "symmetric_averaging": true,
+    "clip_nonnegative": true,
+    "quantile_real_cap_k": 10000.0,
+    "aggregation": "pooled observed labels; WQL = 2*sum(pinball)/(21*sum(abs(y)))"
+  }
+}

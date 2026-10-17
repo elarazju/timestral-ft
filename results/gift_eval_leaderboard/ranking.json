@@ -1,0 +1,165 @@
+{
+  "retrieved_at_utc": "2026-10-17T08:06:46.264152+00:00",
+  "space_revision": "23078cb5bffd44b17301b84f77732425fceb88fb",
+  "source_sha256": "327bd6b0cf6d186fdac3258feeae239b49ee7fec1143ee598c54f8a9d6cf2842",
+  "local_results_sha256": "40a9c5fc44032e5d7782b633d3e66c2dd95c241b1e711b9d7cc1059114ed617f",
+  "method": "Official per-task rank(method=first) then arithmetic mean; recalculated after inserting one local result. No submission performed.",
+  "current_official": {
+    "models": 153,
+    "entries": {
+      "Timestral-5M": {
+        "crps_position": 54,
+        "mase_position": 66,
+        "mean_crps_task_rank": 56.43298969072165,
+        "mean_mase_task_rank": 64.83505154639175,
+        "crps_score": 0.4788640138386903,
+        "mase_score": 0.7049053490648121
+      },
+      "Timestral-28M": {
+        "crps_position": 22,
+        "mase_position": 28,
+        "mean_crps_task_rank": 37.72164948453608,
+        "mean_mase_task_rank": 42.8041237113402,
+        "crps_score": 0.4610056744770429,
+        "mase_score": 0.677956518119845
+      },
+      "Timestral-123M": {
+        "crps_position": 4,
+        "mase_position": 12,
+        "mean_crps_task_rank": 26.123711340206185,
+        "mean_mase_task_rank": 29.7319587628866,
+        "crps_score": 0.44759924213145025,
+        "mase_score": 0.6589244700301651
+      },
+      "Timestral-209M": {
+        "crps_position": 2,
+        "mase_position": 8,
+        "mean_crps_task_rank": 24.329896907216494,
+        "mean_mase_task_rank": 27.288659793814432,
+        "crps_score": 0.4460100703735699,
+        "mase_score": 0.6575470668013165
+      }
+    }
+  },
+  "with_local_all_models": {
+    "models": 154,
+    "entries": {
+      "Timestral-5M": {
+        "crps_position": 55,
+        "mase_position": 66,
+        "mean_crps_task_rank": 56.95876288659794,
+        "mean_mase_task_rank": 65.29896907216495,
+        "crps_score": 0.4788640138386903,
+        "mase_score": 0.7049053490648121
+      },
+      "Timestral-28M": {
+        "crps_position": 22,
+        "mase_position": 28,
+        "mean_crps_task_rank": 37.845360824742265,
+        "mean_mase_task_rank": 42.92783505154639,
+        "crps_score": 0.4610056744770429,
+        "mase_score": 0.677956518119845
+      },
+      "Timestral-123M": {
+        "crps_position": 4,
+        "mase_position": 12,
+        "mean_crps_task_rank": 26.164948453608247,
+        "mean_mase_task_rank": 29.77319587628866,
+        "crps_score": 0.44759924213145025,
+        "mase_score": 0.6589244700301651
+      },
+      "Timestral-209M": {
+        "crps_position": 2,
+        "mase_position": 8,
+        "mean_crps_task_rank": 24.38144329896907,
+        "mean_mase_task_rank": 27.34020618556701,
+        "crps_score": 0.4460100703735699,
+        "mase_score": 0.6575470668013165
+      },
+      "Timestral-FT-5M-LoRA": {
+        "crps_position": 53,
+        "mase_position": 67,
+        "mean_crps_task_rank": 56.7319587628866,
+        "mean_mase_task_rank": 65.44329896907216,
+        "crps_score": 0.47900950614331467,
+        "mase_score": 0.705209621687201
+      }
+    }
+  },
+  "with_local_no_test_leakage": {
+    "models": 134,
+    "entries": {
+      "Timestral-5M": {
+        "crps_position": 50,
+        "mase_position": 61,
+        "mean_crps_task_rank": 56.95876288659794,
+        "mean_mase_task_rank": 65.29896907216495,
+        "crps_score": 0.4788640138386903,
+        "mase_score": 0.7049053490648121
+      },
+      "Timestral-28M": {
+        "crps_position": 22,
+        "mase_position": 27,
+        "mean_crps_task_rank": 37.845360824742265,
+        "mean_mase_task_rank": 42.92783505154639,
+        "crps_score": 0.4610056744770429,
+        "mase_score": 0.677956518119845
+      },
+      "Timestral-123M": {
+        "crps_position": 4,
+        "mase_position": 12,
+        "mean_crps_task_rank": 26.164948453608247,
+        "mean_mase_task_rank": 29.77319587628866,
+        "crps_score": 0.44759924213145025,
+        "mase_score": 0.6589244700301651
+      },
+      "Timestral-209M": {
+        "crps_position": 2,
+        "mase_position": 8,
+        "mean_crps_task_rank": 24.38144329896907,
+        "mean_mase_task_rank": 27.34020618556701,
+        "crps_score": 0.4460100703735699,
+        "mase_score": 0.6575470668013165
+      },
+      "Timestral-FT-5M-LoRA": {
+        "crps_position": 49,
+        "mase_position": 62,
+        "mean_crps_task_rank": 56.7319587628866,
+        "mean_mase_task_rank": 65.44329896907216,
+        "crps_score": 0.47900950614331467,
+        "mase_score": 0.705209621687201
+      }
+    }
+  },
+  "with_local_fine_tuned": {
+    "models": 8,
+    "entries": {
+      "Timestral-FT-5M-LoRA": {
+        "crps_position": 4,
+        "mase_position": 5,
+        "mean_crps_task_rank": 56.7319587628866,
+        "mean_mase_task_rank": 65.44329896907216,
+        "crps_score": 0.47900950614331467,
+        "mase_score": 0.705209621687201
+      }
+    }
+  },
+  "neighbors_rank": {
+    "MoiraiAgent-leaking": 54.618556701030926,
+    "Synapse": 55.63917525773196,
+    "TiRex-2-Pretrained": 56.371134020618555,
+    "Timestral-FT-5M-LoRA": 56.7319587628866,
+    "Tabby-Pretrain": 56.76288659793814,
+    "Timestral-5M": 56.95876288659794,
+    "MoiraiAgent": 56.98969072164948
+  },
+  "neighbors_Rank_MASE": {
+    "EFG-base": 64.30927835051547,
+    "TSOrchestra-test": 65.0,
+    "Timestral-5M": 65.29896907216495,
+    "Timestral-FT-5M-LoRA": 65.44329896907216,
+    "Zeus": 65.91752577319588,
+    "tafsut": 66.15463917525773,
+    "TiRex-2-Zeroshot": 66.77319587628865
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task": "m_dense/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 42629.642222222225,
+    "MSE[0.5]": 42629.642222222225,
+    "MAE[0.5]": 88.11116970486111,
+    "MASE[0.5]": 0.774338600867923,
+    "MAPE[0.5]": 0.28650036833042064,
+    "sMAPE[0.5]": 0.21104370689491447,
+    "MSIS": 7.939532820378163,
+    "RMSE[mean]": 206.46947043624203,
+    "NRMSE[mean]": 0.3662253916595016,
+    "ND[0.5]": 0.15628725916020658,
+    "mean_weighted_sum_quantile_loss": 0.1292674196413296
+  },
+  "seconds": 488.8075747077819,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

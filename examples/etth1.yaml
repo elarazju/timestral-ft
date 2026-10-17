@@ -1,0 +1,26 @@
+model_id: mistralai/Timestral-5M
+revision: bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f
+train_data: data/etth1/train.parquet
+validation_data: data/etth1/validation.parquet
+output_dir: runs/etth1/full
+data:
+  time_column: date
+  target_columns: [OT]
+  past_covariates: [HUFL]
+  known_covariates: [hour_sin, hour_cos]
+  categorical_known_covariates: [hour_category, weekday_category]
+  frequency: h
+training:
+  mode: full
+  device: cpu
+  context_length: 256
+  prediction_length: 96
+  max_steps: 200
+  batch_size: 4
+  gradient_accumulation: 4
+  weight_decay: 0.01
+  warmup_steps: 20
+  eval_every: 50
+  patience: 3
+  seed: 42
+  num_threads: 4

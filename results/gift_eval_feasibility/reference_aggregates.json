@@ -1,0 +1,41 @@
+{
+  "scope": "Geometric mean of all 97 per-task scores divided by Seasonal Naive, from GitHub snapshot; not leaderboard average-rank positions",
+  "repo_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+  "models": [
+    {
+      "model": "TurkForecast-FM-Chronos2-LoRA-v1",
+      "type": "fine-tuned",
+      "leakage": "No",
+      "normalized_crps": 0.4230152464,
+      "normalized_mase": 0.6581714205
+    },
+    {
+      "model": "Timestral-209M",
+      "type": "zero-shot",
+      "leakage": "No",
+      "normalized_crps": 0.4460100704,
+      "normalized_mase": 0.6575470668
+    },
+    {
+      "model": "Timestral-123M",
+      "type": "zero-shot",
+      "leakage": "No",
+      "normalized_crps": 0.4475992421,
+      "normalized_mase": 0.65892447
+    },
+    {
+      "model": "Timestral-28M",
+      "type": "zero-shot",
+      "leakage": "No",
+      "normalized_crps": 0.4610056745,
+      "normalized_mase": 0.6779565181
+    },
+    {
+      "model": "Timestral-5M",
+      "type": "zero-shot",
+      "leakage": "No",
+      "normalized_crps": 0.4788640138,
+      "normalized_mase": 0.7049053491
+    }
+  ]
+}

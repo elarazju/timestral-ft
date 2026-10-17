@@ -1,0 +1,35 @@
+name: accelerator hardware validation
+on:
+  workflow_dispatch:
+    inputs:
+      backend:
+        description: Backend label on an existing self-hosted runner
+        required: true
+        type: choice
+        options: [cuda, mps]
+      large_models:
+        description: Download and validate all four real model sizes
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  accelerator:
+    runs-on: [self-hosted, "${{ inputs.backend }}"]
+    env:
+      TIMESTRAL_TEST_DEVICE: ${{ inputs.backend }}
+      TIMESTRAL_INTEGRATION: '1'
+      TIMESTRAL_LARGE_MODELS: ${{ inputs.large_models && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[dev]'
+      - run: pytest -q tests/test_devices.py tests/test_integration.py
+      - if: ${{ inputs.large_models }}
+        run: |
+          python scripts/run_etth1.py --prepare-only --data-dir data/validation
+          python scripts/validate_models.py --devices "${{ inputs.backend }}"
+          python scripts/validate_model_shapes.py --devices "${{ inputs.backend }}"

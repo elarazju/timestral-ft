@@ -1,0 +1,46 @@
+{
+  "purpose": "Broaden evidence for adaptation benefits, real large-model support and standard multivariate test protocols",
+  "benchmark": {
+    "datasets": ["ETTh1", "ETTh2", "exchange_rate"],
+    "domains": ["electricity transformer", "foreign exchange"],
+    "context": 96,
+    "horizons": [96, 192],
+    "seeds": [42, 43, 44],
+    "features": "M: all 7 ETT or 8 exchange targets",
+    "test_stride": 1,
+    "scaling": "training-only mean and population standard deviation per column",
+    "methods": ["persistence", "Timestral-5M zero-shot", "Timestral-5M full", "Timestral-5M LoRA", "official TSLib DLinear network"],
+    "adaptation_steps": 200,
+    "primary_metrics": ["standardized MAE", "standardized MSE"],
+    "reporting": "all runs, mean and sample std across seeds, paired improvements versus base, per-target and per-lead errors",
+    "selection": "validation only; test never selects seeds, runs or checkpoints",
+    "pass_criteria": "complete reproducible protocol and independent label/metric verification; improvements not required"
+  },
+  "large_models": {
+    "sizes": ["5M", "28M", "123M", "209M"],
+    "devices": ["cpu", "mps"],
+    "cuda": "hardware unavailable, remains unverified",
+    "functional": ["strict base forecast parity", "finite full gradients", "zero-delta LoRA", "finite LoRA gradients", "LoRA merge", "four-step full/LoRA training", "pause/resume", "merged reload", "adapter reload", "official export numerical parity"],
+    "real_data": "pinned ETTh1 slice, two targets and four covariate types, missing history, L63/H41",
+    "shape_checks": ["7 targets L256/H96", "7 targets L1024/H192", "7 targets L256/H1024"],
+    "limits": "functional/shape support only; no large-model quality, throughput, long training or maximum-context capacity claims"
+  },
+  "frozen_transfer_extension": {
+    "source_dataset": "ETTh1",
+    "target_datasets": ["ETTh2", "exchange_rate"],
+    "horizons": [96, 192],
+    "seeds": [42, 43, 44],
+    "modes": ["full", "lora"],
+    "target_optimizer_steps": 0,
+    "preprocessing": "target training-only scaler and target column layout, array interface; source weights only",
+    "purpose": "Separate within-dataset adaptation gains from frozen cross-dataset transfer and expose regressions"
+  },
+  "interpretation_limits": [
+    "Two domains do not establish universal industry generalization",
+    "Pretraining overlap is unknown",
+    "Overlapping origins and related ETT datasets are not independent observations",
+    "Three seeds characterize training variation, not statistical significance",
+    "Matched test protocols do not imply identical pretraining, training budgets or losses",
+    "DLinear uses the official network with an explicit local training loop and documented validation-loader difference"
+  ]
+}

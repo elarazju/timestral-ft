@@ -1,0 +1,1508 @@
+{
+  "benchmark": {
+    "passed": true,
+    "benchmark_rows": [
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 2785,
+        "scored_values": 1871520,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 2689,
+        "scored_values": 3614016,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 1422,
+        "scored_values": 1092096,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "persistence",
+        "seed": null,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "zero-shot",
+        "seed": null,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 42,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 43,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "dlinear",
+        "seed": 44,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "windows": 1326,
+        "scored_values": 2036736,
+        "all_labels_and_origins_verified": true,
+        "metrics_verified": true
+      }
+    ],
+    "dataset_shapes": [
+      {
+        "dataset": "ETTh1",
+        "raw_rows": 14400,
+        "targets": 7,
+        "train": [
+          0,
+          8640
+        ],
+        "validation": [
+          8640,
+          11520
+        ],
+        "test": [
+          11520,
+          14400
+        ]
+      },
+      {
+        "dataset": "ETTh2",
+        "raw_rows": 14400,
+        "targets": 7,
+        "train": [
+          0,
+          8640
+        ],
+        "validation": [
+          8640,
+          11520
+        ],
+        "test": [
+          11520,
+          14400
+        ]
+      },
+      {
+        "dataset": "exchange_rate",
+        "raw_rows": 7588,
+        "targets": 8,
+        "train": [
+          0,
+          5311
+        ],
+        "validation": [
+          5311,
+          6071
+        ],
+        "test": [
+          6071,
+          7588
+        ]
+      }
+    ],
+    "paired_adaptation_results": [
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 2.3635017918425483,
+        "mse_gain_pct": 4.976600576415635
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 2.4488461106005,
+        "mse_gain_pct": 5.246781105198261
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 2.461007157316397,
+        "mse_gain_pct": 5.427048367493292
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 2.1547412423935985,
+        "mse_gain_pct": 4.176039605652537
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 2.2020696838928044,
+        "mse_gain_pct": 4.40510375811336
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 2.2558515579938376,
+        "mse_gain_pct": 4.617165795414313
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 2.285291410449508,
+        "mse_gain_pct": 5.234724963735438
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 2.262002000378416,
+        "mse_gain_pct": 5.062580821799855
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 2.167032316544537,
+        "mse_gain_pct": 4.807566162122756
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 0.7284880076261713,
+        "mse_gain_pct": 1.4156463665344177
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 0.7339203088871593,
+        "mse_gain_pct": 1.4931404233017753
+      },
+      {
+        "dataset": "ETTh1",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 0.7221370313166608,
+        "mse_gain_pct": 1.500765508079882
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 0.6234923306728701,
+        "mse_gain_pct": 0.9983677603993324
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 0.5969351045763238,
+        "mse_gain_pct": 0.8772829925523751
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 0.6399912410160469,
+        "mse_gain_pct": 1.0218968656094618
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 0.2315414691489992,
+        "mse_gain_pct": 0.34611114243218166
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 0.24229316577939475,
+        "mse_gain_pct": 0.3588830730510306
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 0.18285696408795182,
+        "mse_gain_pct": 0.27780416053958534
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 0.4852013584475179,
+        "mse_gain_pct": 0.8583287110490945
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 0.500054113787507,
+        "mse_gain_pct": 0.8044446588160947
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 0.4914150223825575,
+        "mse_gain_pct": 0.8359092217159247
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 0.19755789983434413,
+        "mse_gain_pct": 0.2908574502183181
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 0.19542927737189464,
+        "mse_gain_pct": 0.28619176834698834
+      },
+      {
+        "dataset": "ETTh2",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 0.19204963552854615,
+        "mse_gain_pct": 0.28420548280816416
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 1.1877906528975357,
+        "mse_gain_pct": 2.6545380402127616
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 1.1106993366447715,
+        "mse_gain_pct": 2.40900290075462
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 1.24822971942532,
+        "mse_gain_pct": 2.7735991512256364
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 0.3873873893161628,
+        "mse_gain_pct": 0.8068934503558278
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 0.21266431708347744,
+        "mse_gain_pct": 0.4387239470490134
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 96,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 0.184344964350025,
+        "mse_gain_pct": 0.3842904937575997
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "full",
+        "mae_gain_pct": 0.9238745771858681,
+        "mse_gain_pct": 2.3414721249510717
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "full",
+        "mae_gain_pct": 0.6836608868328042,
+        "mse_gain_pct": 1.5937296597691275
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "full",
+        "mae_gain_pct": 0.8351785797155231,
+        "mse_gain_pct": 2.0367852306510725
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 42,
+        "mode": "lora",
+        "mae_gain_pct": 0.015621948822308607,
+        "mse_gain_pct": 0.03454332099014357
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 43,
+        "mode": "lora",
+        "mae_gain_pct": 0.20599188744023778,
+        "mse_gain_pct": 0.46704880369129453
+      },
+      {
+        "dataset": "exchange_rate",
+        "horizon": 192,
+        "seed": 44,
+        "mode": "lora",
+        "mae_gain_pct": 0.14159907975855868,
+        "mse_gain_pct": 0.3295404288515713
+      }
+    ],
+    "adaptation_summary": {
+      "full": {
+        "runs": 18,
+        "mae_wins": 18,
+        "mse_wins": 18,
+        "mae_gain_pct_range": [
+          0.4852013584475179,
+          2.461007157316397
+        ],
+        "mse_gain_pct_range": [
+          0.8044446588160947,
+          5.427048367493292
+        ]
+      },
+      "lora": {
+        "runs": 18,
+        "mae_wins": 18,
+        "mse_wins": 18,
+        "mae_gain_pct_range": [
+          0.015621948822308607,
+          2.2558515579938376
+        ],
+        "mse_gain_pct_range": [
+          0.03454332099014357,
+          4.617165795414313
+        ]
+      }
+    },
+    "independence": "raw data/scaler checked using pandas reductions; all labels/origins and median metrics independently re-read from saved NPZ arrays",
+    "coverage_limit": "interval coverage is streamed by runner, not independently re-audited from median-only saved arrays",
+    "statistical_limit": "wins across related datasets/horizons/seeds are descriptive, not independent significance tests"
+  },
+  "models": {
+    "passed": true,
+    "rows": [
+      {
+        "size": "5M",
+        "device": "cpu",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "5M",
+        "device": "mps",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "28M",
+        "device": "cpu",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "28M",
+        "device": "mps",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "123M",
+        "device": "cpu",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "123M",
+        "device": "mps",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "209M",
+        "device": "cpu",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      },
+      {
+        "size": "209M",
+        "device": "mps",
+        "functional": true,
+        "shape_checks": true,
+        "latest_checkpoint_model_optimizer_scheduler_rng_verified": true,
+        "real_full_updates_and_lora_frozen_base_verified": true
+      }
+    ],
+    "cuda": "unverified; no NVIDIA hardware",
+    "limits": "functional correctness and finite gradients at selected shapes; not large-model quality or maximum-capacity testing"
+  },
+  "transfer": {
+    "passed": true,
+    "rows": [
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "zero-shot",
+        "seed": null,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "zero-shot",
+        "seed": null,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "zero-shot",
+        "seed": null,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "zero-shot",
+        "seed": null,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "all_labels_origins_and_metrics_verified": true
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "all_labels_origins_and_metrics_verified": true
+      }
+    ],
+    "paired_results": [
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "mae_gain_pct": 0.8414590647776388,
+        "mse_gain_pct": 1.550265614971147
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "mae_gain_pct": 0.8543625267051214,
+        "mse_gain_pct": 1.6349717977187983
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "mae_gain_pct": 0.8680011872809201,
+        "mse_gain_pct": 1.6417081067843897
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "mae_gain_pct": 0.8339918381715217,
+        "mse_gain_pct": 1.4403497403167709
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "mae_gain_pct": 0.8296913449275412,
+        "mse_gain_pct": 1.5245141788721495
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "mae_gain_pct": 0.8438100883268462,
+        "mse_gain_pct": 1.4937161292532863
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "mae_gain_pct": 0.6733229517978168,
+        "mse_gain_pct": 1.2593620859585597
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "mae_gain_pct": 0.6711589973931953,
+        "mse_gain_pct": 1.198292235811238
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "mae_gain_pct": 0.6853321143511226,
+        "mse_gain_pct": 1.2193833840659196
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "mae_gain_pct": 0.2862170712166101,
+        "mse_gain_pct": 0.48568079945852105
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "mae_gain_pct": 0.30213822157618697,
+        "mse_gain_pct": 0.4868733163089112
+      },
+      {
+        "target_dataset": "ETTh2",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "mae_gain_pct": 0.2633565513556535,
+        "mse_gain_pct": 0.46900538498308997
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 42,
+        "mae_gain_pct": -0.8137168334904299,
+        "mse_gain_pct": -1.619751249575363
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 43,
+        "mae_gain_pct": -1.017969998770174,
+        "mse_gain_pct": -2.0529214887057723
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "full",
+        "seed": 44,
+        "mae_gain_pct": -0.9997667930525367,
+        "mse_gain_pct": -2.041946042644893
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 42,
+        "mae_gain_pct": -0.8046795971959231,
+        "mse_gain_pct": -1.5741525813076196
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 43,
+        "mae_gain_pct": -1.0413635449626257,
+        "mse_gain_pct": -2.0937461887072795
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 96,
+        "mode": "lora",
+        "seed": 44,
+        "mae_gain_pct": -1.0167050273159228,
+        "mse_gain_pct": -2.0506883764219053
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 42,
+        "mae_gain_pct": -1.1972161985852825,
+        "mse_gain_pct": -2.5257912830932483
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 43,
+        "mae_gain_pct": -1.0576629966970508,
+        "mse_gain_pct": -2.2356170156932365
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "full",
+        "seed": 44,
+        "mae_gain_pct": -1.056989718474144,
+        "mse_gain_pct": -2.2382167443970147
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 42,
+        "mae_gain_pct": -0.268345607787146,
+        "mse_gain_pct": -0.6078021608797224
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 43,
+        "mae_gain_pct": -0.2091880472509855,
+        "mse_gain_pct": -0.4783194254949885
+      },
+      {
+        "target_dataset": "exchange_rate",
+        "horizon": 192,
+        "mode": "lora",
+        "seed": 44,
+        "mae_gain_pct": -0.3384402324165814,
+        "mse_gain_pct": -0.7593612934742033
+      }
+    ],
+    "limit": "Target training-only scalers are available, but target dataset labels never update network weights"
+  }
+}

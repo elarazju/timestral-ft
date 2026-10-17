@@ -1,0 +1,43 @@
+{
+  "python": "3.12.13 (main, Mar  3 2026, 15:35:03) [Clang 21.1.4 ]",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "settings": {
+    "datasets": [
+      "ETTh1",
+      "ETTh2"
+    ],
+    "horizons": [
+      96,
+      192
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "steps": 200,
+    "threads": 2,
+    "jobs": 1,
+    "data": "data/validation",
+    "output": "runs/validation/benchmark",
+    "results": "results/validation/benchmark",
+    "summarize_only": false,
+    "dlinear_only": true,
+    "dlinear_source": ".cache/validation-sources/tslib",
+    "modes": [
+      "dlinear"
+    ]
+  },
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "tslib_revision": "4e938a1767106324dd753b2a44832bf870a0252e",
+  "dlinear_sources": {
+    "revision": "4e938a1767106324dd753b2a44832bf870a0252e",
+    "files": {
+      "models/DLinear.py": "e03acaf97e70c85ea6bda6776b3a62550f84470afa7bc53dffccb6121626e7eb",
+      "layers/Autoformer_EncDec.py": "48745b4bb647355e9845792a855df9c59fd7df7fcc664c765351fec390c4073e"
+    }
+  }
+}

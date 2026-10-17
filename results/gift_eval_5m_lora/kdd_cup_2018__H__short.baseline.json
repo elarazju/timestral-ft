@@ -1,0 +1,22 @@
+{
+  "task": "kdd_cup_2018/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 4330.722712522982,
+    "MSE[0.5]": 4330.722712522982,
+    "MAE[0.5]": 21.7634617383487,
+    "MASE[0.5]": 0.9159525118558056,
+    "MAPE[0.5]": 0.8066181156794613,
+    "sMAPE[0.5]": 0.48572311009340186,
+    "MSIS": 7.1934581885717614,
+    "RMSE[mean]": 65.80822678452127,
+    "NRMSE[mean]": 1.3774853629435926,
+    "ND[0.5]": 0.45554866703397584,
+    "mean_weighted_sum_quantile_loss": 0.36704794817760855
+  },
+  "seconds": 181.09157533291727,
+  "device": "cpu",
+  "threads": 2,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

@@ -1,0 +1,21 @@
+{
+  "task": "temperature_rain/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 181.74866702321881,
+    "MSE[0.5]": 181.74866702321881,
+    "MAE[0.5]": 5.777878004894332,
+    "MASE[0.5]": 1.3407520705477327,
+    "MAPE[0.5]": 25.760309765653965,
+    "sMAPE[0.5]": 1.451658695439048,
+    "MSIS": 18.579207800861575,
+    "RMSE[mean]": 13.481419325249801,
+    "NRMSE[mean]": 1.5871194967238018,
+    "ND[0.5]": 0.6802090054482821,
+    "mean_weighted_sum_quantile_loss": 0.5509095572978935
+  },
+  "seconds": 97.38584104203619,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "32f43d36fe97f683d8d4c56280fb038fb2335059511ec87c74351238812d8145"
+}

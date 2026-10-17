@@ -1,0 +1,21 @@
+{
+  "task": "jena_weather/10T/medium",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 1380.3295815295814,
+    "MSE[0.5]": 1380.3295815295814,
+    "MAE[0.5]": 9.065019052128427,
+    "MASE[0.5]": 0.5562584987198098,
+    "MAPE[0.5]": 0.6935716962269608,
+    "sMAPE[0.5]": 0.4879226683804563,
+    "MSIS": 5.266310838329387,
+    "RMSE[mean]": 37.15278699545407,
+    "NRMSE[mean]": 0.22800599341270383,
+    "ND[0.5]": 0.05563186079522183,
+    "mean_weighted_sum_quantile_loss": 0.045504290639795095
+  },
+  "seconds": 26.700339999981225,
+  "device": "cpu",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "77132925e24fc20cb4e695f73d430c876a58193f787965ee4419350169370240"
+}

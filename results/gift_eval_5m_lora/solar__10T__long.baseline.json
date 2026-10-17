@@ -1,0 +1,21 @@
+{
+  "task": "solar/10T/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 21.69651082851784,
+    "MSE[0.5]": 21.69651082851784,
+    "MAE[0.5]": 1.969872650864254,
+    "MASE[0.5]": 0.8613463699370534,
+    "MAPE[0.5]": 3.5947679478735415,
+    "sMAPE[0.5]": 1.131077265793945,
+    "MSIS": 4.557014335782818,
+    "RMSE[mean]": 4.657951355318971,
+    "NRMSE[mean]": 1.0067416685647084,
+    "ND[0.5]": 0.4257564598922824,
+    "mean_weighted_sum_quantile_loss": 0.3279888582020301
+  },
+  "seconds": 26.028611792018637,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

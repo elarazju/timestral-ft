@@ -1,0 +1,22 @@
+{
+  "task": "bitbrains_fast_storage/5T/long",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 4518371.966255916,
+    "MSE[0.5]": 4518371.966255916,
+    "MAE[0.5]": 381.01908324830896,
+    "MASE[0.5]": 0.8949375538605491,
+    "MAPE[0.5]": 3.543802238237457,
+    "sMAPE[0.5]": 0.715396345901935,
+    "MSIS": 16.459637809836007,
+    "RMSE[mean]": 2125.6462467343704,
+    "NRMSE[mean]": 5.617447720292257,
+    "ND[0.5]": 1.0069195586374193,
+    "mean_weighted_sum_quantile_loss": 0.6878235160240312
+  },
+  "seconds": 882.4315329168458,
+  "device": "cpu",
+  "threads": 4,
+  "seasonal_error_implementation": "equivalent_slices",
+  "reference_matches": true
+}

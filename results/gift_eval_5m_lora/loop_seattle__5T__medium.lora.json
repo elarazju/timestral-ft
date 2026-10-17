@@ -1,0 +1,21 @@
+{
+  "task": "loop_seattle/5T/medium",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 67.58644003160475,
+    "MSE[0.5]": 67.58644003160475,
+    "MAE[0.5]": 4.761006564838106,
+    "MASE[0.5]": 0.7573520049844492,
+    "MAPE[0.5]": 0.1496136388001181,
+    "sMAPE[0.5]": 0.11004334629873742,
+    "MSIS": 5.328462452276212,
+    "RMSE[mean]": 8.221097252289669,
+    "NRMSE[mean]": 0.14627021513754912,
+    "ND[0.5]": 0.08470809104176454,
+    "mean_weighted_sum_quantile_loss": 0.06643816078623492
+  },
+  "seconds": 174.36444750009105,
+  "device": "mps",
+  "seasonal_error_implementation": "equivalent_slices",
+  "adapter_sha256": "e56324471942c07320ac2d7623e00fbdb8f0369a8a3da471fd46760073eb0777"
+}

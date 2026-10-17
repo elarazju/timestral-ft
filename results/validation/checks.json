@@ -1,0 +1,17 @@
+{
+  "test_command": "TIMESTRAL_INTEGRATION=1 TIMESTRAL_LARGE_MODELS=1 pytest -q",
+  "test_output": "..................ss.s..ss..s..s..s..s.........                          [100%]\n38 passed, 9 skipped in 9.67s",
+  "lint_command": "ruff check src tests scripts",
+  "lint_output": "All checks passed!",
+  "workflow_yaml": "both workflow files parsed successfully",
+  "cuda": "9 skipped tests; no NVIDIA hardware available",
+  "reference_environment": "Python 3.12, FP32, local CPU and Apple MPS",
+  "installed_wheel_smoke": {
+    "passed": true,
+    "dependency_environment": "locked reference dependencies reused",
+    "source": "installed wheel, no editable source import",
+    "one_window_mae": 0.3182359760850367,
+    "one_window_mse": 0.19720793524104469,
+    "mse_rmse_available": true
+  }
+}
