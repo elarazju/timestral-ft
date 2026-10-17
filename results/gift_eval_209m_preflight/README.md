@@ -34,3 +34,10 @@ quality. Both standalone scripts are retained for inspection.
 fixtures, raw-length audit, official CSV schema validation, and ZIP packaging.
 It is not an actual 97-task training result. `freeze_guard_check.json` verifies
 that incomplete task selection refuses testing before reading a test iterator.
+
+`full_context_inference.json` preserves two successful official-default inference
+calls with synthetic 32768-step history, seven targets, 35 past covariates and
+H=900. Both outputs are finite; retained driver allocations were about
+11–12 GB. The training context budget does not shorten validation or test
+inference. The accompanying source waits for an accelerator slot between task
+jobs; this is a shape/resource check, not a GIFT test score.

@@ -1,0 +1,26 @@
+{
+  "synthetic_input": true,
+  "records": [
+    {
+      "iteration": 0,
+      "context": 32768,
+      "targets": 7,
+      "past_covariates": 35,
+      "horizon": 900,
+      "seconds": 26.479546500137076,
+      "finite": true,
+      "driver_bytes": 11125080064
+    },
+    {
+      "iteration": 1,
+      "context": 32768,
+      "targets": 7,
+      "past_covariates": 35,
+      "horizon": 900,
+      "seconds": 28.14403041685,
+      "finite": true,
+      "driver_bytes": 11678728192
+    }
+  ],
+  "note": "Official default forecast postprocessing, 32768 history; no GIFT test iterator accessed"
+}

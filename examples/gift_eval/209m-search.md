@@ -133,3 +133,31 @@ history capped at 1536 completed three finite optimizer updates in about
 synthetic timing checks say nothing about forecasting quality. Complete v2
 training starts in independent directories; v1 preflight artifacts remain
 separate. Validation/test inference still uses up to 32,768 timestamps.
+
+## Optional local rank simulation
+
+After the audited full result exists, `scripts/rank_gift209.py` inserts it into a
+pinned public GIFT leaderboard snapshot and reproduces the official mean-task-rank
+calculation. This is separate from normalized geometric-mean score aggregation.
+A snapshot may be a checkout of the public Hugging Face Space repository:
+
+```sh
+# Save a public snapshot once, and keep its commit fixed for the comparison.
+git clone https://huggingface.co/spaces/Salesforce/GIFT-Eval .cache/gift-leaderboard-current
+.cache/gift-probe-env/bin/python scripts/rank_gift209.py
+```
+
+Skip the clone when the snapshot directory already exists. The script records
+its revision and each input CSV checksum. `--wait` waits for the experiment
+supervisor's successful completion before ranking. The resulting
+`ranking_simulation.json` is a local insertion/recalculation, not an official
+leaderboard place or submission. The adapter archive is unchanged by ranking;
+the separate README/ranking JSON contain the added simulation.
+
+The postprocessor also writes `training_diagnostics.json`: total optimizer steps,
+parallel-summed training-loop time, supervised wall time, step-zero fallbacks,
+and the distribution of selected context caps/learning rates. Its validation
+diagnostics compare observed 200/800-step checkpoints within the **same
+screening-selected continuation context** for each task. This conditional view
+avoids counting all short screens as if each had been extended; it is not an
+independently optimized objective comparison or a test-set gain claim.
