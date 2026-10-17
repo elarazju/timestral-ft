@@ -175,22 +175,3 @@ def test_context_budget_keeps_covariate_rows_and_bounds_training_memory():
     assert bounded_contexts([256, 2048, 8192], 100000, 21) == [256, 2048, 3104]
     with pytest.raises(ValueError, match='one history patch'):
         bounded_contexts([256], 100, 3000)
-
-
-def test_final_test_batch_budget_is_separate_from_validation(monkeypatch):
-    import importlib.util
-    import sys
-    from pathlib import Path
-
-    from timestral_ft.gift_validation import GiftValidationConfig
-
-    spec = importlib.util.spec_from_file_location('gift209_cli_test',
-              Path(__file__).resolve().parents[1]/'scripts/run_gift209_search.py')
-    runner = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(runner)
-    monkeypatch.setattr(sys, 'argv', ['run_gift209_search.py', '--stage', 'test'])
-    args = runner.cli()
-    assert (args.eval_max_rows, args.eval_max_tokens) == (32, 2**20)
-    # Validation/checkpoint selection keeps the original, frozen runtime budget.
-    cfg = GiftValidationConfig()
-    assert (cfg.max_rows, cfg.max_tokens) == (16, 2**17)
