@@ -1,0 +1,66 @@
+[
+  {
+    "dataset": "hospital",
+    "term": "short",
+    "selected_series": 128,
+    "actual": {
+      "crps": 0.05268798386038815,
+      "mase": 0.7608813524271497,
+      "scaled_pinball": 0.26742812630254775
+    },
+    "official_validation": {
+      "mase": 0.7608813524271499,
+      "crps": 0.05268798386038814
+    },
+    "matches": true,
+    "seconds": 2.554990499978885
+  },
+  {
+    "dataset": "ett1/H",
+    "term": "long",
+    "selected_series": 1,
+    "actual": {
+      "crps": 0.36448226731720884,
+      "mase": 1.6504520215662917,
+      "scaled_pinball": 0.6761609315872192
+    },
+    "official_validation": {
+      "mase": 1.6504520215662917,
+      "crps": 0.36448226731720884
+    },
+    "matches": true,
+    "seconds": 1.9364713341929018
+  },
+  {
+    "dataset": "bizitobs_l2c/H",
+    "term": "short",
+    "selected_series": 1,
+    "actual": {
+      "crps": 0.28399681728121506,
+      "mase": 0.10789509472214426,
+      "scaled_pinball": 0.1618994027376175
+    },
+    "official_validation": {
+      "mase": 0.10789509472214426,
+      "crps": 0.28399681728121506
+    },
+    "matches": true,
+    "seconds": 0.8542967918328941
+  },
+  {
+    "dataset": "m4_yearly",
+    "term": "short",
+    "selected_series": 128,
+    "actual": {
+      "crps": 0.11100908945467865,
+      "mase": 3.2621312795135684,
+      "scaled_pinball": 0.37341633753385395
+    },
+    "official_validation": {
+      "mase": 3.2621312795135684,
+      "crps": 0.11100908463549147
+    },
+    "matches": true,
+    "seconds": 5.521339875180274
+  }
+]

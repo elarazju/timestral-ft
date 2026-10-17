@@ -265,6 +265,7 @@ For frozen transfer, model acceptance and independent audit commands, see the
 | [ETTh1 configuration](examples/etth1.yaml) | A runnable example with numeric and categorical covariates |
 | [Broader validation](results/validation/README.md) | Multi-seed benchmarks, frozen transfer and four-size acceptance |
 | [GIFT-Eval guide](examples/gift_eval/README.md) | Environment setup, all-task training and official evaluation |
+| [209M search protocol](examples/gift_eval/209m-search.md) | Validation-only context/budget search and frozen 97-task testing; experiment in progress |
 | [Contributing](CONTRIBUTING.md) | Development setup and contribution expectations |
 
 ```text

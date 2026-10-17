@@ -79,6 +79,7 @@ class GiftWindows:
         self.context_length = context_length
         self.horizon = dataset.prediction_length
         self.train, self.validation = [], []
+        self.validation_indices = []
         digest = hashlib.sha256()
         for entry in dataset.training_dataset:
             target = _matrix(entry["target"])
@@ -114,6 +115,7 @@ class GiftWindows:
             if not np.array_equal(target[:, :cutoff], training, equal_nan=True):
                 raise ValueError("Official training and validation prefixes disagree")
             labels = target[:, cutoff:].copy()
+            self.validation_indices.append(i)
             self.validation.append(self.window(training, cov, cutoff, labels=labels))
             digest.update(labels.tobytes())
         if count != len(self.train):
@@ -247,7 +249,8 @@ def load_gift_adapter(directory, device="cpu"):
 
 def train_gift_task(dataset, *, task_key, output_dir, config=None,
                     model_id="mistralai/Timestral-5M", revision=BASE_REVISION,
-                    stop_after_steps=None):
+                    stop_after_steps=None, validation_fn=None, validation_metadata=None,
+                    include_initial=False, retain_validation_checkpoints=False):
     """Train one independent LoRA; exact-resume only its adapter/optimizer state."""
     cfg = config or GiftTrainConfig()
     check_device(cfg.device)
@@ -271,6 +274,14 @@ def train_gift_task(dataset, *, task_key, output_dir, config=None,
         "data_fingerprint": windows.fingerprint, "data": windows.summary,
         "selection_objective": "history-scaled masked pinball over all 21 quantiles",
     }
+    if validation_fn is not None:
+        if not validation_metadata:
+            raise ValueError("Custom validation requires reproducible validation_metadata")
+        metadata["selection_objective"] = validation_metadata
+    if include_initial:
+        metadata["include_initial_checkpoint"] = True
+    if retain_validation_checkpoints:
+        metadata["retain_validation_checkpoints"] = True
     # Initialize adapters on CPU for the same seeded A matrices on every backend.
     # Completed CPU tasks used this same initialization order already.
     model = load_model(path, device="cpu")
@@ -308,6 +319,31 @@ def train_gift_task(dataset, *, task_key, output_dir, config=None,
         elapsed, best, best_state = state["elapsed"], state["best"], state["best_adapter"]
         _reconcile_history(output / "history.jsonl", step)
     started = time.perf_counter()
+
+    def assess():
+        result = (validation_fn(model, windows, cfg) if validation_fn is not None
+                  else validation_loss(model, windows, cfg))
+        result = result if isinstance(result, dict) else {"score": result}
+        if "score" not in result or not all(math.isfinite(float(v)) for v in result.values()):
+            raise FloatingPointError("Custom validation returned a non-finite or missing score")
+        return {k: float(v) for k, v in result.items()}
+
+    def retain(at_step):
+        if retain_validation_checkpoints:
+            checkpoints = output / "validation_checkpoints"
+            checkpoints.mkdir(exist_ok=True)
+            temporary = checkpoints / f"step_{at_step:05d}.safetensors.tmp"
+            save_file(adapter_state(model), temporary)
+            temporary.replace(checkpoints / f"step_{at_step:05d}.safetensors")
+
+    if step == 0 and include_initial:
+        initial = assess()
+        best = initial["score"]
+        best_state = {k: v.clone() for k, v in adapter_state(model).items()}
+        atomic_json(output / "initial_validation.json", dict(step=0, validation_loss=best,
+                    validation_metrics=initial))
+        retain(0)
+        print(f"TRAIN {task_key} step=0 val={best:.6g} best=0", flush=True)
     stop = cfg.max_steps if stop_after_steps is None else min(cfg.max_steps, stop_after_steps)
     if stop < step:
         raise ValueError("Pause precedes resumed step")
@@ -337,8 +373,12 @@ def train_gift_task(dataset, *, task_key, output_dir, config=None,
             record = {"step": step, "train_loss": float(np.mean(losses)),
                       "learning_rate": optimizer.param_groups[0]["lr"], "gradient_norm": gradient_norm}
             if step % cfg.eval_every == 0 or step == cfg.max_steps:
-                value = validation_loss(model, windows, cfg)
+                metrics = assess()
+                value = metrics["score"]
                 record["validation_loss"] = value
+                if validation_fn is not None:
+                    record["validation_metrics"] = metrics
+                retain(step)
                 if value < best:
                     best, best_step, bad = value, step, 0
                     best_state = {k: v.clone() for k, v in adapter_state(model).items()}

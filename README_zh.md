@@ -243,6 +243,7 @@ python scripts/benchmark_suite.py --jobs 2
 | [ETTh1 示例配置](examples/etth1.yaml) | 包含数值和分类协变量的可运行配置 |
 | [综合验证记录](results/validation/README.zh-CN.md) | 多种子基准、冻结迁移和四档模型验收 |
 | [GIFT-Eval 运行指南](examples/gift_eval/README.md) | 环境配置、全任务训练和官方评估 |
+| [209M 搜索方案](examples/gift_eval/209m-search.md) | 验证集上的上下文／预算搜索及冻结后的 97 任务测试；实验进行中 |
 | [贡献指南](CONTRIBUTING.md) | 开发环境与贡献要求 |
 
 ```text

@@ -146,3 +146,18 @@ After the complete evaluation, run `python scripts/audit_gift_eval.py` and
 `python scripts/summarize_gift_eval.py`. `python scripts/package_gift_adapters.py`
 creates a local ZIP of all 97 adapters, their configurations/histories and base
 licenses, excluding optimizer states and raw datasets. Nothing is uploaded.
+
+## Timestral-209M validation search
+
+The 209M experiment uses a separate run directory and never changes the recorded
+5M run. See [the 209M protocol](209m-search.md) for the fixed search, baseline
+fallback, checkpoint-level validation ablations, and test freeze policy.
+
+```sh
+.cache/gift-probe-env/bin/python scripts/run_gift209_search.py --stage all
+```
+
+This runs the complete search before the paired official tests and independent
+report. It does not publish weights or submit a leaderboard entry. The default
+backend is MPS; use `--device cpu` or `--device cuda` in a new run directory to
+change the protocol. Long experiments checkpoint each optimizer step.
