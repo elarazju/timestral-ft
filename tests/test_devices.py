@@ -12,7 +12,12 @@ from safetensors.torch import save_file
 from timestral.forecaster import TimestralForecaster
 
 from timestral_ft import DataConfig, FineTunedModel, TrainConfig, evaluate, export, finetune
-from timestral_ft.compat import PortableTimestralModel, differentiable_forecast, pinball_loss
+from timestral_ft.compat import (
+    PortableForecaster,
+    PortableTimestralModel,
+    differentiable_forecast,
+    pinball_loss,
+)
 from timestral_ft.data import collate
 from timestral_ft.trainer import _restore_rng, _rng_state
 
@@ -51,11 +56,52 @@ def test_accelerator_parity_and_gradients(model, accelerator, n_target):
     assert batch["categorical_known_covariates"].device.type == "cpu"
     prediction = differentiable_forecast(portable, prediction_length=7, **batch)
     assert prediction.device.type == accelerator
-    torch.testing.assert_close(prediction.cpu(), expected, rtol=1e-3, atol=1e-4)
+    try:
+        torch.testing.assert_close(prediction.cpu(), expected, rtol=1e-3, atol=1e-4)
+    except AssertionError as error:
+        pytest.fail(f"{error}\nBackend diagnostics: {_parity_diagnostics(model, portable, context, covariates, batch)}")
     labels = torch.randn(2, n_target, 7, device=accelerator)
     loss = pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
     loss.backward()
     assert all(p.grad is None or torch.isfinite(p.grad).all() for p in portable.parameters())
+
+
+def _parity_diagnostics(cpu_model, device_model, context, covariates, batch):
+    """On failure, locate the first CPU/accelerator divergence without weakening parity."""
+    snapshots = [{}, {}]
+    handles = []
+
+    def capture(store, name):
+        def hook(module, inputs, output):
+            if isinstance(output, torch.Tensor):
+                store.setdefault(name, []).append(output.detach().cpu().clone())
+        return hook
+
+    def difference(left, right):
+        return float(torch.nan_to_num((left - right).abs(), nan=float("inf")).max())
+
+    try:
+        for model, store in zip((cpu_model, device_model), snapshots):
+            for name, module in model.named_modules():
+                if name in {"representation", "transformer", "head"} or isinstance(module, torch.nn.Linear):
+                    handles.append(module.register_forward_hook(capture(store, name)))
+        expected = TimestralForecaster(cpu_model, quantile_real_cap_k=0).forecast(
+            context, 7, symmetric_averaging=False, clip_nonnegative=False, **covariates).quantiles
+        actual = differentiable_forecast(device_model, prediction_length=7, **batch).detach().cpu()
+    finally:
+        for handle in handles:
+            handle.remove()
+    stages = {}
+    for name, values in snapshots[0].items():
+        other = snapshots[1].get(name, [])
+        stages[name] = ([difference(a, b) for a, b in zip(values, other)]
+                        if len(values) == len(other) else "call count differs")
+    inference = PortableForecaster(device_model, quantile_real_cap_k=0).forecast(
+        batch["context"], 7, symmetric_averaging=False, clip_nonnegative=False,
+        **{key: value for key, value in batch.items() if key != "context"}).quantiles.cpu()
+    return {"torch": torch.__version__, "stages_max_abs": stages,
+            "gradient_forecast_max_abs": difference(actual, expected),
+            "inference_forecast_max_abs": difference(inference, expected)}
 
 
 def test_accelerator_rng_restore(accelerator):
