@@ -73,6 +73,8 @@ def _parity_diagnostics(cpu_model, device_model, context, covariates, batch):
 
     def capture(store, name):
         def hook(module, inputs, output):
+            if inputs and isinstance(inputs[0], torch.Tensor):
+                store.setdefault(name + ":input", []).append(inputs[0].detach().cpu().clone())
             if isinstance(output, torch.Tensor):
                 store.setdefault(name, []).append(output.detach().cpu().clone())
         return hook
@@ -99,7 +101,9 @@ def _parity_diagnostics(cpu_model, device_model, context, covariates, batch):
     inference = PortableForecaster(device_model, quantile_real_cap_k=0).forecast(
         batch["context"], 7, symmetric_averaging=False, clip_nonnegative=False,
         **{key: value for key, value in batch.items() if key != "context"}).quantiles.cpu()
-    return {"torch": torch.__version__, "stages_max_abs": stages,
+    weights = {name: difference(value, device_model.state_dict()[name].cpu())
+               for name, value in cpu_model.state_dict().items()}
+    return {"torch": torch.__version__, "weights_max_abs": max(weights.values()), "stages_max_abs": stages,
             "gradient_forecast_max_abs": difference(actual, expected),
             "inference_forecast_max_abs": difference(inference, expected)}
 
