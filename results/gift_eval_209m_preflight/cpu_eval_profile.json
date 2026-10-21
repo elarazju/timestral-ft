@@ -1,0 +1,123 @@
+{
+  "records": [
+    {
+      "task": "hospital/M/short",
+      "kind": "baseline",
+      "seconds": 4.879981959005818,
+      "metrics": {
+        "MSE[mean]": 2458.48283355063,
+        "MSE[0.5]": 2458.48283355063,
+        "MAE[0.5]": 17.1494153357236,
+        "MASE[0.5]": 0.745373189772627,
+        "MAPE[0.5]": 0.19019298727540335,
+        "sMAPE[0.5]": 0.1701223347716516,
+        "MSIS": 5.1868015558834815,
+        "RMSE[mean]": 49.58309019767354,
+        "NRMSE[mean]": 0.17999813131366654,
+        "ND[0.5]": 0.062256360005916285,
+        "mean_weighted_sum_quantile_loss": 0.05025794876656501
+      },
+      "device": "cpu",
+      "reference_matches": true
+    },
+    {
+      "task": "hospital/M/short",
+      "kind": "lora",
+      "seconds": 6.077893082983792,
+      "metrics": {
+        "MSE[mean]": 2382.1245110821383,
+        "MSE[0.5]": 2382.1245110821383,
+        "MAE[0.5]": 16.98637311223381,
+        "MASE[0.5]": 0.7428044257462351,
+        "MAPE[0.5]": 0.1898162987687079,
+        "sMAPE[0.5]": 0.16974415752173816,
+        "MSIS": 4.997345920090348,
+        "RMSE[mean]": 48.807012929313125,
+        "NRMSE[mean]": 0.17718079061337988,
+        "ND[0.5]": 0.06166447887393384,
+        "mean_weighted_sum_quantile_loss": 0.04933709976830807
+      },
+      "device": "cpu"
+    },
+    {
+      "task": "hierarchical_sales/W/short",
+      "kind": "baseline",
+      "seconds": 4.6424668750260025,
+      "metrics": {
+        "MSE[mean]": 453.1657838983051,
+        "MSE[0.5]": 453.1657838983051,
+        "MAE[0.5]": 8.861683990995763,
+        "MASE[0.5]": 0.7190671521817115,
+        "MAPE[0.5]": 0.5304313288261491,
+        "sMAPE[0.5]": 0.4541274248543432,
+        "MSIS": 6.484070989888612,
+        "RMSE[mean]": 21.28769090104197,
+        "NRMSE[mean]": 0.9773283018509427,
+        "ND[0.5]": 0.40684424659866014,
+        "mean_weighted_sum_quantile_loss": 0.34372743611320467
+      },
+      "device": "cpu",
+      "reference_matches": true
+    },
+    {
+      "task": "hierarchical_sales/W/short",
+      "kind": "lora",
+      "seconds": 5.195255666971207,
+      "metrics": {
+        "MSE[mean]": 453.1657838983051,
+        "MSE[0.5]": 453.1657838983051,
+        "MAE[0.5]": 8.861683990995763,
+        "MASE[0.5]": 0.7190671521817115,
+        "MAPE[0.5]": 0.5304313288261491,
+        "sMAPE[0.5]": 0.4541274248543432,
+        "MSIS": 6.484070989888612,
+        "RMSE[mean]": 21.28769090104197,
+        "NRMSE[mean]": 0.9773283018509427,
+        "ND[0.5]": 0.40684424659866014,
+        "mean_weighted_sum_quantile_loss": 0.34372743611320467
+      },
+      "device": "cpu"
+    },
+    {
+      "task": "car_parts/M/short",
+      "kind": "baseline",
+      "seconds": 17.792357333004475,
+      "metrics": {
+        "MSE[mean]": 1.3873680989486028,
+        "MSE[0.5]": 1.3873680989486028,
+        "MAE[0.5]": 0.4488411927834535,
+        "MASE[0.5]": 0.8298808734069423,
+        "MAPE[0.5]": 0.8213877813423104,
+        "sMAPE[0.5]": 1.8665574049358857,
+        "MSIS": 15.042284292936566,
+        "RMSE[mean]": 1.1778659087301078,
+        "NRMSE[mean]": 2.8244016231320552,
+        "ND[0.5]": 1.0762751379678415,
+        "mean_weighted_sum_quantile_loss": 0.9408840039258057
+      },
+      "device": "cpu",
+      "reference_matches": true
+    },
+    {
+      "task": "car_parts/M/short",
+      "kind": "lora",
+      "seconds": 20.629054291173816,
+      "metrics": {
+        "MSE[mean]": 1.3533895742660407,
+        "MSE[0.5]": 1.3533895742660407,
+        "MAE[0.5]": 0.45275915294620356,
+        "MASE[0.5]": 0.8292034725277797,
+        "MAPE[0.5]": 0.8113087372547347,
+        "sMAPE[0.5]": 1.8858795836286266,
+        "MSIS": 14.834457506638282,
+        "RMSE[mean]": 1.1633527299430904,
+        "NRMSE[mean]": 2.789600509169048,
+        "ND[0.5]": 1.0856700045320402,
+        "mean_weighted_sum_quantile_loss": 0.9376565105197024
+      },
+      "device": "cpu"
+    }
+  ],
+  "note": "Post-freeze CPU execution probes on full official test windows, no model selection or training changes",
+  "recorded_at_utc": "2026-10-19T10:28:14.721770+00:00"
+}

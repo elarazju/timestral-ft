@@ -1,0 +1,22 @@
+{
+  "pid": 28461,
+  "phase": "complete",
+  "device": "cpu",
+  "threads": 4,
+  "started_at_utc": "2026-10-20T08:14:07.898301+00:00",
+  "round": "bitbrains",
+  "total_queue": 2,
+  "completed_by_this_worker": [
+    {
+      "task": "bitbrains_rnd/5T/medium",
+      "seconds": 7912.659153792003
+    },
+    {
+      "task": "bitbrains_rnd/5T/long",
+      "seconds": 10080.777599624998
+    }
+  ],
+  "current_task": null,
+  "skipped_busy": [],
+  "updated_at_utc": "2026-10-20T13:18:13.974976+00:00"
+}

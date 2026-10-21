@@ -1,0 +1,34 @@
+{
+  "task": "restaurant/D/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 138.47372046324836,
+    "MSE[0.5]": 138.47372046324836,
+    "MAE[0.5]": 7.056268679368637,
+    "MASE[0.5]": 0.677936549587038,
+    "MAPE[0.5]": 0.6601489989755533,
+    "sMAPE[0.5]": 0.39029887491462945,
+    "MSIS": 4.651400168467312,
+    "RMSE[mean]": 11.767485732442948,
+    "NRMSE[mean]": 0.5415669583975218,
+    "ND[0.5]": 0.3247458338348062,
+    "mean_weighted_sum_quantile_loss": 0.25442062727793413
+  },
+  "device": "cpu",
+  "seconds": 9.195279833860695,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": -5.837302694544633e-06,
+    "MSE[0.5]": -5.837302694544633e-06,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": -1.7246307715268472e-09,
+    "MAPE[0.5]": 0.0,
+    "sMAPE[0.5]": 5.551115123125783e-17,
+    "MSIS": 2.541096932873188e-08,
+    "RMSE[mean]": -2.480267564664018e-07,
+    "NRMSE[mean]": -1.1414766021289324e-08,
+    "ND[0.5]": 0.0,
+    "mean_weighted_sum_quantile_loss": 1.9726422162413826e-09
+  }
+}

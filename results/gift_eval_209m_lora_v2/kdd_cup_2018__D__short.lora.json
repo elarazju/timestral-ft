@@ -1,0 +1,21 @@
+{
+  "task": "kdd_cup_2018/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 2933.2853019648915,
+    "MSE[0.5]": 2933.2853019648915,
+    "MAE[0.5]": 21.372951614863855,
+    "MASE[0.5]": 1.2087610829794166,
+    "MAPE[0.5]": 0.5189552999603375,
+    "sMAPE[0.5]": 0.4720295550254235,
+    "MSIS": 9.491378475459067,
+    "RMSE[mean]": 54.159812610134566,
+    "NRMSE[mean]": 1.2132373301975925,
+    "ND[0.5]": 0.4787768181976233,
+    "mean_weighted_sum_quantile_loss": 0.3826748580723932
+  },
+  "device": "cpu",
+  "seconds": 8.57709354092367,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "38b25de53aaeb420dc4ed5836c7bc7ab0106d8d3ef7e3cef8e83751b0c1ba893"
+}

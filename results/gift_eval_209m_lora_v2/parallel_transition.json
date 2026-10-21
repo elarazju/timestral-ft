@@ -1,0 +1,37 @@
+{
+  "phase": "handed_off",
+  "task": "electricity/15T/long",
+  "previous_state": {
+    "controller_pid": 34411,
+    "started_at_utc": "2026-10-17T09:21:33.410928+00:00",
+    "phase": "frozen_paired_test",
+    "updated_at_utc": "2026-10-19T11:05:49.149786+00:00",
+    "progress": {
+      "selected_tasks": 97,
+      "total_tasks": 97,
+      "logged_optimizer_steps": 113000,
+      "baseline_tests": 9,
+      "adapted_tests": 8,
+      "test_candidates_frozen": true
+    },
+    "workers": [
+      {
+        "name": "search_cpu",
+        "pid": 34413,
+        "returncode": 0
+      },
+      {
+        "name": "search_mps",
+        "pid": 34414,
+        "returncode": 0
+      },
+      {
+        "name": "paired_test",
+        "pid": 86187,
+        "returncode": null
+      }
+    ]
+  },
+  "new_controller_pid": 60415,
+  "completed_results_preserved": true
+}

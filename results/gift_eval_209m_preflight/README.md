@@ -1,7 +1,10 @@
 # Timestral-209M preflight
 
-These are device and validation-protocol checks, **not test-set adaptation
-results**. Hardware is Apple M4 Pro, 48 GB unified memory; FP32, PyTorch 2.14.1.
+These are device checks and evaluation-protocol/throughput probes, **not the
+completed 97-task adaptation benchmark**. Hardware is Apple M4 Pro, 48 GB unified
+memory; FP32, PyTorch 2.14.1. Initial checks use synthetic/validation inputs.
+Post-freeze execution probes, identified below, use fixed official test inputs
+after all 97 adapters have been selected and frozen.
 
 `hardware_profile.json` records actual forward/backward/optimizer timing after
 loading the pinned real 209M checkpoint, on CPU and MPS. Timings include an
@@ -41,3 +44,27 @@ H=900. Both outputs are finite; retained driver allocations were about
 11–12 GB. The training context budget does not shorten validation or test
 inference. The accompanying source waits for an accelerator slot between task
 jobs; this is a shape/resource check, not a GIFT test score.
+
+`cpu_eval_profile.json` records full official paired-test execution probes for
+hospital, hierarchical weekly sales, and car parts, after selection freezing.
+All 11 base-model metrics match the pinned public reference at the production
+tolerance. Their recorded adapter metrics are correctness/runtime evidence;
+they are not used for checkpoint or recipe selection. No complete adaptation
+benefit is inferred from these three cases.
+
+[mps_concurrency.md](mps_concurrency.md) and `mps_concurrency.json` preserve the
+equal-work one/two-MPS-process probes. The completed ABBA comparisons showed
+only about 0.25–2.35% throughput changes and approximately doubled per-worker
+Metal driver allocations. A longer electricity repeat did not reproduce the
+exploratory short-trial advantage. The supplemental 35-covariate probe was
+stopped on the user's decision after three trials and is clearly marked
+incomplete. Production testing resumed with the existing one-MPS/one-CPU plan;
+no adapters, hyperparameters, test windows, or completed metrics were changed.
+
+[mps_batch_profile.md](mps_batch_profile.md) and `mps_batch_profile.json` record
+an equal-work batch-2/4/8/16 inference sweep on 32 fixed real Bitbrains windows.
+All sizes run, but larger batches show no throughput gain and fail the strict
+cross-batch prediction-parity tolerance. Repeats at each individual size are
+bitwise stable. Production keeps its batch-2 budget; both suspended workers
+resumed without discarding their active evaluation progress. The exact source
+snapshot and difference diagnostics accompany the measurements.

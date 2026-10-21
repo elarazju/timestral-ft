@@ -1,0 +1,21 @@
+{
+  "task": "ett2/H/medium",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 213.85928199404762,
+    "MSE[0.5]": 213.85928199404762,
+    "MAE[0.5]": 9.096022251674107,
+    "MASE[0.5]": 1.0053845926658398,
+    "MAPE[0.5]": 0.16675301661205214,
+    "sMAPE[0.5]": 0.1624190194266183,
+    "MSIS": 7.878515593801226,
+    "RMSE[mean]": 14.623928404982282,
+    "NRMSE[mean]": 0.1970668272042404,
+    "ND[0.5]": 0.12257474159309238,
+    "mean_weighted_sum_quantile_loss": 0.09795884558280107
+  },
+  "device": "cpu",
+  "seconds": 32.263727749930695,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "9d9082beeb54a47f3eaf6f001fbca6eabfd61b1001579cb9741dc136af73f688"
+}

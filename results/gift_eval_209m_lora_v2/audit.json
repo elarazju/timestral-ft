@@ -1,0 +1,1751 @@
+{
+  "tasks": [
+    {
+      "task": "m4_yearly/A/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m4_quarterly/Q/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m4_monthly/M/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m4_weekly/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m4_daily/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m4_hourly/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/15T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/15T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/15T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "electricity/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/10T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/10T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/10T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "solar/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "hospital/M/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "covid_deaths/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "us_births/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "us_births/M/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "us_births/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "saugeen/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "saugeen/M/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "saugeen/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "temperature_rain/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "kdd_cup_2018/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "kdd_cup_2018/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "kdd_cup_2018/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "kdd_cup_2018/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "car_parts/M/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "restaurant/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "hierarchical_sales/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "hierarchical_sales/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/5T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/5T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/5T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "loop_seattle/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "sz_taxi/15T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "sz_taxi/15T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "sz_taxi/15T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "sz_taxi/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m_dense/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m_dense/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m_dense/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "m_dense/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/15T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/15T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/15T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett1/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/15T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/15T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/15T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "ett2/W/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/10T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/10T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/10T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "jena_weather/D/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_fast_storage/5T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_fast_storage/5T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_fast_storage/5T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_fast_storage/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_rnd/5T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_rnd/5T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_rnd/5T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bitbrains_rnd/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_application/10S/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_application/10S/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_application/10S/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_service/10S/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_service/10S/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_service/10S/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/5T/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/5T/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/5T/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/H/short",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/H/medium",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    },
+    {
+      "task": "bizitobs_l2c/H/long",
+      "checks": {
+        "selection_uses_only_validation": true,
+        "best_validation_step": true,
+        "best_validation_value": true,
+        "selected_checkpoint_exact": true,
+        "finite_adapter": true,
+        "only_lora": true,
+        "parameter_count": true,
+        "base_revision": true,
+        "base_weight_hash": true,
+        "official_prefix_lengths": true,
+        "fallback_is_identity": true,
+        "continuation_completed": true,
+        "all_candidate_histories_valid": true
+      }
+    }
+  ],
+  "all_checks_pass": true
+}

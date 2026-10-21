@@ -1,0 +1,21 @@
+{
+  "task": "hospital/M/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 2382.1245110821383,
+    "MSE[0.5]": 2382.1245110821383,
+    "MAE[0.5]": 16.98637311223381,
+    "MASE[0.5]": 0.7428044257462351,
+    "MAPE[0.5]": 0.1898162987687079,
+    "sMAPE[0.5]": 0.16974415752173816,
+    "MSIS": 4.997345920090348,
+    "RMSE[mean]": 48.807012929313125,
+    "NRMSE[mean]": 0.17718079061337988,
+    "ND[0.5]": 0.06166447887393384,
+    "mean_weighted_sum_quantile_loss": 0.04933709976830807
+  },
+  "device": "cpu",
+  "seconds": 7.975321040954441,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "3389829af456e108dad74e13da5ded1d62e17b575c11497d23b4fa2676e070c1"
+}

@@ -1,0 +1,34 @@
+{
+  "task": "bitbrains_rnd/5T/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 2264201.2716056737,
+    "MSE[0.5]": 2264201.2716056737,
+    "MAE[0.5]": 139.1286853233725,
+    "MASE[0.5]": 4.322930867013604,
+    "MAPE[0.5]": 0.2708861642597136,
+    "sMAPE[0.5]": 0.5157691999218471,
+    "MSIS": 158.18093456534552,
+    "RMSE[mean]": 1504.7263111960506,
+    "NRMSE[mean]": 6.331150722481429,
+    "ND[0.5]": 0.5853853089754314,
+    "mean_weighted_sum_quantile_loss": 0.5880743588463
+  },
+  "device": "cpu",
+  "seconds": 4470.0812236249985,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.27881252812221646,
+    "MSE[0.5]": 0.27881252812221646,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": 6.427259613417391e-09,
+    "MAPE[0.5]": 1.6356323961908004e-07,
+    "sMAPE[0.5]": 1.80892294820989e-06,
+    "MSIS": -1.3057498904345266e-07,
+    "RMSE[mean]": 9.26455975331919e-05,
+    "NRMSE[mean]": 3.8980726113635455e-07,
+    "ND[0.5]": 0.0,
+    "mean_weighted_sum_quantile_loss": 5.0864050860077725e-08
+  }
+}

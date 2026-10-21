@@ -1,0 +1,21 @@
+{
+  "task": "hierarchical_sales/W/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 453.1657838983051,
+    "MSE[0.5]": 453.1657838983051,
+    "MAE[0.5]": 8.861683990995763,
+    "MASE[0.5]": 0.7190671521817115,
+    "MAPE[0.5]": 0.5304313288261491,
+    "sMAPE[0.5]": 0.4541274248543432,
+    "MSIS": 6.484070989888612,
+    "RMSE[mean]": 21.28769090104197,
+    "NRMSE[mean]": 0.9773283018509427,
+    "ND[0.5]": 0.40684424659866014,
+    "mean_weighted_sum_quantile_loss": 0.34372743611320467
+  },
+  "device": "cpu",
+  "seconds": 5.9121041658800095,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9"
+}

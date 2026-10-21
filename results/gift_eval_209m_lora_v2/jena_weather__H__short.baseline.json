@@ -1,0 +1,34 @@
+{
+  "task": "jena_weather/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 1062.8824143692564,
+    "MSE[0.5]": 1062.8824143692564,
+    "MAE[0.5]": 7.814191239818296,
+    "MASE[0.5]": 0.4751584355897807,
+    "MAPE[0.5]": 1.094536068238174,
+    "sMAPE[0.5]": 0.4504819513667614,
+    "MSIS": 3.853660676696108,
+    "RMSE[mean]": 32.601877466938255,
+    "NRMSE[mean]": 0.1998474260587423,
+    "ND[0.5]": 0.04790049308025689,
+    "mean_weighted_sum_quantile_loss": 0.0386426411986639
+  },
+  "device": "cpu",
+  "seconds": 151.029875874985,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 8.158416884285202e-07,
+    "MASE[0.5]": 1.9214699831238136e-08,
+    "MAPE[0.5]": 8.692697737178179e-07,
+    "sMAPE[0.5]": -4.485302559920079e-07,
+    "MSIS": -2.111765029511048e-07,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": 0.0,
+    "ND[0.5]": 5.001057484799176e-09,
+    "mean_weighted_sum_quantile_loss": 5.132863023504797e-10
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "decision": "Keep one MPS evaluator plus one CPU evaluator; do not enable a second MPS evaluator",
+  "evidence": "results/gift_eval_209m_preflight/mps_concurrency.json",
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "hyperparameters_or_adapters_changed": false,
+  "measured_at_utc": "2026-10-19T10:53:31.515716+00:00"
+}

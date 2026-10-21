@@ -1,0 +1,21 @@
+{
+  "task": "electricity/15T/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 131897.64572916666,
+    "MSE[0.5]": 131897.64572916666,
+    "MAE[0.5]": 49.2210815649634,
+    "MASE[0.5]": 0.9588978877840898,
+    "MAPE[0.5]": 0.15614254453572482,
+    "sMAPE[0.5]": 0.14330970376274785,
+    "MSIS": 10.647313973255486,
+    "RMSE[mean]": 363.1771547456787,
+    "NRMSE[mean]": 0.7158937623458798,
+    "ND[0.5]": 0.09702445434088622,
+    "mean_weighted_sum_quantile_loss": 0.08065890987628707
+  },
+  "device": "mps",
+  "seconds": 2292.770817667013,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "dae28337103246148f868786245b0892e7e94f3c58b5ce4fe1d1da2c3ed017f0"
+}

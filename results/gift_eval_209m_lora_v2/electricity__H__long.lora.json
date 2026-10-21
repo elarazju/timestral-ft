@@ -1,0 +1,21 @@
+{
+  "task": "electricity/H/long",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 5092904.803171171,
+    "MSE[0.5]": 5092904.803171171,
+    "MAE[0.5]": 230.21024024024024,
+    "MASE[0.5]": 1.0448435982662887,
+    "MAPE[0.5]": 0.16726086102938886,
+    "sMAPE[0.5]": 0.12034417298950864,
+    "MSIS": 7.695602590132941,
+    "RMSE[mean]": 2256.7465083990205,
+    "NRMSE[mean]": 0.8900601680763308,
+    "ND[0.5]": 0.09079485195104231,
+    "mean_weighted_sum_quantile_loss": 0.0712275284471179
+  },
+  "device": "mps",
+  "seconds": 572.872793499846,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "09bad5551166f8d9b90fa1840054400783f9b6a32b4bfa989b6141a25050b87f"
+}

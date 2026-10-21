@@ -1,0 +1,34 @@
+{
+  "task": "sz_taxi/15T/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 16.1333984375,
+    "MSE[0.5]": 16.1333984375,
+    "MAE[0.5]": 2.7318146534455128,
+    "MASE[0.5]": 0.5323652926097036,
+    "MAPE[0.5]": 9216176615150.934,
+    "sMAPE[0.5]": 0.40298482780782585,
+    "MSIS": 3.757682939689073,
+    "RMSE[mean]": 4.016640192685922,
+    "NRMSE[mean]": 0.37381541369329374,
+    "ND[0.5]": 0.2542409515969776,
+    "mean_weighted_sum_quantile_loss": 0.20032883367077453
+  },
+  "device": "cpu",
+  "seconds": 12.300743583124131,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": -2.5601388786711254e-09,
+    "MAPE[0.5]": -1835456.111328125,
+    "sMAPE[0.5]": 5.551115123125783e-17,
+    "MSIS": -1.9304800513708642e-07,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": 5.551115123125783e-17,
+    "ND[0.5]": 0.0,
+    "mean_weighted_sum_quantile_loss": -8.383202743100782e-10
+  }
+}

@@ -1,8 +1,13 @@
 # Timestral-209M: validation search before the 97-task test
 
-This is a new adaptation experiment. The complete 5M results are unchanged.
-The objective is to improve both CRPS and MASE over the original 209M checkpoint;
-validation gains do not guarantee test gains or a higher leaderboard rank.
+The complete 97-task run finished on 2026-10-21 (Asia/Shanghai). The selected
+adapters regressed test CRPS by 0.569% and MASE by 0.507% in normalized geometric
+mean, so the objective of improving both metrics was not achieved.
+[Results and limitations](../../results/gift_eval_209m_lora_v2/README.md) ·
+[Selected training contexts](../../results/gift_eval_209m_lora_v2/context_lengths.csv).
+
+The protocol below records the completed experiment. Validation gains do not
+guarantee test gains or a higher leaderboard rank.
 
 ## Fixed data and model
 
@@ -96,6 +101,86 @@ Optional disjoint CPU/MPS workers can run the search concurrently:
 The two worker commands are intended to run in separate terminals. Per-task
 locks prevent duplicate claims. The optimizer, scheduler, latest/best adapter,
 random state, and screening decision all survive resumption.
+
+### CPU and MPS parallel final testing
+
+After the complete 97-task selection has been frozen, the final paired test can
+use one CPU worker for short histories alongside one MPS worker for heavier
+tasks. Each task has an exclusive lock covering both base and adapted forecasts;
+completed receipts are validated and reused. MPS can claim remaining CPU tasks
+when its heavy queue is empty. There is only one MPS worker.
+
+```sh
+.cache/gift-probe-env/bin/python scripts/parallel_gift209_test.py --plan-only
+# Start/resume when no other test controller is running:
+.cache/gift-probe-env/bin/python scripts/parallel_gift209_test.py
+```
+
+CPU eligibility uses only saved training-prefix shapes: maximum prefix length
+plus 21 forecast horizons must be at most 4096. The bound accounts for at most
+20 official rolling windows; the full test context remains 32768. Eligible
+tasks are ordered by this length bound times series count. CPU routing never
+uses forecast errors, and no variables or test windows are omitted.
+
+For an already running serial `launch_gift209.py`, pass its verified PID and
+`--handoff-after <canonical-task-key>`. The replacement controller waits until
+that task's paired results commit, stops the old evaluator between task commits,
+and retains all completed receipts. Do not start a second serial controller.
+After a handoff, execution-lock acquisition waits up to 30 seconds for the
+previous process's cleanup helpers to release inherited locks. A normal launch
+still refuses an already-owned execution lock immediately.
+
+The execution manifest, test-stage source snapshot, handoff receipt, and actual
+device per result are saved separately from the immutable training protocol.
+The official predictor, mirror/clipping settings, batch limits (16 rows,
+131072 tokens), frozen weights, and all 11 metrics remain identical. CPU probes
+must reproduce the public base reference at the existing tolerance. This is a
+throughput optimization; it makes no claim of a fixed speedup or changed model
+quality. Shared memory bandwidth may limit acceleration.
+
+If the original CPU queue has finished while MPS still has work, an additional
+CPU worker can claim remaining single-series tasks (including multivariate
+ones) and the short-context SZ taxi medium/long tasks:
+
+```sh
+.cache/gift-probe-env/bin/python scripts/extend_gift209_cpu.py
+```
+
+This requires the original CPU worker to have exited and uses the same per-task
+paired-test locks. MPS keeps its full queue, skips completed tasks, and waits for
+any CPU-claimed task before the full report can start. A failed CPU extension
+therefore leaves unfinished work available to MPS. Routing/order uses only saved
+series counts, input dimensions and historical lengths; it does not use test
+errors. Full histories up to 32768, all official windows and all variables are
+retained. The extra queue and source/frozen-weight identities are saved in
+`cpu_extension_plan.json`; its separate PID, current task, timings and completion
+state are in `cpu_extension_status.json`. The original controller's worker list
+continues to show its already-finished initial CPU child.
+
+Use a new named round to assign other frozen tasks explicitly while preserving
+earlier CPU execution records, for example:
+
+```sh
+.cache/gift-probe-env/bin/python scripts/extend_gift209_cpu.py \
+  --round remaining16 \
+  --task loop_seattle/H/medium --task loop_seattle/H/long \
+  --task m_dense/H/medium --task m_dense/H/long \
+  --task bizitobs_service/10S/short --task bizitobs_service/10S/medium \
+  --task bizitobs_service/10S/long
+```
+
+This writes `cpu_extension_remaining16_plan.json` and
+`cpu_extension_remaining16_status.json` with a separate source snapshot. The
+global CPU-extension lock still permits only one extra CPU process. Explicit
+tasks bypass the initial single-series eligibility rule, retain all series and
+variables, and use the same exclusive paired-test locks as MPS. Both devices
+may claim an unstarted task; completed work is reused on the other device.
+
+In the completed run, later CPU rounds also processed heavier multivariate and
+Bitbrains tasks. See the per-task `device` fields and `cpu_extension*_plan.json`
+records; CPU work was not limited to the initial short-history queue. Temporary
+profiling pauses are recorded in the throughput reports and are included in
+the affected task wall timers.
 
 ## Freeze, audit, and publication
 

@@ -1,0 +1,21 @@
+{
+  "task": "restaurant/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 136.96124614738022,
+    "MSE[0.5]": 136.96124614738022,
+    "MAE[0.5]": 6.9963868920449235,
+    "MASE[0.5]": 0.6719030304865365,
+    "MAPE[0.5]": 0.6503421480252405,
+    "sMAPE[0.5]": 0.38744646326950244,
+    "MSIS": 4.507777563746319,
+    "RMSE[mean]": 11.703044311091888,
+    "NRMSE[mean]": 0.5386012148776729,
+    "ND[0.5]": 0.3219899352374617,
+    "mean_weighted_sum_quantile_loss": 0.25170472752462314
+  },
+  "device": "cpu",
+  "seconds": 16.108517166925594,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "3f54efbbc1506331ab5bfa801b0a4d2b9427533e3ec0575aafb5980b580287a8"
+}

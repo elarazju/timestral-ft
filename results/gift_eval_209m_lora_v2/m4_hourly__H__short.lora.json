@@ -1,0 +1,21 @@
+{
+  "task": "m4_hourly/H/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 1400636.805152979,
+    "MSE[0.5]": 1400636.805152979,
+    "MAE[0.5]": 198.52493458132045,
+    "MASE[0.5]": 0.644806071963566,
+    "MAPE[0.5]": 0.08493506390115489,
+    "sMAPE[0.5]": 0.07728623345662239,
+    "MSIS": 4.823316956598559,
+    "RMSE[mean]": 1183.4850253184359,
+    "NRMSE[mean]": 0.16157182868628803,
+    "ND[0.5]": 0.02710303555509633,
+    "mean_weighted_sum_quantile_loss": 0.02097676225750794
+  },
+  "device": "mps",
+  "seconds": 4.029107165988535,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "291c76319525885177869c2eaff5dccbe4c03cbb6da7e7247c9b1351e607dc2b"
+}

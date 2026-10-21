@@ -1,0 +1,34 @@
+{
+  "task": "bizitobs_application/10S/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 338810.1688888889,
+    "MSE[0.5]": 338810.1688888889,
+    "MAE[0.5]": 317.20430555555555,
+    "MASE[0.5]": 0.9100147125795858,
+    "MAPE[0.5]": 0.0130137390560574,
+    "sMAPE[0.5]": 0.013104214138454862,
+    "MSIS": 5.674420140433883,
+    "RMSE[mean]": 582.0740235475973,
+    "NRMSE[mean]": 0.02244826847186574,
+    "ND[0.5]": 0.01223330216343278,
+    "mean_weighted_sum_quantile_loss": 0.009459564489615931
+  },
+  "device": "cpu",
+  "seconds": 174.55956933298148,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": 1.3042754420933278e-07,
+    "MAPE[0.5]": 3.1789143990768043e-09,
+    "sMAPE[0.5]": 3.1789144615268494e-09,
+    "MSIS": -4.701518383498637e-06,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": 4.163336342344337e-17,
+    "ND[0.5]": 7.979727989493313e-17,
+    "mean_weighted_sum_quantile_loss": 8.935162314899214e-10
+  }
+}

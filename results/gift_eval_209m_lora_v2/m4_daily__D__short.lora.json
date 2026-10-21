@@ -1,0 +1,21 @@
+{
+  "task": "m4_daily/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 353395.5867383149,
+    "MSE[0.5]": 353395.5867383149,
+    "MAE[0.5]": 167.84913576413533,
+    "MASE[0.5]": 3.1399446591618725,
+    "MAPE[0.5]": 0.03555152168778014,
+    "sMAPE[0.5]": 0.02909120674884921,
+    "MSIS": 24.54241852810865,
+    "RMSE[mean]": 594.4708459952556,
+    "NRMSE[mean]": 0.0918293167520586,
+    "ND[0.5]": 0.0259280527522574,
+    "mean_weighted_sum_quantile_loss": 0.02043398194573791
+  },
+  "device": "mps",
+  "seconds": 84.24449466704391,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "a7ac2b728373f8fccf36f9c85e8f7e47aed89349b746e3789d591222fef570cb"
+}

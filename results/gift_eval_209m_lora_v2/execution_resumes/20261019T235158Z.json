@@ -1,0 +1,43 @@
+{
+  "reason": "System reboot recorded at 2026-10-20 02:50:32 Asia/Shanghai",
+  "resumed_at_utc": "2026-10-19T23:51:58.959493+00:00",
+  "previous_status": {
+    "controller_pid": 45273,
+    "started_at_utc": "2026-10-17T09:21:33.410928+00:00",
+    "parallel_started_at_utc": "2026-10-19T11:09:43.941646+00:00",
+    "phase": "frozen_paired_test",
+    "updated_at_utc": "2026-10-19T18:49:57.091106+00:00",
+    "progress": {
+      "selected_tasks": 97,
+      "total_tasks": 97,
+      "logged_optimizer_steps": 113000,
+      "baseline_tests": 81,
+      "adapted_tests": 81,
+      "test_candidates_frozen": true
+    },
+    "workers": [
+      {
+        "name": "test_cpu",
+        "pid": 45309,
+        "returncode": 0
+      },
+      {
+        "name": "test_mps",
+        "pid": 45311,
+        "returncode": null
+      }
+    ]
+  },
+  "completed_paired_tests": 81,
+  "remaining_tasks": 16,
+  "completed_results_preserved": true,
+  "model_selection_unchanged": true,
+  "controller_pid": 9612,
+  "ranking_waiter_pid": 9613,
+  "sanitized_system_diagnostic": {
+    "diagnostic_report_date": "2026-10-20 07:49:13.40 +0800",
+    "panic_reason": "userspace watchdog timeout: no successful checkins from configd in 180 seconds",
+    "underlying_service_hang_cause_not_determined": true,
+    "panic_calendar_utc": "2026-10-19T18:50:07+00:00"
+  }
+}

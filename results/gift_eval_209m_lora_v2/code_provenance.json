@@ -1,0 +1,14 @@
+{
+  "commit": "eb5064e5688dccd9f1b25f8dd93a1fbc16ec9142",
+  "source_files_match_commit": {
+    "scripts/run_gift209_search.py": true,
+    "src/timestral_ft/gift.py": true,
+    "src/timestral_ft/gift_validation.py": true,
+    "src/timestral_ft/compat.py": true,
+    "src/timestral_ft/lora.py": true,
+    "src/timestral_ft/trainer.py": true,
+    "scripts/launch_gift209.py": true
+  },
+  "repository": "https://github.com/elarazju/timestral-ft",
+  "ci_run": "https://github.com/elarazju/timestral-ft/actions/runs/39021072902"
+}

@@ -1,0 +1,21 @@
+{
+  "task": "bizitobs_service/10S/medium",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 5034.924126984127,
+    "MSE[0.5]": 5034.924126984127,
+    "MAE[0.5]": 27.854310515873017,
+    "MASE[0.5]": 0.9458289921843634,
+    "MAPE[0.5]": 0.06202232724144345,
+    "sMAPE[0.5]": 0.05360025072854663,
+    "MSIS": 9.462556168610602,
+    "RMSE[mean]": 70.95719926113296,
+    "NRMSE[mean]": 0.05340405389825064,
+    "ND[0.5]": 0.020963807979708315,
+    "mean_weighted_sum_quantile_loss": 0.017227117647120788
+  },
+  "device": "cpu",
+  "seconds": 970.0708563750013,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "961665b848a0873b27d4ab964dde7b7f19c5c3b498058d371ab97c64f27076fb"
+}

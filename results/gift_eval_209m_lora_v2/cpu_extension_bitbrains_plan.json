@@ -1,0 +1,49 @@
+{
+  "queue": [
+    {
+      "task": "bitbrains_rnd/5T/medium",
+      "priority": 1,
+      "estimated_input_work": 60480000,
+      "total_input_rows": 7,
+      "training_shape": {
+        "series": 500,
+        "eligible_training_series": 500,
+        "validation_series": 128,
+        "horizon": 480,
+        "train_length_min": 7200,
+        "train_length_max": 7200,
+        "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+        "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+      }
+    },
+    {
+      "task": "bitbrains_rnd/5T/long",
+      "priority": 1,
+      "estimated_input_work": 75600000,
+      "total_input_rows": 7,
+      "training_shape": {
+        "series": 500,
+        "eligible_training_series": 500,
+        "validation_series": 128,
+        "horizon": 720,
+        "train_length_min": 6480,
+        "train_length_max": 6480,
+        "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+        "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+      }
+    }
+  ],
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "source_sha256": {
+    "scripts/extend_gift209_cpu.py": "edd47d8e135928d0781a9c900f30bb6d1a0dcaed6d49a94eff3f3b08114285cd",
+    "scripts/parallel_gift209_test.py": "0a6b60d15805086ff802e38ea13cad2bf92a933dc5428ae63c959c9158af43a5",
+    "scripts/run_gift209_search.py": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91"
+  },
+  "threads": 4,
+  "requested_tasks": [
+    "bitbrains_rnd/5T/medium",
+    "bitbrains_rnd/5T/long"
+  ],
+  "routing": "Explicit frozen tasks selected for CPU execution; shape-only ordering, no test errors used",
+  "official_forecast_settings_unchanged": true
+}

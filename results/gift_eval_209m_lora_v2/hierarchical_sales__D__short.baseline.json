@@ -1,0 +1,34 @@
+{
+  "task": "hierarchical_sales/D/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 28.71916985324514,
+    "MSE[0.5]": 28.71916985324514,
+    "MAE[0.5]": 2.3126186892827616,
+    "MASE[0.5]": 0.7453622094337681,
+    "MAPE[0.5]": 0.6447517341334785,
+    "sMAPE[0.5]": 1.0348752786165285,
+    "MSIS": 6.870936710847648,
+    "RMSE[mean]": 5.359026950225679,
+    "NRMSE[mean]": 1.6440901206858574,
+    "ND[0.5]": 0.7094858031649102,
+    "mean_weighted_sum_quantile_loss": 0.5749935038113445
+  },
+  "device": "cpu",
+  "seconds": 27.902996917022392,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": -1.2918561402841533e-06,
+    "MSE[0.5]": -1.2918561402841533e-06,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": -6.0224601972080904e-09,
+    "MAPE[0.5]": -5.6324979791355645e-08,
+    "sMAPE[0.5]": 0.0,
+    "MSIS": -1.869975543300484e-07,
+    "RMSE[mean]": -1.2053084841312511e-07,
+    "NRMSE[mean]": -3.6977529482840055e-08,
+    "ND[0.5]": 0.0,
+    "mean_weighted_sum_quantile_loss": -1.4318013441538824e-10
+  }
+}

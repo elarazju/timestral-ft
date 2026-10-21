@@ -1,0 +1,18 @@
+{
+  "tasks": 97,
+  "fallback_tasks": 21,
+  "crps": {
+    "baseline": 0.44601008261259867,
+    "lora": 0.4485491019850558,
+    "change_percent": 0.569273985373675,
+    "improved": 31,
+    "regressed": 45
+  },
+  "mase": {
+    "baseline": 0.6575470862405749,
+    "lora": 0.6608795675539642,
+    "change_percent": 0.5068049700352573,
+    "improved": 33,
+    "regressed": 43
+  }
+}

@@ -32,7 +32,8 @@ of Mistral AI.
 - **Portable artifacts.** Save preprocessing metadata, export a standalone LoRA
   adapter, or merge weights into the official Timestral inference format.
 - **Reproducible evaluation.** Pinned ETTh1 examples, multivariate multi-seed
-  benchmarks, frozen-transfer checks and a complete 97-task GIFT-Eval LoRA run.
+  benchmarks, frozen-transfer checks and complete 97-task GIFT-Eval LoRA runs
+  with Timestral-5M and Timestral-209M.
 
 ## Supported models and devices
 
@@ -41,11 +42,11 @@ of Mistral AI.
 | Timestral-5M | Verified | Verified | ETTh1, multivariate benchmarks, GIFT-Eval |
 | Timestral-28M | Verified | Verified | Not yet measured |
 | Timestral-123M | Verified | Verified | Not yet measured |
-| Timestral-209M | Verified | Verified | Not yet measured |
+| Timestral-209M | Verified | Verified | GIFT-Eval, all 97 tasks |
 
 “Verified” means real-weight functional checks: short training runs, finite
 backpropagation, resume, adapter/merged reload and official-format export.
-It does not establish larger-model quality or maximum batch/context capacity.
+These functional checks do not establish forecast quality or maximum batch/context capacity.
 See the [model acceptance records](results/validation/models).
 
 v0.1 uses **single-device FP32**. Select `cpu`, `mps`, `cuda` or `cuda:1` explicitly;
@@ -190,7 +191,40 @@ encoding, numerical tolerances and the inference compatibility layer.
 
 ## Experiments
 
-### GIFT-Eval: all 97 tasks
+### GIFT-Eval: Timestral-209M, all 97 tasks
+
+**Completed:** validation search, frozen adapter selection and paired official
+tests for all 97 tasks. Seed 42; LoRA rank 8, alpha 16; 1,105,920 trainable
+parameters. Candidates screen training contexts up to 256/2048/8192 for 200 steps;
+the validation-selected winner continues for up to 800 steps. The search used
+113,000 optimizer steps in total. Validation selected the step-zero base model
+for 21 tasks. Testing retains all official series, targets and rolling windows,
+with an inference context limit of 32,768.
+
+| Normalized geometric mean ↓ | Base checkpoint | Selected LoRA / fallback | Relative change | Improved / regressed / unchanged tasks |
+|---|---:|---:|---:|---:|
+| CRPS approximation | 0.446010 | 0.448549 | +0.569% | 31 / 45 / 21 |
+| MASE | 0.657547 | 0.660880 | +0.507% | 33 / 43 / 21 |
+
+**This recipe did not improve aggregate test performance.** The selected
+checkpoints improved validation CRPS/MASE by 3.74%/4.06%, but those gains did not
+transfer to the test split. Repeated selection on one validation suffix per
+series is a possible contributor; this is a diagnostic hypothesis, not a proven
+cause. A single seed does not establish statistical significance.
+
+All 97 base replications match all eleven public reference metrics within
+rtol=1e-3, atol=1e-5. The experiment's checkpoint/data-integrity audit passes.
+A local insertion into the pinned public leaderboard snapshot gives CRPS rank
+6/154 and MASE rank 14/154; these are **not official placements**. Neither the
+adapter weights nor a leaderboard submission has been published.
+
+[Full report](results/gift_eval_209m_lora_v2/README.md) ·
+[Per-task results](results/gift_eval_209m_lora_v2/task_comparison.csv) ·
+[Selected contexts](results/gift_eval_209m_lora_v2/context_lengths.csv) ·
+[Audit](results/gift_eval_209m_lora_v2/audit.json) ·
+[Reproduction protocol](examples/gift_eval/209m-search.md)
+
+### GIFT-Eval: Timestral-5M, all 97 tasks
 
 **Completed:** 97 independent Timestral-5M LoRA adapters, 97 base-model evaluations
 and 97 fine-tuned evaluations. Each task uses seed 42 and 200 optimizer steps;
@@ -265,7 +299,8 @@ For frozen transfer, model acceptance and independent audit commands, see the
 | [ETTh1 configuration](examples/etth1.yaml) | A runnable example with numeric and categorical covariates |
 | [Broader validation](results/validation/README.md) | Multi-seed benchmarks, frozen transfer and four-size acceptance |
 | [GIFT-Eval guide](examples/gift_eval/README.md) | Environment setup, all-task training and official evaluation |
-| [209M search protocol](examples/gift_eval/209m-search.md) | Validation-only context/budget search and frozen 97-task testing; experiment in progress |
+| [209M search protocol](examples/gift_eval/209m-search.md) | Completed validation search, frozen 97-task testing and CPU/MPS execution tools |
+| [209M device throughput](results/gift_eval_209m_preflight/README.md) | Measured CPU routing, MPS process concurrency and inference batch sizes |
 | [Contributing](CONTRIBUTING.md) | Development setup and contribution expectations |
 
 ```text

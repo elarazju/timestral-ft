@@ -1,0 +1,21 @@
+{
+  "task": "car_parts/M/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 1.3533895742660407,
+    "MSE[0.5]": 1.3533895742660407,
+    "MAE[0.5]": 0.45275915294620356,
+    "MASE[0.5]": 0.8292034725277797,
+    "MAPE[0.5]": 0.8113087372547347,
+    "sMAPE[0.5]": 1.8858795836286266,
+    "MSIS": 14.834457506638282,
+    "RMSE[mean]": 1.1633527299430904,
+    "NRMSE[mean]": 2.789600509169048,
+    "ND[0.5]": 1.0856700045320402,
+    "mean_weighted_sum_quantile_loss": 0.9376565105197024
+  },
+  "device": "cpu",
+  "seconds": 27.119701083982363,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "1c6993f3052a94989f11f84eb3d8fd3298006a1c264df5fddf5fad874264d98f"
+}

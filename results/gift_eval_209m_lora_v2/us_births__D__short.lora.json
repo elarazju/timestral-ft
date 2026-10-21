@@ -1,0 +1,21 @@
+{
+  "task": "us_births/D/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 142784.77333333335,
+    "MSE[0.5]": 142784.77333333335,
+    "MAE[0.5]": 217.81514322916667,
+    "MASE[0.5]": 0.320703024404668,
+    "MAPE[0.5]": 0.021196943918863932,
+    "sMAPE[0.5]": 0.02078303019205729,
+    "MSIS": 2.456986950098004,
+    "RMSE[mean]": 377.8687250002749,
+    "NRMSE[mean]": 0.03542212674092976,
+    "ND[0.5]": 0.02041840220979309,
+    "mean_weighted_sum_quantile_loss": 0.01622629650509441
+  },
+  "device": "mps",
+  "seconds": 1.9242408331483603,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "994fa2b5565c8eb9ad89d85e8c6e962f5047ef527e3b6177ba1aa0e40150ff1b"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_valid": true,
+  "submitted": false,
+  "weights_published": false,
+  "remaining": [
+    "model_link",
+    "code_link",
+    "replication_code_available"
+  ],
+  "leakage_note": "Adaptation uses official training/validation only; base entry declares no test leakage, without independent pretraining audit."
+}

@@ -1,0 +1,1010 @@
+{
+  "recorded_at_utc": "2026-10-19T10:53:31.515716+00:00",
+  "hardware": "Apple M4 Pro, 48GB unified memory",
+  "dtype": "FP32",
+  "threads_per_process": 4,
+  "order": [
+    1,
+    2,
+    2,
+    1
+  ],
+  "summary_cases": [
+    {
+      "task": "electricity/15T/short",
+      "input_path": ".cache/gift209/mps_parallel_electricity_repeat/electricity__15T__short.npz",
+      "input_sha256": "8d878842acf5f47d391a4b94e54b0defa9c786fd833797597b24afb350fca23b",
+      "adapter_sha256": "dae28337103246148f868786245b0892e7e94f3c58b5ce4fe1d1da2c3ed017f0",
+      "batch": 3,
+      "targets": 1,
+      "past_covariates": 0,
+      "context": 32768,
+      "horizon": 48,
+      "trials": [
+        {
+          "workers": 1,
+          "jobs": 24,
+          "wall_seconds": 21.352837583050132,
+          "forecasts_per_second": 1.1239723950811664,
+          "sum_worker_peak_driver_bytes": 2206941184,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 2951,
+              "jobs": 24,
+              "seconds": 21.340021499898285,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 23.884425249882042,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 24,
+          "wall_seconds": 21.410294499946758,
+          "forecasts_per_second": 1.1209560896072532,
+          "sum_worker_peak_driver_bytes": 4413882368,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 3605,
+              "jobs": 12,
+              "seconds": 21.271056666970253,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 3612,
+              "jobs": 12,
+              "seconds": 21.385739124845713,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 24.96357287489809,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 24,
+          "wall_seconds": 21.631150583038107,
+          "forecasts_per_second": 1.109511022442764,
+          "sum_worker_peak_driver_bytes": 4413882368,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 4779,
+              "jobs": 12,
+              "seconds": 21.560889000073075,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 4780,
+              "jobs": 12,
+              "seconds": 21.612146040890366,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 25.015420167008415,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 1,
+          "jobs": 24,
+          "wall_seconds": 21.796872874954715,
+          "forecasts_per_second": 1.1010753761644747,
+          "sum_worker_peak_driver_bytes": 2206941184,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 5758,
+              "jobs": 24,
+              "seconds": 21.79289183416404,
+              "peak_driver_bytes": 2206941184,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 24.34527095896192,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        }
+      ],
+      "single_median_seconds": 21.574855229002424,
+      "dual_median_seconds": 21.520722541492432,
+      "throughput_speedup": 1.0025153750021925,
+      "all_predictions_match": true
+    },
+    {
+      "task": "ett1/15T/long",
+      "input_path": ".cache/gift209/mps_parallel_profile/ett1__15T__long.npz",
+      "input_sha256": "b13e92a1478ce4b1871698d4e814cb9373e3d0dcdc35401c617d6a1c18d10982",
+      "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9",
+      "batch": 1,
+      "targets": 7,
+      "past_covariates": 0,
+      "context": 32768,
+      "horizon": 720,
+      "trials": [
+        {
+          "workers": 1,
+          "jobs": 4,
+          "wall_seconds": 8.410370500059798,
+          "forecasts_per_second": 0.47560330427435504,
+          "sum_worker_peak_driver_bytes": 2248884224,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 95779,
+              "jobs": 4,
+              "seconds": 8.379462416982278,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 12.107637249864638,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 4,
+          "wall_seconds": 8.309563334099948,
+          "forecasts_per_second": 0.48137306849629546,
+          "sum_worker_peak_driver_bytes": 4497768448,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 96204,
+              "jobs": 2,
+              "seconds": 8.277762457961217,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 96205,
+              "jobs": 2,
+              "seconds": 8.2509826249443,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 14.099093665834516,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 4,
+          "wall_seconds": 8.246390249812976,
+          "forecasts_per_second": 0.4850607209731213,
+          "sum_worker_peak_driver_bytes": 4497768448,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 96665,
+              "jobs": 2,
+              "seconds": 8.20631766691804,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 96667,
+              "jobs": 2,
+              "seconds": 8.231536750216037,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 13.97171958303079,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 1,
+          "jobs": 4,
+          "wall_seconds": 8.5351747921668,
+          "forecasts_per_second": 0.4686488674691256,
+          "sum_worker_peak_driver_bytes": 2248884224,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 96837,
+              "jobs": 4,
+              "seconds": 8.502076958073303,
+              "peak_driver_bytes": 2248884224,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 12.306357875000685,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        }
+      ],
+      "single_median_seconds": 8.472772646113299,
+      "dual_median_seconds": 8.277976791956462,
+      "throughput_speedup": 1.0235318193143663,
+      "all_predictions_match": true
+    },
+    {
+      "task": "bizitobs_l2c/5T/long",
+      "input_path": ".cache/gift209/mps_parallel_profile/bizitobs_l2c__5T__long.npz",
+      "input_sha256": "6aa3e0c0e32686b35ab9af1d18c067b547b36e831acde2d772d54bf0dc91b228",
+      "adapter_sha256": "15e25886cf463f7fdae690b54c96e7c01e7b7583ebdd8e08acc6675ff51a92ee",
+      "batch": 1,
+      "targets": 7,
+      "past_covariates": 2,
+      "context": 28368,
+      "horizon": 720,
+      "trials": [
+        {
+          "workers": 1,
+          "jobs": 4,
+          "wall_seconds": 19.812918749870732,
+          "forecasts_per_second": 0.20188847743728305,
+          "sum_worker_peak_driver_bytes": 3290152960,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 97264,
+              "jobs": 4,
+              "seconds": 19.78512429096736,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 26.305626292014495,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 4,
+          "wall_seconds": 19.508720041951165,
+          "forecasts_per_second": 0.2050365165627719,
+          "sum_worker_peak_driver_bytes": 6580305920,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 98113,
+              "jobs": 2,
+              "seconds": 19.340900749899447,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 98114,
+              "jobs": 2,
+              "seconds": 19.482396041974425,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 31.009996791835874,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 2,
+          "jobs": 4,
+          "wall_seconds": 19.51180295809172,
+          "forecasts_per_second": 0.20500412025435938,
+          "sum_worker_peak_driver_bytes": 6580305920,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 99061,
+              "jobs": 2,
+              "seconds": 19.482729458017275,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            },
+            {
+              "pid": 99062,
+              "jobs": 2,
+              "seconds": 19.482569916872308,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 31.06445279205218,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        },
+        {
+          "workers": 1,
+          "jobs": 4,
+          "wall_seconds": 20.025764208985493,
+          "forecasts_per_second": 0.19974268938037398,
+          "sum_worker_peak_driver_bytes": 3290152960,
+          "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+          "worker_receipts": [
+            {
+              "pid": 99931,
+              "jobs": 4,
+              "seconds": 19.993196916067973,
+              "peak_driver_bytes": 3290152960,
+              "allocated_tensor_bytes": 841672960
+            }
+          ],
+          "startup_and_run_seconds": 26.382436959072948,
+          "predictions_match": true,
+          "max_absolute_prediction_difference": 0.0
+        }
+      ],
+      "single_median_seconds": 19.919341479428113,
+      "dual_median_seconds": 19.510261500021443,
+      "throughput_speedup": 1.0209674267772484,
+      "all_predictions_match": true
+    }
+  ],
+  "raw_reports": [
+    {
+      "method": "ABBA equal-work trials (1,2,2,1 processes), warmed barrier, full official forecast defaults",
+      "jobs_per_trial": 4,
+      "threads_per_process": 4,
+      "production_model_selection_unchanged": true,
+      "paused_production_model_memory_retained": true,
+      "cases": [
+        {
+          "task": "electricity/15T/short",
+          "input_path": ".cache/gift209/mps_parallel_profile/electricity__15T__short.npz",
+          "input_sha256": "8d878842acf5f47d391a4b94e54b0defa9c786fd833797597b24afb350fca23b",
+          "adapter_sha256": "dae28337103246148f868786245b0892e7e94f3c58b5ce4fe1d1da2c3ed017f0",
+          "batch": 3,
+          "targets": 1,
+          "past_covariates": 0,
+          "context": 32768,
+          "horizon": 48,
+          "trials": [
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 3.384904957842082,
+              "forecasts_per_second": 1.1817170791554659,
+              "sum_worker_peak_driver_bytes": 2206941184,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 94758,
+                  "jobs": 4,
+                  "seconds": 3.3592470418661833,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 5.995222666999325,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 3.167471250053495,
+              "forecasts_per_second": 1.2628370344111077,
+              "sum_worker_peak_driver_bytes": 4413882368,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 95194,
+                  "jobs": 2,
+                  "seconds": 3.1475038749631494,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 95195,
+                  "jobs": 2,
+                  "seconds": 3.1495893748942763,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 6.704870874993503,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 3.2069367088843137,
+              "forecasts_per_second": 1.2472962091576767,
+              "sum_worker_peak_driver_bytes": 4413882368,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 95314,
+                  "jobs": 2,
+                  "seconds": 3.188451958121732,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 95315,
+                  "jobs": 2,
+                  "seconds": 3.19903741707094,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 6.592620374867693,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 3.4407403331715614,
+              "forecasts_per_second": 1.1625405036923933,
+              "sum_worker_peak_driver_bytes": 2206941184,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 95402,
+                  "jobs": 4,
+                  "seconds": 3.4351055829320103,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 5.969811958028004,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            }
+          ],
+          "single_median_seconds": 3.4128226455068216,
+          "dual_median_seconds": 3.1872039794689044,
+          "throughput_speedup": 1.0707889007077334,
+          "all_predictions_match": true
+        },
+        {
+          "task": "ett1/15T/long",
+          "input_path": ".cache/gift209/mps_parallel_profile/ett1__15T__long.npz",
+          "input_sha256": "b13e92a1478ce4b1871698d4e814cb9373e3d0dcdc35401c617d6a1c18d10982",
+          "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9",
+          "batch": 1,
+          "targets": 7,
+          "past_covariates": 0,
+          "context": 32768,
+          "horizon": 720,
+          "trials": [
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 8.410370500059798,
+              "forecasts_per_second": 0.47560330427435504,
+              "sum_worker_peak_driver_bytes": 2248884224,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 95779,
+                  "jobs": 4,
+                  "seconds": 8.379462416982278,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 12.107637249864638,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 8.309563334099948,
+              "forecasts_per_second": 0.48137306849629546,
+              "sum_worker_peak_driver_bytes": 4497768448,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 96204,
+                  "jobs": 2,
+                  "seconds": 8.277762457961217,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 96205,
+                  "jobs": 2,
+                  "seconds": 8.2509826249443,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 14.099093665834516,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 8.246390249812976,
+              "forecasts_per_second": 0.4850607209731213,
+              "sum_worker_peak_driver_bytes": 4497768448,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 96665,
+                  "jobs": 2,
+                  "seconds": 8.20631766691804,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 96667,
+                  "jobs": 2,
+                  "seconds": 8.231536750216037,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 13.97171958303079,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 8.5351747921668,
+              "forecasts_per_second": 0.4686488674691256,
+              "sum_worker_peak_driver_bytes": 2248884224,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 96837,
+                  "jobs": 4,
+                  "seconds": 8.502076958073303,
+                  "peak_driver_bytes": 2248884224,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 12.306357875000685,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            }
+          ],
+          "single_median_seconds": 8.472772646113299,
+          "dual_median_seconds": 8.277976791956462,
+          "throughput_speedup": 1.0235318193143663,
+          "all_predictions_match": true
+        },
+        {
+          "task": "bizitobs_l2c/5T/long",
+          "input_path": ".cache/gift209/mps_parallel_profile/bizitobs_l2c__5T__long.npz",
+          "input_sha256": "6aa3e0c0e32686b35ab9af1d18c067b547b36e831acde2d772d54bf0dc91b228",
+          "adapter_sha256": "15e25886cf463f7fdae690b54c96e7c01e7b7583ebdd8e08acc6675ff51a92ee",
+          "batch": 1,
+          "targets": 7,
+          "past_covariates": 2,
+          "context": 28368,
+          "horizon": 720,
+          "trials": [
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 19.812918749870732,
+              "forecasts_per_second": 0.20188847743728305,
+              "sum_worker_peak_driver_bytes": 3290152960,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 97264,
+                  "jobs": 4,
+                  "seconds": 19.78512429096736,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 26.305626292014495,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 19.508720041951165,
+              "forecasts_per_second": 0.2050365165627719,
+              "sum_worker_peak_driver_bytes": 6580305920,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 98113,
+                  "jobs": 2,
+                  "seconds": 19.340900749899447,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 98114,
+                  "jobs": 2,
+                  "seconds": 19.482396041974425,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 31.009996791835874,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 4,
+              "wall_seconds": 19.51180295809172,
+              "forecasts_per_second": 0.20500412025435938,
+              "sum_worker_peak_driver_bytes": 6580305920,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 99061,
+                  "jobs": 2,
+                  "seconds": 19.482729458017275,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 99062,
+                  "jobs": 2,
+                  "seconds": 19.482569916872308,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 31.06445279205218,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 1,
+              "jobs": 4,
+              "wall_seconds": 20.025764208985493,
+              "forecasts_per_second": 0.19974268938037398,
+              "sum_worker_peak_driver_bytes": 3290152960,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 99931,
+                  "jobs": 4,
+                  "seconds": 19.993196916067973,
+                  "peak_driver_bytes": 3290152960,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 26.382436959072948,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            }
+          ],
+          "single_median_seconds": 19.919341479428113,
+          "dual_median_seconds": 19.510261500021443,
+          "throughput_speedup": 1.0209674267772484,
+          "all_predictions_match": true
+        }
+      ],
+      "status": "complete",
+      "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+      "source_sha256": "8914147e5b2f5b077d473220dc8b9cfa70aa0b4bd81ede7304d455a680e3e655",
+      "full_dataset_evaluation": false,
+      "batch_repeated_with_identical_inputs": true,
+      "official_max_rows": 16,
+      "official_max_tokens": 131072,
+      "prediction_rtol": 0.0001,
+      "prediction_atol": 1e-05,
+      "hardware": "Apple M4 Pro",
+      "production_processes_resumed": [
+        60415,
+        86187
+      ]
+    },
+    {
+      "method": "ABBA equal-work trials (1,2,2,1 processes), warmed barrier, full official forecast defaults",
+      "jobs_per_trial": 24,
+      "threads_per_process": 4,
+      "production_model_selection_unchanged": true,
+      "paused_production_model_memory_retained": true,
+      "cases": [
+        {
+          "task": "electricity/15T/short",
+          "input_path": ".cache/gift209/mps_parallel_electricity_repeat/electricity__15T__short.npz",
+          "input_sha256": "8d878842acf5f47d391a4b94e54b0defa9c786fd833797597b24afb350fca23b",
+          "adapter_sha256": "dae28337103246148f868786245b0892e7e94f3c58b5ce4fe1d1da2c3ed017f0",
+          "batch": 3,
+          "targets": 1,
+          "past_covariates": 0,
+          "context": 32768,
+          "horizon": 48,
+          "trials": [
+            {
+              "workers": 1,
+              "jobs": 24,
+              "wall_seconds": 21.352837583050132,
+              "forecasts_per_second": 1.1239723950811664,
+              "sum_worker_peak_driver_bytes": 2206941184,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 2951,
+                  "jobs": 24,
+                  "seconds": 21.340021499898285,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 23.884425249882042,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 24,
+              "wall_seconds": 21.410294499946758,
+              "forecasts_per_second": 1.1209560896072532,
+              "sum_worker_peak_driver_bytes": 4413882368,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 3605,
+                  "jobs": 12,
+                  "seconds": 21.271056666970253,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 3612,
+                  "jobs": 12,
+                  "seconds": 21.385739124845713,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 24.96357287489809,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 2,
+              "jobs": 24,
+              "wall_seconds": 21.631150583038107,
+              "forecasts_per_second": 1.109511022442764,
+              "sum_worker_peak_driver_bytes": 4413882368,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 4779,
+                  "jobs": 12,
+                  "seconds": 21.560889000073075,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                },
+                {
+                  "pid": 4780,
+                  "jobs": 12,
+                  "seconds": 21.612146040890366,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 25.015420167008415,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            },
+            {
+              "workers": 1,
+              "jobs": 24,
+              "wall_seconds": 21.796872874954715,
+              "forecasts_per_second": 1.1010753761644747,
+              "sum_worker_peak_driver_bytes": 2206941184,
+              "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+              "worker_receipts": [
+                {
+                  "pid": 5758,
+                  "jobs": 24,
+                  "seconds": 21.79289183416404,
+                  "peak_driver_bytes": 2206941184,
+                  "allocated_tensor_bytes": 841672960
+                }
+              ],
+              "startup_and_run_seconds": 24.34527095896192,
+              "predictions_match": true,
+              "max_absolute_prediction_difference": 0.0
+            }
+          ],
+          "single_median_seconds": 21.574855229002424,
+          "dual_median_seconds": 21.520722541492432,
+          "throughput_speedup": 1.0025153750021925,
+          "all_predictions_match": true
+        }
+      ],
+      "status": "complete",
+      "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+      "source_sha256": "121f66835e077c0a254bb523c6eaed53c3d49426382f14995819322fba1596ed",
+      "full_dataset_evaluation": false,
+      "batch_repeated_with_identical_inputs": true,
+      "official_max_rows": 16,
+      "official_max_tokens": 131072,
+      "prediction_rtol": 0.0001,
+      "prediction_atol": 1e-05,
+      "hardware": "Apple M4 Pro",
+      "production_processes_resumed": [
+        60415,
+        86187
+      ]
+    },
+    {
+      "method": "ABBA equal-work trials (1,2,2,1 processes), warmed barrier, full official forecast defaults",
+      "jobs_per_trial": 8,
+      "threads_per_process": 4,
+      "production_model_selection_unchanged": true,
+      "paused_production_model_memory_retained": true,
+      "cases": [],
+      "status": "failed",
+      "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+      "source_sha256": "121f66835e077c0a254bb523c6eaed53c3d49426382f14995819322fba1596ed",
+      "full_dataset_evaluation": false,
+      "batch_repeated_with_identical_inputs": true,
+      "official_max_rows": 16,
+      "official_max_tokens": 131072,
+      "prediction_rtol": 0.0001,
+      "prediction_atol": 1e-05,
+      "hardware": "Apple M4 Pro",
+      "error": "Execution benchmark interrupted by signal 15",
+      "production_processes_resumed": [
+        60415,
+        86187
+      ],
+      "partial_progress": {
+        "case": {
+          "task": "bizitobs_application/10S/long",
+          "input_path": ".cache/gift209/mps_parallel_many_covariates/bizitobs_application__10S__long.npz",
+          "input_sha256": "5f1b5dde9a0ae1455e8284c29e250cba10953d202cda387474980f3df5c07342",
+          "adapter_sha256": "4f18da1edec2591273d737edf5f052d44e498e80694b188199be30d296bb3985",
+          "batch": 1,
+          "targets": 2,
+          "past_covariates": 35,
+          "context": 7934,
+          "horizon": 900
+        },
+        "completed_trials": [
+          {
+            "workers": 1,
+            "jobs": 8,
+            "wall_seconds": 44.36951074982062,
+            "forecasts_per_second": 0.18030399399958097,
+            "sum_worker_peak_driver_bytes": 4355506176,
+            "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "worker_receipts": [
+              {
+                "pid": 6678,
+                "jobs": 8,
+                "seconds": 44.34598091687076,
+                "peak_driver_bytes": 4355506176,
+                "allocated_tensor_bytes": 841672960
+              }
+            ],
+            "startup_and_run_seconds": 51.166871125111356,
+            "predictions_match": true,
+            "max_absolute_prediction_difference": 0.0
+          },
+          {
+            "workers": 2,
+            "jobs": 8,
+            "wall_seconds": 43.64618416596204,
+            "forecasts_per_second": 0.18329208275299558,
+            "sum_worker_peak_driver_bytes": 8711012352,
+            "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "worker_receipts": [
+              {
+                "pid": 8129,
+                "jobs": 4,
+                "seconds": 43.61260937503539,
+                "peak_driver_bytes": 4355506176,
+                "allocated_tensor_bytes": 841672960
+              },
+              {
+                "pid": 8131,
+                "jobs": 4,
+                "seconds": 43.54177962499671,
+                "peak_driver_bytes": 4355506176,
+                "allocated_tensor_bytes": 841672960
+              }
+            ],
+            "startup_and_run_seconds": 56.28205941687338,
+            "predictions_match": true,
+            "max_absolute_prediction_difference": 0.0
+          },
+          {
+            "workers": 2,
+            "jobs": 8,
+            "wall_seconds": 43.46895529096946,
+            "forecasts_per_second": 0.18403938963911504,
+            "sum_worker_peak_driver_bytes": 8711012352,
+            "swap_before": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "swap_after": "vm.swapusage: total = 4096.00M  used = 3308.75M  free = 787.25M  (encrypted)",
+            "worker_receipts": [
+              {
+                "pid": 9868,
+                "jobs": 4,
+                "seconds": 43.454433124978095,
+                "peak_driver_bytes": 4355506176,
+                "allocated_tensor_bytes": 841672960
+              },
+              {
+                "pid": 9869,
+                "jobs": 4,
+                "seconds": 43.28211462497711,
+                "peak_driver_bytes": 4355506176,
+                "allocated_tensor_bytes": 841672960
+              }
+            ],
+            "startup_and_run_seconds": 56.20562604092993,
+            "predictions_match": true,
+            "max_absolute_prediction_difference": 0.0
+          }
+        ]
+      },
+      "cancellation_note": "Stopped on user decision to retain the current execution plan; three trials completed, final ABBA repeat intentionally not finished"
+    }
+  ],
+  "all_predictions_match": true,
+  "decision": "Keep one MPS evaluator plus one CPU evaluator; do not enable a second MPS evaluator",
+  "scope": "Warmed equal-work repeated batches from frozen real tasks, not full-dataset speedups",
+  "production_pause_intervals": [
+    {
+      "profile": "mps_parallel_profile",
+      "approximate_start_utc": "2026-10-19T10:43:37.784419+00:00",
+      "approximate_end_utc": "2026-10-19T10:46:53.642857+00:00",
+      "approximate_seconds": 195.8584382534027,
+      "method": "profile directory birthtime to final report mtime; includes setup before SIGSTOP"
+    },
+    {
+      "profile": "mps_parallel_electricity_repeat",
+      "approximate_start_utc": "2026-10-19T10:47:35.371810+00:00",
+      "approximate_end_utc": "2026-10-19T10:49:16.772811+00:00",
+      "approximate_seconds": 101.40100145339966,
+      "method": "profile directory birthtime to final report mtime; includes setup before SIGSTOP"
+    },
+    {
+      "profile": "mps_parallel_many_covariates",
+      "approximate_start_utc": "2026-10-19T10:49:17.057354+00:00",
+      "approximate_end_utc": "2026-10-19T10:52:44.568216+00:00",
+      "approximate_seconds": 207.51086235046387,
+      "method": "profile directory birthtime to final report mtime; includes setup before SIGSTOP"
+    }
+  ],
+  "timing_note": "The production task in progress retains its original wall timer, which includes these deliberate pauses; no test scores or completed receipts were modified"
+}

@@ -28,7 +28,7 @@
   WQL 和 80% 区间覆盖率。
 - **可迁移的训练产物**：保存预处理配置，导出独立 LoRA 适配器，或合并为官方推理格式权重。
 - **可复现实验**：提供固定版本 ETTh1 示例、多变量多种子基准、冻结迁移检查，以及完整
-  GIFT-Eval 97 任务 LoRA 微调记录。
+  Timestral-5M 与 Timestral-209M 的完整 GIFT-Eval 97 任务 LoRA 微调记录。
 
 ## 模型与设备支持
 
@@ -37,10 +37,10 @@
 | Timestral-5M | 已验证 | 已验证 | ETTh1、多变量基准、GIFT-Eval |
 | Timestral-28M | 已验证 | 已验证 | 尚未开展 |
 | Timestral-123M | 已验证 | 已验证 | 尚未开展 |
-| Timestral-209M | 已验证 | 已验证 | 尚未开展 |
+| Timestral-209M | 已验证 | 已验证 | GIFT-Eval 全部 97 任务 |
 
 “已验证”指使用真实权重完成短程训练、有限梯度、断点恢复、适配器／合并权重加载和官方格式导出检查，
-不代表较大模型的预测效果、最大批量或最大上下文容量已验证。详见[模型验收记录](results/validation/models)。
+这些功能检查不代表预测效果、最大批量或最大上下文容量已验证。详见[模型验收记录](results/validation/models)。
 
 v0.1 使用**单设备 FP32**，显式选择 `cpu`、`mps`、`cuda` 或 `cuda:1`，默认 CPU。
 CUDA 已实现，**尚未进行硬件实测**。MPS 模式下网络在 Apple GPU 上计算，float64 统计在 CPU 上计算；
@@ -175,7 +175,34 @@ print(forecasts[["timestamp", "target", "median", "q_0.1", "q_0.9"]].head())
 
 ## 实验结果
 
-### GIFT-Eval：完整 97 任务
+### GIFT-Eval：Timestral-209M 完整 97 任务
+
+**已完成**全部 97 项任务的验证搜索、适配器冻结与官方成对测试。
+种子 42，LoRA rank=8、alpha=16，可训练参数 1,105,920。
+训练上下文候选上限为 256／2048／8192，各筛选 200 步，验证集优胜方案延长至最多 800 步，
+总计执行 113,000 个优化步骤。21 个任务最终按验证结果回退到第 0 步原模型。
+测试保留全部官方序列、目标和滚动窗口，推理上下文上限为 32,768。
+
+| 归一化几何均值 ↓ | 原模型 | 选中 LoRA／回退 | 相对变化 | 改善／退化／不变任务数 |
+|---|---:|---:|---:|---:|
+| CRPS 近似 | 0.446010 | 0.448549 | +0.569% | 31／45／21 |
+| MASE | 0.657547 | 0.660880 | +0.507% | 33／43／21 |
+
+**本轮配方未改善测试集整体表现。** 最终选中的检查点在验证集上改善 CRPS／MASE 约
+3.74%／4.06%，但收益未迁移到测试集。反复在每条序列的单一验证时间段上选优可能是原因之一，
+目前属于诊断假设，尚无因果对照证明；单种子也不足以判断差异的统计显著性。
+
+97 个原模型结果的全部 11 项指标均通过公开参考值一致性检查（rtol=1e-3、atol=1e-5），
+检查点与数据完整性审计通过。相对固定公开快照的本地插入模拟名次为 CRPS 6／154、MASE 14／154，
+**不是官方榜单名次**。适配器权重尚未公开，尚未正式提交榜单。
+
+[完整报告](results/gift_eval_209m_lora_v2/README.zh-CN.md) ·
+[逐任务对比](results/gift_eval_209m_lora_v2/task_comparison.csv) ·
+[选中上下文](results/gift_eval_209m_lora_v2/context_lengths.csv) ·
+[审计记录](results/gift_eval_209m_lora_v2/audit.json) ·
+[复现方案](examples/gift_eval/209m-search.md)
+
+### GIFT-Eval：Timestral-5M 完整 97 任务
 
 **已完成**：97 个独立 Timestral-5M LoRA 适配器、97 项原模型评估和 97 项微调模型评估。
 每项任务使用种子 42、训练 200 个优化步骤；验证最多固定抽取 512 条序列，
@@ -243,7 +270,8 @@ python scripts/benchmark_suite.py --jobs 2
 | [ETTh1 示例配置](examples/etth1.yaml) | 包含数值和分类协变量的可运行配置 |
 | [综合验证记录](results/validation/README.zh-CN.md) | 多种子基准、冻结迁移和四档模型验收 |
 | [GIFT-Eval 运行指南](examples/gift_eval/README.md) | 环境配置、全任务训练和官方评估 |
-| [209M 搜索方案](examples/gift_eval/209m-search.md) | 验证集上的上下文／预算搜索及冻结后的 97 任务测试；实验进行中 |
+| [209M 搜索方案](examples/gift_eval/209m-search.md) | 已完成的验证搜索、冻结后 97 任务测试及 CPU/MPS 执行工具 |
+| [209M 设备吞吐实测](results/gift_eval_209m_preflight/README.md) | CPU 任务调度、MPS 进程并发与推理批量对照 |
 | [贡献指南](CONTRIBUTING.md) | 开发环境与贡献要求 |
 
 ```text

@@ -1,0 +1,21 @@
+{
+  "task": "saugeen/W/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 921.67470703125,
+    "MSE[0.5]": 921.67470703125,
+    "MAE[0.5]": 14.156640625,
+    "MASE[0.5]": 1.1484843878545523,
+    "MAPE[0.5]": 0.35571300983428955,
+    "sMAPE[0.5]": 0.36681418418884276,
+    "MSIS": 8.972645576877582,
+    "RMSE[mean]": 30.35909595214011,
+    "NRMSE[mean]": 0.9164145556725626,
+    "ND[0.5]": 0.4273299688708612,
+    "mean_weighted_sum_quantile_loss": 0.3387475910791904
+  },
+  "device": "cpu",
+  "seconds": 2.170464541995898,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "d792e826e93ef94c5d3fd826dc358cd3cca54cdd7904ec3d7387a09062e66bdd"
+}

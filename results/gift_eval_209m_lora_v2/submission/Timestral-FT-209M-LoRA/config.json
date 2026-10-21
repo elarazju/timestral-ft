@@ -1,0 +1,10 @@
+{
+  "model": "Timestral-FT-209M-LoRA",
+  "model_type": "fine-tuned",
+  "model_dtype": "float32",
+  "model_link": null,
+  "code_link": null,
+  "org": "elarazju",
+  "testdata_leakage": "No",
+  "replication_code_available": "No"
+}

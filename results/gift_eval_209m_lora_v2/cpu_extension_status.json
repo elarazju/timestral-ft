@@ -1,0 +1,125 @@
+{
+  "pid": 26657,
+  "phase": "complete",
+  "device": "cpu",
+  "threads": 4,
+  "started_at_utc": "2026-10-19T15:33:34.984727+00:00",
+  "total_queue": 28,
+  "completed_by_this_worker": [
+    {
+      "task": "sz_taxi/15T/medium",
+      "seconds": 31.790827790973708
+    },
+    {
+      "task": "sz_taxi/15T/long",
+      "seconds": 39.797703291988
+    },
+    {
+      "task": "bizitobs_l2c/H/medium",
+      "seconds": 6.663068208144978
+    },
+    {
+      "task": "ett1/H/short",
+      "seconds": 205.51654341700487
+    },
+    {
+      "task": "ett2/H/short",
+      "seconds": 234.67395516717806
+    },
+    {
+      "task": "bizitobs_l2c/H/long",
+      "seconds": 8.203367749927565
+    },
+    {
+      "task": "ett1/H/medium",
+      "seconds": 59.96972900000401
+    },
+    {
+      "task": "ett2/H/medium",
+      "seconds": 60.235221249982715
+    },
+    {
+      "task": "jena_weather/H/short",
+      "seconds": 300.1327803749591
+    },
+    {
+      "task": "ett1/H/long",
+      "seconds": 37.32208800013177
+    },
+    {
+      "task": "ett2/H/long",
+      "seconds": 36.87656162492931
+    },
+    {
+      "task": "ett1/15T/long",
+      "seconds": 275.77581662498415
+    },
+    {
+      "task": "ett1/15T/medium",
+      "seconds": 366.366688542068
+    },
+    {
+      "task": "ett1/15T/short",
+      "seconds": 489.6777133750729
+    },
+    {
+      "task": "ett2/15T/long",
+      "seconds": 243.74154304084368
+    },
+    {
+      "task": "ett2/15T/medium",
+      "seconds": 373.907708582934
+    },
+    {
+      "task": "ett2/15T/short",
+      "seconds": 501.32245462504216
+    },
+    {
+      "task": "bizitobs_l2c/5T/short",
+      "seconds": 843.9051916250028
+    },
+    {
+      "task": "bizitobs_l2c/5T/long",
+      "seconds": 144.43411629204638
+    },
+    {
+      "task": "bizitobs_l2c/5T/medium",
+      "seconds": 206.2591605000198
+    },
+    {
+      "task": "bizitobs_application/10S/short",
+      "seconds": 363.2675706250593
+    },
+    {
+      "task": "jena_weather/H/medium",
+      "seconds": 14.169859291985631
+    },
+    {
+      "task": "jena_weather/H/long",
+      "seconds": 13.55761224986054
+    },
+    {
+      "task": "jena_weather/10T/long",
+      "seconds": 262.9738617921248
+    },
+    {
+      "task": "jena_weather/10T/medium",
+      "seconds": 358.6863140829373
+    },
+    {
+      "task": "jena_weather/10T/short",
+      "seconds": 642.1025249580853
+    },
+    {
+      "task": "bizitobs_application/10S/medium",
+      "seconds": 49.52278533321805
+    },
+    {
+      "task": "bizitobs_application/10S/long",
+      "seconds": 26.129282499896362
+    }
+  ],
+  "current_task": null,
+  "skipped_busy": [],
+  "updated_at_utc": "2026-10-19T17:16:52.500142+00:00"
+}

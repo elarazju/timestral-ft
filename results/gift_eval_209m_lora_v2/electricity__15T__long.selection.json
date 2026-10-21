@@ -1,0 +1,507 @@
+{
+  "task": "electricity/15T/long",
+  "selected_candidate": "tasks/electricity__15T__long/candidates/ctx8192_lr3e-04",
+  "best_step": 400,
+  "validation_score": 0.985488530493081,
+  "baseline_fallback": false,
+  "adapter_sha256": "4fe2806b28f9f83bc5235def2cbc1f9fe7017a48f0131a572aacf28393cfc73a",
+  "data_fingerprint": "0fe46a2d8ab276d75535e539721dcfa072ded94efa974e5bfa55b3683cbf779e",
+  "train_device": "mps",
+  "candidates": [
+    {
+      "path": "tasks/electricity__15T__long/candidates/ctx256_lr1e-04",
+      "summary": {
+        "task": "electricity/15T/long",
+        "base_model": "mistralai/Timestral-209M",
+        "base_revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+        "base_weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa",
+        "upstream_revision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+        "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+        "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+        "train_config": {
+          "context_length": 256,
+          "max_steps": 800,
+          "batch_size": 2,
+          "gradient_accumulation": 2,
+          "learning_rate": 0.0001,
+          "weight_decay": 0.01,
+          "warmup_steps": 40,
+          "gradient_clip": 1.0,
+          "eval_every": 100,
+          "patience": 6,
+          "validation_limit": 128,
+          "seed": 42,
+          "device": "mps",
+          "num_threads": 4,
+          "rank": 8,
+          "alpha": 16.0,
+          "dropout": 0.0
+        },
+        "data_fingerprint": "0fe46a2d8ab276d75535e539721dcfa072ded94efa974e5bfa55b3683cbf779e",
+        "data": {
+          "series": 370,
+          "eligible_training_series": 370,
+          "validation_series": 128,
+          "horizon": 720,
+          "train_length_min": 125136,
+          "train_length_max": 125136,
+          "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+          "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+        },
+        "selection_objective": {
+          "name": "official-nine-quantile-crps-mase-pareto-v1",
+          "score": "sqrt(CRPS/base_CRPS * MASE/base_MASE) if both ratios <= 1; otherwise max ratio",
+          "baseline_candidate": "step zero, selected if no checkpoint has score < 1",
+          "config": {
+            "context_length": 32768,
+            "max_rows": 16,
+            "max_tokens": 131072,
+            "seasonality": 96,
+            "record_legacy_objective": true
+          },
+          "base_identity": {
+            "model": "mistralai/Timestral-209M",
+            "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+            "weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa"
+          },
+          "data": "fixed seeded official validation suffix; no test access"
+        },
+        "include_initial_checkpoint": true,
+        "retain_validation_checkpoints": true,
+        "trainable_parameters": 1105920,
+        "steps": 200,
+        "best_step": 0,
+        "completed": false,
+        "validation_loss": 1.0,
+        "training_seconds": 163.42125208396465,
+        "torch_version": "2.14.1"
+      },
+      "validations": [
+        {
+          "step": 100,
+          "train_loss": 0.11901529505848885,
+          "learning_rate": 9.847001329696653e-05,
+          "gradient_norm": 0.02387690730392933,
+          "validation_loss": 1.0043225384192715,
+          "validation_metrics": {
+            "crps": 0.050837043272259755,
+            "mase": 0.8619246569295419,
+            "scaled_pinball": 0.1486419813008979,
+            "crps_ratio": 0.9977413753062203,
+            "mase_ratio": 1.0043225384192715,
+            "score": 1.0043225384192715
+          }
+        },
+        {
+          "step": 200,
+          "train_loss": 0.19719144701957703,
+          "learning_rate": 8.945702546981969e-05,
+          "gradient_norm": 0.021890923380851746,
+          "validation_loss": 1.0053321971903442,
+          "validation_metrics": {
+            "crps": 0.050857782169798624,
+            "mase": 0.8627911612213228,
+            "scaled_pinball": 0.14309755389695056,
+            "crps_ratio": 0.9981484024427505,
+            "mase_ratio": 1.0053321971903442,
+            "score": 1.0053321971903442
+          }
+        }
+      ]
+    },
+    {
+      "path": "tasks/electricity__15T__long/candidates/ctx2048_lr1e-04",
+      "summary": {
+        "task": "electricity/15T/long",
+        "base_model": "mistralai/Timestral-209M",
+        "base_revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+        "base_weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa",
+        "upstream_revision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+        "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+        "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+        "train_config": {
+          "context_length": 2048,
+          "max_steps": 800,
+          "batch_size": 2,
+          "gradient_accumulation": 2,
+          "learning_rate": 0.0001,
+          "weight_decay": 0.01,
+          "warmup_steps": 40,
+          "gradient_clip": 1.0,
+          "eval_every": 100,
+          "patience": 6,
+          "validation_limit": 128,
+          "seed": 42,
+          "device": "mps",
+          "num_threads": 4,
+          "rank": 8,
+          "alpha": 16.0,
+          "dropout": 0.0
+        },
+        "data_fingerprint": "0fe46a2d8ab276d75535e539721dcfa072ded94efa974e5bfa55b3683cbf779e",
+        "data": {
+          "series": 370,
+          "eligible_training_series": 370,
+          "validation_series": 128,
+          "horizon": 720,
+          "train_length_min": 125136,
+          "train_length_max": 125136,
+          "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+          "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+        },
+        "selection_objective": {
+          "name": "official-nine-quantile-crps-mase-pareto-v1",
+          "score": "sqrt(CRPS/base_CRPS * MASE/base_MASE) if both ratios <= 1; otherwise max ratio",
+          "baseline_candidate": "step zero, selected if no checkpoint has score < 1",
+          "config": {
+            "context_length": 32768,
+            "max_rows": 16,
+            "max_tokens": 131072,
+            "seasonality": 96,
+            "record_legacy_objective": true
+          },
+          "base_identity": {
+            "model": "mistralai/Timestral-209M",
+            "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+            "weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa"
+          },
+          "data": "fixed seeded official validation suffix; no test access"
+        },
+        "include_initial_checkpoint": true,
+        "retain_validation_checkpoints": true,
+        "trainable_parameters": 1105920,
+        "steps": 200,
+        "best_step": 200,
+        "completed": false,
+        "validation_loss": 0.996104715723792,
+        "training_seconds": 177.47231829096563,
+        "torch_version": "2.14.1"
+      },
+      "validations": [
+        {
+          "step": 100,
+          "train_loss": 0.09140327572822571,
+          "learning_rate": 9.847001329696653e-05,
+          "gradient_norm": 0.00981418788433075,
+          "validation_loss": 0.9961388084825555,
+          "validation_metrics": {
+            "crps": 0.05068807829753319,
+            "mase": 0.8560365158630737,
+            "scaled_pinball": 0.1018651419726666,
+            "crps_ratio": 0.9948177489662667,
+            "mase_ratio": 0.9974616222882581,
+            "score": 0.9961388084825555
+          }
+        },
+        {
+          "step": 200,
+          "train_loss": 0.12863543443381786,
+          "learning_rate": 8.945702546981969e-05,
+          "gradient_norm": 0.0063474541530013084,
+          "validation_loss": 0.996104715723792,
+          "validation_metrics": {
+            "crps": 0.05064431124328103,
+            "mase": 0.8567176615083943,
+            "scaled_pinball": 0.10182007570983842,
+            "crps_ratio": 0.9939587650818424,
+            "mase_ratio": 0.9982552994595072,
+            "score": 0.996104715723792
+          }
+        }
+      ]
+    },
+    {
+      "path": "tasks/electricity__15T__long/candidates/ctx8192_lr1e-04",
+      "summary": {
+        "task": "electricity/15T/long",
+        "base_model": "mistralai/Timestral-209M",
+        "base_revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+        "base_weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa",
+        "upstream_revision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+        "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+        "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+        "train_config": {
+          "context_length": 8192,
+          "max_steps": 800,
+          "batch_size": 2,
+          "gradient_accumulation": 2,
+          "learning_rate": 0.0001,
+          "weight_decay": 0.01,
+          "warmup_steps": 40,
+          "gradient_clip": 1.0,
+          "eval_every": 100,
+          "patience": 6,
+          "validation_limit": 128,
+          "seed": 42,
+          "device": "mps",
+          "num_threads": 4,
+          "rank": 8,
+          "alpha": 16.0,
+          "dropout": 0.0
+        },
+        "data_fingerprint": "0fe46a2d8ab276d75535e539721dcfa072ded94efa974e5bfa55b3683cbf779e",
+        "data": {
+          "series": 370,
+          "eligible_training_series": 370,
+          "validation_series": 128,
+          "horizon": 720,
+          "train_length_min": 125136,
+          "train_length_max": 125136,
+          "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+          "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+        },
+        "selection_objective": {
+          "name": "official-nine-quantile-crps-mase-pareto-v1",
+          "score": "sqrt(CRPS/base_CRPS * MASE/base_MASE) if both ratios <= 1; otherwise max ratio",
+          "baseline_candidate": "step zero, selected if no checkpoint has score < 1",
+          "config": {
+            "context_length": 32768,
+            "max_rows": 16,
+            "max_tokens": 131072,
+            "seasonality": 96,
+            "record_legacy_objective": true
+          },
+          "base_identity": {
+            "model": "mistralai/Timestral-209M",
+            "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+            "weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa"
+          },
+          "data": "fixed seeded official validation suffix; no test access"
+        },
+        "include_initial_checkpoint": true,
+        "retain_validation_checkpoints": true,
+        "trainable_parameters": 1105920,
+        "steps": 200,
+        "best_step": 200,
+        "completed": false,
+        "validation_loss": 0.9912753188528971,
+        "training_seconds": 240.36062470800243,
+        "torch_version": "2.14.1"
+      },
+      "validations": [
+        {
+          "step": 100,
+          "train_loss": 0.09708048030734062,
+          "learning_rate": 9.847001329696653e-05,
+          "gradient_norm": 0.011688891798257828,
+          "validation_loss": 0.9954227241642176,
+          "validation_metrics": {
+            "crps": 0.050678562843096374,
+            "mase": 0.8549667166687035,
+            "scaled_pinball": 0.10698941562441178,
+            "crps_ratio": 0.9946309961186315,
+            "mase_ratio": 0.9962150824267391,
+            "score": 0.9954227241642176
+          }
+        },
+        {
+          "step": 200,
+          "train_loss": 0.1161132100969553,
+          "learning_rate": 8.945702546981969e-05,
+          "gradient_norm": 0.0056983535178005695,
+          "validation_loss": 0.9912753188528971,
+          "validation_metrics": {
+            "crps": 0.05042520315866284,
+            "mase": 0.8521171900512527,
+            "scaled_pinball": 0.10675839055329561,
+            "crps_ratio": 0.9896584913519784,
+            "mase_ratio": 0.9928947878015381,
+            "score": 0.9912753188528971
+          }
+        }
+      ]
+    },
+    {
+      "path": "tasks/electricity__15T__long/candidates/ctx8192_lr3e-04",
+      "summary": {
+        "task": "electricity/15T/long",
+        "base_model": "mistralai/Timestral-209M",
+        "base_revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+        "base_weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa",
+        "upstream_revision": "a534bdbd244d64f3d9d743f46c7bf6fc330ed4ff",
+        "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+        "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+        "train_config": {
+          "context_length": 8192,
+          "max_steps": 800,
+          "batch_size": 2,
+          "gradient_accumulation": 2,
+          "learning_rate": 0.0003,
+          "weight_decay": 0.01,
+          "warmup_steps": 40,
+          "gradient_clip": 1.0,
+          "eval_every": 100,
+          "patience": 6,
+          "validation_limit": 128,
+          "seed": 42,
+          "device": "mps",
+          "num_threads": 4,
+          "rank": 8,
+          "alpha": 16.0,
+          "dropout": 0.0
+        },
+        "data_fingerprint": "0fe46a2d8ab276d75535e539721dcfa072ded94efa974e5bfa55b3683cbf779e",
+        "data": {
+          "series": 370,
+          "eligible_training_series": 370,
+          "validation_series": 128,
+          "horizon": 720,
+          "train_length_min": 125136,
+          "train_length_max": 125136,
+          "validation_sampling": "seeded uniform series, fixed before any model evaluation",
+          "series_sampling": "uniform series then uniform origin; partial labels only for T < H+1"
+        },
+        "selection_objective": {
+          "name": "official-nine-quantile-crps-mase-pareto-v1",
+          "score": "sqrt(CRPS/base_CRPS * MASE/base_MASE) if both ratios <= 1; otherwise max ratio",
+          "baseline_candidate": "step zero, selected if no checkpoint has score < 1",
+          "config": {
+            "context_length": 32768,
+            "max_rows": 16,
+            "max_tokens": 131072,
+            "seasonality": 96,
+            "record_legacy_objective": true
+          },
+          "base_identity": {
+            "model": "mistralai/Timestral-209M",
+            "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+            "weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa"
+          },
+          "data": "fixed seeded official validation suffix; no test access"
+        },
+        "include_initial_checkpoint": true,
+        "retain_validation_checkpoints": true,
+        "trainable_parameters": 1105920,
+        "steps": 800,
+        "best_step": 400,
+        "completed": true,
+        "validation_loss": 0.985488530493081,
+        "training_seconds": 822.2379357500467,
+        "torch_version": "2.14.1"
+      },
+      "validations": [
+        {
+          "step": 100,
+          "train_loss": 0.09868839383125305,
+          "learning_rate": 0.0002954100398908995,
+          "gradient_norm": 0.011365268379449844,
+          "validation_loss": 0.9935049069235874,
+          "validation_metrics": {
+            "crps": 0.050544713622164665,
+            "mase": 0.8539308225087382,
+            "scaled_pinball": 0.10729638652992435,
+            "crps_ratio": 0.9920040355957535,
+            "mase_ratio": 0.9950080490231743,
+            "score": 0.9935049069235874
+          }
+        },
+        {
+          "step": 200,
+          "train_loss": 0.11553133651614189,
+          "learning_rate": 0.00026837107640945905,
+          "gradient_norm": 0.005046521313488483,
+          "validation_loss": 0.987827861257784,
+          "validation_metrics": {
+            "crps": 0.05022302493365933,
+            "mase": 0.8496069814397091,
+            "scaled_pinball": 0.10715178996906616,
+            "crps_ratio": 0.9856904875640388,
+            "mase_ratio": 0.9899698696379386,
+            "score": 0.987827861257784
+          }
+        },
+        {
+          "step": 300,
+          "train_loss": 0.07943239435553551,
+          "learning_rate": 0.00022139210895556104,
+          "gradient_norm": 0.015553419478237629,
+          "validation_loss": 0.9868205224011715,
+          "validation_metrics": {
+            "crps": 0.050098068330352914,
+            "mase": 0.8499898930190531,
+            "scaled_pinball": 0.10627264992217533,
+            "crps_ratio": 0.9832380559273514,
+            "mase_ratio": 0.9904160417322918,
+            "score": 0.9868205224011715
+          }
+        },
+        {
+          "step": 400,
+          "train_loss": 0.05710039101541042,
+          "learning_rate": 0.00016238690182084986,
+          "gradient_norm": 0.006591097917407751,
+          "validation_loss": 0.985488530493081,
+          "validation_metrics": {
+            "crps": 0.04999650475129574,
+            "mase": 0.8494188635427571,
+            "scaled_pinball": 0.10514881266863085,
+            "crps_ratio": 0.9812447420261705,
+            "mase_ratio": 0.9897506729340619,
+            "score": 0.985488530493081
+          }
+        },
+        {
+          "step": 500,
+          "train_loss": 0.10027052462100983,
+          "learning_rate": 0.00010129507961929748,
+          "gradient_norm": 0.011072754859924316,
+          "validation_loss": 0.986003439842526,
+          "validation_metrics": {
+            "crps": 0.05002572318172738,
+            "mase": 0.8498100865952319,
+            "scaled_pinball": 0.10538811460719444,
+            "crps_ratio": 0.9818181907377139,
+            "mase_ratio": 0.9902065296333579,
+            "score": 0.986003439842526
+          }
+        },
+        {
+          "step": 600,
+          "train_loss": 0.06214250437915325,
+          "learning_rate": 4.840776425613885e-05,
+          "gradient_norm": 0.014535610564053059,
+          "validation_loss": 0.9873516812222758,
+          "validation_metrics": {
+            "crps": 0.05011600645543435,
+            "mase": 0.8506005917724303,
+            "scaled_pinball": 0.10573677337379195,
+            "crps_ratio": 0.983590114356346,
+            "mase_ratio": 0.991127633537063,
+            "score": 0.9873516812222758
+          }
+        },
+        {
+          "step": 700,
+          "train_loss": 0.083782272413373,
+          "learning_rate": 1.2634001001741373e-05,
+          "gradient_norm": 0.02481849491596222,
+          "validation_loss": 0.9870630488904389,
+          "validation_metrics": {
+            "crps": 0.05009087200386678,
+            "mase": 0.8505299150182899,
+            "scaled_pinball": 0.10568419637274928,
+            "crps_ratio": 0.9830968189036525,
+            "mase_ratio": 0.9910452803330388,
+            "score": 0.9870630488904389
+          }
+        },
+        {
+          "step": 800,
+          "train_loss": 0.1105516105890274,
+          "learning_rate": 0.0,
+          "gradient_norm": 0.013637199997901917,
+          "validation_loss": 0.987085550891508,
+          "validation_metrics": {
+            "crps": 0.050093000657736766,
+            "mase": 0.8505325502932001,
+            "scaled_pinball": 0.10566299199126661,
+            "crps_ratio": 0.9831385964324598,
+            "mase_ratio": 0.991048350979604,
+            "score": 0.987085550891508
+          }
+        }
+      ]
+    }
+  ],
+  "selection_data": "official training/validation only; test not accessed"
+}

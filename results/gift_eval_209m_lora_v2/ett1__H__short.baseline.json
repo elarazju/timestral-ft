@@ -1,0 +1,34 @@
+{
+  "task": "ett1/H/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 93.24642857142857,
+    "MSE[0.5]": 93.24642857142857,
+    "MAE[0.5]": 4.726469203404018,
+    "MASE[0.5]": 0.783594337168202,
+    "MAPE[0.5]": 0.47207950410388766,
+    "sMAPE[0.5]": 0.24790731157575335,
+    "MSIS": 5.2833038822992595,
+    "RMSE[mean]": 9.656419034581534,
+    "NRMSE[mean]": 0.4507045823904743,
+    "ND[0.5]": 0.2206036545092785,
+    "mean_weighted_sum_quantile_loss": 0.16810967327385148
+  },
+  "device": "cpu",
+  "seconds": 94.73379520792514,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": 5.424457771852076e-09,
+    "MAPE[0.5]": -3.6330450148280846e-08,
+    "sMAPE[0.5]": 5.551115123125783e-17,
+    "MSIS": -1.0907104508461885e-06,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": 0.0,
+    "ND[0.5]": 0.0,
+    "mean_weighted_sum_quantile_loss": -1.8134286294824165e-09
+  }
+}

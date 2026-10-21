@@ -1,0 +1,50 @@
+{
+  "controller_pid": 9612,
+  "started_at_utc": "2026-10-17T09:21:33.410928+00:00",
+  "parallel_started_at_utc": "2026-10-19T23:52:00.743083+00:00",
+  "phase": "complete",
+  "updated_at_utc": "2026-10-20T22:46:10.634693+00:00",
+  "progress": {
+    "selected_tasks": 97,
+    "total_tasks": 97,
+    "logged_optimizer_steps": 113000,
+    "baseline_tests": 97,
+    "adapted_tests": 97,
+    "test_candidates_frozen": true
+  },
+  "workers": [
+    {
+      "name": "test_cpu",
+      "pid": 9639,
+      "returncode": 0
+    },
+    {
+      "name": "test_mps",
+      "pid": 9640,
+      "returncode": 0
+    },
+    {
+      "name": "report",
+      "pid": 91670,
+      "returncode": 0
+    }
+  ],
+  "aggregates": {
+    "tasks": 97,
+    "fallback_tasks": 21,
+    "crps": {
+      "baseline": 0.44601008261259867,
+      "lora": 0.4485491019850558,
+      "change_percent": 0.569273985373675,
+      "improved": 31,
+      "regressed": 45
+    },
+    "mase": {
+      "baseline": 0.6575470862405749,
+      "lora": 0.6608795675539642,
+      "change_percent": 0.5068049700352573,
+      "improved": 33,
+      "regressed": 43
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "scope": "Exact historical inference helper snapshots; current scripts may contain later reporting or lifecycle fixes. Original training sources remain available at the commit recorded in code_provenance.json.",
+  "files": [
+    {
+      "original_run_path": "test_source_snapshot/scripts/parallel_gift209_test.py",
+      "published_path": "execution_sources/test_source_snapshot/scripts/parallel_gift209_test.py",
+      "sha256": "0a6b60d15805086ff802e38ea13cad2bf92a933dc5428ae63c959c9158af43a5"
+    },
+    {
+      "original_run_path": "test_source_snapshot/scripts/run_gift209_search.py",
+      "published_path": "execution_sources/test_source_snapshot/scripts/run_gift209_search.py",
+      "sha256": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91"
+    },
+    {
+      "original_run_path": "cpu_extension_source_snapshot/scripts/parallel_gift209_test.py",
+      "published_path": "execution_sources/cpu_extension_source_snapshot/scripts/parallel_gift209_test.py",
+      "sha256": "0a6b60d15805086ff802e38ea13cad2bf92a933dc5428ae63c959c9158af43a5"
+    },
+    {
+      "original_run_path": "cpu_extension_source_snapshot/scripts/run_gift209_search.py",
+      "published_path": "execution_sources/cpu_extension_source_snapshot/scripts/run_gift209_search.py",
+      "sha256": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91"
+    },
+    {
+      "original_run_path": "cpu_extension_source_snapshot/scripts/extend_gift209_cpu.py",
+      "published_path": "execution_sources/cpu_extension_source_snapshot/scripts/extend_gift209_cpu.py",
+      "sha256": "5ce14d686577306a9fab54afca495815e5de2584ed018cb641b7739c50482f93"
+    },
+    {
+      "original_run_path": "cpu_extension_remaining16_source_snapshot/scripts/parallel_gift209_test.py",
+      "published_path": "execution_sources/cpu_extension_remaining16_source_snapshot/scripts/parallel_gift209_test.py",
+      "sha256": "0a6b60d15805086ff802e38ea13cad2bf92a933dc5428ae63c959c9158af43a5"
+    },
+    {
+      "original_run_path": "cpu_extension_remaining16_source_snapshot/scripts/run_gift209_search.py",
+      "published_path": "execution_sources/cpu_extension_remaining16_source_snapshot/scripts/run_gift209_search.py",
+      "sha256": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91"
+    },
+    {
+      "original_run_path": "cpu_extension_remaining16_source_snapshot/scripts/extend_gift209_cpu.py",
+      "published_path": "execution_sources/cpu_extension_remaining16_source_snapshot/scripts/extend_gift209_cpu.py",
+      "sha256": "edd47d8e135928d0781a9c900f30bb6d1a0dcaed6d49a94eff3f3b08114285cd"
+    },
+    {
+      "original_run_path": "cpu_extension_bitbrains_source_snapshot/scripts/parallel_gift209_test.py",
+      "published_path": "execution_sources/cpu_extension_bitbrains_source_snapshot/scripts/parallel_gift209_test.py",
+      "sha256": "0a6b60d15805086ff802e38ea13cad2bf92a933dc5428ae63c959c9158af43a5"
+    },
+    {
+      "original_run_path": "cpu_extension_bitbrains_source_snapshot/scripts/run_gift209_search.py",
+      "published_path": "execution_sources/cpu_extension_bitbrains_source_snapshot/scripts/run_gift209_search.py",
+      "sha256": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91"
+    },
+    {
+      "original_run_path": "cpu_extension_bitbrains_source_snapshot/scripts/extend_gift209_cpu.py",
+      "published_path": "execution_sources/cpu_extension_bitbrains_source_snapshot/scripts/extend_gift209_cpu.py",
+      "sha256": "edd47d8e135928d0781a9c900f30bb6d1a0dcaed6d49a94eff3f3b08114285cd"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "task": "hierarchical_sales/W/short",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 453.1657838983051,
+    "MSE[0.5]": 453.1657838983051,
+    "MAE[0.5]": 8.861683990995763,
+    "MASE[0.5]": 0.7190671521817115,
+    "MAPE[0.5]": 0.5304313288261491,
+    "sMAPE[0.5]": 0.4541274248543432,
+    "MSIS": 6.484070989888612,
+    "RMSE[mean]": 21.28769090104197,
+    "NRMSE[mean]": 0.9773283018509427,
+    "ND[0.5]": 0.40684424659866014,
+    "mean_weighted_sum_quantile_loss": 0.34372743611320467
+  },
+  "device": "cpu",
+  "seconds": 4.809616083977744,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": 2.58480503667613e-09,
+    "MAPE[0.5]": 0.0,
+    "sMAPE[0.5]": 0.0,
+    "MSIS": 2.3980540753143487e-07,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": -1.1102230246251565e-16,
+    "ND[0.5]": 5.551115123125783e-17,
+    "mean_weighted_sum_quantile_loss": 9.419286572942553e-09
+  }
+}

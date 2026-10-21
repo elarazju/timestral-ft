@@ -1,0 +1,21 @@
+{
+  "task": "loop_seattle/H/long",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 59.68054695562436,
+    "MSE[0.5]": 59.68054695562436,
+    "MAE[0.5]": 4.049876577549879,
+    "MASE[0.5]": 0.8471596851211699,
+    "MAPE[0.5]": 0.12187230622272209,
+    "sMAPE[0.5]": 0.09401025289844556,
+    "MSIS": 6.316024372135475,
+    "RMSE[mean]": 7.725318566610982,
+    "NRMSE[mean]": 0.1380617881687293,
+    "ND[0.5]": 0.07237671784510964,
+    "mean_weighted_sum_quantile_loss": 0.05717848917163283
+  },
+  "device": "mps",
+  "seconds": 51.051544916999774,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9"
+}

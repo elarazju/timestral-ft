@@ -292,15 +292,11 @@ def freeze(args, inventory):
     atomic_json(args.results_dir / 'frozen_selection.json', payload)
 
 
-def test(args, protocol, inventory):
+def test_namespace():
+    """Use exactly the pinned official predictor and the original batch budget."""
     import gluonts.model.evaluation as ev
-    import numpy as np
-    import pandas as pd
 
-    from timestral_ft.artifacts import file_sha256
-    from timestral_ft.compat import PortableForecaster
-    from timestral_ft.gift import atomic_json, load_gift_adapter, seasonal_error_sliced
-    freeze(args, inventory)
+    from timestral_ft.gift import seasonal_error_sliced
     notebook = ROOT / '.cache/gift-eval/notebooks/timestral.ipynb'
     cells = read(notebook)['cells']
     namespace = {}
@@ -309,39 +305,81 @@ def test(args, protocol, inventory):
     os.environ['GIFT_EVAL'] = str(ROOT / '.cache/gift-eval-data')
     namespace.update(MAX_ROWS=16, MAX_TOKENS=2**17)
     ev.seasonal_error = seasonal_error_sliced
+    return namespace
+
+
+def test_task(args, task, namespace, reference, *, nonblocking=False):
+    """Commit a paired test under one task lock; never evaluate a busy task twice."""
+    import numpy as np
+
+    from timestral_ft.artifacts import file_sha256
+    from timestral_ft.compat import PortableForecaster
+    from timestral_ft.gift import atomic_json, load_gift_adapter
+
+    key = task['key']
+    directory = task_directory(args, key)
+    frozen_sha = file_sha256(args.run_dir / 'frozen_selection.json')
+    adapter_sha = file_sha256(directory / 'adapter.safetensors')
+    frozen = read(args.run_dir / 'frozen_selection.json')
+    if frozen['count'] != 97 or next(r['adapter_sha256'] for r in frozen['tasks'] if r['task'] == key) != adapter_sha:
+        raise ValueError(f'Unfrozen or changed adapter: {key}')
+    with (directory / '.test.lock').open('a') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | (fcntl.LOCK_NB if nonblocking else 0))
+        except BlockingIOError:
+            return False
+        _test_task_locked(args, task, namespace, reference, frozen_sha, adapter_sha,
+                          np, PortableForecaster, load_gift_adapter, atomic_json)
+    return True
+
+
+def _test_task_locked(args, task, namespace, reference, frozen_sha, adapter_sha,
+                      np, forecaster_type, load_adapter, atomic_json):
     device = args.device
+    key = task['key']
+    directory = task_directory(args, key)
+    for kind in ['baseline', 'lora']:
+        path = args.results_dir / f'{key.replace("/", "__")}.{kind}.json'
+        if path.exists():
+            existing = read(path)
+            if (existing['frozen_selection_sha256'] != frozen_sha
+                    or existing['task'] != key or existing['kind'] != kind
+                    or (kind == 'lora' and existing['adapter_sha256'] != adapter_sha)):
+                raise ValueError(f'Existing test receipt identity differs: {path}')
+            print(f'SKIP TEST {kind} {key}', flush=True)
+            continue
+        print(f'START TEST {kind} {key} device={device}', flush=True)
+        started = time.perf_counter()
+        if kind == 'baseline':
+            fc = forecaster_type.from_pretrained(BASE, revision=REVISION, device=device, max_context=32768)
+        else:
+            fc = forecaster_type(load_adapter(directory, device), max_context=32768)
+        metrics = namespace['evaluate_config'](fc, task['dataset'], task['term'])
+        if not all(np.isfinite(v) and v >= 0 for v in metrics.values()):
+            raise FloatingPointError(f'Non-finite test metric {key}')
+        record = dict(task=key, kind=kind, metrics=metrics, device=device,
+                      seconds=time.perf_counter()-started, frozen_selection_sha256=frozen_sha)
+        if kind == 'baseline':
+            record['reference_matches'] = bool(all(np.isclose(v, reference.loc[key, 'eval_metrics/'+m],
+                                                                rtol=1e-3, atol=1e-5) for m, v in metrics.items()))
+            record['reference_difference'] = {m: float(v-reference.loc[key, 'eval_metrics/'+m]) for m, v in metrics.items()}
+        else:
+            record['adapter_sha256'] = adapter_sha
+        atomic_json(path, record)
+        print(f'DONE TEST {kind} {key} crps={metrics["mean_weighted_sum_quantile_loss"]:.8g} '
+              f'mase={metrics["MASE[0.5]"]:.8g} seconds={record["seconds"]:.1f}', flush=True)
+        del fc
+        clear(device)
+
+
+def test(args, protocol, inventory):
+    import pandas as pd
+
+    freeze(args, inventory)
+    namespace = test_namespace()
     reference = pd.read_csv(ROOT / '.cache/gift-eval/results/Timestral-209M/all_results.csv').set_index('dataset')
     for task in inventory:
-        key = task['key']
-        directory = task_directory(args, key)
-        for kind in ['baseline', 'lora']:
-            path = args.results_dir / f'{key.replace("/", "__")}.{kind}.json'
-            if path.exists():
-                print(f'SKIP TEST {kind} {key}', flush=True)
-                continue
-            print(f'START TEST {kind} {key}', flush=True)
-            started = time.perf_counter()
-            if kind == 'baseline':
-                fc = PortableForecaster.from_pretrained(BASE, revision=REVISION, device=device, max_context=32768)
-            else:
-                fc = PortableForecaster(load_gift_adapter(directory, device), max_context=32768)
-            metrics = namespace['evaluate_config'](fc, task['dataset'], task['term'])
-            if not all(np.isfinite(v) and v >= 0 for v in metrics.values()):
-                raise FloatingPointError(f'Non-finite test metric {key}')
-            record = dict(task=key, kind=kind, metrics=metrics, device=device,
-                          seconds=time.perf_counter()-started,
-                          frozen_selection_sha256=file_sha256(args.run_dir / 'frozen_selection.json'))
-            if kind == 'baseline':
-                record['reference_matches'] = bool(all(np.isclose(v, reference.loc[key, 'eval_metrics/'+m],
-                                                                    rtol=1e-3, atol=1e-5) for m, v in metrics.items()))
-                record['reference_difference'] = {m: float(v-reference.loc[key, 'eval_metrics/'+m]) for m, v in metrics.items()}
-            else:
-                record['adapter_sha256'] = file_sha256(directory / 'adapter.safetensors')
-            atomic_json(path, record)
-            print(f'DONE TEST {kind} {key} crps={metrics["mean_weighted_sum_quantile_loss"]:.8g} '
-                  f'mase={metrics["MASE[0.5]"]:.8g} seconds={record["seconds"]:.1f}', flush=True)
-            del fc
-            clear(device)
+        test_task(args, task, namespace, reference)
 
 
 def report(args, protocol, inventory):
@@ -364,13 +402,19 @@ def report(args, protocol, inventory):
     seasonal = {r['dataset']: r for r in csv.DictReader(
         (ROOT / '.cache/gift-eval/results/Seasonal_Naive/all_results.csv').open())}
     props = read(ROOT / '.cache/gift-eval/notebooks/dataset_properties.json')
-    comparison, audit, ablations, lengths = [], [], [], {}
+    comparison, audit, ablations, contexts, lengths = [], [], [], [], {}
     submissions = {'baseline': [], 'lora': []}
     for task in inventory:
         key = task['key']
         directory = task_directory(args, key)
         selected = read(directory / 'selection.json')
         summary = read(directory / 'training_summary.json')
+        contexts.append(dict(task=key, dataset=task['dataset'], term=task['term'],
+                             selected_training_context=summary['train_config']['context_length'],
+                             selected_step=selected['best_step'], identity_fallback=selected['baseline_fallback'],
+                             validation_context_limit=32768, test_context_limit=32768,
+                             training_history_min=summary['data']['train_length_min'],
+                             training_history_max=summary['data']['train_length_max']))
         candidate = args.run_dir / selected['selected_candidate']
         rows = [read(candidate / 'initial_validation.json')] + history(candidate)
         best = min(rows, key=lambda row: row['validation_loss'])
@@ -451,7 +495,8 @@ def report(args, protocol, inventory):
         aggregates[label] = dict(baseline=b, lora=t, change_percent=(t/b-1)*100,
                                  improved=sum(r[f'{label}_ratio'] < 1-1e-6 for r in comparison),
                                  regressed=sum(r[f'{label}_ratio'] > 1+1e-6 for r in comparison))
-    for name, rows in [('task_comparison', comparison), ('validation_ablations', ablations)] + [(k+'_all_results', v) for k, v in submissions.items()]:
+    for name, rows in [('task_comparison', comparison), ('validation_ablations', ablations),
+                       ('context_lengths', contexts)] + [(k+'_all_results', v) for k, v in submissions.items()]:
         with (args.results_dir / f'{name}.csv').open('w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=list(rows[0]))
             writer.writeheader()
@@ -475,7 +520,9 @@ def report(args, protocol, inventory):
     print(json.dumps(aggregates, indent=2), flush=True)
     gains = all(aggregates[k]['change_percent'] < 0 for k in ['crps', 'mase'])
     text = '# Timestral-209M GIFT-Eval adaptation\n\n'
-    text += f'Completed all 97 tasks. Both aggregate metrics improved: **{gains}**.\n\n'
+    text += 'Completed all 97 tasks. '
+    text += ('**Both aggregate metrics improved.**\n\n' if gains
+             else '**This recipe did not improve both aggregate test metrics.**\n\n')
     text += '| Metric | Base | Adapted | Change |\n|---|---:|---:|---:|\n'
     for k in ['crps', 'mase']:
         r = aggregates[k]
@@ -486,9 +533,18 @@ def report(args, protocol, inventory):
     text += '\nTraining screens are prefixes of the longer cosine schedule. Only the chosen candidate is extended; '
     text += 'validation_ablations.csv describes observed checkpoints, not a complete factorial search. '
     text += 'All three selection objectives are compared on validation only, and no test-driven retry is performed.\n'
+    text += '\n[Per-task results](task_comparison.csv) · [Selected training contexts](context_lengths.csv) · '
+    text += '[Integrity audit](audit.json). The context CSV distinguishes training windows from the '
+    text += '32768-step validation/test inference limit and marks step-zero fallbacks.\n'
+    if (args.results_dir / 'parallel_test_execution.json').exists():
+        text += '\nFinal testing used one MPS worker alongside a CPU worker. The initial CPU queue covered '
+        text += 'short histories; later CPU extension rounds also processed heavier multivariate and Bitbrains tasks. '
+        text += 'See parallel_test_execution.json, cpu_extension*_plan.json and each test receipt for routing and devices. '
+        text += 'All frozen adapters, official test windows, context limits, and prediction settings were retained.\n'
     (args.results_dir / 'README.md').write_text(text)
     chinese = '# Timestral-209M：GIFT-Eval 完整微调实验\n\n'
-    chinese += f'已完成全部 97 个任务的搜索、冻结、成对回测与审计。两项聚合指标均改善：**{gains}**。\n\n'
+    chinese += '已完成全部 97 个任务的搜索、冻结、成对回测与审计。'
+    chinese += '**两项聚合指标均改善。**\n\n' if gains else '**本轮配方未实现两项测试聚合指标同时改善。**\n\n'
     chinese += '| 指标 | 原模型 | 微调后 | 变化 |\n|---|---:|---:|---:|\n'
     for k in ['crps', 'mase']:
         r = aggregates[k]
@@ -499,6 +555,13 @@ def report(args, protocol, inventory):
     chinese += '仅优胜方案延长，因此消融记录属于已观测检查点比较，不是完全析因实验。'
     chinese += '全部 97 份权重在测试前冻结；测试结果不会触发重新训练或换配方。'
     chinese += '权重尚未公开，提交草稿仅通过格式校验，尚未正式提交榜单。\n'
+    chinese += '\n[逐任务结果](task_comparison.csv) · [选中训练上下文](context_lengths.csv) · '
+    chinese += '[完整性审计](audit.json)。上下文 CSV 区分训练窗口与 32768 步验证／测试推理上限，并标注第 0 步回退。\n'
+    if (args.results_dir / 'parallel_test_execution.json').exists():
+        chinese += '\n正式测试使用一个 MPS 进程与一个 CPU 进程并行；初始 CPU 队列处理短历史，'
+        chinese += '后续 CPU 扩展轮次还处理了较重的多变量及 Bitbrains 任务。'
+        chinese += 'parallel_test_execution.json 和 cpu_extension*_plan.json 记录调度规则与代码校验值，各任务测试记录注明实际设备。'
+        chinese += '冻结权重、全部官方测试窗口、上下文上限和预测设置保持一致。\n'
     (args.results_dir / 'README.zh-CN.md').write_text(chinese)
     package = ROOT / 'dist/timestral-ft-209m-lora-gift-eval-adapters.zip'
     package.parent.mkdir(exist_ok=True)

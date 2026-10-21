@@ -1,0 +1,34 @@
+{
+  "task": "ett1/H/medium",
+  "kind": "baseline",
+  "metrics": {
+    "MSE[mean]": 137.50729166666667,
+    "MSE[0.5]": 137.50729166666667,
+    "MAE[0.5]": 6.836326962425595,
+    "MASE[0.5]": 1.2563569518123163,
+    "MAPE[0.5]": 3271908578893.2246,
+    "sMAPE[0.5]": 0.4329076131184896,
+    "MSIS": 7.963618461332422,
+    "RMSE[mean]": 11.72635031314802,
+    "NRMSE[mean]": 0.5616643827844172,
+    "ND[0.5]": 0.32744385604428033,
+    "mean_weighted_sum_quantile_loss": 0.24706558759434882
+  },
+  "device": "cpu",
+  "seconds": 27.960501916939393,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "reference_matches": true,
+  "reference_difference": {
+    "MSE[mean]": 0.0,
+    "MSE[0.5]": 0.0,
+    "MAE[0.5]": 0.0,
+    "MASE[0.5]": -1.0547639650582141e-08,
+    "MAPE[0.5]": 319589.7978515625,
+    "sMAPE[0.5]": 0.0,
+    "MSIS": -5.108477418858115e-07,
+    "RMSE[mean]": 0.0,
+    "NRMSE[mean]": 0.0,
+    "ND[0.5]": 5.551115123125783e-17,
+    "mean_weighted_sum_quantile_loss": -3.4084396416389495e-10
+  }
+}

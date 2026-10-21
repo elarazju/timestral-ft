@@ -1,0 +1,21 @@
+{
+  "task": "sz_taxi/15T/medium",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 16.158862513354702,
+    "MSE[0.5]": 16.158862513354702,
+    "MAE[0.5]": 2.7279430422008546,
+    "MASE[0.5]": 0.531755891268609,
+    "MAPE[0.5]": 9344125342809.271,
+    "sMAPE[0.5]": 0.4026243291349493,
+    "MSIS": 3.6925282019347163,
+    "RMSE[mean]": 4.0198087657691755,
+    "NRMSE[mean]": 0.3741103023069392,
+    "ND[0.5]": 0.2538806335476495,
+    "mean_weighted_sum_quantile_loss": 0.19973390249719652
+  },
+  "device": "cpu",
+  "seconds": 19.346967082936317,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "b9d0eb50d933815d55a682b88ac7cbb7de1bb7264dc6fa4ee3009c27fac58bec"
+}

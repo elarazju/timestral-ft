@@ -1,0 +1,21 @@
+{
+  "task": "m4_yearly/A/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 3517358.5026551755,
+    "MSE[0.5]": 3517358.5026551755,
+    "MAE[0.5]": 870.8527057760947,
+    "MASE[0.5]": 3.2843618484321015,
+    "MAPE[0.5]": 0.16635740487208367,
+    "sMAPE[0.5]": 0.1462825886838819,
+    "MSIS": 28.57183164531598,
+    "RMSE[mean]": 1875.4622104044581,
+    "NRMSE[mean]": 0.3007390592002376,
+    "ND[0.5]": 0.13964526823529191,
+    "mean_weighted_sum_quantile_loss": 0.11273968565864712
+  },
+  "device": "mps",
+  "seconds": 64.0995211249683,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "f1b71c60cb5f8f2a6fbed4e3954b3fa778c9004b077fbaea8af59275ee993150"
+}

@@ -1,0 +1,24 @@
+{
+  "original_sources": {
+    "scripts/run_gift209_search.py": "4820b8bc972bcc1d03f4bc4fea7459d956d42f49c0b1a5814650c2d5a1db4634",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/compat.py": "6f0000bfa151a5c4ccd3691b39dad1cf34b922c37493c1929899f636080f2fa2",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/trainer.py": "eee824c494a3400794ad3ad049bc2bc9b03dc8367add4064ac22e8aae729a1bd",
+    "scripts/launch_gift209.py": "9ff209a3d43e21bf0b5338fa3f63f40d5cc95a649e57d2db292273be2532c989"
+  },
+  "executed_sources": {
+    "scripts/run_gift209_search.py": "647507149320dc28e2305fe59912613eb2e29759e65f043f390d51c545947f91",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/compat.py": "6f0000bfa151a5c4ccd3691b39dad1cf34b922c37493c1929899f636080f2fa2",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/trainer.py": "eee824c494a3400794ad3ad049bc2bc9b03dc8367add4064ac22e8aae729a1bd",
+    "scripts/launch_gift209.py": "9ff209a3d43e21bf0b5338fa3f63f40d5cc95a649e57d2db292273be2532c989"
+  },
+  "changed_runner_files": [
+    "scripts/run_gift209_search.py"
+  ],
+  "frozen_weights_unchanged": true
+}

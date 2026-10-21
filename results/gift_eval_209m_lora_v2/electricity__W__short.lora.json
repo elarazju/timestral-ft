@@ -1,0 +1,21 @@
+{
+  "task": "electricity/W/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 39426742917.76576,
+    "MSE[0.5]": 39426742917.76576,
+    "MAE[0.5]": 27475.212612612613,
+    "MASE[0.5]": 1.464849867228025,
+    "MAPE[0.5]": 0.15751689424566506,
+    "sMAPE[0.5]": 0.09033875916884293,
+    "MSIS": 11.22278005857923,
+    "RMSE[mean]": 198561.68542235374,
+    "NRMSE[mean]": 0.4530522405629649,
+    "ND[0.5]": 0.06268936833211748,
+    "mean_weighted_sum_quantile_loss": 0.049004755538691464
+  },
+  "device": "cpu",
+  "seconds": 11.459226541919634,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9"
+}

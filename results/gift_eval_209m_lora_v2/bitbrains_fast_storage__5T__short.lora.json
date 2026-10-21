@@ -1,0 +1,21 @@
+{
+  "task": "bitbrains_fast_storage/5T/short",
+  "kind": "lora",
+  "metrics": {
+    "MSE[mean]": 1617594.9785662943,
+    "MSE[0.5]": 1617594.9785662943,
+    "MAE[0.5]": 136.8389421612217,
+    "MASE[0.5]": 0.6379070110806999,
+    "MAPE[0.5]": 1.5219780090899448,
+    "sMAPE[0.5]": 0.4554267915717847,
+    "MSIS": 12.169859883427751,
+    "RMSE[mean]": 1271.8470735769667,
+    "NRMSE[mean]": 3.993285229072188,
+    "ND[0.5]": 0.4296404322867689,
+    "mean_weighted_sum_quantile_loss": 0.3409527019937018
+  },
+  "device": "mps",
+  "seconds": 23436.835026457997,
+  "frozen_selection_sha256": "c6a6a93aa10facd11c46dddeef492d471660cf74bbe092d68af2661324efba75",
+  "adapter_sha256": "c78cce376c8fb82177404343521217fcab2f967a709d47a76d5acf678c43e3b9"
+}
