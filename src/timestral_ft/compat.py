@@ -4,6 +4,8 @@ We use its differentiable block decoder directly, never its inference_mode entry
 Refinement is left in the graph, including dependence on earlier predicted medians.
 """
 
+import math
+from dataclasses import dataclass
 from functools import lru_cache
 
 import torch
@@ -11,7 +13,16 @@ from safetensors.torch import load_file
 from timestral.config import TimestralConfig
 from timestral.forecaster import TimestralForecaster
 from timestral.loading import resolve_checkpoint
-from timestral.model import TimestralModel
+from timestral.masks import (
+    build_forecast_positions,
+    build_forecast_time_mask,
+    build_two_stream_positions,
+    build_two_stream_time_mask,
+    build_two_stream_variate_mask,
+    compute_enc_key_validity,
+    group_first_observed_patch,
+)
+from timestral.model import ROLE_KNOWN_COV, ROLE_TARGET, TimestralModel
 from timestral.scaler import clamp_nonfinite, cumulative_welford, welford_combine
 
 
@@ -191,8 +202,8 @@ def load_model(path_or_repo_id, *, device="cpu", **hub_kwargs):
     return model.eval()
 
 
-def differentiable_forecast(model, context, prediction_length, **covariates):
-    """Return (B,V,H,Q) predictions without augmentation or output clipping."""
+def _training_inputs(model, context, prediction_length, covariates):
+    """Use exactly the pinned forecaster's row assembly for both objectives."""
     if not 1 <= prediction_length <= model.config.block_size * model.config.patch_size:
         raise ValueError("Training horizon must fit in one model decode block")
     if context.shape[-1] > model.config.context_length:
@@ -219,10 +230,157 @@ def differentiable_forecast(model, context, prediction_length, **covariates):
     rows, mask, role_ids, future, future_mask, n_target = forecaster._assemble_rows(
         context, observed, prediction_length, **numeric
     )
+    return forecaster, rows, mask, role_ids, future, future_mask, n_target
+
+
+def differentiable_forecast(model, context, prediction_length, **covariates):
+    """Return (B,V,H,Q) predictions without augmentation or output clipping."""
+    forecaster, rows, mask, role_ids, future, future_mask, n_target = _training_inputs(
+        model, context, prediction_length, covariates)
     # _block_ar_decode preserves the official advancing refine frame. No eval() or
     # inference-mode call is made here, so LoRA dropout and gradients remain active.
     predictions = forecaster._block_ar_decode(rows, mask, prediction_length, role_ids, future, future_mask)
     return predictions[:, :n_target]
+
+
+@dataclass(frozen=True)
+class NormalizedForecast:
+    """Training head outputs and causal target frames, all shaped (B,V,H[,Q])."""
+
+    quantiles: torch.Tensor
+    loc: torch.Tensor
+    scale: torch.Tensor
+    use_asinh: bool = True
+
+
+def _normalized_block(model, inputs, observed, group_ids, n_pred, role_ids, future, future_mask):
+    """Pinned predict_block before denormalization; preserve all official masks.
+
+    Adapted from mistralai/timestral model.py (Apache-2.0), pinned in config.py.
+    Direct head outputs avoid an inaccurate sinh/affine/asinh round trip, in
+    particular when a series has a large offset compared with its variation.
+    """
+    c, ps = model.config, model.config.patch_size
+    rows, t = inputs.shape
+    ll = t // ps
+    covariates = (role_ids is not None and c.covariate_enabled
+                  and not bool((role_ids == ROLE_TARGET).all()))
+    if covariates:
+        if future is None:
+            future = inputs.new_zeros(rows, n_pred * ps)
+            future_mask = torch.zeros_like(future, dtype=torch.bool)
+        inputs = torch.cat([inputs, future], dim=-1)
+        observed = torch.cat([observed, future_mask], dim=-1)
+    scaled, loc, scale = model.scale(inputs, observed)
+    if covariates:
+        known_rows = role_ids == ROLE_KNOWN_COV
+        scaled, _, _ = model._known_cov_scaling(inputs, observed, scaled, loc, scale, known_rows)
+    x_enc = model.representation(scaled, observed)
+    n = ll + n_pred if covariates else ll
+    dec_len = n if covariates else n_pred
+    x_dec = model.representation.forecast_tokens(rows, dec_len)
+    obs_per_patch = observed.unflatten(-1, (n, ps)).any(dim=-1)
+    key_valid = compute_enc_key_validity(obs_per_patch, c.attend_missing_patches)
+    unique_ids, inverse = torch.unique(group_ids, return_inverse=True)
+    first_obs = group_first_observed_patch(obs_per_patch, inverse, unique_ids.numel())[inverse]
+    if covariates:
+        starts = torch.full((rows,), ll, device=inputs.device, dtype=torch.long)
+        time_mask = build_two_stream_time_mask(starts, n, c.block_size, key_valid,
+                                               bidirectional_rows=known_rows)
+        variate_mask = build_two_stream_variate_mask(group_ids, key_valid, n,
+                                                     target_rows=role_ids == ROLE_TARGET,
+                                                     bidirectional_rows=known_rows)
+        positions = build_two_stream_positions(n, first_obs)
+    else:
+        time_mask = build_forecast_time_mask(ll, n_pred, key_valid, inputs.device)
+        variate_mask = build_two_stream_variate_mask(group_ids, key_valid, n_pred)
+        positions = build_forecast_positions(ll, n_pred, first_obs)
+    quantiles = model._run_two_stream(x_enc, x_dec, time_mask, variate_mask, positions)
+    return quantiles[:, ll * ps:] if covariates else quantiles
+
+
+def _normalized_frames(model, quantiles, context, observed):
+    """Target frames from history and earlier predicted medians, never labels.
+
+    Statistical operations run on CPU FP64 for MPS. The model head remains on
+    the requested device, and copies preserve gradients through the medians.
+    """
+    device, dtype = quantiles.device, quantiles.dtype
+    ps = model.config.patch_size
+    n_pred = quantiles.shape[-2] // ps
+    _, anchor_loc, anchor_scale = model.scale(context, observed)
+    loc0, scale0 = anchor_loc[:, -1], anchor_scale[:, -1]
+    if n_pred == 1:
+        return loc0[:, None].expand(-1, ps), scale0[:, None].expand(-1, ps)
+    if device.type == "mps":
+        context, observed, quantiles = context.cpu(), observed.cpu(), quantiles.cpu()
+        loc0, scale0 = loc0.cpu(), scale0.cpu()
+    median = quantiles[..., model.config.median_index].to(torch.float64)
+    if model.config.use_asinh:
+        # Very large finite head outputs must not introduce inf*0 derivatives.
+        # Beyond this bound the upstream folded-median clip is already saturated.
+        limit = math.log(torch.finfo(torch.float64).max) - math.log(torch.finfo(torch.float32).max) - 4
+        median = median.clamp(-limit, limit).sinh()
+    loc, scale = _advancing_frames_with_finite_gradients(
+        context, observed, median.unflatten(-1, (n_pred, ps)), model.config.minimum_scale)
+    first = torch.zeros_like(loc, dtype=torch.bool)
+    first[:, 0] = True
+    # Inference uses FP32 frames; retain that rounding before label transform.
+    loc = torch.where(first, loc0[:, None], loc.to(dtype))
+    scale = torch.where(first, scale0[:, None], scale.to(dtype))
+    return (loc.to(dtype).to(device).repeat_interleave(ps, dim=-1),
+            scale.to(dtype).to(device).repeat_interleave(ps, dim=-1))
+
+
+def differentiable_normalized_forecast(model, context, prediction_length, **covariates):
+    """Direct normalized head predictions with inference-matched target frames.
+
+    No inference_mode/eval switch, output augmentation or loss scaling is used.
+    This is the opt-in objective path; raw-space forecasting is unchanged.
+    """
+    _, rows, mask, role_ids, future, future_mask, n_target = _training_inputs(
+        model, context, prediction_length, covariates)
+    b, v, t = rows.shape
+    packed = rows.reshape(b * v, t)
+    observed = mask.reshape(b * v, t)
+    group_ids = torch.arange(b, device=rows.device).repeat_interleave(v)
+    n_pred = math.ceil(prediction_length / model.config.patch_size)
+    quantiles = _normalized_block(model, packed, observed, group_ids, n_pred,
+                                  role_ids, future, future_mask)
+    quantiles = quantiles.reshape(b, v, n_pred * model.config.patch_size, -1)[:, :n_target]
+    target_context = rows[:, :n_target].reshape(b * n_target, t)
+    target_observed = mask[:, :n_target].reshape(b * n_target, t)
+    loc, scale = _normalized_frames(model, quantiles.flatten(0, 1), target_context, target_observed)
+    loc = loc.reshape(b, n_target, -1)[..., :prediction_length]
+    scale = scale.reshape(b, n_target, -1)[..., :prediction_length]
+    return NormalizedForecast(quantiles[..., :prediction_length, :], loc, scale, model.config.use_asinh)
+
+
+def normalized_pinball_loss(forecast, labels, context, quantile_levels):
+    """Equal mean over observed target positions and quantiles in model space.
+
+    Transform only scored labels, in FP64, to avoid NaN gradients at missing
+    positions and overflow in (label - loc) for finite, extreme FP32 values.
+    """
+    valid = torch.isfinite(labels) & torch.isfinite(context).any(-1)[..., None]
+    if not valid.any():
+        return None
+    predictions = forecast.quantiles[valid]
+    if not torch.isfinite(predictions).all():
+        raise FloatingPointError("Non-finite normalized forecast at an observed label")
+    target, loc, scale = labels[valid], forecast.loc[valid], forecast.scale[valid]
+    device = predictions.device
+    if device.type == "mps":
+        target, loc, scale = target.cpu(), loc.cpu(), scale.cpu()
+    target = (target.to(torch.float64) - loc.to(torch.float64)) / scale.to(torch.float64)
+    if forecast.use_asinh:
+        target = target.asinh()
+    target = target.to(predictions.dtype).to(device)
+    if not torch.isfinite(target).all():
+        raise FloatingPointError("Non-finite normalized target at an observed label")
+    error = target[:, None] - predictions
+    q = predictions.new_tensor(quantile_levels)
+    return torch.maximum(q * error, (q - 1) * error).mean()
 
 
 def pinball_loss(predictions, labels, context, quantile_levels):

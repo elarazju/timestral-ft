@@ -169,7 +169,10 @@ print(forecasts[["timestamp", "target", "median", "q_0.1", "q_0.9"]].head())
 `frequency`，缺少的时间点保留 NaN 掩码，不插值目标。
 分类词表仅在训练集建立，随模型保存；未知类别使用保留编码。
 
-训练目标是按历史尺度平衡的全部 21 分位数 masked pinball loss，这是本项目的微调配方。
+默认训练目标是按历史尺度平衡的全部 21 分位数 masked pinball loss。
+可通过 `TrainConfig(loss_space="normalized")` 或 YAML 中的同名字段，选择技术报告描述的
+逐 patch 归一化空间损失；独立的 `validation_loss_space` 可固定选优准则。
+详见[报告对齐记录](docs/report-alignment.zh-CN.md)与[第一轮对照实验](results/report_round1/README.md)。
 归一化、分类编码、数值容差和推理兼容层的细节见[使用指南](docs/guide.zh-CN.md)
 和[英文技术参考](docs/reference.md)。
 
@@ -267,6 +270,7 @@ python scripts/benchmark_suite.py --jobs 2
 |---|---|
 | [中文使用指南](docs/guide.zh-CN.md) | 数据准备、配置、训练、续训、预测与导出 |
 | [英文技术参考](docs/reference.md) | 训练语义、设备行为、指标与兼容层细节 |
+| [报告对齐记录](docs/report-alignment.zh-CN.md) | 官方机制、社区实现选择、第一轮损失及后续任务 |
 | [ETTh1 示例配置](examples/etth1.yaml) | 包含数值和分类协变量的可运行配置 |
 | [综合验证记录](results/validation/README.zh-CN.md) | 多种子基准、冻结迁移和四档模型验收 |
 | [GIFT-Eval 运行指南](examples/gift_eval/README.md) | 环境配置、全任务训练和官方评估 |

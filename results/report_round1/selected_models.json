@@ -1,0 +1,113 @@
+{
+  "protocol_sha256": "9239f1e9f6d9fb1d42f5b981ff7448fdd0b53b4592782fba7386d9fe66bdcead",
+  "models": {
+    "ETTh1_history_scaled_s42": {
+      "model_sha256": "cafcb1b7767f4bcb4d46f854e1b6313990f797361c0dec00f9fbcf049bc440b2",
+      "adapter_sha256": "f34522dce83eb607d93466e8e88393057ce5d4934b1532a3de914540480b0381",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.2648932715257009,
+      "training_seconds": 36.59316483401926,
+      "trainable_parameters": 92160
+    },
+    "ETTh1_history_scaled_s43": {
+      "model_sha256": "a95bb5ff2511c19724de87fc6efe0d465bb6aeb7e29067b28eae06a38359d442",
+      "adapter_sha256": "9ca1f664c0eaef58dde27d0194e327fca34091590557db168822cf27c7770d2b",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.26411168376604716,
+      "training_seconds": 36.39228237501811,
+      "trainable_parameters": 92160
+    },
+    "ETTh1_history_scaled_s44": {
+      "model_sha256": "fb832b70cdb623696b06455376ad65dac184e13822de55f547127fb507d9b355",
+      "adapter_sha256": "c991f9fbc43b59d81fe5dbe5ed0e74b9ed2ff804b76b47b7769bee812b7aaf65",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.264643265803655,
+      "training_seconds": 35.90498208295321,
+      "trainable_parameters": 92160
+    },
+    "ETTh1_normalized_s42": {
+      "model_sha256": "aedefcdbf22c8bd6c0bdde80eb463d70dcf9ad6d340db3dabc5ad9a30d5083bc",
+      "adapter_sha256": "f1acfaf5042b76b2ba6a6b3f2de2b6cb5d074a75e881187e5aedf9e908d6d5b6",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.26442304452260335,
+      "training_seconds": 38.221501416002866,
+      "trainable_parameters": 92160
+    },
+    "ETTh1_normalized_s43": {
+      "model_sha256": "7d622f7bc389ff1e9be5730326ba48f1cb3e182533096624c15a3b35d9f57ddb",
+      "adapter_sha256": "a7f4c3efb7fdaccc7cd7b1a1b979ffe8f186a583a9b34c3086beec73bdc385b8",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.2637814591328303,
+      "training_seconds": 38.03894666698761,
+      "trainable_parameters": 92160
+    },
+    "ETTh1_normalized_s44": {
+      "model_sha256": "7b70361b4bf746ac9ac78f11389708011c33c810a6dd82e89ebfa5aef36cb315",
+      "adapter_sha256": "f2a0cf423d83d39f01258328daa4d535399812743285d766c651e1affd15e678",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.26442768673102063,
+      "training_seconds": 38.698640540998895,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_history_scaled_s42": {
+      "model_sha256": "744d1f9024c0c816e2316df1dc5823add30913301c292f7e4a7ba7a7f712591a",
+      "adapter_sha256": "55fe30ab6bd66d88e181cecbbe94355e7b8f904d7808a990c454764613ca6b25",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27903182109196983,
+      "training_seconds": 38.385948583018035,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_history_scaled_s43": {
+      "model_sha256": "7fcec55e6b275d0a1811b7a2ee303b6e24d32e1cdd7d07c4f79b8eec07812b34",
+      "adapter_sha256": "24e18767176d9e932a23cf00b9f3d9b5edbcf5d9bef4604a135931a53841d1c8",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27880357106526693,
+      "training_seconds": 37.72609354101587,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_history_scaled_s44": {
+      "model_sha256": "88859e9ae27f3e63c4e6838ddfeb4f9d353fa50fe2bc83dd144a7177150029bc",
+      "adapter_sha256": "b1b48bb27c402518d20c3690fe9d00fc11d676e0a64bb97cdba24e87b142d114",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27925187746683755,
+      "training_seconds": 38.489568916964345,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_normalized_s42": {
+      "model_sha256": "ead776c9f5e23dc085fb810f48597b8e462b1c2147230e187022e1840f94fef4",
+      "adapter_sha256": "587bd68a35554602af5e2b50a080706b8be422d16703901fb9205214617d81d1",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27842875123023986,
+      "training_seconds": 40.296703208005056,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_normalized_s43": {
+      "model_sha256": "a8639532a2e144d0a6c28a1d2696f6d8765ff7a07fd6f94073b0d631c40f26bb",
+      "adapter_sha256": "50738c0ca8c0eb9a69b64f252ef3899a69998d414fd51838d5b099c73d8373d2",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27808016339937847,
+      "training_seconds": 40.30461854103487,
+      "trainable_parameters": 92160
+    },
+    "ETTh2_normalized_s44": {
+      "model_sha256": "155372dc8eea7abd09ee04472d82dea7e3912b3f0d05dfe7637a835bca26ea70",
+      "adapter_sha256": "2d4ad35a1f1f2a2c35bfa1fe5ad1bae5b5da96eeb1356d1ed31869ba7f3e2399",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.27868180473645526,
+      "training_seconds": 40.93435212498298,
+      "trainable_parameters": 92160
+    }
+  }
+}

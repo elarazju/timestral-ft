@@ -1,0 +1,10 @@
+{
+  "python": "3.12.13 (main, Mar  3 2026, 15:35:03) [Clang 21.1.4 ]",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch": "2.14.1",
+  "numpy": "2.5.4",
+  "pandas": "3.0.6",
+  "device": "mps",
+  "threads": 2,
+  "git_head_before_round1": "89651437c01ca01760db50c47d2c369383955b8a"
+}

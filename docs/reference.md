@@ -123,9 +123,24 @@ it checks the pipeline and is not comparable to the 200-step CPU adaptation expe
 
 ## Training and resume
 
-The loss is the masked pinball loss over all 21 quantiles, divided by each target history's population
-standard deviation. Constant histories use scale 1; targets with no history are excluded. This is our
-fine-tuning objective, not a reproduction of Mistral's unpublished training recipe.
+The default `TrainConfig.loss_space="history_scaled"` keeps the masked pinball loss over all 21
+quantiles, divided by each target history's population standard deviation. Constant histories use scale 1;
+targets with no history are excluded. `loss_space="normalized"` instead scores direct quantile-head
+outputs against targets in the same advancing per-patch affine/asinh frame described in report
+Sections 3.3 and 4.1. Later frames use previous predicted medians, never future labels. The implementation
+retains gradient dependence through those predicted medians; the report does not specify the authors'
+complete gradient policy. This remains single-origin fine-tuning, not a reproduction of full pretraining.
+
+`validation_loss_space=None` follows `loss_space`; either explicit loss-space value selects a fixed
+checkpoint criterion. To isolate the training-objective change, use
+`TrainConfig(loss_space="normalized", validation_loss_space="history_scaled")` and the same validation
+space for the comparison arm. Numerical losses from different spaces must not be compared directly.
+Both fields are accepted in the YAML `training` mapping and persisted in artifacts/checkpoints. Missing
+fields in old configurations retain historical behavior; changing objectives requires a new run.
+See the [report alignment record](report-alignment.zh-CN.md) and
+[round-one experiment](../results/report_round1/README.md) for scope and evidence.
+Earlier four-size hardware acceptance used the historical objective; it does not automatically
+certify the new objective on every size. The round-one acceptance record states its actual coverage.
 
 Training bypasses `forecast()`'s inference mode and preserves the upstream advancing refine frame.
 It does not use test-time symmetry averaging, nonnegative clipping, or extreme-output caps in the loss.

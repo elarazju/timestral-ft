@@ -29,6 +29,9 @@ timestral-ft = "timestral_ft.cli:main"
 [tool.hatch.metadata]
 allow-direct-references = true
 
+[tool.hatch.build]
+exclude = ["/blog/**"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/timestral_ft"]
 

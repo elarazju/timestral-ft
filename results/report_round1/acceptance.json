@@ -1,0 +1,71 @@
+{
+  "accepted": true,
+  "scope": "round one normalized-space loss; not multi-block DHF or full pretraining reproduction",
+  "date_local": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "branch": "codex/report-round1",
+  "base_commit": "89651437c01ca01760db50c47d2c369383955b8a",
+  "publication_status": "User approved commit and push to main on 2026-10-28; consult Git history for delivery state",
+  "tests": [
+    {
+      "name": "default_test_suite",
+      "log": "runs/report-round1-acceptance/full-tests.log",
+      "summary": "124 passed, 29 skipped in 8.58s",
+      "sha256": "6d22b7fbaad85da8f7e5ef109cd443765f48f6cd3ae97df7de8b029798d5f3c2"
+    },
+    {
+      "name": "real_weight_cpu_mps_integration",
+      "log": "runs/report-round1-acceptance/real-integration.log",
+      "summary": "14 passed, 16 skipped in 2.89s",
+      "sha256": "0114a4862a4a545cf2f8104416e44979252a16e1b5d20f653bb90b1c85856ec4"
+    }
+  ],
+  "lint": "ruff check src tests scripts passed",
+  "build": "sdist and wheel built; wheel installed to isolated target and import/config check passed; both archives exclude blog",
+  "provenance_audit": {
+    "passed": true,
+    "auditor_sha256": "e537a09bdc062c5ce117ddf7fc9a9c348202a7164c39ee2172085a87e9979085",
+    "protocol_sha256": "9239f1e9f6d9fb1d42f5b981ff7448fdd0b53b4592782fba7386d9fe66bdcead",
+    "selected_model_count": 12,
+    "result_row_count": 14,
+    "split_score_count": 28,
+    "independent_metric_scalar_checks": 196,
+    "runs_csv_rows": 28,
+    "summary_csv_rows": 12,
+    "checks": [
+      "runtime source SHA256",
+      "dataset SHA256 and train-only scaler",
+      "selected merged model and adapter SHA256",
+      "saved training configuration",
+      "prediction SHA256, origins and ground truth",
+      "all metrics recomputed from predictions",
+      "row identity vs frozen selected ledger",
+      "runs and seed mean/sample std aggregates",
+      "independent piecewise quantile/point/interval metric formulation"
+    ],
+    "limitations": [
+      "per-target/per-quantile details reuse runner; seven primary metrics independently formulated",
+      "no statistical significance claim",
+      "this provenance audit does not certify device numerical parity"
+    ]
+  },
+  "blog": {
+    "local_path": "blog/report-round1-normalized-loss.md",
+    "git_tracked": false,
+    "excluded_locally": true,
+    "excluded_from_distributions": true,
+    "sha256": "95d4fb4053f3d7fb1d188d40b992ed7509c06fa3cc5ba46cf207094de6cf8842"
+  },
+  "compatibility": [
+    "legacy objective remains default",
+    "pre-field checkpoints and artifacts load with historical defaults",
+    "CPU/MPS normalized objective finite backward, resume, export/reload",
+    "pinned real Timestral-5M CPU/MPS forward/backward",
+    "CUDA and normalized objective on larger sizes not hardware validated"
+  ],
+  "experiment_conclusion": "Both objectives improve over base on both ETT datasets; normalized does not outperform historical objective on held-out point/WQL metrics. Keep normalized opt-in. Three seeds, sparse stride96, common historical validation and unknown pretraining overlap limit generalization claims.",
+  "build_log": {
+    "path": "runs/report-round1-acceptance/build.log",
+    "sha256": "f147386643e4136dc566122241c77dd5d255f22bf9c96e7fd98c0caef4dc05d9"
+  }
+}

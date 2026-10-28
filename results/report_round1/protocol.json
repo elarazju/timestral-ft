@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "paper": "https://arxiv.org/pdf/2610.37585",
+  "model_id": "mistralai/Timestral-5M",
+  "model_revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "model_sha256": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+  "model_config_sha256": "b5f27f61513f8fd1a3aa996f3720d3679cb40bce5bcb08eb3dc320ce726e7c2f",
+  "sources": {
+    "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+    "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+    "src/timestral_ft/__init__.py": "8b227ae936ae31e605f8f0dafaa864b0d2b3396e0e40f24119d8e64851b84296",
+    "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+    "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+    "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+    "src/timestral_ft/config.py": "e432d31bc056dbb1da890ff6975565da5ed418f27cec18df55744ce606df494d",
+    "src/timestral_ft/data.py": "997b8e846df750605c878430961b7b9ccfbab3f4e21e5be63a6d8f5172ddae39",
+    "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/trainer.py": "0566964608360a565dbdfde1d4a09acca5b21802a619fd41669168a9fe345987"
+  },
+  "datasets": {
+    "ETTh1": {
+      "dataset": "ETTh1",
+      "sha256": "f18de3ad269cef59bb07b5438d79bb3042d3be49bdeecf01c1cd6d29695ee066",
+      "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh1.csv",
+      "rows": 14400,
+      "columns": [
+        "HUFL",
+        "HULL",
+        "MUFL",
+        "MULL",
+        "LUFL",
+        "LULL",
+        "OT"
+      ],
+      "train": [
+        0,
+        8640
+      ],
+      "validation": [
+        8640,
+        11520
+      ],
+      "test": [
+        11520,
+        14400
+      ],
+      "mean": [
+        7.937742245659508,
+        2.0210386567335163,
+        5.079770601157927,
+        0.7461858799957015,
+        2.781762386375555,
+        0.7884531235540096,
+        17.1282616982271
+      ],
+      "std_ddof0": [
+        5.812749409143771,
+        2.0901046504076,
+        5.518793579036245,
+        1.926379274132982,
+        1.0235226594952191,
+        0.6302366362251923,
+        9.176491024944333
+      ],
+      "standardization": "fit training partition only; cast to float32 after transform",
+      "timestamps": "original hourly dates",
+      "frequency": "h"
+    },
+    "ETTh2": {
+      "dataset": "ETTh2",
+      "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b",
+      "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh2.csv",
+      "rows": 14400,
+      "columns": [
+        "HUFL",
+        "HULL",
+        "MUFL",
+        "MULL",
+        "LUFL",
+        "LULL",
+        "OT"
+      ],
+      "train": [
+        0,
+        8640
+      ],
+      "validation": [
+        8640,
+        11520
+      ],
+      "test": [
+        11520,
+        14400
+      ],
+      "mean": [
+        41.53683496078959,
+        12.273452896210882,
+        46.60977329964991,
+        10.526153112865156,
+        1.1869920139097505,
+        -2.373217913729173,
+        26.872023494265697
+      ],
+      "std_ddof0": [
+        10.448841072588486,
+        4.587112566531959,
+        16.858190332598408,
+        3.0186055666829184,
+        4.641011217319063,
+        8.460910779279644,
+        11.584718923414682
+      ],
+      "standardization": "fit training partition only; cast to float32 after transform",
+      "timestamps": "original hourly dates",
+      "frequency": "h"
+    }
+  },
+  "training": {
+    "history_scaled": {
+      "mode": "lora",
+      "context_length": 256,
+      "prediction_length": 96,
+      "max_steps": 200,
+      "batch_size": 4,
+      "gradient_accumulation": 4,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "warmup_steps": 20,
+      "gradient_clip": 1.0,
+      "eval_every": 50,
+      "patience": 3,
+      "seed": 42,
+      "device": "mps",
+      "num_threads": 2,
+      "lora_rank": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.0,
+      "loss_space": "history_scaled",
+      "validation_loss_space": "history_scaled"
+    },
+    "normalized": {
+      "mode": "lora",
+      "context_length": 256,
+      "prediction_length": 96,
+      "max_steps": 200,
+      "batch_size": 4,
+      "gradient_accumulation": 4,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "warmup_steps": 20,
+      "gradient_clip": 1.0,
+      "eval_every": 50,
+      "patience": 3,
+      "seed": 42,
+      "device": "mps",
+      "num_threads": 2,
+      "lora_rank": 8,
+      "lora_alpha": 16,
+      "lora_dropout": 0.0,
+      "loss_space": "normalized",
+      "validation_loss_space": "history_scaled"
+    }
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "context": 256,
+  "horizon": 96,
+  "validation_stride": 96,
+  "test_stride": 96,
+  "selection": "minimum common history_scaled validation pinball, eval_every50 plus final; no test feedback",
+  "postprocessing": {
+    "symmetric_averaging": true,
+    "clip_nonnegative": false,
+    "other_options": "unchanged PortableForecaster/upstream defaults"
+  },
+  "metrics": "global label-weighted masked WQL21; separate nine-quantile CRPS approximation; median MAE/MSE; MASE24 training-prefix denominator; 80% coverage/width",
+  "metric_units": "train-only per-target standardized units; MASE/WQL dimensionless",
+  "statistical_scope": "three-seed mean/sample std, no significance claim; 30 nonoverlapping forecast horizons per split",
+  "normalization_causality": "training-only external scaler; each forecast uses only prefix context; normalized loss refinement uses predicted median, never future label",
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:35:03) [Clang 21.1.4 ]",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "device": "mps",
+    "threads": 2,
+    "git_head_before_round1": "89651437c01ca01760db50c47d2c369383955b8a"
+  },
+  "preflight": {
+    "identity": {
+      "sources": {
+        "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+        "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+        "src/timestral_ft/__init__.py": "8b227ae936ae31e605f8f0dafaa864b0d2b3396e0e40f24119d8e64851b84296",
+        "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+        "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+        "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+        "src/timestral_ft/config.py": "e432d31bc056dbb1da890ff6975565da5ed418f27cec18df55744ce606df494d",
+        "src/timestral_ft/data.py": "997b8e846df750605c878430961b7b9ccfbab3f4e21e5be63a6d8f5172ddae39",
+        "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+        "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+        "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+        "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+        "src/timestral_ft/trainer.py": "0566964608360a565dbdfde1d4a09acca5b21802a619fd41669168a9fe345987"
+      },
+      "device": "mps",
+      "threads": 2,
+      "requested_steps": 200,
+      "budget_hours": 8
+    },
+    "measurements": [
+      {
+        "loss_space": "history_scaled",
+        "steps": 10,
+        "wall_seconds": 6.792813165986445,
+        "seconds_per_step_conservative": 0.6792813165986444
+      },
+      {
+        "loss_space": "normalized",
+        "steps": 10,
+        "wall_seconds": 5.75912695802981,
+        "seconds_per_step_conservative": 0.575912695802981
+      }
+    ],
+    "selected_steps": 200,
+    "projected_seconds_including_40pct_overhead": 2282.3852237714455,
+    "selection_rule": "largest of requested 200/100/50 fitting budget; common setting for all arms"
+  },
+  "limitations": [
+    "short adaptation only, not official training reproduction",
+    "ETT pretraining overlap is unknown",
+    "sparse stride96 evaluation, not stride1 leaderboard",
+    "common history-scaled validation criterion may favor that objective"
+  ]
+}

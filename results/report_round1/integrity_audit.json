@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "auditor_sha256": "e537a09bdc062c5ce117ddf7fc9a9c348202a7164c39ee2172085a87e9979085",
+  "protocol_sha256": "9239f1e9f6d9fb1d42f5b981ff7448fdd0b53b4592782fba7386d9fe66bdcead",
+  "selected_model_count": 12,
+  "result_row_count": 14,
+  "split_score_count": 28,
+  "independent_metric_scalar_checks": 196,
+  "runs_csv_rows": 28,
+  "summary_csv_rows": 12,
+  "checks": [
+    "runtime source SHA256",
+    "dataset SHA256 and train-only scaler",
+    "selected merged model and adapter SHA256",
+    "saved training configuration",
+    "prediction SHA256, origins and ground truth",
+    "all metrics recomputed from predictions",
+    "row identity vs frozen selected ledger",
+    "runs and seed mean/sample std aggregates",
+    "independent piecewise quantile/point/interval metric formulation"
+  ],
+  "limitations": [
+    "per-target/per-quantile details reuse runner; seven primary metrics independently formulated",
+    "no statistical significance claim",
+    "this provenance audit does not certify device numerical parity"
+  ]
+}

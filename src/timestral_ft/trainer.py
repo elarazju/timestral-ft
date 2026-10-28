@@ -14,7 +14,14 @@ from safetensors.torch import save_file
 from timestral.loading import resolve_checkpoint
 
 from .artifacts import FineTunedModel, file_sha256, write_json
-from .compat import check_device, differentiable_forecast, load_model, pinball_loss
+from .compat import (
+    check_device,
+    differentiable_forecast,
+    differentiable_normalized_forecast,
+    load_model,
+    normalized_pinball_loss,
+    pinball_loss,
+)
 from .config import UPSTREAM_REVISION, DataConfig, TrainConfig
 from .data import DataProcessor, WindowDataset, collate
 from .lora import apply_lora
@@ -76,6 +83,17 @@ def _cpu_state(model):
     return {k: v.detach().cpu().contiguous() for k, v in model.state_dict().items()}
 
 
+def _batch_loss(model, batch, labels, cfg, *, loss_space=None):
+    space = loss_space or cfg.loss_space
+    if space == "normalized":
+        prediction = differentiable_normalized_forecast(model, prediction_length=cfg.prediction_length, **batch)
+        return normalized_pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
+    if space != "history_scaled":
+        raise ValueError("loss_space must be history_scaled or normalized")
+    prediction = differentiable_forecast(model, prediction_length=cfg.prediction_length, **batch)
+    return pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
+
+
 def _validation_loss(model, dataset, cfg):
     model.eval()
     numerator, denominator = 0.0, 0
@@ -84,8 +102,8 @@ def _validation_loss(model, dataset, cfg):
             batch = collate([dataset[i] for i in range(start, min(start + cfg.batch_size, len(dataset)))],
                             cfg.device)
             labels = batch.pop("labels")
-            prediction = differentiable_forecast(model, prediction_length=cfg.prediction_length, **batch)
-            loss = pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
+            loss = _batch_loss(model, batch, labels, cfg,
+                               loss_space=cfg.validation_loss_space or cfg.loss_space)
             if loss is not None:
                 valid = torch.isfinite(labels) & torch.isfinite(batch["context"]).any(-1)[..., None]
                 weight = int(valid.sum())
@@ -154,14 +172,20 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                 "preprocessing": processor.to_dict(), "fingerprints": fingerprints,
                 "trainable_parameters": sum(p.numel() for p in parameters),
                 "total_parameters": sum(p.numel() for p in model.parameters()),
-                "torch_version": str(torch.__version__), "validated_device": cfg.device}
+                "torch_version": str(torch.__version__), "validated_device": cfg.device,
+                "training_loss_space": cfg.loss_space,
+                "validation_loss_space": cfg.validation_loss_space or cfg.loss_space}
     step, best, bad, best_step, elapsed = 0, math.inf, 0, 0, 0.0
     best_state = None
     if resume:
         state = torch.load(resume, map_location="cpu", weights_only=True)
         for key in ("base_model", "base_revision", "base_weights_sha256", "upstream_revision", "train_config",
                     "preprocessing", "fingerprints"):
-            if state["metadata"][key] != metadata[key]:
+            saved = state["metadata"][key]
+            if key == "train_config":
+                # Pre-loss-space checkpoints default to the exact legacy objective.
+                saved = TrainConfig(**saved).to_dict()
+            if saved != metadata[key]:
                 raise ValueError(f"Resume mismatch: {key}; use the same data, base model and schedule")
         model.load_state_dict(state["model"], strict=True)
         optimizer.load_state_dict(state["optimizer"])
@@ -185,8 +209,7 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                 indices = torch.randint(len(training), (cfg.batch_size,), generator=generator).tolist()
                 batch = collate([training[i] for i in indices], cfg.device)
                 labels = batch.pop("labels")
-                prediction = differentiable_forecast(model, prediction_length=cfg.prediction_length, **batch)
-                loss = pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
+                loss = _batch_loss(model, batch, labels, cfg)
                 if loss is None:
                     continue
                 if not torch.isfinite(loss):

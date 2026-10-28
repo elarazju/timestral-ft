@@ -1,0 +1,20 @@
+[
+  {
+    "fixture": "constant",
+    "history_scaled_loss": 5.2627065899590875e-11,
+    "normalized_loss": 0.0002269361139042303,
+    "note": "different objective units; numerical magnitude is not a quality ranking"
+  },
+  {
+    "fixture": "level_shift",
+    "history_scaled_loss": 0.005379983223974705,
+    "normalized_loss": 0.003898326540365815,
+    "note": "different objective units; numerical magnitude is not a quality ranking"
+  },
+  {
+    "fixture": "outlier",
+    "history_scaled_loss": 123.99061584472656,
+    "normalized_loss": 0.5282931327819824,
+    "note": "different objective units; numerical magnitude is not a quality ranking"
+  }
+]

@@ -26,15 +26,21 @@ def config(mode):
 
 
 @pytest.mark.parametrize("mode", ["full", "lora"])
-def test_train_export_reload_and_official(model, frame, tmp_path, mode):
+@pytest.mark.parametrize("loss_space", ["history_scaled", "normalized"])
+def test_train_export_reload_and_official(model, frame, tmp_path, mode, loss_space):
     base = base_checkpoint(model, tmp_path)
     cfg = DataConfig(target_columns=["target", "other"], past_covariates=["past"],
                      known_covariates=["known"], categorical_past_covariates=["catpast"],
                      categorical_known_covariates=["catknown"])
     output = tmp_path / mode
+    train_cfg = config(mode)
+    train_cfg.loss_space = loss_space
+    train_cfg.validation_loss_space = "history_scaled"
     result = finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base,
-                      data_config=cfg, train_config=config(mode), output_dir=output)
+                      data_config=cfg, train_config=train_cfg, output_dir=output)
     assert result.metadata["steps"] == 4
+    assert result.metadata["training_loss_space"] == loss_space
+    assert result.metadata["validation_loss_space"] == "history_scaled"
     with pytest.raises(ValueError, match="positive"):
         result.predict(frame.iloc[:128], prediction_length=0)
     with pytest.raises(ValueError, match="positive"):
@@ -72,9 +78,11 @@ def test_train_export_reload_and_official(model, frame, tmp_path, mode):
 
 
 @pytest.mark.parametrize("mode", ["full", "lora"])
-def test_exact_resume(model, frame, tmp_path, mode):
+@pytest.mark.parametrize("loss_space", ["history_scaled", "normalized"])
+def test_exact_resume(model, frame, tmp_path, mode, loss_space):
     base = base_checkpoint(model, tmp_path)
     cfg = config(mode)
+    cfg.loss_space = loss_space
     if mode == "lora":
         cfg.lora_dropout = 0.1  # Exercise restoration of the global Torch RNG, not just window sampling.
     direct = finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base,
@@ -86,6 +94,37 @@ def test_exact_resume(model, frame, tmp_path, mode):
     for key, value in direct.model.state_dict().items():
         torch.testing.assert_close(value, resumed.model.state_dict()[key], rtol=0, atol=0)
     assert direct.metadata["best_validation_loss"] == resumed.metadata["best_validation_loss"]
+
+
+def test_old_checkpoint_and_artifact_default_to_history_scaled(model, frame, tmp_path):
+    base = base_checkpoint(model, tmp_path)
+    cfg = config("full")
+    output = tmp_path / "run"
+    finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base, train_config=cfg,
+             output_dir=output, stop_after_steps=1)
+    checkpoint = output / "checkpoint.pt"
+    state = torch.load(checkpoint, map_location="cpu", weights_only=True)
+    for name in ("loss_space", "validation_loss_space"):
+        state["metadata"]["train_config"].pop(name)
+    state["metadata"].pop("training_loss_space")
+    state["metadata"].pop("validation_loss_space")
+    torch.save(state, checkpoint)
+    with pytest.raises(ValueError, match="train_config"):
+        changed = config("full")
+        changed.loss_space = "normalized"
+        finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base, train_config=changed,
+                 output_dir=output, resume=checkpoint)
+    finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base, train_config=cfg,
+             output_dir=output, resume=checkpoint)
+    path = output / "model/finetune.json"
+    meta = json.loads(path.read_text())
+    for name in ("loss_space", "validation_loss_space"):
+        meta["train_config"].pop(name)
+    path.write_text(json.dumps(meta))
+    loaded = FineTunedModel.from_pretrained(output / "model")
+    assert loaded.train_config.loss_space == "history_scaled"
+    assert loaded.train_config.validation_loss_space is None
+    assert np.isfinite(loaded.predict(frame.iloc[:128])["median"]).all()
 
 
 def test_resume_rejects_data_change(model, frame, tmp_path):

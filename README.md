@@ -184,8 +184,12 @@ Duplicate timestamps are errors. Irregular observations require an explicit
 Category vocabularies are fit on training data only and saved with the model;
 unseen categories use a reserved code.
 
-The training objective is a history-scale-balanced masked pinball loss over all
-21 quantiles. It is this project's fine-tuning recipe. The
+The default training objective is a history-scale-balanced masked pinball loss over all
+21 quantiles. Set `TrainConfig(loss_space="normalized")` (or the same YAML field) for pinball loss
+in the report's advancing per-patch normalized space. A separate `validation_loss_space` can keep
+checkpoint selection fixed across objective comparisons. See the
+[alignment record](docs/report-alignment.zh-CN.md) and [round-one experiment](results/report_round1/README.md).
+The
 [technical reference](docs/reference.md) documents normalization, categorical
 encoding, numerical tolerances and the inference compatibility layer.
 
@@ -296,6 +300,7 @@ For frozen transfer, model acceptance and independent audit commands, see the
 |---|---|
 | [Chinese usage guide](docs/guide.zh-CN.md) | Data preparation, configuration, training, resume, prediction and export |
 | [English technical reference](docs/reference.md) | Training semantics, device behavior, metrics and compatibility details |
+| [Report alignment record](docs/report-alignment.zh-CN.md) | Official mechanisms, implementation choices, round-one loss and remaining tasks |
 | [ETTh1 configuration](examples/etth1.yaml) | A runnable example with numeric and categorical covariates |
 | [Broader validation](results/validation/README.md) | Multi-seed benchmarks, frozen transfer and four-size acceptance |
 | [GIFT-Eval guide](examples/gift_eval/README.md) | Environment setup, all-task training and official evaluation |

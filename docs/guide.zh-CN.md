@@ -104,8 +104,24 @@ model = finetune(
 
 默认历史长度 256、预测长度 96、batch size 4、梯度累积 4、最多 200 个优化步骤。
 使用 AdamW，前 20 步预热后余弦衰减；每 50 步验证，连续三次没有改善则提前停止。
-训练损失是按历史标准差平衡的 21 分位数 pinball loss；常数历史使用尺度 1。
-损失只统计有效标签，不是对官方未公开训练流程的复现。
+默认 `loss_space="history_scaled"`，训练损失是按历史标准差平衡的 21 分位数 pinball loss；
+常数历史使用尺度 1。新增 `loss_space="normalized"`，在模型的逐 patch 归一化空间计算损失，
+对应技术报告 §3.3／§4.1：目标与预测使用相同推进统计，并应用模型配置的 `asinh` 变换。
+后续统计只读取历史与此前预测中位数，不读取未来真实目标。两种方式都只统计有效目标。
+
+`validation_loss_space=None` 默认沿用训练损失；也可以指定 `"history_scaled"` 或 `"normalized"`。
+比较两种训练目标时，建议固定共同验证准则，避免同时改变检查点选优方式：
+
+```yaml
+training:
+  mode: lora
+  loss_space: normalized
+  validation_loss_space: history_scaled
+```
+
+这些字段也可传给 `TrainConfig`，会随模型和检查点保存。不同损失空间的数值不能直接比较。
+更换损失空间需要新输出目录；旧配置缺少新增字段时保留历史行为。
+本轮仍是单预测区间微调，不代表官方完整训练流程的复现。详见[技术报告对齐记录](report-alignment.zh-CN.md)。
 
 训练保留官方逐 patch 更新的预测尺度；镜像平均、非负裁剪和极值裁剪只用于评估预测，
 不会应用在训练损失上。训练预测长度最多为单块上限 1024 步。

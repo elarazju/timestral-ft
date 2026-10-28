@@ -1,0 +1,40 @@
+{
+  "identity": {
+    "sources": {
+      "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+      "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+      "src/timestral_ft/__init__.py": "8b227ae936ae31e605f8f0dafaa864b0d2b3396e0e40f24119d8e64851b84296",
+      "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+      "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+      "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+      "src/timestral_ft/config.py": "e432d31bc056dbb1da890ff6975565da5ed418f27cec18df55744ce606df494d",
+      "src/timestral_ft/data.py": "997b8e846df750605c878430961b7b9ccfbab3f4e21e5be63a6d8f5172ddae39",
+      "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+      "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+      "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+      "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+      "src/timestral_ft/trainer.py": "0566964608360a565dbdfde1d4a09acca5b21802a619fd41669168a9fe345987"
+    },
+    "device": "mps",
+    "threads": 2,
+    "requested_steps": 200,
+    "budget_hours": 8
+  },
+  "measurements": [
+    {
+      "loss_space": "history_scaled",
+      "steps": 10,
+      "wall_seconds": 6.792813165986445,
+      "seconds_per_step_conservative": 0.6792813165986444
+    },
+    {
+      "loss_space": "normalized",
+      "steps": 10,
+      "wall_seconds": 5.75912695802981,
+      "seconds_per_step_conservative": 0.575912695802981
+    }
+  ],
+  "selected_steps": 200,
+  "projected_seconds_including_40pct_overhead": 2282.3852237714455,
+  "selection_rule": "largest of requested 200/100/50 fitting budget; common setting for all arms"
+}

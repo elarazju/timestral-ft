@@ -60,10 +60,16 @@ class TrainConfig:
     lora_rank: int = 8
     lora_alpha: float = 16.0
     lora_dropout: float = 0.0
+    loss_space: str = "history_scaled"
+    validation_loss_space: str | None = None
 
     def __post_init__(self):
         if self.mode not in {"full", "lora"}:
             raise ValueError("mode must be full or lora")
+        if self.loss_space not in {"history_scaled", "normalized"}:
+            raise ValueError("loss_space must be history_scaled or normalized")
+        if self.validation_loss_space not in {None, "history_scaled", "normalized"}:
+            raise ValueError("validation_loss_space must be None, history_scaled or normalized")
         for name in ("context_length", "prediction_length", "max_steps", "batch_size",
                      "gradient_accumulation", "eval_every", "patience", "num_threads", "lora_rank"):
             if getattr(self, name) < 1:
