@@ -1,0 +1,5 @@
+# Runtime only; pass to predict/evaluate --inference-config.
+precision: bf16
+compile: false
+warmup_steps: 2
+fallback: error

@@ -10,9 +10,10 @@ import pandas as pd
 from safetensors.torch import load_file, save_file
 from timestral.loading import resolve_checkpoint
 
-from .compat import PortableForecaster, check_device, load_model
+from .compat import check_device, load_model
 from .config import UPSTREAM_REVISION, TrainConfig
 from .data import INTERNAL_ID, DataProcessor, read_frame
+from .inference import InferenceConfig, InferenceRuntime
 from .lora import adapter_state, apply_lora, merge_lora
 
 
@@ -54,6 +55,7 @@ class FineTunedModel:
         self.processor = processor
         self.train_config = train_config
         self.metadata = metadata
+        self._inference_runtimes = {}
 
     @classmethod
     def from_pretrained(cls, path, *, device="cpu", prefer_adapter=False):
@@ -117,8 +119,26 @@ class FineTunedModel:
             (output / "BASE_MODEL_LICENSE").write_text(meta["base_license_text"])
         return output
 
+    def clear_inference_cache(self):
+        """Drop compiled/warm instances after structural model changes."""
+        self._inference_runtimes.clear()
+
+    def inference_runtime(self, config=None):
+        """Reuse warm execution state; runtime configuration is not weight metadata."""
+        config = config or InferenceConfig()
+        self.model.eval()
+        key = (id(self.model), config, str(next(self.model.parameters()).device), self.train_config.context_length)
+        if key not in self._inference_runtimes:
+            self._inference_runtimes[key] = InferenceRuntime(
+                self.model.eval(), config, max_context=self.train_config.context_length)
+        return self._inference_runtimes[key]
+
+    def backtest(self, data, **kwargs):
+        from .evaluation import evaluate
+        return evaluate(self, data, **kwargs)
+
     def predict(self, history, prediction_length=None, *, future_covariates=None,
-                symmetric_averaging=True, clip_nonnegative=True):
+                symmetric_averaging=True, clip_nonnegative=True, inference_config=None):
         """Return a long prediction table. Future target columns are never read."""
         processor, cfg = self.processor, self.processor.config
         horizon = self.train_config.prediction_length if prediction_length is None else prediction_length
@@ -130,7 +150,7 @@ class FineTunedModel:
             raise ValueError("Configured known-future covariates require a future table")
         future = processor.normalize(future_covariates, columns=known) if future_covariates is not None else None
         records = []
-        forecaster = PortableForecaster(self.model.eval(), max_context=self.train_config.context_length)
+        forecaster = self.inference_runtime(inference_config)
         for sid, past in historical.groupby(processor.id_column, sort=False):
             past = past.sort_values(cfg.time_column)
             dates = pd.date_range(past[cfg.time_column].iloc[-1], periods=horizon + 1,
@@ -151,7 +171,9 @@ class FineTunedModel:
                                            symmetric_averaging=symmetric_averaging,
                                            clip_nonnegative=clip_nonnegative).quantiles[0].cpu().numpy()
             records.extend(prediction_frame(processor, combined, len(past), horizon, forecast))
-        return pd.DataFrame(records)
+        result = pd.DataFrame(records)
+        result.attrs["inference_runtime"] = forecaster.metadata
+        return result
 
 
 def export(model, output_dir, *, adapter_only=False):

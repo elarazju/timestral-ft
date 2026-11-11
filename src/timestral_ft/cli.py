@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from . import DataConfig, FineTunedModel, TrainConfig, evaluate, export, finetune
+from . import DataConfig, FineTunedModel, InferenceConfig, TrainConfig, evaluate, export, finetune
 
 
 def main(argv=None):
@@ -38,9 +38,13 @@ def main(argv=None):
     predict.add_argument("--horizon", type=int)
     predict.add_argument("--device", default="cpu")
     predict.add_argument("--output", required=True)
+    for command in (predict, backtest):
+        command.add_argument("--inference-config", help="YAML mapping: precision, compile, warmup_steps, fallback")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     try:
+        runtime = (InferenceConfig(**yaml.safe_load(Path(args.inference_config).read_text()))
+                   if getattr(args, "inference_config", None) else None)
         if args.command == "train":
             payload = yaml.safe_load(Path(args.config).read_text())
             training = payload.get("training", {})
@@ -58,15 +62,17 @@ def main(argv=None):
         elif args.command == "evaluate":
             model = FineTunedModel.from_pretrained(args.model, device=args.device)
             result = evaluate(model, args.data, history=args.history, stride=args.stride,
-                              output_dir=args.output)
+                              output_dir=args.output, inference_config=runtime)
             print(json.dumps(result.metrics, indent=2))
         elif args.command == "export":
             print(export(args.model, args.output, adapter_only=args.adapter_only))
         elif args.command == "predict":
             model = FineTunedModel.from_pretrained(args.model, device=args.device)
-            predictions = model.predict(args.history, args.horizon, future_covariates=args.future)
+            predictions = model.predict(args.history, args.horizon, future_covariates=args.future, inference_config=runtime)
             output = Path(args.output)
             output.parent.mkdir(parents=True, exist_ok=True)
+            output.with_suffix(output.suffix + ".runtime.json").write_text(
+                json.dumps(predictions.attrs["inference_runtime"], indent=2) + "\n")
             if output.suffix.lower() in {".parquet", ".pq"}:
                 predictions.to_parquet(output, index=False)
             else:

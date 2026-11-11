@@ -300,6 +300,24 @@ python scripts/benchmark_suite.py --jobs 2
 
 冻结迁移、模型验收及独立审计命令见[完整验证流程](docs/reference.md#evaluation-and-verification)。
 
+## 可选推理运行配置
+
+默认保留 FP32 无编译。独立 `InferenceConfig` 可用于 `FineTunedModel.predict()`、
+`evaluate()` 和 `model.backtest()`：
+
+```python
+from timestral_ft import InferenceConfig
+runtime = InferenceConfig(precision="bf16", compile=True, warmup_steps=2)
+predictions = model.predict("history.parquet", 96, inference_config=runtime)
+print(predictions.attrs["inference_runtime"])
+```
+
+BF16 只对 Transformer／预测头中的合适算子使用自动混合精度；patch 投影及 FP32／FP64
+统计路径保持原精度。权重仍为 FP32，导出名称不变。运行实例复用编译与预热状态，默认失败报错。
+运行记录区分请求／实际模式、真实编译执行、回退原因和混合执行。速度取决于设备与形状，
+首次启动成本单独报告。见[可运行示例](examples/report_round5/README.md)和
+[性能矩阵与六任务 GIFT 质量对照](results/report_round5/README.md)。
+
 ## 文档导航
 
 | 文档 | 内容 |

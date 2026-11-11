@@ -1,0 +1,39 @@
+{
+  "reviewer": "root",
+  "parent_commit": "f5dc2ab29c6e3384b047285f0a0108c1251ab57d",
+  "regression": {
+    "passed": 240,
+    "skipped": 50,
+    "seconds": 40.24,
+    "log": "runs/report-round5-root-acceptance/pytest.log"
+  },
+  "ruff": "passed",
+  "diff_check": "passed",
+  "independent_audit": {
+    "auditor_sha256": "61ecca85d2eeee839881181db880ac07c8d392e244bc2470370ff4d4b85cb748",
+    "checks": {
+      "benchmark": {
+        "cases": 32,
+        "completed": 32,
+        "independent_recomputation": "timing median/range, throughput, speedup, amortization, all-quantile residuals; repeatability within predeclared rtol1e-4/atol1e-5 (max difference reported), actual modes, source/input hashes"
+      },
+      "gift": {
+        "complete_task_mode_cases": 12,
+        "official_metrics_repeated": 11,
+        "independent_metrics": 4
+      },
+      "acceptance": {
+        "cases": 12,
+        "shape": [
+          1,
+          1,
+          64,
+          32
+        ]
+      }
+    }
+  },
+  "audit_log": "runs/report-round5-root-audit.log",
+  "scope": "CPU/MPS real32runtime+12GIFT+12large; CUDA unavailable; no complete leaderboard claim",
+  "blog_review": "Passed: final reader-facing prose/numeric claims and both figures independently reviewed; local only"
+}

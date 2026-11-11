@@ -88,7 +88,7 @@ timestral-ft evaluate --model runs/my-mps-run/model --device mps --data data/ett
 
 For loading/forecasting, use `FineTunedModel.from_pretrained(path, device="mps")` (or `cuda`).
 Unavailable requested devices raise an error; the whole model is never silently moved to CPU.
-On MPS the neural network runs in FP32 on Apple GPU, while scaling, categorical target encoding,
+By default on MPS the neural network runs in FP32 on Apple GPU, while scaling, categorical target encoding,
 and advancing-frame float64 statistics run on CPU. Device copies preserve the refinement gradient.
 This keeps the upstream equations without casting double-precision statistics to float32; the
 CPU/GPU synchronization adds overhead, so MPS can be slower than CPU for small models/windows.
@@ -326,6 +326,50 @@ Adapter-only artifacts require the original base weights and revision. Merged ex
 Exports preserve upstream weight names. Input schema and training metadata are separate JSON files.
 v0.1 trains horizons up to one decode block (1024 steps on released models); official inference handles longer
 horizons by feeding predicted medians back as context. Context cannot exceed the selected model's trained limit.
+
+## Inference execution configuration
+
+`InferenceConfig(precision="fp32", compile=False, warmup_steps=0, fallback="error")`
+is immutable and serializable with `to_dict()`; it is independent of training
+configuration and is not saved in weights/checkpoints. Missing runtime options
+retain the legacy forecast path. Both table forecasting and evaluation accept
+`inference_config=...`; array callers use `InferenceRuntime(model.eval(), config)`.
+
+BF16 means autocast for eligible operations in `_run_two_stream` (Transformer and
+quantile head), not conversion of all weights or statistics. Patch projection,
+residual/quantile reconstruction and causal normalization retain their existing
+precision. Statistics remain FP64 internally with FP32 frames; on MPS the FP64
+work stays on CPU. A device-local linear probe verifies BF16 autocast execution.
+Final forecasts remain FP32. Runtime requires FP32 floating parameters.
+
+Compilation uses Inductor with `fullgraph=True` on that normalized core. A custom
+backend counts actual successful compiled callable executions; merely constructing
+`torch.compile` does not mark execution successful. A graph break fails this core
+rather than silently falling through to partial compilation. Shapes may trigger
+additional graphs and backend-specific limits. No global compiler policy is
+changed. GPU synchronization belongs around the caller's timing boundary.
+
+Warmup performs extra full forecasts once per input shape/dtype/device/options
+signature. Table models cache runtime instances by model identity/config/device/
+context. Call `clear_inference_cache()` after structural edits; changing an existing
+low-level runtime's model device/dtype is rejected. Parameters are shared by
+reference, and the original module registry/state dictionary is unchanged. One
+runtime per worker is required; concurrent use is not supported.
+
+Default failures raise. Explicit `fallback="fp32_eager"` records the reason and
+actual mode. Metadata is cumulative for the runtime lifetime, including warmup:
+`successful_calls_by_mode` and `mixed_execution` preserve earlier successful modes
+if a later shape falls back. `effective` is the latest successful mode, not a claim
+that every historical output used that mode. Inspect the table's
+`attrs["inference_runtime"]`, evaluation metadata or CLI `.runtime.json` sidecar.
+CLI predict/evaluate accept `--inference-config` with a YAML runtime mapping.
+
+The [round-five example](../examples/report_round5/README.md) and
+[measured results](../results/report_round5/README.md) separate cold setup, warm
+latency, throughput, memory and all-quantile errors. The fixed six-task GIFT check
+compares official 5M CPU FP32/BF16 eager only; it does not establish compiled GIFT
+quality or larger-model quality. Actual CPU/MPS compilation support is measured
+on this PyTorch installation; CUDA still requires hardware validation.
 
 ## Evaluation and verification
 

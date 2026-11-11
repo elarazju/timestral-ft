@@ -1,0 +1,10 @@
+{
+  "auditor_sha256": "61ecca85d2eeee839881181db880ac07c8d392e244bc2470370ff4d4b85cb748",
+  "checks": {
+    "benchmark": {
+      "cases": 32,
+      "completed": 32,
+      "independent_recomputation": "timing median/range, throughput, speedup, amortization, all-quantile residuals; repeatability within predeclared rtol1e-4/atol1e-5 (max difference reported), actual modes, source/input hashes"
+    }
+  }
+}

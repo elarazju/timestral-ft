@@ -1,0 +1,160 @@
+{
+  "round": 5,
+  "created_utc": "2026-11-11T15:41:22.887991+00:00",
+  "parent_commit": "f5dc2ab29c6e3384b047285f0a0108c1251ab57d",
+  "source_hashes": {
+    "examples/report_round5/README.md": "07b1134d7de41c465707716d9235723db768d74c5496d2b99485cc0d50a8efb4",
+    "examples/report_round5/bf16.yaml": "1bb111943571cd71c58ea27a4bdcbeb93cbf35711f31015381bdc40712bb4a20",
+    "examples/report_round5/inference.py": "c7aedad330c2d6cb5e2dee67b7d6937c634b1e799fc61d44460b9125a4c45ea9",
+    "scripts/accept_report_round5.py": "0e7bd8007469d24e30b8aa094eafdb6fcbb84451d3b67223db0e094a42abb9b4",
+    "scripts/audit_report_round5.py": "61ecca85d2eeee839881181db880ac07c8d392e244bc2470370ff4d4b85cb748",
+    "scripts/run_report_round5.py": "f8dba35d8ac337256983232975bb9f5a74476017d085019f8c117e19661737b2",
+    "scripts/run_report_round5_gift.py": "004747950547f1387ed6891ad50293398502783eaacd4ea01580b371b0483611",
+    "src/timestral_ft/__init__.py": "0696260666c740ea545a34e8a731e0d7db46b45b47b3778f176a7beb3e7c17bd",
+    "src/timestral_ft/artifacts.py": "adbaa67376a7c7cc8192ff8ba4225a98395197cfd41026cb13467bc0e23dc796",
+    "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+    "src/timestral_ft/cli.py": "40c4babb63040cc05b4519134a9d981678b3eafcde9f2bfc9480c89ea631eccf",
+    "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+    "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+    "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+    "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+    "src/timestral_ft/evaluation.py": "0074126b3dbf10ae1e7512206fa243137f9d42f3e07b5b431089111e25188af0",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/inference.py": "2bdc51973a785e970723eef542bc0772df26b73f746d6ee737c44d131c2ca34c",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+    "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d",
+    "tests/test_inference.py": "f746bbcc6278a38b6cc2d75f1e1bcfb3c2b77880fecda4fc9ffe481dbd576d4d"
+  },
+  "source_snapshot": "/Users/mony/Documents/ts_model/runs/report-round5/source_snapshot",
+  "runtime_freeze": "frozen before formal measurements and GIFT test metrics",
+  "weights": {
+    "5M": {
+      "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+      "path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-5M/snapshots/bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+      "weights_sha256": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+      "config_sha256": "b5f27f61513f8fd1a3aa996f3720d3679cb40bce5bcb08eb3dc320ce726e7c2f"
+    },
+    "28M": {
+      "revision": "180698bbf5a50dda3516aa6419798437fb03a430",
+      "path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-28M/snapshots/180698bbf5a50dda3516aa6419798437fb03a430",
+      "weights_sha256": "dfc83c6220937ce5fc6687b35a4df94cd25e28a2cfe6fb92a23dad6301b2015d",
+      "config_sha256": "0cdf44b8ea981191de53078e0a5ecbbd437046bd939a546d5dbe17868f71281f"
+    },
+    "123M": {
+      "revision": "5a147287addda85f6acd8da3fb8858fe9af7e8f7",
+      "path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-123M/snapshots/5a147287addda85f6acd8da3fb8858fe9af7e8f7",
+      "weights_sha256": "599fafa73cadbbc800b5a346ca900fa741ee3e5fd22e3b4a4430e151e74f4bc2",
+      "config_sha256": "7bb4c042fb2d2ed6469b6758ba380dfeda3ab32df47690a87aec1527bdae79bf"
+    },
+    "209M": {
+      "revision": "9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+      "path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-209M/snapshots/9874d252ab0aae16f7f7c999f98f98d6ad7d8365",
+      "weights_sha256": "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa",
+      "config_sha256": "1764139bb6d37ee5ff543f470495c086cfa6c373f7134fc61c7e3d844538bfd8"
+    }
+  },
+  "benchmark": {
+    "model": "mistralai/Timestral-5M",
+    "devices": [
+      "cpu",
+      "mps"
+    ],
+    "batch": 1,
+    "contexts": [
+      256,
+      2048
+    ],
+    "horizon": 96,
+    "variables": [
+      1,
+      7
+    ],
+    "modes": [
+      "fp32",
+      "bf16",
+      "compile",
+      "bf16_compile"
+    ],
+    "threads": 4,
+    "seed": 725,
+    "extra_warmup": 2,
+    "stable_repetitions": 5,
+    "fallback": "error",
+    "cold_scope": "fresh process and per-case Inductor cache; OS/file/Metal caches not cleared",
+    "compile_timeout_seconds": 900,
+    "timing": "input resident on device; synchronize before/after forecast; excludes final CPU/numpy transfer and DataFrame construction; setup/load/first/warm/stable separate",
+    "memory": "process lifetime RSS; MPS driver/current memory 10ms sampling, may miss brief peaks",
+    "repeatability_tolerance": {
+      "rtol": 0.0001,
+      "atol": 1e-05,
+      "report": "actual max first/repeat discrepancy"
+    },
+    "mode_fp32_residuals": "descriptive all-quantile max absolute and relative L2; no selection threshold"
+  },
+  "gift": {
+    "tasks": [
+      "m4_hourly/H/short",
+      "electricity/W/short",
+      "solar/W/short",
+      "hospital/M/short",
+      "ett1/H/short",
+      "ett2/H/long"
+    ],
+    "modes": [
+      "fp32",
+      "bf16"
+    ],
+    "device": "cpu",
+    "selection": "predeclared CPU BF16 eager precision quality control, retain even when slower; no test-based choice",
+    "weights": "fixed official 5M, no training or adaptation",
+    "scope": "complete fixed official test splits, not full leaderboard; no compiled GIFT evaluation",
+    "max_context": 32768,
+    "max_rows": 128,
+    "max_tokens": 4194304,
+    "threads": 4,
+    "gift_revision": "8e6da595ac943be01e0848a02b9157af84731284",
+    "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0",
+    "notebook_sha256": "a04b708eaf44537d5dd10d78bb509caee38f3b27b7fc1245b86d7e066d6d731d",
+    "data_manifest_sha256": "537d5d3e788a8b454526c00c9cd3750a6a2c4f4eebcc90ab19bf4b8c261cb55a"
+  },
+  "large_model_acceptance": {
+    "sizes": [
+      "28M",
+      "123M",
+      "209M"
+    ],
+    "devices": [
+      "cpu",
+      "mps"
+    ],
+    "modes": [
+      "full",
+      "lora"
+    ],
+    "shape": [
+      1,
+      1,
+      64,
+      32
+    ],
+    "runtime_modes": [
+      "fp32",
+      "bf16"
+    ],
+    "updates": 1,
+    "official_export_reload_device": "cpu",
+    "compile": "not evaluated for large models"
+  },
+  "environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "torch": "2.14.1",
+    "files": {
+      "main-environment.txt": "e4dbb3ae5b852b61a11696f72560abc9f0374bc116aee5e01f4b9193a9efc6f3",
+      "gift-environment.txt": "9a4d3b1071b2016f718061341ce5a8c5b9f81896a821d06e8de8210b05db2171"
+    }
+  },
+  "blog": "local only; excluded from git and distributions"
+}

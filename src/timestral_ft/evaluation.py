@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 
 from .artifacts import FineTunedModel, prediction_frame, write_json
-from .compat import PortableForecaster
 from .data import WindowDataset, collate
 
 
@@ -29,7 +28,7 @@ class EvaluationResult:
 
 
 def evaluate(model, data, *, history=None, stride=None, output_dir=None,
-             symmetric_averaging=True, clip_nonnegative=True):
+             symmetric_averaging=True, clip_nonnegative=True, inference_config=None):
     if not isinstance(model, FineTunedModel):
         model = FineTunedModel.from_pretrained(model)
     cfg = model.train_config
@@ -37,7 +36,7 @@ def evaluate(model, data, *, history=None, stride=None, output_dir=None,
     dataset = WindowDataset(model.processor, data, cfg.context_length, cfg.prediction_length,
                             history=history, stride=stride)
     device = next(model.model.parameters()).device
-    forecaster = PortableForecaster(model.model.eval(), max_context=cfg.context_length)
+    forecaster = model.inference_runtime(inference_config)
     records = []
     started = time.perf_counter()
     for i in range(len(dataset)):
@@ -70,7 +69,7 @@ def evaluate(model, data, *, history=None, stride=None, output_dir=None,
                "coverage_80": float(((target >= predictions.loc[valid, "q_0.1"].to_numpy())
                                       & (target <= predictions.loc[valid, "q_0.9"].to_numpy())).mean()),
                "observed_labels": len(target), "windows": len(dataset), "backtest_seconds": elapsed}
-    metadata = {"model": model.metadata, "data_fingerprint": dataset.fingerprint(),
+    metadata = {"model": model.metadata, "inference_runtime": forecaster.metadata, "data_fingerprint": dataset.fingerprint(),
                 "evaluation_device": str(device),
                 "point_metric_scale": "input target units (evaluator applies no dataset-level standardization)",
                 "point_estimate": "median",

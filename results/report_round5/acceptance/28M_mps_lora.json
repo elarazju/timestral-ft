@@ -1,0 +1,125 @@
+{
+  "case": "28M_mps_lora",
+  "size": "28M",
+  "device": "mps",
+  "mode": "lora",
+  "shape": [
+    1,
+    1,
+    64,
+    32
+  ],
+  "revision": "180698bbf5a50dda3516aa6419798437fb03a430",
+  "weights_path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-28M/snapshots/180698bbf5a50dda3516aa6419798437fb03a430",
+  "weights_sha256": "dfc83c6220937ce5fc6687b35a4df94cd25e28a2cfe6fb92a23dad6301b2015d",
+  "source_hashes": {
+    "examples/report_round5/README.md": "07b1134d7de41c465707716d9235723db768d74c5496d2b99485cc0d50a8efb4",
+    "examples/report_round5/bf16.yaml": "1bb111943571cd71c58ea27a4bdcbeb93cbf35711f31015381bdc40712bb4a20",
+    "examples/report_round5/inference.py": "c7aedad330c2d6cb5e2dee67b7d6937c634b1e799fc61d44460b9125a4c45ea9",
+    "scripts/accept_report_round5.py": "0e7bd8007469d24e30b8aa094eafdb6fcbb84451d3b67223db0e094a42abb9b4",
+    "scripts/audit_report_round5.py": "61ecca85d2eeee839881181db880ac07c8d392e244bc2470370ff4d4b85cb748",
+    "scripts/run_report_round5.py": "f8dba35d8ac337256983232975bb9f5a74476017d085019f8c117e19661737b2",
+    "scripts/run_report_round5_gift.py": "004747950547f1387ed6891ad50293398502783eaacd4ea01580b371b0483611",
+    "src/timestral_ft/__init__.py": "0696260666c740ea545a34e8a731e0d7db46b45b47b3778f176a7beb3e7c17bd",
+    "src/timestral_ft/artifacts.py": "adbaa67376a7c7cc8192ff8ba4225a98395197cfd41026cb13467bc0e23dc796",
+    "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+    "src/timestral_ft/cli.py": "40c4babb63040cc05b4519134a9d981678b3eafcde9f2bfc9480c89ea631eccf",
+    "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+    "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+    "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+    "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+    "src/timestral_ft/evaluation.py": "0074126b3dbf10ae1e7512206fa243137f9d42f3e07b5b431089111e25188af0",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/inference.py": "2bdc51973a785e970723eef542bc0772df26b73f746d6ee737c44d131c2ca34c",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+    "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d",
+    "tests/test_inference.py": "f746bbcc6278a38b6cc2d75f1e1bcfb3c2b77880fecda4fc9ffe481dbd576d4d"
+  },
+  "config_sha256": "0cdf44b8ea981191de53078e0a5ecbbd437046bd939a546d5dbe17868f71281f",
+  "protocol_sha256": "38ea14f494c7362d1d71f14639feec95bf23a09fd341cfb7be4333478faa83bf",
+  "loss": 0.2625986635684967,
+  "finite_gradient_tensors": 60,
+  "runtime": {
+    "fp32": {
+      "requested": {
+        "precision": "fp32",
+        "compile": false,
+        "warmup_steps": 0,
+        "fallback": "error"
+      },
+      "effective": {
+        "precision": "fp32",
+        "compile": false
+      },
+      "device": "mps:0",
+      "status": "supported",
+      "failure_reason": null,
+      "compiled_graphs": 0,
+      "compiled_executions": 0,
+      "compile_fullgraph": true,
+      "compile_scope": "normalized transformer and quantile head",
+      "graph_breaks": 0,
+      "warmup_calls": 0,
+      "forecast_calls": 2,
+      "core_output_dtypes": [
+        "torch.float32"
+      ],
+      "autocast_probe_dtype": null,
+      "successful_calls_by_mode": {
+        "fp32_eager": 2
+      },
+      "metadata_scope": "cumulative lifetime of this runtime, including warmup",
+      "precision_scope": "BF16 autocast eligible core operations; FP32 patch projection, residuals, quantile reconstruction; unchanged statistics",
+      "statistics": "unchanged portable FP64 moments / FP32 frames",
+      "compiled_executed": false,
+      "warmed_signatures": 1,
+      "mixed_execution": false
+    },
+    "bf16": {
+      "requested": {
+        "precision": "bf16",
+        "compile": false,
+        "warmup_steps": 0,
+        "fallback": "error"
+      },
+      "effective": {
+        "precision": "bf16",
+        "compile": false
+      },
+      "device": "mps:0",
+      "status": "supported",
+      "failure_reason": null,
+      "compiled_graphs": 0,
+      "compiled_executions": 0,
+      "compile_fullgraph": true,
+      "compile_scope": "normalized transformer and quantile head",
+      "graph_breaks": 0,
+      "warmup_calls": 0,
+      "forecast_calls": 1,
+      "core_output_dtypes": [
+        "torch.float32"
+      ],
+      "autocast_probe_dtype": "torch.bfloat16",
+      "successful_calls_by_mode": {
+        "bf16_eager": 1
+      },
+      "metadata_scope": "cumulative lifetime of this runtime, including warmup",
+      "precision_scope": "BF16 autocast eligible core operations; FP32 patch projection, residuals, quantile reconstruction; unchanged statistics",
+      "statistics": "unchanged portable FP64 moments / FP32 frames",
+      "compiled_executed": false,
+      "warmed_signatures": 1,
+      "mixed_execution": false
+    }
+  },
+  "export_path": "/Users/mony/Documents/ts_model/runs/report-round5/acceptance/28M_mps_lora",
+  "export_sha256": "a645607f764bf33034bf69e03c1f58d8d0b47b2868aa2cc1765a3464b277b6b0",
+  "export_config_sha256": "0cdf44b8ea981191de53078e0a5ecbbd437046bd939a546d5dbe17868f71281f",
+  "predictions_sha256": "0eb82b55a8c93310e4d25c2f51a94c062ce450cb8b9da85ead1b59e9dba42527",
+  "official_sha256": "4f39e063dc596740d2f3cc90a79bfb829ba833a3c5d4f038b891bfb665be1c64",
+  "official_export_max_abs_error": 4.76837158203125e-06,
+  "bf16_relative_l2_error": 0.0030578472651541233,
+  "seconds": 1.0948919169604778,
+  "scope": "one full/LoRA forward-backward-update, default FP32 and BF16 eager forecast; official CPU reload; no large-model compile or long-context quality claim"
+}

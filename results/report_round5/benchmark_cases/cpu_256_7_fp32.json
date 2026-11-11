@@ -1,0 +1,113 @@
+{
+  "case": "cpu:256:7:fp32",
+  "shape": [
+    1,
+    7,
+    256,
+    96
+  ],
+  "source_hashes": {
+    "examples/report_round5/README.md": "07b1134d7de41c465707716d9235723db768d74c5496d2b99485cc0d50a8efb4",
+    "examples/report_round5/bf16.yaml": "1bb111943571cd71c58ea27a4bdcbeb93cbf35711f31015381bdc40712bb4a20",
+    "examples/report_round5/inference.py": "c7aedad330c2d6cb5e2dee67b7d6937c634b1e799fc61d44460b9125a4c45ea9",
+    "scripts/accept_report_round5.py": "0e7bd8007469d24e30b8aa094eafdb6fcbb84451d3b67223db0e094a42abb9b4",
+    "scripts/audit_report_round5.py": "61ecca85d2eeee839881181db880ac07c8d392e244bc2470370ff4d4b85cb748",
+    "scripts/run_report_round5.py": "f8dba35d8ac337256983232975bb9f5a74476017d085019f8c117e19661737b2",
+    "scripts/run_report_round5_gift.py": "004747950547f1387ed6891ad50293398502783eaacd4ea01580b371b0483611",
+    "src/timestral_ft/__init__.py": "0696260666c740ea545a34e8a731e0d7db46b45b47b3778f176a7beb3e7c17bd",
+    "src/timestral_ft/artifacts.py": "adbaa67376a7c7cc8192ff8ba4225a98395197cfd41026cb13467bc0e23dc796",
+    "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+    "src/timestral_ft/cli.py": "40c4babb63040cc05b4519134a9d981678b3eafcde9f2bfc9480c89ea631eccf",
+    "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+    "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+    "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+    "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+    "src/timestral_ft/evaluation.py": "0074126b3dbf10ae1e7512206fa243137f9d42f3e07b5b431089111e25188af0",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/inference.py": "2bdc51973a785e970723eef542bc0772df26b73f746d6ee737c44d131c2ca34c",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+    "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d",
+    "tests/test_inference.py": "f746bbcc6278a38b6cc2d75f1e1bcfb3c2b77880fecda4fc9ffe481dbd576d4d"
+  },
+  "input_sha256": "8c201c5c1544bf8f103f2b05559b2e6bc3ff194e75663d95467354f590c1bb0e",
+  "python": "3.12.13",
+  "torch": "2.14.1",
+  "machine": "macOS-26.5.2-arm64-arm-64bit",
+  "threads": 4,
+  "requested": {
+    "precision": "fp32",
+    "compile": false,
+    "warmup_steps": 0,
+    "fallback": "error"
+  },
+  "timing_scope": "input already on device; synchronized forecast only, excludes final prediction.cpu().numpy() transfer and table construction",
+  "protocol_sha256": "38ea14f494c7362d1d71f14639feec95bf23a09fd341cfb7be4333478faa83bf",
+  "cache": "/Users/mony/Documents/ts_model/runs/report-round5/benchmark/cpu_256_7_fp32/compile-cache",
+  "cold_scope": "fresh process, fresh per-case Inductor directory; OS/file/Metal caches not cleared",
+  "memory_scope": "process lifetime ru_maxrss; 10ms sampled MPS driver/current bytes from before load through predictions (may miss brief peaks)",
+  "mps_driver_peak_sampled_bytes": 0,
+  "mps_allocated_peak_sampled_bytes": 0,
+  "weights_path": "/Users/mony/.cache/huggingface/hub/models--mistralai--Timestral-5M/snapshots/bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "weights_sha256": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+  "config_sha256": "b5f27f61513f8fd1a3aa996f3720d3679cb40bce5bcb08eb3dc320ce726e7c2f",
+  "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+  "load_seconds": 0.011465874966233969,
+  "runtime_setup_seconds": 0.00014837482012808323,
+  "first_seconds": 0.010260040871798992,
+  "warmup_seconds": [
+    0.008372416952624917,
+    0.008173041976988316
+  ],
+  "first_sha256": "b767dfd63e5d78bc6a7ca5f5b110cb3f5e1b315a3948cf1637e35455c73d090e",
+  "predictions_sha256": "941eefe274d271f2afe97881fc68373232ad0372c34f77851203d7b2c7f6498e",
+  "stable_seconds": [
+    0.008698832942172885,
+    0.008226291975006461,
+    0.008066292153671384,
+    0.00808570790104568,
+    0.008509125094860792
+  ],
+  "median_seconds": 0.008226291975006461,
+  "throughput_forecast_points_per_second": 81689.29598435172,
+  "finite": true,
+  "monotonic": true,
+  "status": "completed",
+  "runtime": {
+    "requested": {
+      "precision": "fp32",
+      "compile": false,
+      "warmup_steps": 0,
+      "fallback": "error"
+    },
+    "effective": {
+      "precision": "fp32",
+      "compile": false
+    },
+    "device": "cpu",
+    "status": "supported",
+    "failure_reason": null,
+    "compiled_graphs": 0,
+    "compiled_executions": 0,
+    "compile_fullgraph": true,
+    "compile_scope": "normalized transformer and quantile head",
+    "graph_breaks": 0,
+    "warmup_calls": 0,
+    "forecast_calls": 8,
+    "core_output_dtypes": [
+      "torch.float32"
+    ],
+    "autocast_probe_dtype": null,
+    "successful_calls_by_mode": {
+      "fp32_eager": 8
+    },
+    "metadata_scope": "cumulative lifetime of this runtime, including warmup",
+    "precision_scope": "BF16 autocast eligible core operations; FP32 patch projection, residuals, quantile reconstruction; unchanged statistics",
+    "statistics": "unchanged portable FP64 moments / FP32 frames",
+    "compiled_executed": false,
+    "warmed_signatures": 1,
+    "mixed_execution": false
+  },
+  "rss_peak_bytes": 333938688
+}

@@ -336,3 +336,39 @@ python scripts/summarize_gift_eval.py
 正式对照只用ETTh1训练/选优，冻结后同时评估ETTh1和ETTh2；ETTh2训练段仅提供尺度和MASE基准。
 不能称为完全未见目标域统计。数据来源不同，等步数/等监督量仍不等于同分布训练。
 [结果与限制](../results/report_round4/README.md)保留所有三个种子和负结果。
+
+
+## 推理精度、编译与预热
+
+推理选项独立于 `TrainConfig`；默认 `InferenceConfig()` 保留 FP32 无编译。
+传入 `InferenceConfig(precision="bf16", compile=True, warmup_steps=2)` 可启用
+Transformer／预测头的 BF16 自动混合精度、Inductor 编译及每种输入签名两次额外预热。
+patch 投影、残差／分位数还原及统计沿用原精度；模型参数始终 FP32。
+归一化内部 FP64 与输出 FP32 边界保留，MPS 的 FP64 统计仍在 CPU。
+
+```python
+from timestral_ft import FineTunedModel, InferenceConfig
+model = FineTunedModel.from_pretrained("runs/my-model/model")
+config = InferenceConfig(precision="bf16", warmup_steps=2)
+forecast = model.predict("history.parquet", 96, inference_config=config)
+print(forecast.attrs["inference_runtime"])
+# evaluate(model, data, history=history, inference_config=config) 同样支持。
+```
+
+同一模型复用运行实例，数值不同但形状／dtype／设备／预测参数相同的请求不重复预热；
+改变形状可能触发新图。修改模型结构后用 `model.clear_inference_cache()` 清理缓存。
+低层 `InferenceRuntime` 要求 `model.eval()` 与 FP32 参数，一个工作进程独占一个实例。
+它共享参数引用，不把编译包装注册进原模型；全参数／LoRA 权重和官方导出格式不变。
+运行配置可单独保存 `to_dict()`，不混入训练检查点。
+
+编译核心要求完整图；只有真正执行 Inductor 返回函数才增加 `compiled_executions`。
+默认不支持就报错。显式 `fallback="fp32_eager"` 才允许回退，记录原因与实际模式。
+记录按整个实例生命期累计（包含预热），`effective` 表示最近成功模式，
+`successful_calls_by_mode`／`mixed_execution` 保留不同形状前后混合执行的事实。
+不能把回退所得 FP32 速度归在 BF16 或编译名下。
+
+CLI 的 predict／evaluate 支持 `--inference-config examples/report_round5/bf16.yaml`。
+predict 在输出文件旁保存 `.runtime.json`，evaluate 把运行记录放在 metadata 中。
+首次调用可能远慢于热状态；五次短重复只有描述意义。请读
+[第五轮完整配置](../examples/report_round5/README.md)与
+[实测和边界](../results/report_round5/README.md)，再按实际调用频率判断是否值得启用。

@@ -336,6 +336,26 @@ python scripts/benchmark_suite.py --jobs 2
 For frozen transfer, model acceptance and independent audit commands, see the
 [full validation workflow](docs/reference.md#evaluation-and-verification).
 
+## Optional inference runtime
+
+Keep default FP32 eager execution, or pass a separate `InferenceConfig` to
+`FineTunedModel.predict()`, `evaluate()` or `model.backtest()`:
+
+```python
+from timestral_ft import InferenceConfig
+runtime = InferenceConfig(precision="bf16", compile=True, warmup_steps=2)
+predictions = model.predict("history.parquet", 96, inference_config=runtime)
+print(predictions.attrs["inference_runtime"])
+```
+
+BF16 autocasts eligible Transformer/head operations; patch projection and
+FP32/FP64 statistical paths retain their precision. Weights stay FP32 and exports
+keep official names. Compiled/warm instances are reused; failures raise by default.
+Receipts distinguish requested and effective modes, actual compiled executions,
+fallback reasons and mixed execution. Speed is shape/device dependent, with a
+separate first-call cost. See the [runnable example](examples/report_round5/README.md)
+and [measured matrix and six-task GIFT quality control](results/report_round5/README.md).
+
 ## Documentation
 
 | Resource | Contents |
