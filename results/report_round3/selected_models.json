@@ -1,0 +1,941 @@
+{
+  "protocol_sha256": "8c20d307b89872d9993e78136fde4fd198a207c21db9ef39e1514fae84149522",
+  "models": {
+    "ETTh1_baseline_s42": {
+      "model_sha256": "ec47f7a8b76d147f5aa6c027b34b53c546706235fca1a6c714b3489134beb6bf",
+      "adapter_sha256": "7860e0602277c27a898ed58217a9ebde3eb0fa1569c43f0e65875f06c98d479b",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3266457994778951,
+      "training_seconds": 61.83190100011416,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "8d27e8ef28b78d422968a27cc02c8e5337627b06ec355334899f03fc208172e7",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 154961152,
+        "sampled_mps_driver_bytes_max": 231161856,
+        "process_cumulative_max_rss_bytes": 719224832,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "07014507e95b7297956d206bae73eccf648b03616609f4c59dba9b86d875cffb"
+    },
+    "ETTh1_baseline_s43": {
+      "model_sha256": "db9b787bcf475240e93a4535420b6e8e0bc8679e1e1f9c3e1ceb719cba17c9a6",
+      "adapter_sha256": "5a95fd103e5f00c3f4238f93f3329807ebad1ff70434d60a9f46e8b0695fb5e5",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.32667252520720164,
+      "training_seconds": 62.2134763749782,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "ef1627893cd3fea9ae474d9e41e59eb5e426d49b58d5a277c91de01fa5259ce6",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 156125440,
+        "sampled_mps_driver_bytes_max": 231161856,
+        "process_cumulative_max_rss_bytes": 740360192,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "b431e2d4216680848b6ea14c9323a3a5b4ce6e9a118481faa3854f7cf808894a"
+    },
+    "ETTh1_baseline_s44": {
+      "model_sha256": "c99eec8002b601776da3b2c4af4cbdd930c69f1f7bb550e0f49d4ac3ee860d2f",
+      "adapter_sha256": "a21b1ec41505f22c84813c1bac3c3042a0b2af1b79f74eb9647c006022c17df6",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.32677421867847445,
+      "training_seconds": 62.36068270797841,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "34271dea011aa3e55ddedb6551532af86a6c446b386273607617dfbb20cec3d8",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 156125440,
+        "sampled_mps_driver_bytes_max": 231161856,
+        "process_cumulative_max_rss_bytes": 743849984,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "2233cc86648decace6280750790fa5fa14115fc8cbe37a43431c059c58e02d12"
+    },
+    "ETTh1_missing_s42": {
+      "model_sha256": "97ac9eb881a352f0022b392177a5cb09d2a6f0d8c4f6f827d949a5f4c0b381e8",
+      "adapter_sha256": "39d2cdfe4ea0c17660c7abd910eea8db6d3a0c33ed6ea7e81ee0c11e8af7e92c",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3266201138496399,
+      "training_seconds": 65.81567033310421,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316960,
+        "artificially_hidden_points": 361587,
+        "hidden_supervised_points": 349259,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9673613,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "199f81dfa9a9eb517fddd09bc726122028da2102ed56f1400b472064d920c554",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 155492608,
+        "sampled_mps_driver_bytes_max": 230948864,
+        "process_cumulative_max_rss_bytes": 760807424,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "e4278a095d7ab094ef9bcc0cdb6af6e8f255cec8c430c21537fc9d64f8876148"
+    },
+    "ETTh1_missing_s43": {
+      "model_sha256": "fc0b249f21c6bc021450cec8bd3fbd4d27baa1a56174e53a59bad6f7a78bbd47",
+      "adapter_sha256": "e71605187e00ba8ac84593dcc47772fe72cd73e29208dc132a4611d9bfe7de31",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.32676968574523924,
+      "training_seconds": 66.91706945910119,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316544,
+        "artificially_hidden_points": 366321,
+        "hidden_supervised_points": 353444,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9668879,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "702bb657dfe9f33cb2e91ba66c7c7c3ea6c28479b208c08f5af8c4c679befa2e",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 154295040,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 766885888,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "0edfaabc8f3640badc7010a77b7b52baf8d9e6a264d279f8cd3ff2f9233a74f8"
+    },
+    "ETTh1_missing_s44": {
+      "model_sha256": "dd058124090fafc5a2245d3729c824c58aad8bac3d69854ece5ffca3fad4fd38",
+      "adapter_sha256": "241063e53ecda2c0f472c8a512dae8b13d4c2508f6ad5b71fe962379a32e8001",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3268010983864466,
+      "training_seconds": 69.98941462486982,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316320,
+        "artificially_hidden_points": 370281,
+        "hidden_supervised_points": 357179,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9664919,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "74ebcdf8af81805e8ba4b0fee00037fc384d58a6ba3c95b6b097f6f2b07a95a7",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153008896,
+        "sampled_mps_driver_bytes_max": 238927872,
+        "process_cumulative_max_rss_bytes": 766885888,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "8538e93ad1cd130d87f4dc752054fa4e90f763aff12d4ac72e98a38dc36d1ce9"
+    },
+    "ETTh1_roles_s42": {
+      "model_sha256": "5e40a14d98a43c493f7262b1c00d7df63ba7d8988049c8d8f010df9cd7792b32",
+      "adapter_sha256": "9d82be9c9af735916e78867715e8c95368baed78746bde7e2639a358c7f2073a",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3262433757384618,
+      "training_seconds": 67.36276454222389,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4625504,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11119,
+        "sampled_past_rows": 5687,
+        "sampled_known_rows": 5594,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "6d132be2f668e20d08136f1b7a7ce5a10b8606cd5f01791b1ca4d85e7a96f5ef",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153472256,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 766885888,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "46a9f1bfccb85c5188506ace4e0c2dc0b00e713a97ac98a6333093b91b5db48e"
+    },
+    "ETTh1_roles_s43": {
+      "model_sha256": "9a843c14e4c87fd9af176b628e0aacb11c34d7b92acbb0aaa47f18e63c14ae93",
+      "adapter_sha256": "149df9ad09d94251942d33ec51f8d79d573e758b5f754d74ef106e522d9e7cb5",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.32622199356555937,
+      "training_seconds": 67.0943318749778,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4655456,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11191,
+        "sampled_past_rows": 5545,
+        "sampled_known_rows": 5664,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "cb91d002755769821a3a3b152d136ea7c881515e8ddd0f12019d89bcbd050759",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153642752,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 779829248,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "7143f3a9cda247bd7e27c1ac908740547b650db4ab865495916d14f0a5455605"
+    },
+    "ETTh1_roles_s44": {
+      "model_sha256": "eb95d8468811b24d41d6c5a715866ddfaf1b2962125cca3b8405ea4f634806be",
+      "adapter_sha256": "4c93332bba154e38c2854cae61632f31bdbeced98a66f687c8d8c0e8344da038",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.32629870971043906,
+      "training_seconds": 65.71767066698521,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4680416,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11251,
+        "sampled_past_rows": 5589,
+        "sampled_known_rows": 5560,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "98dbdeb90a6363c2f073ba3b8108910d34a8b763eda2177e1b55083987246562",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 154295040,
+        "sampled_mps_driver_bytes_max": 230572032,
+        "process_cumulative_max_rss_bytes": 781287424,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "762dc3603b97b15c125e84ae9b72fcdca3516e0da83ea173986f5dca530d5289"
+    },
+    "ETTh1_both_s42": {
+      "model_sha256": "85bd893ff101a6279296e5ab99a7da64a3d158eefb6eab39606b5937fa697598",
+      "adapter_sha256": "3cd45bd498762f9f57d4cbd0c94a10496ecd14fc60a1b594b3691209b720af07",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3262700577576955,
+      "training_seconds": 65.3234518750105,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4624672,
+        "artificially_hidden_points": 361587,
+        "hidden_supervised_points": 172789,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9673613,
+        "sampled_target_rows": 11119,
+        "sampled_past_rows": 5687,
+        "sampled_known_rows": 5594,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "b7b0f1b2588032f4af3b5152e440bcfea98e0a786712c5265cabe86ce13ec360",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 155277312,
+        "sampled_mps_driver_bytes_max": 230457344,
+        "process_cumulative_max_rss_bytes": 782483456,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "4d948baf88f9fe4aa58afcd5111b626001195e43499adb3e941e0d54e424911a"
+    },
+    "ETTh1_both_s43": {
+      "model_sha256": "0ec62ed2f1e59f13325e3220dd220e898a5afa56d64ab379e23e27b41768d4cd",
+      "adapter_sha256": "1ce0af03c133e700eccdcead20bdcb5d4fc6e560309ca3e6b602e3d31851e37c",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3262940734624863,
+      "training_seconds": 65.52036166703328,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4654944,
+        "artificially_hidden_points": 366321,
+        "hidden_supervised_points": 174092,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9668879,
+        "sampled_target_rows": 11191,
+        "sampled_past_rows": 5545,
+        "sampled_known_rows": 5664,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "9c42bdaaf91a5607b7c49e3f842b63d1724f598da305be278e0d00804199ed1d",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 152863488,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 787333120,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "27f5a9a0f55e01411536efa53271eeb37c42a12bcc751dc4da44439c2f704355"
+    },
+    "ETTh1_both_s44": {
+      "model_sha256": "3f6c40521c6385e345c0ba1d8cdeb9012bfb167082494e14f122826072a5845d",
+      "adapter_sha256": "e900c84d5e212ae7f1adfd3128e44627c6243452f1ec892477c75141e1d2a664",
+      "best_step": 50,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3263776808977127,
+      "training_seconds": 64.73584004188888,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4679104,
+        "artificially_hidden_points": 370281,
+        "hidden_supervised_points": 181049,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9664919,
+        "sampled_target_rows": 11251,
+        "sampled_past_rows": 5589,
+        "sampled_known_rows": 5560,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "6cd5525284dc610a00118f53640ee2d21fb3d7401536828a0ba0c3926540d8d0",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 152807424,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 788004864,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "13264bf450c3c82a5ce3174450e55d68eb165ce3fff7cd70791ab306c6856eda"
+    },
+    "ETTh2_baseline_s42": {
+      "model_sha256": "b52a29459236baa57c588fd5c0968e25d136674207a6795214a89333869a3778",
+      "adapter_sha256": "7a4389726d132503be702c815a030e10f228ee5fb6b8f8558d71fc4c122aafb7",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3396921714146932,
+      "training_seconds": 63.726689625065774,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "15d46abd74edd9deea7d4d8961866b4618a4d39c6321157235ca721103989bf7",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 157103872,
+        "sampled_mps_driver_bytes_max": 232439808,
+        "process_cumulative_max_rss_bytes": 788856832,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "bd32c744746d3773e2ea970a4e5a949530cf6865cd44a34a4bae344283bc6898"
+    },
+    "ETTh2_baseline_s43": {
+      "model_sha256": "8d170cf93f086c5239c45056afce7580cc9828f26be51f3cb208ec6f5b303f17",
+      "adapter_sha256": "623ed985ffba865e2a123a50e958341464370afcb007035f0bfa1c4b21b005d3",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.33965928355852765,
+      "training_seconds": 63.65204624994658,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "fa918c09f5a7cb0acacd5af7a349239371d6326e623154f9a27846d9f84bb248",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153004032,
+        "sampled_mps_driver_bytes_max": 231161856,
+        "process_cumulative_max_rss_bytes": 790577152,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "35aefbf8906b4a4584a241bf1a26f040eb4f6dced2e16bbebf515f3988d6b4c2"
+    },
+    "ETTh2_baseline_s44": {
+      "model_sha256": "c48b34f4110d2e9ab7bf2e15c8267313e81e33ce4e9b6a801daaf56663c90796",
+      "adapter_sha256": "3ee8f639ff80c20f5e426f3013383afab690ca45c34bfcede6a9f5b05b05e63f",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.33991332054138185,
+      "training_seconds": 65.02296400000341,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9318400,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "57a5dc8c7d177aee12299eddf0540da05b3a3d3455b4907ab53a4a875ad0e78e",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153075456,
+        "sampled_mps_driver_bytes_max": 231161856,
+        "process_cumulative_max_rss_bytes": 806977536,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "a0dfa85a6bd8fc90420ede8a5a9098113aef3235e8fc68fd430163e6e7f9ae2d"
+    },
+    "ETTh2_missing_s42": {
+      "model_sha256": "3de88cfaf87428910c2ac9cf5a7b465e28842ed02f7a5735f593c12951ed8bb7",
+      "adapter_sha256": "9d8d993633229ac96d7d3f2713a22e88fff067a1f48494ffafba32d015df97ba",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.33966413537661233,
+      "training_seconds": 70.62870120815933,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316960,
+        "artificially_hidden_points": 361587,
+        "hidden_supervised_points": 349259,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9673613,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "1eb840d829729b7a2d5cb58a3ce2ee0108bf1e15f9acfd14f33a50193615c3eb",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 152886784,
+        "sampled_mps_driver_bytes_max": 231014400,
+        "process_cumulative_max_rss_bytes": 807452672,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "4d562928a9842191035637f7dded0e2aaae726301f6791d7bb5fe4188649e484"
+    },
+    "ETTh2_missing_s43": {
+      "model_sha256": "a26f2faa61eea75e835b75aec70b89c7115ca00137af1059cc4dd0e0c0e7e091",
+      "adapter_sha256": "ae09db1a6fc5428f5646b42649d2ee07a8db0f30481154f3d9f800337951fa40",
+      "best_step": 150,
+      "actual_steps": 200,
+      "best_validation_loss": 0.33970380822817486,
+      "training_seconds": 70.59582833317108,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316544,
+        "artificially_hidden_points": 366321,
+        "hidden_supervised_points": 353444,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9668879,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "a21069d7948df0a37ccde42c6765b0ca5fadbca9963d8c97462b50ca70609573",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153666816,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 808026112,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "a6634a5a2ae3d2c73240e7d6c52f0b3989f8088754c6aad37f1a463c8a97ae32"
+    },
+    "ETTh2_missing_s44": {
+      "model_sha256": "180bfc4a0e59945e67bd797dfc2c64f02df7e4cd1da90ec9c27885c915e26c2a",
+      "adapter_sha256": "7c3cc84acefe29508f4d4f3343a35b4eb8c816219ef8f3f7d3e9673f724a6496",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3399023512999217,
+      "training_seconds": 70.86189233302139,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 9316320,
+        "artificially_hidden_points": 370281,
+        "hidden_supervised_points": 357179,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9664919,
+        "sampled_target_rows": 22400,
+        "sampled_past_rows": 0,
+        "sampled_known_rows": 0,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "06df3d6526ed96364d78c06a8b26731ec7cd9122e0457225e8884b0049baf891",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 155492608,
+        "sampled_mps_driver_bytes_max": 239009792,
+        "process_cumulative_max_rss_bytes": 817086464,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "c714cd3a917bbcd0a229d68109f4d01a8bd86f548b491967a768c23af7ebf2fc"
+    },
+    "ETTh2_roles_s42": {
+      "model_sha256": "057e9b1b647a7338b57425bbbcedce3b2a8a016c6937535a11ebd22313bc0d55",
+      "adapter_sha256": "5ce0bac437610eb32ccc087b4081ddfc437ea690a3e165a34f43f09fe85a9f4a",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.34014142950375875,
+      "training_seconds": 71.60187404113822,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4625504,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11119,
+        "sampled_past_rows": 5687,
+        "sampled_known_rows": 5594,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "7da165c1b02b5fa3a2bb482cc2f71e43619cacc4dc014c829c65f104f7dc8df7",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153049856,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 817774592,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "0781ec4b14e9f908c65d0cd1f2eabe9ec65cd9f3f662060e763ecc28337b6ad5"
+    },
+    "ETTh2_roles_s43": {
+      "model_sha256": "e62b266b9365368870cf9c4bb48f7367cff9dc2235d5de24c27d7f859f4ee404",
+      "adapter_sha256": "ab8246c1c02167f74951b9713f374a4fa0756bf1fb0a4a923a96d138b1a30f67",
+      "best_step": 150,
+      "actual_steps": 200,
+      "best_validation_loss": 0.33958445191383363,
+      "training_seconds": 71.44739150023088,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4655456,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11191,
+        "sampled_past_rows": 5545,
+        "sampled_known_rows": 5664,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "ac54e0fed71ce6eebe45810d61271fec3501c55c0182d28e6013f72ccca08a63",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 152623360,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 819773440,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "10c48f4388d2e48c5341076b346d9b20b6dc7ebcbf26a43042ee894bf8383a1b"
+    },
+    "ETTh2_roles_s44": {
+      "model_sha256": "cdcbb739b182d96db8652731f4f6bc9919050162b16727dc385b2e74d6bc27fe",
+      "adapter_sha256": "1d2d1f89b5a21173c211339b732204421a99c140726d91cf37a6a03835d5612b",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3399279077847799,
+      "training_seconds": 70.70871383394115,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4680416,
+        "artificially_hidden_points": 0,
+        "hidden_supervised_points": 0,
+        "original_observed_points": 10035200,
+        "input_observed_points": 10035200,
+        "sampled_target_rows": 11251,
+        "sampled_past_rows": 5589,
+        "sampled_known_rows": 5560,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "86368b48f7e34b831508585766f91900932dcef27afb91bd431df33fd85e6131",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153188096,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 820297728,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "1d865b331d2ec7782a8e0826d52ee56783fbf5c893d2119d9a4fc27968876a74"
+    },
+    "ETTh2_both_s42": {
+      "model_sha256": "05bb61881984e43322c284fb042bc4fbf14109b931e872b82214b7a247aaefe3",
+      "adapter_sha256": "7e11a30f19d60e0c4d0412b0b2f0cf174986e191b93152f44de10d1987f0d6a7",
+      "best_step": 100,
+      "actual_steps": 200,
+      "best_validation_loss": 0.34009344776471456,
+      "training_seconds": 71.17211845796555,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4624672,
+        "artificially_hidden_points": 361587,
+        "hidden_supervised_points": 172789,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9673613,
+        "sampled_target_rows": 11119,
+        "sampled_past_rows": 5687,
+        "sampled_known_rows": 5594,
+        "forecast_blocks": 13433,
+        "block_length_histogram": {
+          "2": 2742,
+          "1": 3017,
+          "3": 2388,
+          "5": 1777,
+          "4": 2002,
+          "6": 1507
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "ffa90fdafdfdc9c3209d4d061221e9c8fcbb013b5d699eb33f506ed93c3c661d",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 154193664,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 821182464,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "22eff4d4722237b1f76414dbcc244ff1ef295e8622475934f795b75d8ffd26f2"
+    },
+    "ETTh2_both_s43": {
+      "model_sha256": "ce491fcdb3a1e139c6b0c8a3f297e91776428374513e84e1ea2531fba2cac479",
+      "adapter_sha256": "d70a471d5e2fcc980e7c88425e8b9c1aea944e9743531d78801679d02c2752d9",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3394636253515879,
+      "training_seconds": 70.89754137489945,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4654944,
+        "artificially_hidden_points": 366321,
+        "hidden_supervised_points": 174092,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9668879,
+        "sampled_target_rows": 11191,
+        "sampled_past_rows": 5545,
+        "sampled_known_rows": 5664,
+        "forecast_blocks": 13364,
+        "block_length_histogram": {
+          "5": 1779,
+          "1": 2936,
+          "6": 1457,
+          "4": 2106,
+          "2": 2655,
+          "3": 2431
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "8e066a9e5505fcf102a50f773cbacddee5d08567d8a7d641e87612e28272012a",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 153605376,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 821968896,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "9f577354161993afd90f2f97a484fb30a67cc8970f5ac74452b42c01e5546144"
+    },
+    "ETTh2_both_s44": {
+      "model_sha256": "16bacc2bc497a2d1a5cb6f6621a48709d01f7e10033f9aedb9c4dda7238f9d12",
+      "adapter_sha256": "2c94d0d96c58bb1cd129f0ac6da6b60f68e8feafd278f03268df75650b5d9d6b",
+      "best_step": 200,
+      "actual_steps": 200,
+      "best_validation_loss": 0.3400108714898427,
+      "training_seconds": 71.14857908315025,
+      "trainable_parameters": 92160,
+      "training_exposure": {
+        "sampled_windows": 3200,
+        "optimizer_steps": 200,
+        "supervised_points": 4679104,
+        "artificially_hidden_points": 370281,
+        "hidden_supervised_points": 181049,
+        "original_observed_points": 10035200,
+        "input_observed_points": 9664919,
+        "sampled_target_rows": 11251,
+        "sampled_past_rows": 5589,
+        "sampled_known_rows": 5560,
+        "forecast_blocks": 13438,
+        "block_length_histogram": {
+          "4": 2110,
+          "2": 2769,
+          "3": 2403,
+          "6": 1457,
+          "1": 2956,
+          "5": 1743
+        },
+        "note": "counts sum accepted gradient microbatches, not unique data; targets may be reassigned to input-only roles"
+      },
+      "history_sha256": "682d84e8103b936c9d12ce38e037f2b2f1b4b944d965c75441200987b632dba9",
+      "execution_memory": {
+        "sampled_mps_live_bytes_max": 154269440,
+        "sampled_mps_driver_bytes_max": 231211008,
+        "process_cumulative_max_rss_bytes": 829915136,
+        "memory_scope": "MPS allocator counters sampled every100ms across this train invocation; allocator peaks may be missed; RSS cumulative process high-water mark, not per-model incremental RSS"
+      },
+      "execution_memory_sha256": "9ebed0cf0742d80976dbaa7a7c39cf0c77399ffdeee6b1ff20a3b27e625c1278"
+    }
+  }
+}

@@ -201,20 +201,28 @@ training = TrainConfig(
 )
 ```
 
-DHF encodes one observed sequence of `context_length + prediction_length` steps
+For numeric-only inputs, DHF encodes one observed sequence of `context_length + prediction_length` steps
 and samples consecutive forecast blocks sharing that context stream. On released
 models, this example uses 448 steps: a 32-step initial prefix leaves 416 possible
 labels per target, versus 192 for the default `training_strategy="window"`.
 Actual block histories vary from 32 up to 416 steps; `context_length=256` is not a
 fixed DHF history. Uniform lengths from 1 to 6 patches, truncated at the sequence
 end, are a project choice; the report does not disclose its distribution.
-DHF requires normalized loss and currently accepts numeric covariates only.
-Window training retains categorical support. Validation remains an ordinary
+DHF requires normalized loss. Numeric covariates share the context encoding;
+categorical covariates use a safe per-origin reference path with multiple forward
+calls. Validation remains an ordinary
 single-origin forecast at the configured history/horizon and chosen validation
 loss. A separately checkpointed layout RNG keeps window sampling independent.
 See the [round-two protocol and results](results/report_round2/README.md) and
 [acceptance record](results/report_round2/acceptance.zh-CN.md) for the tested scope.
 Equal optimizer steps do not imply equal supervision or computation.
+
+Optional `missing_probability=.5, missing_max_span=64` simulates continuous input
+gaps while retaining original finite labels. `dynamic_role_sampling=True` samples
+target/past/known roles on originally declared targets only; fixed covariates stay
+fixed and every example keeps a target. Both mechanisms default off and have
+independent checkpointed random states. See the [round-three example](examples/report_round3/README.md)
+and [four-arm complete/gapped-history experiment](results/report_round3/README.md).
 
 The
 [technical reference](docs/reference.md) documents normalization, categorical

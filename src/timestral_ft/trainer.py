@@ -12,8 +12,10 @@ import torch
 from huggingface_hub import hf_hub_download
 from safetensors.torch import save_file
 from timestral.loading import resolve_checkpoint
+from timestral.model import ROLE_KNOWN_COV, ROLE_PAST_COV, ROLE_TARGET
 
 from .artifacts import FineTunedModel, file_sha256, write_json
+from .augmentation import prepare_augmented_batch
 from .compat import (
     check_device,
     differentiable_forecast,
@@ -59,17 +61,19 @@ def clip_gradients(parameters, max_norm):
     return float(total)
 
 
-def _rng_state(generator, device="cpu", layout_generator=None):
+def _rng_state(generator, device="cpu", layout_generator=None, missing_generator=None, role_generator=None):
     npstate = np.random.get_state()
     return {"python": random.getstate(), "numpy": [npstate[0], npstate[1].tolist(),
             npstate[2], npstate[3], npstate[4]], "torch": torch.get_rng_state(),
             "cuda": torch.cuda.get_rng_state_all() if torch.device(device).type == "cuda" else [],
             "mps": torch.mps.get_rng_state() if torch.device(device).type == "mps" else None,
             "sampler": generator.get_state(),
-            "dhf_layout": layout_generator.get_state() if layout_generator is not None else None}
+            "dhf_layout": layout_generator.get_state() if layout_generator is not None else None,
+            "missingness": missing_generator.get_state() if missing_generator is not None else None,
+            "roles": role_generator.get_state() if role_generator is not None else None}
 
 
-def _restore_rng(state, generator, layout_generator=None):
+def _restore_rng(state, generator, layout_generator=None, missing_generator=None, role_generator=None):
     random.setstate(state["python"])
     n = state["numpy"]
     np.random.set_state((n[0], np.asarray(n[1], dtype=np.uint32), n[2], n[3], n[4]))
@@ -83,6 +87,11 @@ def _restore_rng(state, generator, layout_generator=None):
         if state.get("dhf_layout") is None:
             raise ValueError("DHF checkpoint is missing its forecast-layout RNG state")
         layout_generator.set_state(state["dhf_layout"])
+    for key, rng in (("missingness", missing_generator), ("roles", role_generator)):
+        if rng is not None:
+            if state.get(key) is None:
+                raise ValueError(f"Checkpoint is missing its {key} RNG state")
+            rng.set_state(state[key])
 
 
 def _cpu_state(model):
@@ -99,6 +108,33 @@ def _batch_loss(model, batch, labels, cfg, *, loss_space=None):
     prediction = differentiable_forecast(model, prediction_length=cfg.prediction_length, **batch)
     return pinball_loss(prediction, labels, batch["context"], model.config.quantile_knots)
 
+
+
+def _augmented_window_loss(model, augmented, batch, cfg):
+    """Variable target cardinality: weight per-example losses by actual labels."""
+    total, count, hidden_count = None, 0, 0
+    origin = cfg.context_length
+    for i, roles in enumerate(augmented.role_ids):
+        targets = torch.where(roles == ROLE_TARGET)[0]
+        context = augmented.inputs[i:i + 1, targets, :origin]
+        labels = augmented.labels[i:i + 1, targets, origin:]
+        covariates = {}
+        for key, role, end in (("past_covariates", ROLE_PAST_COV, origin),
+                                ("known_covariates", ROLE_KNOWN_COV, augmented.inputs.shape[-1])):
+            columns = torch.where(roles == role)[0]
+            if len(columns):
+                covariates[key] = augmented.inputs[i:i + 1, columns, :end]
+        for key in ("categorical_past_covariates", "categorical_known_covariates"):
+            if key in batch:
+                covariates[key] = batch[key][i:i + 1]
+        valid = torch.isfinite(labels) & torch.isfinite(context).any(-1)[..., None]
+        weight = int(valid.sum())
+        if weight:
+            loss = _batch_loss(model, {"context": context, **covariates}, labels, cfg)
+            total = loss * weight if total is None else total + loss * weight
+            count += weight
+            hidden_count += int((augmented.hidden_mask[i:i + 1, targets, origin:] & valid).sum())
+    return (total / count if count else None), count, hidden_count
 
 def _validation_loss(model, dataset, cfg):
     model.eval()
@@ -195,6 +231,9 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
     generator = torch.Generator().manual_seed(cfg.seed)
     layout_generator = (torch.Generator().manual_seed(cfg.seed ^ 0x444846)
                         if cfg.training_strategy == "dhf" else None)
+    missing_generator = (torch.Generator().manual_seed(cfg.seed ^ 0x4D495353) if cfg.missing_probability else None)
+    role_generator = (torch.Generator().manual_seed(cfg.seed ^ 0x524F4C45) if cfg.dynamic_role_sampling else None)
+    use_augmentation = bool(cfg.missing_probability or cfg.dynamic_role_sampling)
     metadata = {"base_model": base_model, "base_revision": base_revision,
                 "base_weights_sha256": file_sha256(checkpoint_path / "model.safetensors"),
                 "base_license_text": license_path.read_text() if license_path.exists() else None,
@@ -206,6 +245,12 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                 "training_loss_space": cfg.loss_space,
                 "training_strategy": cfg.training_strategy,
                 "validation_loss_space": cfg.validation_loss_space or cfg.loss_space}
+    if use_augmentation:
+        metadata["augmentation"] = {
+            "missingness": "one interval per numeric row with configured Bernoulli probability; uniform length1..max_span clipped to window, uniform valid start",
+            "role_sampling": "iid target/past/known on originally declared targets only; uniformly repair zero-target examples; fixed covariates retain roles",
+            "missing_seed": cfg.seed ^ 0x4D495353, "role_seed": cfg.seed ^ 0x524F4C45,
+            "labels": "original finite observations; artificial gaps affect inputs only; eligibility requires observed target prefix"}
     if dhf_metadata is not None:
         metadata["dhf"] = dhf_metadata
     step, best, bad, best_step, elapsed = 0, math.inf, 0, 0, 0.0
@@ -223,7 +268,7 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
         model.load_state_dict(state["model"], strict=True)
         optimizer.load_state_dict(state["optimizer"])
         scheduler.load_state_dict(state["scheduler"])
-        _restore_rng(state["rng"], generator, layout_generator)
+        _restore_rng(state["rng"], generator, layout_generator, missing_generator, role_generator)
         step, best, bad = state["step"], state["best_loss"], state["bad_evaluations"]
         best_step, elapsed, best_state = state["best_step"], state["elapsed"], state["best_model"]
     started = time.perf_counter()
@@ -242,11 +287,22 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                     raise ValueError("Too many batches without valid labels")
                 indices = torch.randint(len(training), (cfg.batch_size,), generator=generator).tolist()
                 batch = collate([training[i] for i in indices], cfg.device)
+                augmented = (prepare_augmented_batch(batch, cfg, missing_generator, role_generator)
+                             if use_augmentation else None)
                 if cfg.training_strategy == "dhf":
                     anchors = sample_block_layout(cfg.batch_size, n_patches, cfg.dhf_min_context_patches,
                                                   max_block, layout_generator)
-                    prediction = differentiable_dhf_forecast(model, block_anchors=anchors, **batch)
-                    loss = dhf_pinball_loss(prediction, batch["sequence"], model.config.quantile_knots)
+                    if augmented is None:
+                        prediction = differentiable_dhf_forecast(model, block_anchors=anchors, **batch)
+                        training_labels = batch["sequence"]
+                    else:
+                        categories = {key: value for key, value in batch.items() if key.startswith("categorical_")}
+                        prediction = differentiable_dhf_forecast(model, augmented.inputs, anchors,
+                            numeric_role_ids=augmented.role_ids, labels=augmented.labels, **categories)
+                        training_labels = augmented.labels
+                    loss = dhf_pinball_loss(prediction, training_labels, model.config.quantile_knots)
+                elif augmented is not None:
+                    loss, window_count, hidden_supervised = _augmented_window_loss(model, augmented, batch, cfg)
                 else:
                     labels = batch.pop("labels")
                     loss = _batch_loss(model, batch, labels, cfg)
@@ -262,9 +318,17 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                     for length, count in stats["block_length_histogram"].items():
                         histogram = supervision["block_length_histogram"]
                         histogram[length] = histogram.get(length, 0) + count
+                elif augmented is not None:
+                    supervision["supervised_points"] += window_count
                 else:
                     supervision["supervised_points"] += int((torch.isfinite(labels)
                         & torch.isfinite(batch["context"]).any(-1)[..., None]).sum())
+                if augmented is not None:
+                    for name, value in augmented.statistics().items():
+                        supervision[name] = supervision.get(name, 0) + value
+                    hidden_count = (int((augmented.hidden_mask & prediction.supervision_mask).sum())
+                                    if cfg.training_strategy == "dhf" else hidden_supervised)
+                    supervision["hidden_supervised_points"] = supervision.get("hidden_supervised_points", 0) + hidden_count
                 losses.append(float(loss.detach()))
                 accumulated += 1
             clip_gradients(parameters, cfg.gradient_clip)
@@ -273,7 +337,7 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
             step += 1
             record = {"step": step, "train_loss": float(np.mean(losses)),
                       "learning_rate": optimizer.param_groups[0]["lr"]}
-            if cfg.training_strategy == "dhf":
+            if cfg.training_strategy == "dhf" or use_augmentation:
                 record.update(supervision)
             else:
                 record["supervised_points"] = supervision["supervised_points"]
@@ -291,7 +355,7 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
             log.flush()
             checkpoint = {"metadata": metadata, "model": _cpu_state(model),
                           "optimizer": optimizer.state_dict(), "scheduler": scheduler.state_dict(),
-                          "rng": _rng_state(generator, cfg.device, layout_generator), "step": step,
+                          "rng": _rng_state(generator, cfg.device, layout_generator, missing_generator, role_generator), "step": step,
                           "best_loss": best, "best_step": best_step, "bad_evaluations": bad,
                           "best_model": best_state, "elapsed": elapsed + time.perf_counter() - started}
             # Replace atomically so an interrupted write leaves the last checkpoint intact.

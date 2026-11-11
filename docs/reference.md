@@ -170,7 +170,7 @@ this is a project choice because the report does not disclose its sampling distr
 exceed the model's single-block limit. `dhf_min_context_patches` defaults to 1 and must leave
 a real forecast suffix. The longest possible block history must fit the model's context limit.
 
-One transformer call encodes the full causal context stream and all independent decoder blocks.
+For numeric-only inputs, one transformer call encodes the full causal context stream and all independent decoder blocks.
 Context never reads decoder tokens; each decoder reads only context before its own block and
 earlier/current decoder positions in that block. All variates in one example share its layout;
 separate examples remain isolated. Frames restart at each block's observed prefix, then advance
@@ -179,9 +179,8 @@ using its previous predicted medians. Only target rows receive direct loss.
 Fixed numeric past and known-future roles are supported. Known-future rows use whole-window
 normalization/bidirectional context, protected by the official variate firewalls. Consequently,
 the independent-prefix numerical reference applies to target-only inputs; cropping known-future
-rows changes their allowed normalization window. DHF currently rejects categorical covariates;
-the window strategy retains categorical support. Random role sampling and missing-gap augmentation
-remain future work. Full-parameter and LoRA training use the same DHF forward path.
+rows changes their allowed normalization window. Categorical DHF uses the per-origin reference path
+described below. Full-parameter and LoRA training support both paths.
 
 Validation always uses the ordinary single-origin forecast at the configured context/horizon,
 with `validation_loss_space` choosing the criterion; it does not sample forecast blocks.
@@ -194,6 +193,58 @@ layout configuration requires a new run. Missing fields in old artifacts mean wi
 See the [round-two experiment](../results/report_round2/README.md) and
 [acceptance record](../results/report_round2/acceptance.zh-CN.md). Equal steps are not equal
 supervision or compute, and mechanism alignment does not guarantee better forecasts.
+
+### Missing observations and dynamic roles
+
+All fields work in Python `TrainConfig` and the YAML `training` mapping:
+
+| Field | Default | Meaning |
+|---|---|---|
+| `missing_probability` | `0.0` | Per-numeric-row probability of hiding one interval, in [0,1] |
+| `missing_max_span` | `64` | Positive integer maximum gap length; bounded by the sequence length |
+| `dynamic_role_sampling` | `False` | Reassign originally declared target columns to synthetic target/past/known roles |
+| `role_probabilities` | `[0.5, 0.25, 0.25]` | Target/past/known probabilities; sum to one with positive target probability |
+
+Selected gap lengths are uniform from 1 to the bounded maximum; starts are uniform
+among valid positions. Only the input copy changes: natural NaNs remain unscored,
+artificially hidden finite labels can still be scored, and a target/block without
+any observed prefix is ineligible. Categorical codes are not corrupted by numeric
+gap augmentation. In window training, hiding slots that are already unavailable
+future targets has no forward effect; DHF additionally hides context copies at
+later positions that other blocks could otherwise read.
+
+Role sampling is per example, shared by its DHF blocks, with a uniformly selected
+target restored if the draw contains none. Fixed declared covariates retain their
+roles; categories are not reassigned. Current non-target rows are inputs only and
+are excluded from loss. Attention and normalization use the sampled roles via the
+official firewalls. Sampling distributions are project choices, not an official
+published recipe. Defaults preserve old configurations and exports.
+
+Window-index, layout, missingness and role generators are independent and saved
+in checkpoints. Missingness and role seeds are respectively `seed ^ 0x4D495353`
+and `seed ^ 0x524F4C45`; validation draws neither. Augmented training logs
+`original_observed_points`, `input_observed_points`, `artificially_hidden_points`,
+`hidden_supervised_points`, and `sampled_target_rows`/`sampled_past_rows`/`sampled_known_rows`,
+in addition to supervision and layout counts. These count accepted microbatches,
+not unique observations. Changing augmentation configuration requires a new run.
+
+Categorical DHF reconstructs each example at each forecast origin using the
+ordinary differentiable single-origin interface. Past inputs end at the origin;
+known inputs end at the current block's endpoint. The pinned encoder uses target
+encoding for a single current target and numeric category codes for multiple
+targets. Therefore dynamic roles can change the encoder branch. Table categories
+use train-only compact vocabularies; external huge raw codes are not guaranteed
+lossless in the multi-target FP32 fallback. Codes stay CPU float64 until encoding.
+Categorical preprocessing is discrete and does not support input gradients;
+model/LoRA parameter gradients are supported. This path makes multiple forward
+calls and does **not** share the numeric path's encoding speedup or whole-window
+known-covariate normalization scope.
+
+See the [runnable example and protocol](../examples/report_round3/README.md),
+[round-three results](../results/report_round3/README.md), and
+[acceptance record](../results/report_round3/acceptance.zh-CN.md).
+The four-arm evaluation uses all-target forecasting with complete or fixed-gap
+history; it does not establish forecast-quality gains for known-future deployments.
 
 Training bypasses `forecast()`'s inference mode and preserves the upstream advancing refine frame.
 It does not use test-time symmetry averaging, nonnegative clipping, or extreme-output caps in the loss.

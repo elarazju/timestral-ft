@@ -219,8 +219,6 @@ class DHFSequenceDataset(WindowDataset):
     """
 
     def __init__(self, processor, data, context_length, prediction_length, *, min_context_steps):
-        if processor.config.categorical_columns:
-            raise ValueError("DHF categorical covariates are deferred; use numeric covariates or window training")
         self.processor = processor
         self.context_length = context_length
         self.prediction_length = prediction_length
@@ -252,8 +250,8 @@ class DHFSequenceDataset(WindowDataset):
         group = self.groups[group_index].iloc[origin - self.context_length:origin + self.prediction_length]
         cfg = self.processor.config
         item = {"sequence": self.processor.feature_array(group, cfg.target_columns)}
-        for role in ("past_covariates", "known_covariates"):
-            values = self.processor.feature_array(group, getattr(cfg, role))
+        for role in COVARIATE_ROLES:
+            values = self.processor.feature_array(group, getattr(cfg, role), categorical=role.startswith("categorical"))
             if values is not None:
                 item[role] = values
         return {key: torch.from_numpy(value) for key, value in item.items()}

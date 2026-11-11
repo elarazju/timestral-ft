@@ -18,7 +18,12 @@ from timestral.masks import (
 )
 from timestral.model import ROLE_KNOWN_COV, ROLE_PAST_COV, ROLE_TARGET
 
-from .compat import NormalizedForecast, _normalized_frames, normalized_pinball_loss
+from .compat import (
+    NormalizedForecast,
+    _normalized_frames,
+    differentiable_normalized_forecast,
+    normalized_pinball_loss,
+)
 
 
 def sample_block_layout(batch_size, n_patches, min_context, max_block, generator):
@@ -95,15 +100,14 @@ class DHFForecast:
 
 
 def differentiable_dhf_forecast(model, sequence, block_anchors, *, past_covariates=None,
-                                known_covariates=None, **unsupported):
+                                known_covariates=None, numeric_role_ids=None, labels=None,
+                                categorical_past_covariates=None, categorical_known_covariates=None):
     """Forecast every active sequence position using one shared transformer call.
 
     sequence and numeric covariates are `(B,V,T)` over the same full training
     window. T need not divide the patch size: trailing NaNs pad the final patch
     and never become labels. Returned predictions are cropped to the real T.
     """
-    if unsupported:
-        raise ValueError("DHF currently supports only numeric covariates; categorical covariates are deferred")
     if sequence.ndim != 3 or sequence.shape[-1] < 2:
         raise ValueError("DHF sequence must have shape (batch, targets, time)")
     c, ps = model.config, model.config.patch_size
@@ -127,10 +131,30 @@ def differentiable_dhf_forecast(model, sequence, block_anchors, *, past_covariat
             roles.extend([role] * values.shape[1])
     full = torch.cat(features, dim=1)
     v = full.shape[1]
+    role_matrix = torch.tensor(roles, device=sequence.device).expand(batch, -1)
+    if numeric_role_ids is not None:
+        if past_covariates is not None or known_covariates is not None:
+            raise ValueError("numeric_role_ids requires all numeric rows in sequence")
+        if numeric_role_ids.shape != (batch, v) or not torch.isin(numeric_role_ids, numeric_role_ids.new_tensor(
+                [ROLE_TARGET, ROLE_PAST_COV, ROLE_KNOWN_COV])).all():
+            raise ValueError("numeric_role_ids must contain a valid role for every numeric row")
+        if not (numeric_role_ids == ROLE_TARGET).any(-1).all():
+            raise ValueError("Every example requires at least one target")
+        role_matrix = numeric_role_ids.to(sequence.device)
+    if not c.covariate_enabled and (role_matrix != ROLE_TARGET).any():
+        raise ValueError("This model cannot consume covariates")
+    if not c.supports_known_covariates and (role_matrix == ROLE_KNOWN_COV).any():
+        raise ValueError("This model cannot consume known-future covariates")
+    labels = sequence if labels is None else labels
+    if labels.shape != sequence.shape:
+        raise ValueError("DHF labels must have the same shape as sequence")
+    if categorical_past_covariates is not None or categorical_known_covariates is not None:
+        return _categorical_dhf_reference(model, full, labels, block_anchors, role_matrix, n_target,
+                                          categorical_past_covariates, categorical_known_covariates)
     full = torch.nn.functional.pad(full, (0, n * ps - length), value=float("nan"))
     observed = torch.isfinite(full).reshape(batch * v, n * ps)
     inputs = torch.where(torch.isfinite(full), full, 0.).reshape(batch * v, n * ps)
-    role_ids = torch.tensor(roles, device=sequence.device).repeat(batch)
+    role_ids = role_matrix.reshape(-1)
     known_rows = role_ids == ROLE_KNOWN_COV
     group_ids = torch.arange(batch, device=sequence.device).repeat_interleave(v)
     scaled, loc, scale = model.scale(inputs, observed)
@@ -174,7 +198,8 @@ def differentiable_dhf_forecast(model, sequence, block_anchors, *, past_covariat
         all_valid.append(torch.cat(valid_parts, -1))
     forecast = NormalizedForecast(quantiles[..., :length, :], torch.stack(all_loc)[..., :length],
                                   torch.stack(all_scale)[..., :length], c.use_asinh)
-    valid = torch.stack(all_valid)[..., :length] & torch.isfinite(sequence)
+    valid = (torch.stack(all_valid)[..., :length] & torch.isfinite(labels)
+             & (role_matrix[:, :n_target] == ROLE_TARGET)[..., None])
     return DHFForecast(forecast, valid, block_anchors)
 
 
@@ -192,3 +217,54 @@ def layout_statistics(output):
             histogram[length] = histogram.get(length, 0) + 1
     return {"supervised_points": int(output.supervision_mask.sum()),
             "forecast_blocks": sum(histogram.values()), "block_length_histogram": histogram}
+
+
+def _categorical_dhf_reference(model, inputs, labels, anchors, role_ids, n_output, cat_past, cat_known):
+    """Safe per-origin encoding; intentionally not a shared-context acceleration.
+
+    At every origin, target encoding sees only that example's current target
+    prefix. Numeric/category known futures end at this block's endpoint, exactly
+    matching the public single-origin forecasting API. Codes remain CPU float64.
+    """
+    batch, _, length = inputs.shape
+    ps, nq = model.config.patch_size, len(model.config.quantile_knots)
+    for codes in (cat_past, cat_known):
+        if codes is not None and (codes.ndim != 3 or codes.shape[0] != batch or codes.shape[-1] != length):
+            raise ValueError("DHF categorical covariates must share full sequence batch/time dimensions")
+    forecasts, locations, scales, supervision = [], [], [], []
+    for i, layout in enumerate(anchors.detach().cpu().tolist()):
+        targets = torch.where(role_ids[i] == ROLE_TARGET)[0]
+        prefix = next(j for j, a in enumerate(layout) if a >= 0) * ps
+        qs = [inputs.new_zeros(n_output, prefix, nq)]
+        ls, ss = [inputs.new_zeros(n_output, prefix)], [inputs.new_ones(n_output, prefix)]
+        vs = [torch.zeros(n_output, prefix, dtype=torch.bool, device=inputs.device)]
+        for start in sorted(set(layout) - {-1}):
+            end = min(length, (start + layout.count(start)) * ps)
+            origin, horizon = start * ps, end - start * ps
+            context = inputs[i:i + 1, targets, :origin]
+            covariates = {}
+            for key, role, stop in [('past_covariates', ROLE_PAST_COV, origin),
+                                    ('known_covariates', ROLE_KNOWN_COV, end)]:
+                indices = torch.where(role_ids[i] == role)[0]
+                if len(indices):
+                    covariates[key] = inputs[i:i + 1, indices, :stop]
+            if cat_past is not None:
+                covariates['categorical_past_covariates'] = cat_past[i:i + 1, :, :origin]
+            if cat_known is not None:
+                covariates['categorical_known_covariates'] = cat_known[i:i + 1, :, :end]
+            prediction = differentiable_normalized_forecast(model, context, horizon, **covariates)
+            # Dynamic sampling exposes all numeric rows as potential outputs;
+            # with fixed roles, only the original leading targets are outputs.
+            output_targets = targets[targets < n_output]
+            selected = targets < n_output
+            qs.append(inputs.new_zeros(n_output, horizon, nq).index_copy(0, output_targets, prediction.quantiles[0, selected]))
+            ls.append(inputs.new_zeros(n_output, horizon).index_copy(0, output_targets, prediction.loc[0, selected]))
+            ss.append(inputs.new_ones(n_output, horizon).index_copy(0, output_targets, prediction.scale[0, selected]))
+            valid = torch.isfinite(context[0, selected]).any(-1)[:, None] & torch.isfinite(labels[i, output_targets, origin:end])
+            vs.append(torch.zeros(n_output, horizon, dtype=torch.bool, device=inputs.device).index_copy(0, output_targets, valid))
+        forecasts.append(torch.cat(qs, 1))
+        locations.append(torch.cat(ls, 1))
+        scales.append(torch.cat(ss, 1))
+        supervision.append(torch.cat(vs, 1))
+    return DHFForecast(NormalizedForecast(torch.stack(forecasts), torch.stack(locations), torch.stack(scales),
+                                         model.config.use_asinh), torch.stack(supervision), anchors)

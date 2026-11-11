@@ -185,17 +185,24 @@ training = TrainConfig(
 )
 ```
 
-DHF 对长为 `context_length + prediction_length` 的完整观测序列共享历史编码，
+纯数值 DHF 对长为 `context_length + prediction_length` 的完整观测序列共享历史编码，
 在初始上下文之后连续采样多个预测块。对已发布模型，上例使用 448 个时间点，
 首个 32 点 patch 作为初始上下文，其余 416 点均可作为每个目标的监督；
 默认 `training_strategy="window"` 只监督末尾 192 点。DHF 的实际块历史可在 32–416 点之间变化，
 `context_length=256` 不再表示固定的训练历史长度。
 块长从 1–6 个 patch 均匀采样，末块按剩余长度截断；该分布是项目选择，报告未公开官方分布。
-DHF 要求归一化空间损失，目前支持数值协变量，分类协变量请继续使用默认窗口训练。
+DHF 要求归一化空间损失，数值协变量共享上下文前向；分类协变量采用逐起点安全参考路径，
+需要多次前向，不宣称共享加速。
 验证仍按配置的历史／预测长度执行普通单起点预测，并使用 `validation_loss_space` 选优。
 布局采样使用单独保存的随机状态，不改变窗口采样随机流。
 具体实验及硬件覆盖见[第二轮实验记录](results/report_round2/README.md)和
 [验收报告](results/report_round2/acceptance.zh-CN.md)；相同步数不等于相同监督点数或计算量。
+
+可选 `missing_probability=.5, missing_max_span=64` 模拟连续输入缺口并保留原始有限标签；
+`dynamic_role_sampling=True` 只对原目标列采样目标／历史／未来已知角色，固定协变量不变，至少保留一个目标。
+两者默认关闭，随机状态分别保存和精确恢复。详见[第三轮示例](examples/report_round3/README.md)和
+[四组完整／缺口历史实验](results/report_round3/README.md)。
+
 
 归一化、分类编码、数值容差和推理兼容层的细节见[使用指南](docs/guide.zh-CN.md)
 和[英文技术参考](docs/reference.md)。

@@ -1,0 +1,145 @@
+{
+  "passed": true,
+  "unit_tests": {
+    "passed": 208,
+    "skipped": 50,
+    "seconds": 35.96
+  },
+  "real_5m_augmented_acceptance": {
+    "passed": 8,
+    "skipped": 4,
+    "backends": [
+      "cpu",
+      "mps"
+    ],
+    "unavailable": [
+      "cuda"
+    ],
+    "modes": [
+      "full",
+      "lora"
+    ],
+    "paths": [
+      "shared_numeric",
+      "per_origin_categorical"
+    ]
+  },
+  "experiment_audit": {
+    "passed": true,
+    "protocol_sha256": "8c20d307b89872d9993e78136fde4fd198a207c21db9ef39e1514fae84149522",
+    "auditor_sha256": "1c631c59370972f31a90e5111fe777d388de76d63533760bc503f828f18f0bd8",
+    "selected_model_count": 24,
+    "result_row_count": 104,
+    "split_score_count": 208,
+    "independent_metric_scalar_checks": 1456,
+    "runs_csv_rows": 208,
+    "summary_csv_rows": 80,
+    "checks": [
+      "source SHA256 and execution snapshot",
+      "dataset checksum and train-only scaling",
+      "base, adapter and merged-weight identity",
+      "configuration and window fingerprints",
+      "training history and independent eligibility replay from checkpointed RNG streams",
+      "selected-checkpoint identity",
+      "forecast checksum, origins and labels",
+      "seven independently formulated metrics",
+      "aggregate means and sample standard deviations"
+    ],
+    "limitations": [
+      "audit does not establish causal attribution, significance, or device parity",
+      "evaluation context256; training horizon192"
+    ]
+  },
+  "example": "runs/report-round3-example-smoke/forecast.csv",
+  "limitations": [
+    "No CUDA hardware",
+    "Categorical preprocessing has no input gradients",
+    "All-target evaluation does not establish known-future conditional forecast quality",
+    "No positive WQL finding in this four-arm matrix"
+  ],
+  "root_acceptance": {
+    "passed": true,
+    "pytest": {
+      "passed": 208,
+      "skipped": 50,
+      "seconds": 29.1
+    },
+    "lint_and_diffcheck": true,
+    "independent_audit_rerun": true,
+    "mechanisms": {
+      "passed": true,
+      "cases": [
+        {
+          "categorical": false,
+          "passed": true,
+          "checks": [
+            "cross-example isolation",
+            "labels do not enter predictions",
+            "role supervision",
+            "natural NaN excluded",
+            "hidden label scored",
+            "future target/past invariant",
+            "known future effective",
+            "finite parameter gradients"
+          ]
+        },
+        {
+          "categorical": true,
+          "passed": true,
+          "checks": [
+            "cross-example isolation",
+            "labels do not enter predictions",
+            "role supervision",
+            "natural NaN excluded",
+            "hidden label scored",
+            "future target/past invariant",
+            "known future effective",
+            "finite parameter gradients"
+          ]
+        }
+      ],
+      "limitation": "Official categorical target encoding is discrete NumPy preprocessing; input-gradient support is not claimed."
+    },
+    "disabled_augmentation_cross_round": [
+      {
+        "case": "ETTh1_baseline_s42",
+        "identical_round2_dhf_weights": true,
+        "best_step": 50,
+        "previous_best_step": 50
+      },
+      {
+        "case": "ETTh1_baseline_s43",
+        "identical_round2_dhf_weights": true,
+        "best_step": 50,
+        "previous_best_step": 50
+      },
+      {
+        "case": "ETTh1_baseline_s44",
+        "identical_round2_dhf_weights": true,
+        "best_step": 50,
+        "previous_best_step": 50
+      },
+      {
+        "case": "ETTh2_baseline_s42",
+        "identical_round2_dhf_weights": true,
+        "best_step": 200,
+        "previous_best_step": 200
+      },
+      {
+        "case": "ETTh2_baseline_s43",
+        "identical_round2_dhf_weights": true,
+        "best_step": 200,
+        "previous_best_step": 200
+      },
+      {
+        "case": "ETTh2_baseline_s44",
+        "identical_round2_dhf_weights": true,
+        "best_step": 100,
+        "previous_best_step": 100
+      }
+    ],
+    "blog_sha256": "8d982c5aba4a18b37c8afefc4793d137d428e1c7f917335a726ac99ed92cc5fd",
+    "blog_and_figures_reviewed": true,
+    "blog_delivery": "local only; excluded from Git and build archives"
+  }
+}

@@ -66,7 +66,22 @@ class TrainConfig:
     dhf_max_block_patches: int | None = None
     dhf_min_context_patches: int = 1
 
+    missing_probability: float = 0.0
+    missing_max_span: int = 64
+    dynamic_role_sampling: bool = False
+    role_probabilities: list[float] = field(default_factory=lambda: [0.5, 0.25, 0.25])
+
     def __post_init__(self):
+        if not 0 <= self.missing_probability <= 1:
+            raise ValueError("missing_probability must be in [0, 1]")
+        if isinstance(self.missing_max_span, bool) or not isinstance(self.missing_max_span, int) or self.missing_max_span < 1:
+            raise ValueError("missing_max_span must be a positive integer")
+        if not isinstance(self.dynamic_role_sampling, bool):
+            raise ValueError("dynamic_role_sampling must be boolean")
+        self.role_probabilities = list(self.role_probabilities)
+        if (len(self.role_probabilities) != 3 or any(not 0 <= p <= 1 for p in self.role_probabilities)
+                or abs(sum(self.role_probabilities) - 1) > 1e-8 or self.role_probabilities[0] <= 0):
+            raise ValueError("role_probabilities must be three probabilities summing to one with positive target probability")
         if self.mode not in {"full", "lora"}:
             raise ValueError("mode must be full or lora")
         if self.loss_space not in {"history_scaled", "normalized"}:

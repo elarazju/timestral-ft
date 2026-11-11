@@ -146,15 +146,19 @@ def test_legacy_config_artifact_checkpoint_remain_window(model, frame, tmp_path)
              output_dir=tmp_path / "run", stop_after_steps=1)
     checkpoint = tmp_path / "run/checkpoint.pt"
     state = torch.load(checkpoint, weights_only=True)
-    for key in ("training_strategy", "dhf_max_block_patches", "dhf_min_context_patches"):
+    for key in ("training_strategy", "dhf_max_block_patches", "dhf_min_context_patches", "missing_probability",
+                "missing_max_span", "dynamic_role_sampling", "role_probabilities"):
         state["metadata"]["train_config"].pop(key)
     state["rng"].pop("dhf_layout")
+    state["rng"].pop("missingness")
+    state["rng"].pop("roles")
     torch.save(state, checkpoint)
     finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base, train_config=cfg,
              output_dir=tmp_path / "run", resume=checkpoint)
     manifest = tmp_path / "run/model/finetune.json"
     metadata = json.loads(manifest.read_text())
-    for key in ("training_strategy", "dhf_max_block_patches", "dhf_min_context_patches"):
+    for key in ("training_strategy", "dhf_max_block_patches", "dhf_min_context_patches", "missing_probability",
+                "missing_max_span", "dynamic_role_sampling", "role_probabilities"):
         metadata["train_config"].pop(key)
     manifest.write_text(json.dumps(metadata))
     loaded = FineTunedModel.from_pretrained(tmp_path / "run/model")
@@ -174,9 +178,9 @@ def test_model_constraints_rejected(model, frame, tmp_path, setting, match):
                  train_config=cfg, output_dir=tmp_path / "run")
 
 
-def test_dhf_categories_rejected_but_window_support_preserved(model, frame, tmp_path):
+def test_dhf_categories_supported(model, frame, tmp_path):
     base = base_checkpoint(model, tmp_path)
-    with pytest.raises(ValueError, match="categorical covariates are deferred"):
-        finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base,
-                 data_config=DataConfig(categorical_known_covariates=["catknown"]),
-                 train_config=config(), output_dir=tmp_path / "run")
+    result = finetune(frame.iloc[:96], frame.iloc[96:128], model_id=base,
+                     data_config=DataConfig(categorical_known_covariates=["catknown"]),
+                     train_config=config(), output_dir=tmp_path / "run")
+    assert result.metadata["completed"]
