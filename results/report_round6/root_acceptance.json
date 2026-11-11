@@ -80,6 +80,18 @@
     "skipped": 50,
     "seconds": 27.2
   },
-  "root_clean_package_regression": "pending final integration step",
+  "root_clean_package_regression": {
+    "status": "passed",
+    "source_commit": "ad3576ce547a38157770774888607738b62ea6a0",
+    "passed": 251,
+    "skipped": 50,
+    "seconds": 25.12,
+    "import_verified": "runs/report-final-package/installed/timestral_ft/__init__.py",
+    "log": "runs/report-final-package/wheel-pytest.log",
+    "examples": [
+      "round5 BF16 inference",
+      "round6 CPU encoding"
+    ]
+  },
   "local_blog_review": "Passed: reader-facing geometry, affine-invariance assumptions, ranking-versus-threshold discussion, actual results and both figures reviewed; local only"
 }
