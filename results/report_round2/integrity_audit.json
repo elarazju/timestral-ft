@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "protocol_sha256": "b055be4e6470572f316fcec6d8aab6f317c1b1ca8c7be83061e3fe089d43d88e",
+  "auditor_sha256": "00e559612b8df66c9da8c14f0b0ca808eca799156d12e1f176d780a652b34234",
+  "selected_model_count": 18,
+  "result_row_count": 40,
+  "split_score_count": 80,
+  "independent_metric_scalar_checks": 560,
+  "runs_csv_rows": 80,
+  "summary_csv_rows": 32,
+  "checks": [
+    "source SHA256 and execution snapshot",
+    "dataset checksum and train-only scaling",
+    "base, adapter and merged-weight identity",
+    "configuration and window fingerprints",
+    "training history and supervision counters",
+    "selected-checkpoint identity",
+    "forecast checksum, origins and labels",
+    "seven independently formulated metrics",
+    "aggregate means and sample standard deviations"
+  ],
+  "limitations": [
+    "audit does not establish causal attribution, significance, or device parity",
+    "evaluation context256; training horizon192"
+  ]
+}

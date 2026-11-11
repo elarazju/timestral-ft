@@ -189,6 +189,33 @@ The default training objective is a history-scale-balanced masked pinball loss o
 in the report's advancing per-patch normalized space. A separate `validation_loss_space` can keep
 checkpoint selection fixed across objective comparisons. See the
 [alignment record](docs/report-alignment.zh-CN.md) and [round-one experiment](results/report_round1/README.md).
+
+Native multi-block DHF training is opt-in:
+
+```python
+training = TrainConfig(
+    mode="lora", training_strategy="dhf", loss_space="normalized",
+    validation_loss_space="history_scaled",
+    context_length=256, prediction_length=192,
+    dhf_min_context_patches=1, dhf_max_block_patches=6,
+)
+```
+
+DHF encodes one observed sequence of `context_length + prediction_length` steps
+and samples consecutive forecast blocks sharing that context stream. On released
+models, this example uses 448 steps: a 32-step initial prefix leaves 416 possible
+labels per target, versus 192 for the default `training_strategy="window"`.
+Actual block histories vary from 32 up to 416 steps; `context_length=256` is not a
+fixed DHF history. Uniform lengths from 1 to 6 patches, truncated at the sequence
+end, are a project choice; the report does not disclose its distribution.
+DHF requires normalized loss and currently accepts numeric covariates only.
+Window training retains categorical support. Validation remains an ordinary
+single-origin forecast at the configured history/horizon and chosen validation
+loss. A separately checkpointed layout RNG keeps window sampling independent.
+See the [round-two protocol and results](results/report_round2/README.md) and
+[acceptance record](results/report_round2/acceptance.zh-CN.md) for the tested scope.
+Equal optimizer steps do not imply equal supervision or computation.
+
 The
 [technical reference](docs/reference.md) documents normalization, categorical
 encoding, numerical tolerances and the inference compatibility layer.
@@ -300,7 +327,7 @@ For frozen transfer, model acceptance and independent audit commands, see the
 |---|---|
 | [Chinese usage guide](docs/guide.zh-CN.md) | Data preparation, configuration, training, resume, prediction and export |
 | [English technical reference](docs/reference.md) | Training semantics, device behavior, metrics and compatibility details |
-| [Report alignment record](docs/report-alignment.zh-CN.md) | Official mechanisms, implementation choices, round-one loss and remaining tasks |
+| [Report alignment record](docs/report-alignment.zh-CN.md) | Official mechanisms, implementation choices, normalized loss, DHF and remaining tasks |
 | [ETTh1 configuration](examples/etth1.yaml) | A runnable example with numeric and categorical covariates |
 | [Broader validation](results/validation/README.md) | Multi-seed benchmarks, frozen transfer and four-size acceptance |
 | [GIFT-Eval guide](examples/gift_eval/README.md) | Environment setup, all-task training and official evaluation |

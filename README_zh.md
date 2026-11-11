@@ -173,6 +173,30 @@ print(forecasts[["timestamp", "target", "median", "q_0.1", "q_0.9"]].head())
 可通过 `TrainConfig(loss_space="normalized")` 或 YAML 中的同名字段，选择技术报告描述的
 逐 patch 归一化空间损失；独立的 `validation_loss_space` 可固定选优准则。
 详见[报告对齐记录](docs/report-alignment.zh-CN.md)与[第一轮对照实验](results/report_round1/README.md)。
+
+原生多预测块 DHF 训练通过配置显式启用：
+
+```python
+training = TrainConfig(
+    mode="lora", training_strategy="dhf", loss_space="normalized",
+    validation_loss_space="history_scaled",
+    context_length=256, prediction_length=192,
+    dhf_min_context_patches=1, dhf_max_block_patches=6,
+)
+```
+
+DHF 对长为 `context_length + prediction_length` 的完整观测序列共享历史编码，
+在初始上下文之后连续采样多个预测块。对已发布模型，上例使用 448 个时间点，
+首个 32 点 patch 作为初始上下文，其余 416 点均可作为每个目标的监督；
+默认 `training_strategy="window"` 只监督末尾 192 点。DHF 的实际块历史可在 32–416 点之间变化，
+`context_length=256` 不再表示固定的训练历史长度。
+块长从 1–6 个 patch 均匀采样，末块按剩余长度截断；该分布是项目选择，报告未公开官方分布。
+DHF 要求归一化空间损失，目前支持数值协变量，分类协变量请继续使用默认窗口训练。
+验证仍按配置的历史／预测长度执行普通单起点预测，并使用 `validation_loss_space` 选优。
+布局采样使用单独保存的随机状态，不改变窗口采样随机流。
+具体实验及硬件覆盖见[第二轮实验记录](results/report_round2/README.md)和
+[验收报告](results/report_round2/acceptance.zh-CN.md)；相同步数不等于相同监督点数或计算量。
+
 归一化、分类编码、数值容差和推理兼容层的细节见[使用指南](docs/guide.zh-CN.md)
 和[英文技术参考](docs/reference.md)。
 
@@ -270,7 +294,7 @@ python scripts/benchmark_suite.py --jobs 2
 |---|---|
 | [中文使用指南](docs/guide.zh-CN.md) | 数据准备、配置、训练、续训、预测与导出 |
 | [英文技术参考](docs/reference.md) | 训练语义、设备行为、指标与兼容层细节 |
-| [报告对齐记录](docs/report-alignment.zh-CN.md) | 官方机制、社区实现选择、第一轮损失及后续任务 |
+| [报告对齐记录](docs/report-alignment.zh-CN.md) | 官方机制、社区实现选择、归一化损失、DHF 及后续任务 |
 | [ETTh1 示例配置](examples/etth1.yaml) | 包含数值和分类协变量的可运行配置 |
 | [综合验证记录](results/validation/README.zh-CN.md) | 多种子基准、冻结迁移和四档模型验收 |
 | [GIFT-Eval 运行指南](examples/gift_eval/README.md) | 环境配置、全任务训练和官方评估 |

@@ -1,0 +1,97 @@
+{
+  "passed": true,
+  "status": "accepted_locally_awaiting_user_review",
+  "date": "2026-10-29",
+  "branch": "codex/report-round2",
+  "base_commit": "78666239d99f7461fde27a0dd51003ade00a26c2",
+  "protocol_sha256": "b055be4e6470572f316fcec6d8aab6f317c1b1ca8c7be83061e3fe089d43d88e",
+  "checks": {
+    "default_full_suite": {
+      "passed": 176,
+      "skipped": 38,
+      "failed": 0
+    },
+    "real_5m_dhf_cpu_mps": {
+      "passed": 2,
+      "skipped_cuda": 1,
+      "failed": 0
+    },
+    "ruff": true,
+    "independent_implementation_review": true,
+    "independent_blog_review": true,
+    "loss_and_parameter_gradient_prefix_reference": true,
+    "future_information_gradient_firewall": true,
+    "packaging_build": true,
+    "wheel_isolated_import": true,
+    "packaged_runtime_modules_match_sources": 12,
+    "blog_excluded_from_wheel_and_sdist": true,
+    "selected_models": 18,
+    "evaluation_cases": 40,
+    "split_scores": 80,
+    "independent_metric_scalar_checks": 560,
+    "layout_replayed_dhf_models": 12,
+    "matched_window_sampler_pairs": 6,
+    "candidate_index_lists_match_both_datasets": true
+  },
+  "comparisons": [
+    {
+      "dataset": "ETTh1",
+      "horizon": 96,
+      "window_wql21_mean": 0.342176575200835,
+      "dhf_wql21_mean": 0.3412373045572641,
+      "dhf_relative_change_percent": -0.27449881483547767
+    },
+    {
+      "dataset": "ETTh1",
+      "horizon": 192,
+      "window_wql21_mean": 0.3634308189751796,
+      "dhf_wql21_mean": 0.3601326244378294,
+      "dhf_relative_change_percent": -0.907516469475711
+    },
+    {
+      "dataset": "ETTh2",
+      "horizon": 96,
+      "window_wql21_mean": 0.1730577846045217,
+      "dhf_wql21_mean": 0.1728079785559469,
+      "dhf_relative_change_percent": -0.14434834534930996
+    },
+    {
+      "dataset": "ETTh2",
+      "horizon": 192,
+      "window_wql21_mean": 0.2052196360566842,
+      "dhf_wql21_mean": 0.2049569429915845,
+      "dhf_relative_change_percent": -0.128005813745391
+    }
+  ],
+  "local_evidence": {
+    "runs/report-round2-acceptance/baseline-tests.log": "4f3e28aa498c1e3d309b701ba459a8c88a2997d7f44d43a4711bf12fe84f8459",
+    "runs/report-round2-acceptance/cpu-suite.log": "170461009036feac2f0b0dcfc6d8bbc2266f6d0b2803e672164487b66b544fb7",
+    "runs/report-round2-acceptance/final-suite.log": "f87763d80e4443136c93bdc7d8f8a1c1f6860bfc982de4f53118a877e2b84d64",
+    "runs/report-round2-acceptance/real-5m.log": "186e9ff8b0a6008baf41fa84a1729bf13b14177aaf2736f6dc37df936b684018",
+    "runs/report-round2-acceptance/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "runs/report-round2-acceptance/build.log": "f147386643e4136dc566122241c77dd5d255f22bf9c96e7fd98c0caef4dc05d9",
+    "runs/report-round2-acceptance/package-checks.json": "33bf6c5fcd19f296945ba262ed99e83ab3e48a1021e604e9291973214c2e7dba",
+    "runs/report-round2-acceptance/wheel-import.json": "ade4a62b8409e19b4ce0c457873eae48ce0245992a50287b007f0e55d468804c",
+    "runs/report-round2-acceptance/wheel-source-checks.json": "f9ae42cb2bf8742bcc9a05d39a8219842b36d86e200f7c116b4561d171b371cf",
+    "runs/report-round2-acceptance/independent-audit.log": "5cebf97429ef898f8daa855919a72b5754c06fe79c977299577f7a2f2c88a36d",
+    "runs/report-round2-acceptance/exposure-audit.log": "6e2c64df4cecf6fb5a4bf734b70e532788dcf09ec7df59daf7869f5344752edb"
+  },
+  "delivery": {
+    "no_commit": true,
+    "no_push": true,
+    "main_unchanged": true,
+    "blog_local_only": true,
+    "blog_path": "blog/timestral-dhf-training.md",
+    "blog_sha256": "590aacc2b1178cd1be47a8356dc089ee99fbc7f742c88cabad30142489239653",
+    "blog_revision": "Problem-led rewrite with conditional-dependency derivation and supervision-distance analysis; independently reviewed; experiment results unchanged."
+  },
+  "limitations": [
+    "5M real-weight checks only; CUDA unavailable",
+    "DHF categorical covariates, gap augmentation and dynamic roles remain future work",
+    "uniform block distribution is a project choice, not the undisclosed official recipe",
+    "same steps are unequal supervision/compute; 92-step control matches completed budgets approximately, not selected-model exposure",
+    "two datasets and three seeds do not establish significance or broad generalization",
+    "coverage falls; ETTh2 H192 undercoverage worsens despite slightly lower WQL",
+    "8-hour planning budget is not a strict elapsed-time cutoff"
+  ]
+}

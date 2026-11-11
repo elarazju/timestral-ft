@@ -121,10 +121,52 @@ training:
 
 这些字段也可传给 `TrainConfig`，会随模型和检查点保存。不同损失空间的数值不能直接比较。
 更换损失空间需要新输出目录；旧配置缺少新增字段时保留历史行为。
-本轮仍是单预测区间微调，不代表官方完整训练流程的复现。详见[技术报告对齐记录](report-alignment.zh-CN.md)。
+默认仍为单预测区间微调；归一化损失或下述 DHF 都不代表复现官方完整预训练流程。
+详见[技术报告对齐记录](report-alignment.zh-CN.md)。
 
 训练保留官方逐 patch 更新的预测尺度；镜像平均、非负裁剪和极值裁剪只用于评估预测，
 不会应用在训练损失上。训练预测长度最多为单块上限 1024 步。
+
+### 多预测块 DHF 训练
+
+将以下字段放入 YAML 的 `training`，或传给 `TrainConfig`：
+
+```yaml
+training:
+  mode: lora
+  training_strategy: dhf
+  loss_space: normalized
+  validation_loss_space: history_scaled
+  context_length: 256
+  prediction_length: 192
+  dhf_min_context_patches: 1
+  dhf_max_block_patches: 6
+```
+
+默认 `training_strategy="window"` 保持现有行为。DHF 中，两种长度之和决定训练序列预算：
+上例为 448 点，整条序列均来自训练集。初始 1 个 patch，即已发布模型上的 32 点，只作为上下文；
+其余 416 点各被一个预测块覆盖。默认窗口方案只监督末尾 192 点。
+DHF 实际历史取决于块起点，上例可为 32–416 点；不要将配置的 256 误读为每个块的历史长度。
+
+每个样本单独采样布局，同一序列的所有变量共享布局；块长均匀采样自 1 到最大值，
+末块截断。这是本项目的采样选择，官方报告未披露其分布。
+`dhf_max_block_patches=None` 默认取 `ceil(prediction_length / patch_size)`，
+不得超过所选模型单块上限；初始上下文必须留下至少一个真实监督位置。
+最长可能历史也不得超过模型上下文上限。不整除 patch 的序列在右侧用缺失值补齐，
+补齐部分不会成为标签，输出裁回原长度。
+
+DHF 要求 `loss_space="normalized"`，可训练全部参数或 LoRA。
+数值型历史协变量和未来已知协变量覆盖完整训练序列，按固定角色处理；
+仅未来已知变量允许全窗归一化和双向读取，角色掩码阻止未来目标／历史协变量泄漏。
+分类协变量在此模式下明确报错，默认窗口模式继续支持。缺口增强和随机角色采样尚未加入。
+
+验证始终使用普通单起点预测，上例读取 256 点历史预测 192 点；不会采样 DHF 布局。
+比较训练策略时固定相同的 `validation_loss_space` 和验证长度。
+每步记录实际监督点数、预测块数及块长分布；块数按样本计算，同一布局不会按目标数重复计数。
+窗口与布局使用独立随机生成器，二者状态随检查点恢复；验证不消耗二者的随机流。
+
+对照实验、相同步数与近似监督点数控制的边界见[第二轮实验记录](../results/report_round2/README.md)，
+机制、真实权重和设备覆盖见[第二轮验收报告](../results/report_round2/acceptance.zh-CN.md)。
 
 ## 暂停和恢复
 

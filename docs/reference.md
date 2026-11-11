@@ -129,7 +129,8 @@ targets with no history are excluded. `loss_space="normalized"` instead scores d
 outputs against targets in the same advancing per-patch affine/asinh frame described in report
 Sections 3.3 and 4.1. Later frames use previous predicted medians, never future labels. The implementation
 retains gradient dependence through those predicted medians; the report does not specify the authors'
-complete gradient policy. This remains single-origin fine-tuning, not a reproduction of full pretraining.
+complete gradient policy. The default remains single-origin fine-tuning; neither this objective nor
+the optional DHF strategy reproduces the complete pretraining recipe.
 
 `validation_loss_space=None` follows `loss_space`; either explicit loss-space value selects a fixed
 checkpoint criterion. To isolate the training-objective change, use
@@ -141,6 +142,58 @@ See the [report alignment record](report-alignment.zh-CN.md) and
 [round-one experiment](../results/report_round1/README.md) for scope and evidence.
 Earlier four-size hardware acceptance used the historical objective; it does not automatically
 certify the new objective on every size. The round-one acceptance record states its actual coverage.
+
+### Native multi-block DHF
+
+Set `training_strategy="dhf"` together with `loss_space="normalized"`; the default remains
+`training_strategy="window"`. The same fields work in the YAML `training` mapping:
+
+```python
+TrainConfig(
+    mode="lora", training_strategy="dhf", loss_space="normalized",
+    validation_loss_space="history_scaled", context_length=256, prediction_length=192,
+    dhf_min_context_patches=1, dhf_max_block_patches=6,
+)
+```
+
+DHF samples a full observed training sequence of `context_length + prediction_length` steps.
+On released 32-step-patch models, this example has 448 steps: one initial context patch and
+416 potential scored positions per target, compared with 192 for terminal-window training.
+Actual block histories range from 32 up to 416 steps; the configured 256 is a sequence-budget
+component, not a fixed DHF history. Every real position after the initial prefix belongs to
+exactly one forecast block. Missing labels and targets with no observations before their block
+are excluded. Incomplete trailing patches are right-padded with NaNs and never scored as padding.
+
+The block-length distribution is uniform on `1..dhf_max_block_patches`, truncating the last block;
+this is a project choice because the report does not disclose its sampling distribution.
+`dhf_max_block_patches=None` resolves to `ceil(prediction_length / patch_size)` and must not
+exceed the model's single-block limit. `dhf_min_context_patches` defaults to 1 and must leave
+a real forecast suffix. The longest possible block history must fit the model's context limit.
+
+One transformer call encodes the full causal context stream and all independent decoder blocks.
+Context never reads decoder tokens; each decoder reads only context before its own block and
+earlier/current decoder positions in that block. All variates in one example share its layout;
+separate examples remain isolated. Frames restart at each block's observed prefix, then advance
+using its previous predicted medians. Only target rows receive direct loss.
+
+Fixed numeric past and known-future roles are supported. Known-future rows use whole-window
+normalization/bidirectional context, protected by the official variate firewalls. Consequently,
+the independent-prefix numerical reference applies to target-only inputs; cropping known-future
+rows changes their allowed normalization window. DHF currently rejects categorical covariates;
+the window strategy retains categorical support. Random role sampling and missing-gap augmentation
+remain future work. Full-parameter and LoRA training use the same DHF forward path.
+
+Validation always uses the ordinary single-origin forecast at the configured context/horizon,
+with `validation_loss_space` choosing the criterion; it does not sample forecast blocks.
+Window sampling and layout sampling have separate checkpointed CPU generators. Layout seed
+is `seed ^ 0x444846`, a reproducibility choice, and validation consumes neither generator.
+History records actual `supervised_points` for both strategies; DHF also records `forecast_blocks`
+and `block_length_histogram`, counted per example rather than per target. Changing strategy or
+layout configuration requires a new run. Missing fields in old artifacts mean window training.
+
+See the [round-two experiment](../results/report_round2/README.md) and
+[acceptance record](../results/report_round2/acceptance.zh-CN.md). Equal steps are not equal
+supervision or compute, and mechanism alignment does not guarantee better forecasts.
 
 Training bypasses `forecast()`'s inference mode and preserves the upstream advancing refine frame.
 It does not use test-time symmetry averaging, nonnegative clipping, or extreme-output caps in the loss.

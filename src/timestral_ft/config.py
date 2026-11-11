@@ -62,6 +62,9 @@ class TrainConfig:
     lora_dropout: float = 0.0
     loss_space: str = "history_scaled"
     validation_loss_space: str | None = None
+    training_strategy: str = "window"
+    dhf_max_block_patches: int | None = None
+    dhf_min_context_patches: int = 1
 
     def __post_init__(self):
         if self.mode not in {"full", "lora"}:
@@ -70,6 +73,16 @@ class TrainConfig:
             raise ValueError("loss_space must be history_scaled or normalized")
         if self.validation_loss_space not in {None, "history_scaled", "normalized"}:
             raise ValueError("validation_loss_space must be None, history_scaled or normalized")
+        if self.training_strategy not in {"window", "dhf"}:
+            raise ValueError("training_strategy must be window or dhf")
+        if self.training_strategy == "dhf" and self.loss_space != "normalized":
+            raise ValueError("DHF training requires loss_space='normalized'")
+        if self.dhf_min_context_patches is None:
+            raise ValueError("dhf_min_context_patches must be a positive integer")
+        for name in ("dhf_min_context_patches", "dhf_max_block_patches"):
+            value = getattr(self, name)
+            if value is not None and (isinstance(value, bool) or not isinstance(value, int) or value < 1):
+                raise ValueError(f"{name} must be a positive integer")
         for name in ("context_length", "prediction_length", "max_steps", "batch_size",
                      "gradient_accumulation", "eval_every", "patience", "num_threads", "lora_rank"):
             if getattr(self, name) < 1:

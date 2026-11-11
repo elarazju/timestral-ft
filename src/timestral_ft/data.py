@@ -210,6 +210,58 @@ class WindowDataset(Dataset):
         return digest.hexdigest()
 
 
+class DHFSequenceDataset(WindowDataset):
+    """Full sequences entirely inside the training split, including covariates.
+
+    context_length + prediction_length fixes the sequence budget. Unlike a
+    terminal window, all real positions after min_context_steps may be labels.
+    The model, not this dataset, pads incomplete patches and samples blocks.
+    """
+
+    def __init__(self, processor, data, context_length, prediction_length, *, min_context_steps):
+        if processor.config.categorical_columns:
+            raise ValueError("DHF categorical covariates are deferred; use numeric covariates or window training")
+        self.processor = processor
+        self.context_length = context_length
+        self.prediction_length = prediction_length
+        self.min_context_steps = min_context_steps
+        total = context_length + prediction_length
+        if not 1 <= min_context_steps < total:
+            raise ValueError("DHF initial context must leave at least one real target step")
+        normalized = processor.normalize(data)
+        self.groups, self.index = [], []
+        cfg = processor.config
+        for _, group in normalized.groupby(processor.id_column, sort=False):
+            group = group.sort_values(cfg.time_column).reset_index(drop=True)
+            group_index = len(self.groups)
+            self.groups.append(group)
+            for start in range(len(group) - total + 1):
+                values = group.iloc[start:start + total][cfg.target_columns].notna().to_numpy()
+                # A target is usable if any observed point follows an earlier
+                # observed patch. Actual per-block eligibility is checked later.
+                prefix_observed = values[:min_context_steps].any(axis=0)
+                suffix = values[min_context_steps:]
+                later_observed = suffix.cumsum(axis=0) - suffix
+                if (suffix & (prefix_observed[None] | (later_observed > 0))).any():
+                    self.index.append((group_index, start + context_length))
+        if not self.index:
+            raise ValueError("No eligible DHF sequences: check sequence length and observed labels")
+
+    def __getitem__(self, index):
+        group_index, origin = self.index[index]
+        group = self.groups[group_index].iloc[origin - self.context_length:origin + self.prediction_length]
+        cfg = self.processor.config
+        item = {"sequence": self.processor.feature_array(group, cfg.target_columns)}
+        for role in ("past_covariates", "known_covariates"):
+            values = self.processor.feature_array(group, getattr(cfg, role))
+            if values is not None:
+                item[role] = values
+        return {key: torch.from_numpy(value) for key, value in item.items()}
+
+    def fingerprint(self):
+        return hashlib.sha256((super().fingerprint() + f":dhf:{self.min_context_steps}").encode()).hexdigest()
+
+
 def collate(items, device="cpu"):
     # Categories are encoded on CPU in float64, including codes above 2**24.
     # Moving them to MPS first would either fail or lose category identity.
