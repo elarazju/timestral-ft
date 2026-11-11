@@ -1,0 +1,167 @@
+{
+  "frozen_at_utc": "2026-11-11T16:05:45.151694+00:00",
+  "amendment": {
+    "prior_protocol_sha256": "931e2a1ad9f19b74ed91cc50b60e738801c1183e45f1e0150a948a05002cc716",
+    "reason": "First execution completed arrays but failed recording pip freeze because uv environment has no pip. No scores were displayed/inspected. Preserve original snapshot/arrays in failed-environment-receipt; replace only environment package inventory with importlib.metadata, extend receipt audits, and rerun unchanged experiment parameters."
+  },
+  "purpose": "Exploratory context representations, not official classification or anomaly results",
+  "model": {
+    "repo": "mistralai/Timestral-5M",
+    "revision": "bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f",
+    "weights_sha256": "7ace108c4987e7f2a99a75a445240019d1d31c2117139d1bd05ffdfd25aca738",
+    "config_sha256": "b5f27f61513f8fd1a3aa996f3720d3679cb40bce5bcb08eb3dc320ce726e7c2f",
+    "frozen": true,
+    "device": "cpu",
+    "precision": "fp32",
+    "threads": 4,
+    "batch_size": 16
+  },
+  "classification": {
+    "dataset": "GunPoint",
+    "official_description": "https://www.timeseriesclassification.com/description.php?Dataset=GunPoint",
+    "source_note": "Official zip returned HTTP 403; pinned aeon archive mirror, official page confirms dimensions and standard split",
+    "train_n": 50,
+    "test_n": 150,
+    "length": 150,
+    "classes": [
+      1,
+      2
+    ],
+    "features": [
+      "raw",
+      "mean",
+      "last"
+    ],
+    "classifier": "1-NN Euclidean, first training index on ties",
+    "normalization": "Keep archive values; no additional external scaling of raw data or embeddings",
+    "selection": "All three prespecified methods reported; test labels used only after prediction for final scoring",
+    "repetitions": "One complete fixed split; no artificial seed repeats"
+  },
+  "detection": {
+    "dataset": "ETTh2",
+    "column": "OT",
+    "train": [
+      0,
+      8640
+    ],
+    "calibration": [
+      8640,
+      11520
+    ],
+    "test": [
+      11520,
+      14400
+    ],
+    "window": 96,
+    "stride": 24,
+    "label_unit": "window",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "normal_assumption": "Unmodified data treated as reference normal; genuine faults are unknown, not adjudicated healthy labels",
+    "injection": "Independent perturbations of overlapping test windows, not a continuous fault timeline",
+    "selection": "Choose floor(0.30*n_test_windows) indices without replacement, shuffle balanced cycling kinds 1/2/3; same input for both methods",
+    "spike": "one point += sign*6*training_raw_std_ddof0; start uniform [24,72), sign uniform +/-1",
+    "level_shift": "24 consecutive points += sign*3*training_raw_std_ddof0; start uniform [24,72)",
+    "stuck": "24 consecutive points set to immediately preceding original value; start uniform [24,72)",
+    "random_order": "default_rng(seed): choice(indices), shuffle(cycling kinds); for each selected index draw start then sign (also for stuck)",
+    "input_scaling": "(raw-training_point_mean)/training_point_std_ddof0, same for both methods",
+    "embedding": "valid-patch mean, flatten variable and hidden axes, no external embedding scaling",
+    "statistics": [
+      "mean(x)",
+      "std(x,ddof=0)",
+      "min(x)",
+      "max(x)",
+      "mean(abs(diff(x)))",
+      "max(abs(diff(x)))"
+    ],
+    "statistics_scaling": "each feature centered/scaled using train-window mean/std ddof0; floor scale at 1e-12",
+    "score": "Euclidean distance to closest training reference-normal window, no bank subsampling",
+    "threshold": {
+      "split": "unmodified calibration only",
+      "quantile": 0.99,
+      "method": "linear",
+      "comparison": ">"
+    },
+    "metrics": "average precision (stepwise PR AUC, ties grouped), fixed threshold F1/FPR/recall; per-kind versus same noninjected windows; seed mean and sample std ddof1",
+    "interpretation": "Offline complete-window detection; overlapping correlated windows; no point adjustment; seeds measure injection variability only, not dataset uncertainty"
+  },
+  "data": {
+    "GunPoint_TRAIN.ts": {
+      "sha256": "f842401779fd9800d247d8b33121a1a4643710a19b24917dbdd9a060ca8630d5",
+      "url": "https://raw.githubusercontent.com/aeon-toolkit/aeon/98c13323251a011722de2d6f68a772554af9b9ea/aeon/datasets/data/GunPoint/GunPoint_TRAIN.ts"
+    },
+    "GunPoint_TEST.ts": {
+      "sha256": "79332750788a6227b325b96bd0d70130c8eb707b9731f8d7dec62b7a7d36017e",
+      "url": "https://raw.githubusercontent.com/aeon-toolkit/aeon/98c13323251a011722de2d6f68a772554af9b9ea/aeon/datasets/data/GunPoint/GunPoint_TEST.ts"
+    },
+    "ETTh2.csv": {
+      "sha256": "a3dc2c597b9218c7ce1cd55eb77b283fd459a1d09d753063f944967dd6b9218b",
+      "url": "https://raw.githubusercontent.com/zhouhaoyi/ETDataset/1d16c8f4f943005d613b5bc962e9eeb06058cf07/ETT-small/ETTh2.csv"
+    }
+  },
+  "source_hashes": {
+    "examples/report_round6/README.md": "47c2e6898eed1d3aa050f23d3c350c86ccd7fb9337d6d952fc52698fa62c11a5",
+    "examples/report_round6/encode.py": "19ef54ee141e077f5a83def785e88667653d53dbf3ae812ac15b91d79d9c1933",
+    "pyproject.toml": "87ac827d7a980774d6c46077925ab2200ac04f3f4ff69afcc972e5d31f4ccf49",
+    "scripts/audit_report_round6.py": "94b1e0761ed220613399ca3a33b3b6d48f63d5caebebab259a0a84dc6e34b8f3",
+    "scripts/run_report_round6.py": "d92f002e45e87298e8ea53a7a19883cd111c06cacf6864bdb872a3f59ef64ca6",
+    "src/timestral_ft/__init__.py": "d5a8f518c5b9c858edc1124eef4242f9528bbc4c061756254e435c81a1ecab45",
+    "src/timestral_ft/artifacts.py": "0fe47d52c2fcae564c2f253e0372d7343b2ac51306856a7eb7ddaf6c8cd83dfa",
+    "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+    "src/timestral_ft/cli.py": "40c4babb63040cc05b4519134a9d981678b3eafcde9f2bfc9480c89ea631eccf",
+    "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+    "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+    "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+    "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+    "src/timestral_ft/evaluation.py": "0074126b3dbf10ae1e7512206fa243137f9d42f3e07b5b431089111e25188af0",
+    "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+    "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+    "src/timestral_ft/inference.py": "2bdc51973a785e970723eef542bc0772df26b73f746d6ee737c44d131c2ca34c",
+    "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+    "src/timestral_ft/representation.py": "9da5d68ab1d14a82fc02a8cec899104375afa808cbbf3c130058396e7bf9118b",
+    "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+    "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d",
+    "tests/conftest.py": "84f137c76dd5f66d86d20d8a4754640a3ef5e53d29f1c4ea14320d481bd043b8",
+    "tests/test_api.py": "532f3e20aa902b478c6baa31836bb196d1e00211c8494f69a461dcad1c19abde",
+    "tests/test_augmentation.py": "1398d94932bab76b7b29080a7c9dcab1e878825f1b68330012f325c1a1abb69d",
+    "tests/test_augmentation_acceptance.py": "7471dd31a59c1f69d107b86555873881ac97e8eae91850dfa02ad89a07741e5f",
+    "tests/test_benchmark.py": "e9e4b542069c7bbaab1efd31730c89c4b7797052806bd34b0c2e1e9737558fc8",
+    "tests/test_data.py": "035d6578cb4b2681efc284410bc7b91a212dbcb9bd2efbac8201b4602b6ad290",
+    "tests/test_devices.py": "dc2c930f30fd4ce4021d69ecf08f830993bb5465ebc6829b1c91d2499ed58e6e",
+    "tests/test_dhf.py": "1feebb4b2124edfd5c797f05bddfda7bd7ae30bbe06bab4b72bc4609082f8eb5",
+    "tests/test_dhf_acceptance.py": "0896fc685df717c32190df94ffcf0d554112e9e3f1ff904b387f7fc5b17a756a",
+    "tests/test_dhf_api.py": "99f8cc5f54f8e63ddc1b38063a81924f95b53f38bbc0d5e7100d77af7c9fa222",
+    "tests/test_gift.py": "e522488929f5f87d64ed6410d3f5c66653e96af45c7e01b03beac52baa3614f1",
+    "tests/test_gift_parallel.py": "34ad955e06522e73d399b455291cdc4bfccf2208b1183dfd5215da64ff23d848",
+    "tests/test_gift_ranking.py": "5250512888c3691491f4d4f6b67186bbd394f3ee783a8a1e3ac87f29f8d6b040",
+    "tests/test_gift_selection.py": "6feb69f099b25aa9f0446004855903bad87c3cbbfe6ca1c9405ab5223e2ff413",
+    "tests/test_inference.py": "f746bbcc6278a38b6cc2d75f1e1bcfb3c2b77880fecda4fc9ffe481dbd576d4d",
+    "tests/test_integration.py": "eac76ff92e5218e1ff4941078bb3d1d4d33b392f6b8c86a559d9ba3c1b65d1d4",
+    "tests/test_mps_profile_lifecycle.py": "06e3afa7c102fbf16dd7b6688a93ab65c28aa731575b0d285db1062cb0e0eff9",
+    "tests/test_normalized_devices.py": "e0445ecf0b1f06c2892a618b33bc234254c804d218afa1c4f038049e29fc609a",
+    "tests/test_normalized_loss.py": "8f4fc5e24520948299b7fb6e96413b762a09494e04ac6d3049a0e18564897a4c",
+    "tests/test_report_round1.py": "b03fea42b2f5bd11b31634dff62c7918162392f9c9317dfbdcff0337e6e83166",
+    "tests/test_report_round2.py": "63e6e181c11e0847ec2b7d60de7b47b194719e178646417401e33cfa4033faf1",
+    "tests/test_report_round3.py": "0624748cb53b55cdfdf70a8759b0e2da0f7906f360f9a0f98825e8155037bed4",
+    "tests/test_report_round4.py": "848e55e9f3eda9b4193ce8934597c005efa6d32388ec6816b08d19aa988b8a97",
+    "tests/test_report_round6.py": "5eb79ec1d88f6a5e1607116850482f7320031f78e6df2184ea053f75724245bc",
+    "tests/test_representation.py": "6a75188e3cf8865db9554e7a3edfcdf6c9f07c9a4d95936cbacfd087d39a38ae",
+    "tests/test_synthetic.py": "7c3ecbc9edc0f920cc8bddc345c92ebd4607b58a31676fd9ab9e69a16e77b775",
+    "tests/test_training_path.py": "61ed49701590a3fce1658ef3299cdd6bf6075f93021867baea50b1727f3bd36f"
+  },
+  "upstream_source_hashes": {
+    "__init__.py": "46777bcb15b903f7721a3d6d91a6cb93463fc454816da238799eb8d5360e5ab5",
+    "config.py": "d46e37020875c536e7a75e1b6ace3f67419ba2f2c9d9e8465f4b07f837e92ed6",
+    "covariate_encoding.py": "1c7f5c320fa4b7622d3705f765f53ab9676b829cb1d4fd68f839ec593b8404c0",
+    "forecaster.py": "12a712f9be777d1e160513b7f8c81d545b991fcfe6cd4a46004a03533b7cb8fd",
+    "layers.py": "480ba93e7e3681dea185e5fa08a96dcce327cf938931c715ae54e6b02934527d",
+    "loading.py": "179257fa74e798c207887e2fed162e9a2fef9c37cadadb9437fabfeae68b3d6f",
+    "masks.py": "1792898d809b99034bb70e2cc1ab74f897ce8478886f83140e705fc67e6762b3",
+    "model.py": "988121c6a089e843c4941732cbc5c64b10cb0eccd9310e228abe38ecf2dfb668",
+    "scaler.py": "838da836f70b1640bcaed7701a70a1a358e30442693e63522a93f878e157a8ca"
+  },
+  "metric_selection": "No label-driven parameter/pooling/threshold/model selection; no training or prior-round winning weights"
+}

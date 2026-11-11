@@ -372,3 +372,44 @@ predict 在输出文件旁保存 `.runtime.json`，evaluate 把运行记录放�
 首次调用可能远慢于热状态；五次短重复只有描述意义。请读
 [第五轮完整配置](../examples/report_round5/README.md)与
 [实测和边界](../results/report_round5/README.md)，再按实际调用频率判断是否值得启用。
+
+
+## 提取上下文表征
+
+`encode()` 返回预测网络内部的上下文 Transformer 表征，可用作固定特征的探索起点。
+调用前保持 `model.eval()` 和 FP32 权重；该接口走 eager 路径，不接受 `InferenceConfig`。
+不会执行预测查询、预测头、反归一化或对称平均，也不修改模型及导出结构。
+
+```python
+import numpy as np
+from timestral_ft import encode
+from timestral_ft.compat import load_model
+
+backbone = load_model("mistralai/Timestral-5M",
+                      revision="bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f")
+x = np.stack([np.sin(np.arange(150) / 8), np.cos(np.arange(150) / 8)])[:, None, :]
+r = encode(backbone, x, lengths=[130, 150], pooling="mean")
+print(r.patches.shape)       # (2, 1, 5, 192)，发布的5M使用32点patch
+print(r.pooled.shape)        # (2, 1, 192)
+print(r.patch_start[0], r.patch_end[0])
+# 已加载的微调模型也可 artifact.encode(x, pooling="last")。
+```
+
+输入支持 `(T,)`、`(B,T)`、`(B,V,T)`；`lengths` 指各样本真实前缀长度，右侧存储区被忽略。
+先保留真实前缀的末 `max_context` 点，再在左侧补齐 patch。`patch_start/end` 是原输入时间轴上
+去掉填充后的半开区间；全填充槽起止相等。`observation_mask` 必须为同形布尔数组；非有限值也视作缺失。
+`patch_valid` 排除全填充和全缺失 patch；部分 patch 只要有观测即有效，在 mean 中等权计一次。
+`pooling="last"` 取最后一个有效 patch；全缺失变量的所有输出为零，`valid=False`，不会伪造可用特征。
+
+输出 `(B,V,P,D)` 保留变量轴，但同一示例内的变量有交互注意力；不同示例隔离。
+模型配置若允许读取启动后的缺失 patch，内部注意力继续沿用该设置；对外有效掩码仍排除这些无观测位置。
+每个 token 读取整个自身 patch 及此前历史，因此不能声称 patch 第一个点就已得到这个向量。
+完整窗口的 mean／last 表征只能在窗口结束后使用。本次检测实验是离线窗口检测，没有逐点定位或 point adjustment。
+
+首版只支持数值目标。`role_ids` 只能显式为全目标0；过去／未来／分类协变量参数全部拒绝。
+`FineTunedModel.encode()` 接数组，不走表格 processor；有协变量配置的模型需显式
+`targets_only=True` 表示只提取目标，不能将这一结果称为协变量条件下的表征。
+
+[第六轮结果](../results/report_round6/README.md)显示，GunPoint 的两种表征池化均未胜过原始序列最近邻，
+ETTh2 模拟异常的统计基线整体也更强。分类和异常检测是官方报告提出的探索方向，
+该社区接口及有限实验不等于官方已证明的能力。完整接口语义见[参考](reference.md#context-representation-api)。

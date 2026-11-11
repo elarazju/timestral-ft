@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "protocol_sha256": "9d675cecebac10ab8ce772d0b354eed9779bac79afbd6a0c893318ec2144fe9d",
+  "results_sha256": "b37ffa1b4d0344973bfe26af30c232c8481db6886e2ccc9a3e3364a3d748255a",
+  "checks": [
+    "complete source and array key sets, snapshot and all hashes",
+    "pinned upstream, weights/config and data identity",
+    "official split, all classification predictions/distances/confusions/deltas",
+    "all temporal windows and seed injection reconstruction",
+    "all six baseline features and training-only scaling",
+    "all NN scores and calibration-only thresholds",
+    "all overall/per-type/seed-summary metrics",
+    "CPU/MPS acceptance array hashes, finite/zero/shape and numerical agreement"
+  ],
+  "limits": "Neural arrays checked by hashes, not recomputed by this auditor; independent hidden-layer reference and device agreement tested separately. No real-fault labels or independent-window inference."
+}

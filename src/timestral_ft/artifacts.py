@@ -133,6 +133,23 @@ class FineTunedModel:
                 self.model.eval(), config, max_context=self.train_config.context_length)
         return self._inference_runtimes[key]
 
+    def encode(self, context, *, observation_mask=None, lengths=None, pooling="mean",
+               targets_only=False, **kwargs):
+        """Encode numeric arrays, not a table; no fitted preprocessing is applied.
+
+        The default context cap is this artifact's training context length. All
+        supplied rows are numeric targets; covariates/future arguments are rejected.
+        Call self.model.eval() first if the model was put into training mode.
+        """
+        from .representation import encode
+        cfg = self.processor.config
+        if (cfg.past_covariates or cfg.known_covariates or cfg.categorical_past_covariates
+                or cfg.categorical_known_covariates) and targets_only is not True:
+            raise ValueError("Artifact has covariates; explicitly pass targets_only=True to encode numeric targets alone")
+        kwargs.setdefault("max_context", self.train_config.context_length)
+        return encode(self.model, context, observation_mask=observation_mask,
+                      lengths=lengths, pooling=pooling, **kwargs)
+
     def backtest(self, data, **kwargs):
         from .evaluation import evaluate
         return evaluate(self, data, **kwargs)

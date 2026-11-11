@@ -1,0 +1,33 @@
+{
+  "devices": {
+    "cpu": {
+      "finite": true,
+      "forecast_bitwise_unchanged": true,
+      "state_dict_bitwise_unchanged": true,
+      "official_context_max_abs_error": 0.0,
+      "shape": [
+        2,
+        3,
+        5,
+        192
+      ],
+      "sha256": "76e7178446642d0cff6d86c90d8c5f332f77d3696b6645c00fabd3886ef0e320"
+    },
+    "mps": {
+      "finite": true,
+      "forecast_bitwise_unchanged": true,
+      "state_dict_bitwise_unchanged": true,
+      "official_context_max_abs_error": 0.0,
+      "shape": [
+        2,
+        3,
+        5,
+        192
+      ],
+      "sha256": "4a9f3f79be599598a088ca441d9f950c5620edd14fb0e5c43101e5eafeef5237",
+      "max_abs_vs_cpu": 4.947185516357422e-06
+    }
+  },
+  "input_sha256": "ac39a5fc6cda16f752a46f9ee22efd9eeb42dc0f7c7c9cc0c5dfc37835a83792",
+  "protocol_sha256": "9d675cecebac10ab8ce772d0b354eed9779bac79afbd6a0c893318ec2144fe9d"
+}

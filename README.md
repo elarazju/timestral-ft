@@ -356,6 +356,33 @@ fallback reasons and mixed execution. Speed is shape/device dependent, with a
 separate first-call cost. See the [runnable example](examples/report_round5/README.md)
 and [measured matrix and six-task GIFT quality control](results/report_round5/README.md).
 
+## Context representations
+
+```python
+import numpy as np
+from timestral_ft import encode
+from timestral_ft.compat import load_model
+
+backbone = load_model("mistralai/Timestral-5M",
+                      revision="bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f")
+features = encode(backbone, np.sin(np.arange(150) / 8), pooling="mean")
+print(features.patches.shape, features.pooled.shape, features.valid)
+```
+
+`encode()` exposes per-patch/per-variable context Transformer outputs and observed-patch
+masks, with mean/last pooling. It runs FP32 eager on numeric targets only, independently
+of the forecast head. Invalid vectors are zero; real lengths, left padding and cropping
+have explicit original-input coordinates. `FineTunedModel.encode()` also accepts arrays;
+it does not apply table preprocessing. See the [API](docs/reference.md#context-representation-api)
+and [runnable example](examples/report_round6/README.md).
+
+These features are exploratory. In the fixed GunPoint split, raw/mean/last 1-NN accuracy
+was 91.33%/88.67%/88.00%. In simulated ETTh2 window anomalies, the mean embedding's AP
+was 0.7818 versus 0.8663 for six simple statistics (three injection seeds).
+[Complete results](results/report_round6/README.md) retain failures, threshold sensitivity
+and scope limits. This does not establish the classification/anomaly capabilities proposed
+as future work in the official report.
+
 ## Documentation
 
 | Resource | Contents |

@@ -447,3 +447,67 @@ Our code is Apache-2.0. The upstream code is separately Apache-2.0; model weight
 subject to their own Modified MIT terms, including applicable commercial restrictions. See the base model's
 actual license before distributing a fine-tuned or merged model. Fine-tuning does not relicense weights.
 Datasets are downloaded at runtime and are not included in this repository.
+
+
+## Context representation API
+
+```python
+from timestral_ft import EncodedContext, encode
+# backbone must be an eval-mode Timestral model with FP32 parameters.
+result = encode(backbone, context, observation_mask=None, lengths=None,
+                max_context=None, pooling="mean", role_ids=None)
+```
+
+This inference-only FP32 eager API calls the unchanged model's causal scaling, patch
+projection and context Transformer. It does not create prediction tokens or call the
+quantile head, inverse transform, refinement, symmetric averaging or nonnegative clipping.
+It accepts no `InferenceConfig` and rejects non-FP32 parameters or training mode explicitly.
+It registers no parameters, changes no weight names and leaves the ordinary forecast path
+and exported artifacts unchanged. Returned tensors remain on the model device.
+
+| Field | Shape | Meaning |
+|---|---|---|
+| `patches` | `(B,V,P,D)` | Final Transformer context output, zero at invalid positions |
+| `patch_valid` | `(B,V,P)` | At least one observed real point in the patch |
+| `pooled` | `(B,V,D)` or `None` | Equal-weight valid-patch mean, last observed patch, or no pooling |
+| `valid` | `(B,V)` | At least one observed patch for this variable |
+| `patch_start`, `patch_end` | `(B,P)` | Half-open original-input coordinate bounds, excluding padding |
+| `lengths`, `retained_start` | `(B,)` | Real prefix length and retained crop start |
+
+Input shapes are `(T,)`, `(B,T)` (one variable), or `(B,V,T)`. NaN/infinity are missing.
+An optional boolean observation mask must match the original input shape exactly; False
+also marks missing. `lengths` is an integer `(B,)` vector in `[1,T]`: true data occupy the
+prefix `[0,lengths[b])`, and trailing storage is ignored. Empty inputs/zero lengths raise;
+an all-missing nonempty variable instead returns zero vectors with `valid=False`.
+
+The most recent `max_context` real points are retained independently for each example
+(default: model context length), then left-padded to the shared batch patch width.
+For a fully padded slot `patch_start == patch_end == retained_start`. Partial first patches
+retain their real observations and count **once**, not proportionally to observed-point
+count, in mean pooling. All-missing patches are excluded from both pools. The internal
+attention key mask still follows the model's `attend_missing_patches` setting: if enabled,
+missing patches after a series starts may influence later tokens, although they are not
+valid output/pooling positions. Batch padding therefore remains distinct from missingness.
+Adding longer unrelated examples changes storage width but not valid token representations
+within numerical tolerance; group masks prevent cross-example attention.
+
+Only numeric **target** rows are supported. Explicit `role_ids` must be shape `(V,)` or
+`(B,V)` with every entry `ROLE_TARGET=0`. Covariate/future/categorical arguments and other
+roles raise, rather than being silently interpreted as targets. Variables of one example
+can attend to each other: per-variable output is not independent univariate encoding.
+A token sees all observed points in its own patch and earlier patches, so its available time
+is `patch_end-1`, not `patch_start`. Mean/last whole-context features consume the complete
+retained window and are not online pointwise anomaly scores.
+
+`FineTunedModel.encode(context, ..., targets_only=False)` is an array convenience wrapper,
+with the artifact's training context length as the default cap. It **does not** normalize a
+table, apply the fitted processor or infer column roles/order. An artifact with configured
+covariates rejects the call unless `targets_only=True` explicitly chooses target-only
+features; covariates are not included under that option. Users must construct numeric target
+arrays themselves. A frozen feature API is neither a trained classifier nor a detector.
+
+[Round-six example](../examples/report_round6/README.md) and [protocol/results](../results/report_round6/README.md)
+include the official 5M hidden-layer reference, CPU/MPS checks, GunPoint standard-split 1-NN
+and simulated ETTh2 window detection. Report §5 names these tasks as exploratory directions;
+this community probe does not reproduce undisclosed official experiments or establish
+real-fault detection, universal representation quality, or large-model encoding coverage.

@@ -318,6 +318,29 @@ BF16 只对 Transformer／预测头中的合适算子使用自动混合精度；
 首次启动成本单独报告。见[可运行示例](examples/report_round5/README.md)和
 [性能矩阵与六任务 GIFT 质量对照](results/report_round5/README.md)。
 
+## 上下文表征
+
+```python
+import numpy as np
+from timestral_ft import encode
+from timestral_ft.compat import load_model
+
+backbone = load_model("mistralai/Timestral-5M",
+                      revision="bdd20cfc15a3fea0e4cb5ccef37f8d3ca7aa335f")
+features = encode(backbone, np.sin(np.arange(150) / 8), pooling="mean")
+print(features.patches.shape, features.pooled.shape, features.valid)
+```
+
+`encode()` 独立提取逐 patch／逐变量上下文 Transformer 输出、有效掩码及 mean／last 池化，
+仅支持数值目标和 FP32 eager，不经过预测头。无效向量置零；真实长度、左填充和裁剪都有原输入坐标。
+`FineTunedModel.encode()` 同样接收数组，不自动应用表格预处理。见
+[接口参考](docs/reference.md#context-representation-api)与[可运行示例](examples/report_round6/README.md)。
+
+这是一项探索接口。GunPoint 固定划分的原始／mean／last 最近邻准确率分别为
+91.33%／88.67%／88.00%；ETTh2 模拟窗口异常的表征 AP 为 0.7818，六项简单统计基线为
+0.8663（三个注入种子均值）。[完整实测](results/report_round6/README.md)保留负结果、阈值与样本范围限制，
+不把官方报告提出的分类／异常检测方向描述成已验证能力。
+
 ## 文档导航
 
 | 文档 | 内容 |

@@ -1,0 +1,85 @@
+{
+  "reviewer": "root",
+  "source_review": "Passed: numeric-target-only FP32 context API, original coordinates and masks, causal/context reference, explicit covariate refusal, unchanged forecast/export contract",
+  "static_checks": {
+    "ruff": "passed",
+    "git_diff_check": "passed"
+  },
+  "independent_audit": {
+    "status": "passed",
+    "protocol_sha256": "9d675cecebac10ab8ce772d0b354eed9779bac79afbd6a0c893318ec2144fe9d",
+    "results_sha256": "b37ffa1b4d0344973bfe26af30c232c8481db6886e2ccc9a3e3364a3d748255a",
+    "checks": [
+      "complete source and array key sets, snapshot and all hashes",
+      "pinned upstream, weights/config and data identity",
+      "official split, all classification predictions/distances/confusions/deltas",
+      "all temporal windows and seed injection reconstruction",
+      "all six baseline features and training-only scaling",
+      "all NN scores and calibration-only thresholds",
+      "all overall/per-type/seed-summary metrics",
+      "CPU/MPS acceptance array hashes, finite/zero/shape and numerical agreement"
+    ],
+    "limits": "Neural arrays checked by hashes, not recomputed by this auditor; independent hidden-layer reference and device agreement tested separately. No real-fault labels or independent-window inference."
+  },
+  "neural_recomputation": {
+    "status": "passed",
+    "independent_batch_size": 7,
+    "producer_batch_size": 16,
+    "threads": 2,
+    "rtol": 3e-05,
+    "atol": 3e-05,
+    "checks": [
+      {
+        "input": "train_raw",
+        "saved": "train_mean",
+        "rows": 50,
+        "max_abs": 0.0,
+        "last_max_abs": 0.0
+      },
+      {
+        "input": "test_raw",
+        "saved": "test_mean",
+        "rows": 150,
+        "max_abs": 0.0,
+        "last_max_abs": 0.0
+      },
+      {
+        "input": "train_input",
+        "saved": "train_embedding",
+        "rows": 357,
+        "max_abs": 0.0
+      },
+      {
+        "input": "calibration_input",
+        "saved": "calibration_embedding",
+        "rows": 117,
+        "max_abs": 0.0
+      },
+      {
+        "input": "s42_input",
+        "saved": "s42_embedding",
+        "rows": 117,
+        "max_abs": 0.0
+      },
+      {
+        "input": "s43_input",
+        "saved": "s43_embedding",
+        "rows": 117,
+        "max_abs": 0.0
+      },
+      {
+        "input": "s44_input",
+        "saved": "s44_embedding",
+        "rows": 117,
+        "max_abs": 0.0
+      }
+    ]
+  },
+  "agent_regression": {
+    "passed": 251,
+    "skipped": 50,
+    "seconds": 27.2
+  },
+  "root_clean_package_regression": "pending final integration step",
+  "local_blog_review": "Passed: reader-facing geometry, affine-invariance assumptions, ranking-versus-threshold discussion, actual results and both figures reviewed; local only"
+}
