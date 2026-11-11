@@ -1,0 +1,162 @@
+{
+  "cpu_paired": {
+    "identity": {
+      "sources": {
+        "scripts/run_report_round4.py": "2da95f2afce88828aefef6b8d5faaf6effefd0cc50039e06ec37eae80e38fb2d",
+        "scripts/audit_report_round4.py": "a8ebabfc33361abc9741c4f2cb3e350c538909f8368da50049529011609fd0a5",
+        "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+        "scripts/audit_report_round1.py": "e537a09bdc062c5ce117ddf7fc9a9c348202a7164c39ee2172085a87e9979085",
+        "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+        "src/timestral_ft/__init__.py": "928f47d1cbca40ebde28fa54e9efd3f2eb5de6d5ee83b1fc033d90207956b17e",
+        "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+        "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+        "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+        "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+        "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+        "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+        "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+        "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+        "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+        "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+        "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+        "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+        "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d"
+      },
+      "device": "cpu",
+      "threads": 2,
+      "requested_steps": 200,
+      "budget_hours": 8
+    },
+    "measurements": [
+      {
+        "strategy": "real",
+        "optimizer_steps": 6,
+        "wall_seconds": 5.926104791928083,
+        "conservative_seconds_per_step": 0.9876841319880137
+      },
+      {
+        "strategy": "mixed",
+        "optimizer_steps": 6,
+        "wall_seconds": 5.433751292061061,
+        "conservative_seconds_per_step": 0.9056252153435101
+      },
+      {
+        "strategy": "staged",
+        "optimizer_steps": 6,
+        "wall_seconds": 3.5599651669617742,
+        "conservative_seconds_per_step": 0.5933275278269624
+      }
+    ],
+    "selected_steps": 200,
+    "projected_seconds_with_40pct_overhead": 2088.7749751331285,
+    "selection_rule": "largest common 200/100/50 budget; ETTh1 training only, three arms, three seeds; never inspect test for selection"
+  },
+  "mps_paired": {
+    "identity": {
+      "sources": {
+        "scripts/run_report_round4.py": "2da95f2afce88828aefef6b8d5faaf6effefd0cc50039e06ec37eae80e38fb2d",
+        "scripts/audit_report_round4.py": "a8ebabfc33361abc9741c4f2cb3e350c538909f8368da50049529011609fd0a5",
+        "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+        "scripts/audit_report_round1.py": "e537a09bdc062c5ce117ddf7fc9a9c348202a7164c39ee2172085a87e9979085",
+        "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+        "src/timestral_ft/__init__.py": "928f47d1cbca40ebde28fa54e9efd3f2eb5de6d5ee83b1fc033d90207956b17e",
+        "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+        "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+        "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+        "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+        "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+        "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+        "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+        "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+        "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+        "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+        "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+        "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+        "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d"
+      },
+      "device": "mps",
+      "threads": 2,
+      "requested_steps": 200,
+      "budget_hours": 8
+    },
+    "measurements": [
+      {
+        "strategy": "real",
+        "optimizer_steps": 6,
+        "wall_seconds": 6.452200749889016,
+        "conservative_seconds_per_step": 1.0753667916481693
+      },
+      {
+        "strategy": "mixed",
+        "optimizer_steps": 6,
+        "wall_seconds": 5.798552625114098,
+        "conservative_seconds_per_step": 0.9664254375190163
+      },
+      {
+        "strategy": "staged",
+        "optimizer_steps": 6,
+        "wall_seconds": 3.907449332997203,
+        "conservative_seconds_per_step": 0.6512415554995338
+      }
+    ],
+    "selected_steps": 200,
+    "projected_seconds_with_40pct_overhead": 2262.1483791200444,
+    "selection_rule": "largest common 200/100/50 budget; ETTh1 training only, three arms, three seeds; never inspect test for selection"
+  },
+  "final_cpu_preflight": {
+    "identity": {
+      "sources": {
+        "scripts/run_report_round4.py": "712964a75e075b1ff12a74c4b12dba3694b8ccfd5c1814ef2d4b42129a57ed4e",
+        "scripts/audit_report_round4.py": "e06834c25c56934e21259759b1760739683d34789654cea10360d2f59b0348a8",
+        "scripts/run_report_round1.py": "5faa32b27a8d36ee6ebc3047f4d0c17cf50a72bca359112d5bcb28eccbcaeb0f",
+        "scripts/audit_report_round1.py": "e537a09bdc062c5ce117ddf7fc9a9c348202a7164c39ee2172085a87e9979085",
+        "scripts/benchmark_suite.py": "99a534256bff5d75e3d0ced54ac8c48612f00a465fdc0e9494fe4281760851dc",
+        "src/timestral_ft/__init__.py": "928f47d1cbca40ebde28fa54e9efd3f2eb5de6d5ee83b1fc033d90207956b17e",
+        "src/timestral_ft/artifacts.py": "236ae44f77ffa996d9240e6c2ab66d791a1e20956dd8bf1949f2ab78b7d4fcb1",
+        "src/timestral_ft/augmentation.py": "d083c8060db1ad2310f0eaab661a8af9cd04c29ded8338745d08414219304325",
+        "src/timestral_ft/cli.py": "a5c195cfbe8c6c521175551bb463cd99dd5217679caca7cc5b6294061e16c568",
+        "src/timestral_ft/compat.py": "c1381feca671e4d6850c0c8ea1103529b06dd98bf2c082e93cecc4ace4898cbe",
+        "src/timestral_ft/config.py": "9e57052b8efc70de7a119e70856be8474b0da6ab0508dee286b939ec00793270",
+        "src/timestral_ft/data.py": "043f1ca5a8c2edb2e8cc5b483548b22ff66c4e48ff88fff7c6232adf57917513",
+        "src/timestral_ft/dhf.py": "b5af8583843c10e50c0a474a78cbbf7c62ff189bef494458c53481ec11070059",
+        "src/timestral_ft/evaluation.py": "5b231c3595e4c5994c43aa4ad71839e7848842d93f0a9414bf5f88aaa25c8e4b",
+        "src/timestral_ft/gift.py": "4bf70e3ac385fa7add8e24222230bb597683cf7e96921d3ac9ea8710e5b709e0",
+        "src/timestral_ft/gift_validation.py": "4e16ede6962a9f09aeaa2ce38e99e2af863200ee14fa43a91246a834d18701c4",
+        "src/timestral_ft/lora.py": "6f2526bca974a0a39b3f5364f0a07f18f641b65fae9ff31c47079c2229ffd76d",
+        "src/timestral_ft/synthetic.py": "607b3f56d4c39919402e8d8d28dd21dde0046f4568fec39042ab169cc93abd83",
+        "src/timestral_ft/trainer.py": "41ebd0fa2c1577c033ecece86a6ef4075e47050023aea1df0e655c7fbda3402d"
+      },
+      "device": "cpu",
+      "threads": 2,
+      "requested_steps": 200,
+      "budget_hours": 8
+    },
+    "measurements": [
+      {
+        "strategy": "real",
+        "optimizer_steps": 6,
+        "wall_seconds": 5.90981166693382,
+        "conservative_seconds_per_step": 0.9849686111556366
+      },
+      {
+        "strategy": "mixed",
+        "optimizer_steps": 6,
+        "wall_seconds": 5.469465541187674,
+        "conservative_seconds_per_step": 0.9115775901979456
+      },
+      {
+        "strategy": "staged",
+        "optimizer_steps": 6,
+        "wall_seconds": 3.567803791956976,
+        "conservative_seconds_per_step": 0.5946339653261626
+      }
+    ],
+    "selected_steps": 200,
+    "projected_seconds_with_40pct_overhead": 2092.5913400109853,
+    "selection_rule": "largest common 200/100/50 budget; ETTh1 training only, three arms, three seeds; never inspect test for selection"
+  },
+  "chosen_device": "cpu",
+  "reason": "lower no-test six-step two-stage wall-clock sum on the paired code snapshot; final CPU preflight repeated after selected-prefix reporting change",
+  "paired_sources_equal": true,
+  "note": "Each includes dataset construction/load/checkpoint overhead; only ETTh1 training is timed, no held-out scores examined."
+}

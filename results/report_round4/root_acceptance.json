@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "pytest": {
+    "passed": 229,
+    "skipped": 50,
+    "seconds": 45.35
+  },
+  "lint_and_diffcheck": true,
+  "full_experiment_audit_rerun": true,
+  "capacity_sources_match_formal_protocol": true,
+  "pure_real_stage_equivalence": [
+    {
+      "mode": "full",
+      "passed": true,
+      "checks": [
+        "identical weights",
+        "identical model/window/layout RNG",
+        "identical validation selection",
+        "identical scheduler"
+      ]
+    },
+    {
+      "mode": "lora",
+      "passed": true,
+      "checks": [
+        "identical weights",
+        "identical model/window/layout RNG",
+        "identical validation selection",
+        "identical scheduler"
+      ]
+    }
+  ],
+  "prior_round3_snapshot_audit_passed": true,
+  "blog_sha256": "687b0dc679a721d54c98f23ed62edbdb07e4aff28c49dd6c8dbeffdc449b256e",
+  "blog_and_both_figures_reviewed": true,
+  "blog_delivery": "local only; excluded from Git and build archives"
+}

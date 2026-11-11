@@ -266,3 +266,11 @@ def collate(items, device="cpu"):
     return {key: torch.stack([item[key] for item in items]).to(
         "cpu" if key.startswith("categorical_") else device
     ) for key in items[0]}
+
+
+def training_source_fingerprint(processor, data):
+    """Identity of all training rows, even when no real window is sampled."""
+    normalized = processor.normalize(data)
+    digest = hashlib.sha256(json.dumps(processor.to_dict(), sort_keys=True).encode())
+    digest.update(pd.util.hash_pandas_object(normalized, index=False).values.tobytes())
+    return digest.hexdigest()

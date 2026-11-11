@@ -5,6 +5,7 @@ import logging
 import math
 import random
 import time
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -24,10 +25,11 @@ from .compat import (
     normalized_pinball_loss,
     pinball_loss,
 )
-from .config import UPSTREAM_REVISION, DataConfig, TrainConfig
-from .data import DataProcessor, DHFSequenceDataset, WindowDataset, collate
+from .config import UPSTREAM_REVISION, DataConfig, TrainConfig, TrainingStage
+from .data import DataProcessor, DHFSequenceDataset, WindowDataset, collate, training_source_fingerprint
 from .dhf import dhf_pinball_loss, differentiable_dhf_forecast, layout_statistics, sample_block_layout
 from .lora import apply_lora
+from .synthetic import MIXTURE_SEED_XOR, SYNTHETIC_SEED_XOR, stage_at, synthetic_item
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +63,7 @@ def clip_gradients(parameters, max_norm):
     return float(total)
 
 
-def _rng_state(generator, device="cpu", layout_generator=None, missing_generator=None, role_generator=None):
+def _rng_state(generator, device="cpu", layout_generator=None, missing_generator=None, role_generator=None, mixture_generator=None, synthetic_generator=None):
     npstate = np.random.get_state()
     return {"python": random.getstate(), "numpy": [npstate[0], npstate[1].tolist(),
             npstate[2], npstate[3], npstate[4]], "torch": torch.get_rng_state(),
@@ -70,10 +72,12 @@ def _rng_state(generator, device="cpu", layout_generator=None, missing_generator
             "sampler": generator.get_state(),
             "dhf_layout": layout_generator.get_state() if layout_generator is not None else None,
             "missingness": missing_generator.get_state() if missing_generator is not None else None,
-            "roles": role_generator.get_state() if role_generator is not None else None}
+            "roles": role_generator.get_state() if role_generator is not None else None,
+            "mixture": mixture_generator.get_state() if mixture_generator is not None else None,
+            "synthetic": synthetic_generator.get_state() if synthetic_generator is not None else None}
 
 
-def _restore_rng(state, generator, layout_generator=None, missing_generator=None, role_generator=None):
+def _restore_rng(state, generator, layout_generator=None, missing_generator=None, role_generator=None, mixture_generator=None, synthetic_generator=None):
     random.setstate(state["python"])
     n = state["numpy"]
     np.random.set_state((n[0], np.asarray(n[1], dtype=np.uint32), n[2], n[3], n[4]))
@@ -87,7 +91,8 @@ def _restore_rng(state, generator, layout_generator=None, missing_generator=None
         if state.get("dhf_layout") is None:
             raise ValueError("DHF checkpoint is missing its forecast-layout RNG state")
         layout_generator.set_state(state["dhf_layout"])
-    for key, rng in (("missingness", missing_generator), ("roles", role_generator)):
+    for key, rng in (("missingness", missing_generator), ("roles", role_generator),
+                     ("mixture", mixture_generator), ("synthetic", synthetic_generator)):
         if rng is not None:
             if state.get(key) is None:
                 raise ValueError(f"Checkpoint is missing its {key} RNG state")
@@ -166,6 +171,10 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
     """
     cfg = train_config or TrainConfig()
     data_cfg = data_config or DataConfig()
+    stages = cfg.stages or [TrainingStage(cfg.max_steps, cfg.context_length)]
+    mixed = any(stage.synthetic_probability > 0 for stage in stages)
+    if mixed and data_cfg.covariate_columns:
+        raise ValueError("Synthetic mixing currently supports target-only schemas; declared covariates cannot be dropped")
     check_device(cfg.device)
     torch.set_num_threads(cfg.num_threads)
     random.seed(cfg.seed)
@@ -190,30 +199,43 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
         raise ValueError("context_length exceeds this model's supported history")
     if cfg.prediction_length > model.config.block_size * model.config.patch_size:
         raise ValueError("prediction_length exceeds this model's single decode block")
-    dhf_metadata = None
-    if cfg.training_strategy == "dhf":
-        ps = model.config.patch_size
-        sequence_length = cfg.context_length + cfg.prediction_length
-        n_patches = math.ceil(sequence_length / ps)
-        max_block = cfg.dhf_max_block_patches or math.ceil(cfg.prediction_length / ps)
-        if max_block > model.config.block_size:
-            raise ValueError("dhf_max_block_patches exceeds this model's single decode block")
-        if cfg.dhf_min_context_patches >= n_patches or cfg.dhf_min_context_patches * ps >= sequence_length:
-            raise ValueError("DHF initial context must leave at least one real target step")
-        if (n_patches - 1) * ps > model.config.context_length:
-            raise ValueError("DHF longest possible history exceeds the model's supported context length")
-        training = DHFSequenceDataset(processor, train_data, cfg.context_length, cfg.prediction_length,
-                                      min_context_steps=cfg.dhf_min_context_patches * ps)
-        dhf_metadata = {"sequence_length": sequence_length, "padded_sequence_length": n_patches * ps,
-                        "minimum_context_patches": cfg.dhf_min_context_patches, "max_block_patches": max_block,
-                        "block_length_distribution": "uniform_1_to_max",
-                        "potential_supervised_steps_per_target": sequence_length - cfg.dhf_min_context_patches * ps,
-                        "possible_history_steps": [cfg.dhf_min_context_patches * ps, (n_patches - 1) * ps],
-                        "padding": "right_nan", "layout_rng": "separate_checkpointed_generator",
-                        "layout_seed": cfg.seed ^ 0x444846}
-    else:
-        training = WindowDataset(processor, train_data, cfg.context_length, cfg.prediction_length)
-    fingerprints = {"train": training.fingerprint(), "validation": validation.fingerprint()}
+    training_sets, stage_metadata = [], []
+    for stage in stages:
+        if stage.context_length > model.config.context_length:
+            raise ValueError("Stage context_length exceeds this model's supported history")
+        dhf_metadata = None
+        if cfg.training_strategy == "dhf":
+            ps = model.config.patch_size
+            sequence_length = stage.context_length + cfg.prediction_length
+            n_patches = math.ceil(sequence_length / ps)
+            max_block = cfg.dhf_max_block_patches or math.ceil(cfg.prediction_length / ps)
+            if max_block > model.config.block_size:
+                raise ValueError("dhf_max_block_patches exceeds this model's single decode block")
+            if cfg.dhf_min_context_patches >= n_patches or cfg.dhf_min_context_patches * ps >= sequence_length:
+                raise ValueError("DHF initial context must leave at least one real target step")
+            if (n_patches - 1) * ps > model.config.context_length:
+                raise ValueError("DHF longest possible history exceeds the model's supported context length")
+            training = (DHFSequenceDataset(processor, train_data, stage.context_length, cfg.prediction_length,
+                        min_context_steps=cfg.dhf_min_context_patches * ps) if stage.synthetic_probability < 1 else None)
+            dhf_metadata = {"sequence_length": sequence_length, "padded_sequence_length": n_patches * ps,
+                            "minimum_context_patches": cfg.dhf_min_context_patches, "max_block_patches": max_block,
+                            "block_length_distribution": "uniform_1_to_max",
+                            "potential_supervised_steps_per_target": sequence_length - cfg.dhf_min_context_patches * ps,
+                            "possible_history_steps": [cfg.dhf_min_context_patches * ps, (n_patches - 1) * ps],
+                            "padding": "right_nan", "layout_rng": "separate_checkpointed_generator",
+                            "layout_seed": cfg.seed ^ 0x444846}
+        else:
+            training = (WindowDataset(processor, train_data, stage.context_length, cfg.prediction_length)
+                        if stage.synthetic_probability < 1 else None)
+        training_sets.append(training)
+        stage_metadata.append(dhf_metadata)
+    source_hash = training_source_fingerprint(processor, train_data)
+    stage_fingerprints = [dataset.fingerprint() if dataset is not None else "synthetic_only:" + source_hash
+                          for dataset in training_sets]
+    fingerprints = {"train": stage_fingerprints[0], "validation": validation.fingerprint()}
+    if cfg.stages:
+        fingerprints.update(stages=stage_fingerprints, train_source=source_hash)
+    dhf_metadata = stage_metadata[0]
     if cfg.mode == "lora":
         apply_lora(model, cfg.lora_rank, cfg.lora_alpha, cfg.lora_dropout)
     else:
@@ -233,6 +255,8 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                         if cfg.training_strategy == "dhf" else None)
     missing_generator = (torch.Generator().manual_seed(cfg.seed ^ 0x4D495353) if cfg.missing_probability else None)
     role_generator = (torch.Generator().manual_seed(cfg.seed ^ 0x524F4C45) if cfg.dynamic_role_sampling else None)
+    mixture_generator = torch.Generator().manual_seed(cfg.seed ^ MIXTURE_SEED_XOR) if mixed else None
+    synthetic_generator = torch.Generator().manual_seed(cfg.seed ^ SYNTHETIC_SEED_XOR) if mixed else None
     use_augmentation = bool(cfg.missing_probability or cfg.dynamic_role_sampling)
     metadata = {"base_model": base_model, "base_revision": base_revision,
                 "base_weights_sha256": file_sha256(checkpoint_path / "model.safetensors"),
@@ -253,6 +277,13 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
             "labels": "original finite observations; artificial gaps affect inputs only; eligibility requires observed target prefix"}
     if dhf_metadata is not None:
         metadata["dhf"] = dhf_metadata
+    if cfg.stages:
+        metadata["curriculum"] = {"stages": cfg.to_dict()["stages"], "dhf_stages": stage_metadata,
+            "validation_context_length": cfg.context_length,
+            "mixture_seed": cfg.seed ^ MIXTURE_SEED_XOR, "synthetic_seed": cfg.seed ^ SYNTHETIC_SEED_XOR,
+            "recipe_provenance": "project choice; not official pretraining reproduction"}
+    exposure = {"real_samples": 0, "synthetic_samples": 0,
+                "real_supervised_points": 0, "synthetic_supervised_points": 0}
     step, best, bad, best_step, elapsed = 0, math.inf, 0, 0, 0.0
     best_state = None
     if resume:
@@ -268,26 +299,51 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
         model.load_state_dict(state["model"], strict=True)
         optimizer.load_state_dict(state["optimizer"])
         scheduler.load_state_dict(state["scheduler"])
-        _restore_rng(state["rng"], generator, layout_generator, missing_generator, role_generator)
+        _restore_rng(state["rng"], generator, layout_generator, missing_generator, role_generator, mixture_generator, synthetic_generator)
         step, best, bad = state["step"], state["best_loss"], state["bad_evaluations"]
         best_step, elapsed, best_state = state["best_step"], state["elapsed"], state["best_model"]
+        if cfg.stages:
+            if state.get("stage_progress") != list(stage_at(stages, step)):
+                raise ValueError("Checkpoint stage progress is inconsistent with optimizer step")
+            exposure = state["exposure"].copy()
     started = time.perf_counter()
     stop = min(cfg.max_steps, stop_after_steps) if stop_after_steps is not None else cfg.max_steps
     if stop < step:
         raise ValueError("stop_after_steps precedes the resumed checkpoint")
     with (output / "history.jsonl").open("a") as log:
         while step < stop and bad < cfg.patience:
+            stage_index, stage_step = stage_at(stages, step)
+            stage = stages[stage_index]
+            active_cfg = replace(cfg, context_length=stage.context_length)
+            training = training_sets[stage_index]
+            if cfg.training_strategy == "dhf":
+                n_patches = math.ceil((stage.context_length + cfg.prediction_length) / model.config.patch_size)
             model.train()
             optimizer.zero_grad(set_to_none=True)
             accumulated, attempts, losses = 0, 0, []
             supervision = {"supervised_points": 0, "forecast_blocks": 0, "block_length_histogram": {}}
+            step_exposure = dict.fromkeys(exposure, 0)
             while accumulated < cfg.gradient_accumulation:
                 attempts += 1
                 if attempts > cfg.gradient_accumulation * 100:
                     raise ValueError("Too many batches without valid labels")
-                indices = torch.randint(len(training), (cfg.batch_size,), generator=generator).tolist()
-                batch = collate([training[i] for i in indices], cfg.device)
-                augmented = (prepare_augmented_batch(batch, cfg, missing_generator, role_generator)
+                if mixed:
+                    sources = torch.rand(cfg.batch_size, generator=mixture_generator) < stage.synthetic_probability
+                    items = []
+                    for is_synthetic in sources.tolist():
+                        if is_synthetic:
+                            items.append(synthetic_item(stage.context_length, cfg.prediction_length,
+                                len(data_cfg.target_columns), cfg.synthetic, synthetic_generator, cfg.training_strategy))
+                        else:
+                            index = int(torch.randint(len(training), (), generator=generator))
+                            items.append(training[index])
+                else:
+                    # Preserve the legacy vector draw and random stream exactly.
+                    sources = torch.zeros(cfg.batch_size, dtype=torch.bool)
+                    indices = torch.randint(len(training), (cfg.batch_size,), generator=generator).tolist()
+                    items = [training[i] for i in indices]
+                batch = collate(items, cfg.device)
+                augmented = (prepare_augmented_batch(batch, active_cfg, missing_generator, role_generator)
                              if use_augmentation else None)
                 if cfg.training_strategy == "dhf":
                     anchors = sample_block_layout(cfg.batch_size, n_patches, cfg.dhf_min_context_patches,
@@ -302,7 +358,7 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                         training_labels = augmented.labels
                     loss = dhf_pinball_loss(prediction, training_labels, model.config.quantile_knots)
                 elif augmented is not None:
-                    loss, window_count, hidden_supervised = _augmented_window_loss(model, augmented, batch, cfg)
+                    loss, window_count, hidden_supervised = _augmented_window_loss(model, augmented, batch, active_cfg)
                 else:
                     labels = batch.pop("labels")
                     loss = _batch_loss(model, batch, labels, cfg)
@@ -329,6 +385,18 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                     hidden_count = (int((augmented.hidden_mask & prediction.supervision_mask).sum())
                                     if cfg.training_strategy == "dhf" else hidden_supervised)
                     supervision["hidden_supervised_points"] = supervision.get("hidden_supervised_points", 0) + hidden_count
+                if cfg.training_strategy == "dhf":
+                    per_sample = prediction.supervision_mask.flatten(1).sum(1).cpu()
+                elif augmented is not None:
+                    target_rows = augmented.role_ids == ROLE_TARGET
+                    valid_history = torch.isfinite(augmented.inputs[..., :stage.context_length]).any(-1)
+                    mask = torch.isfinite(augmented.labels[..., stage.context_length:])
+                    per_sample = (mask & (target_rows & valid_history)[..., None]).flatten(1).sum(1).cpu()
+                else:
+                    per_sample = (torch.isfinite(labels) & torch.isfinite(batch["context"]).any(-1)[..., None]).flatten(1).sum(1).cpu()
+                for source, selected in (("synthetic", sources), ("real", ~sources)):
+                    step_exposure[source + "_samples"] += int(selected.sum())
+                    step_exposure[source + "_supervised_points"] += int(per_sample[selected].sum())
                 losses.append(float(loss.detach()))
                 accumulated += 1
             clip_gradients(parameters, cfg.gradient_clip)
@@ -341,6 +409,12 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
                 record.update(supervision)
             else:
                 record["supervised_points"] = supervision["supervised_points"]
+            if cfg.stages:
+                record.update(stage_index=stage_index, stage_step=stage_step + 1,
+                    training_context_length=stage.context_length, synthetic_probability=stage.synthetic_probability,
+                    **step_exposure)
+            for key, value in step_exposure.items():
+                exposure[key] += value
             # A pause does not add an evaluation: resuming keeps exactly the same schedule.
             if step % cfg.eval_every == 0 or step == cfg.max_steps:
                 value = _validation_loss(model, validation, cfg)
@@ -355,15 +429,19 @@ def finetune(train_data, validation_data, *, model_id="mistralai/Timestral-5M",
             log.flush()
             checkpoint = {"metadata": metadata, "model": _cpu_state(model),
                           "optimizer": optimizer.state_dict(), "scheduler": scheduler.state_dict(),
-                          "rng": _rng_state(generator, cfg.device, layout_generator, missing_generator, role_generator), "step": step,
+                          "rng": _rng_state(generator, cfg.device, layout_generator, missing_generator, role_generator, mixture_generator, synthetic_generator), "step": step,
                           "best_loss": best, "best_step": best_step, "bad_evaluations": bad,
                           "best_model": best_state, "elapsed": elapsed + time.perf_counter() - started}
+            if cfg.stages:
+                checkpoint.update(stage_progress=list(stage_at(stages, step)), exposure=exposure.copy())
             # Replace atomically so an interrupted write leaves the last checkpoint intact.
             torch.save(checkpoint, output / "checkpoint.tmp")
             (output / "checkpoint.tmp").replace(output / "checkpoint.pt")
     elapsed += time.perf_counter() - started
     metadata.update(steps=step, best_step=best_step, best_validation_loss=best if math.isfinite(best) else None,
                     training_seconds=elapsed, completed=step >= cfg.max_steps or bad >= cfg.patience)
+    if cfg.stages:
+        metadata.update(stage_progress=list(stage_at(stages, step)), exposure=exposure)
     write_json(output / "training_summary.json", metadata)
     write_json(output / "preprocessing.json", processor.to_dict())
     if best_state is not None:

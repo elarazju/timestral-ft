@@ -224,6 +224,13 @@ fixed and every example keeps a target. Both mechanisms default off and have
 independent checkpointed random states. See the [round-three example](examples/report_round3/README.md)
 and [four-arm complete/gapped-history experiment](results/report_round3/README.md).
 
+Synthetic sequence priors and staged continued training are available through
+`SyntheticConfig` and `TrainingStage`: per-example source mixing, independent
+resumable RNG streams, fixed real validation, and source-specific exposure logs.
+See the [runnable Python/YAML example](examples/report_round4/README.md) and
+[ETTh1 adaptation / frozen ETTh2 transfer evidence](results/report_round4/README.md).
+This project-defined recipe is not official pretraining reproduction.
+
 The
 [technical reference](docs/reference.md) documents normalization, categorical
 encoding, numerical tolerances and the inference compatibility layer.

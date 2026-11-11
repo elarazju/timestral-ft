@@ -246,6 +246,44 @@ See the [runnable example and protocol](../examples/report_round3/README.md),
 The four-arm evaluation uses all-target forecasting with complete or fixed-gap
 history; it does not establish forecast-quality gains for known-future deployments.
 
+### Synthetic sources and stage schedules
+
+`SyntheticConfig` defines a versioned project prior: linear/quadratic trends,
+periodic harmonics, autoregressive noise, level/slope shifts, local events,
+Poisson observations, and lagged linear/nonlinear multivariate dependence.
+It is not the unpublished official generator. `TrainingStage(steps,
+context_length, synthetic_probability)` switches only training windows and the
+per-example real/synthetic Bernoulli probability. Stage steps sum to `max_steps`;
+the optimizer and learning-rate schedule continue through boundaries. Existing
+patience-based early stopping can end the plan before later stages. Top-level
+`context_length` keeps real-data validation fixed. `TrainConfig.to_dict()` saves
+nested configurations; `TrainConfig(**mapping)` restores them, including YAML.
+
+```python
+from timestral_ft import SyntheticConfig, TrainingStage
+training = TrainConfig(
+    mode="lora", training_strategy="dhf", loss_space="normalized",
+    validation_loss_space="history_scaled", context_length=256, prediction_length=192,
+    max_steps=200, synthetic=SyntheticConfig(),
+    stages=[TrainingStage(100, 128, 1.0), TrainingStage(100, 256, .5)],
+)
+```
+
+Positive synthetic probability currently requires target-only declared schemas;
+numeric/categorical covariates are explicitly rejected before training. All-real
+stages retain existing covariate support. Optional dynamic roles still operate
+on generated target rows. A pure-synthetic stage does not require eligible real
+windows at its context length; the complete real training-source identity remains
+pinned. Real validation/test labels never enter generation. The mixture and
+synthetic generators use independent CPU Torch streams (`seed ^ 0x4D495854` and
+`seed ^ 0x53594E54`). Checkpoints save their states, cumulative source-specific
+sample/supervision counts and the next stage position. Disabled stages/mixing
+preserve legacy sampling. See the [Python/YAML example](../examples/report_round4/README.md)
+and [experiment and capacity evidence](../results/report_round4/README.md).
+This is continued training from released weights. Tiny random models only verify
+mechanics; neither short adaptation nor one-batch 8192/32768 capacity checks
+reproduce official pretraining or establish long-context forecast quality.
+
 Training bypasses `forecast()`'s inference mode and preserves the upstream advancing refine frame.
 It does not use test-time symmetry averaging, nonnegative clipping, or extreme-output caps in the loss.
 Backtests use identical official default postprocessing for the base and fine-tuned models.

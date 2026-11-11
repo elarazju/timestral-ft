@@ -41,6 +41,50 @@ class DataConfig:
 
 
 @dataclass
+class SyntheticConfig:
+    """Project-defined prior; all ranges use uniform draws, not an official recipe."""
+    version: int = 1
+    trend_scale: float = 1.0
+    seasonal_scale: float = 1.0
+    noise_scale: float = 0.2
+    shift_probability: float = 0.5
+    event_probability: float = 0.5
+    count_probability: float = 0.2
+    nonlinear_probability: float = 0.5
+    dependency_strength: float = 0.5
+    min_period: float = 8.0
+    max_period: float = 128.0
+
+    def __post_init__(self):
+        import math
+        if self.version != 1:
+            raise ValueError("Unsupported synthetic generator version")
+        for name in ("trend_scale", "seasonal_scale", "noise_scale", "min_period", "max_period"):
+            if not math.isfinite(getattr(self, name)) or getattr(self, name) < 0:
+                raise ValueError(f"{name} must be finite and nonnegative")
+        if not 2 <= self.min_period <= self.max_period:
+            raise ValueError("Synthetic periods require 2 <= min_period <= max_period")
+        for name in ("shift_probability", "event_probability", "count_probability",
+                     "nonlinear_probability", "dependency_strength"):
+            if not 0 <= getattr(self, name) <= 1:
+                raise ValueError(f"{name} must be in [0, 1]")
+
+
+@dataclass
+class TrainingStage:
+    steps: int
+    context_length: int
+    synthetic_probability: float = 0.0
+
+    def __post_init__(self):
+        for name in ("steps", "context_length"):
+            if isinstance(getattr(self, name), bool) or not isinstance(getattr(self, name), int) or getattr(self, name) < 1:
+                raise ValueError(f"Stage {name} must be a positive integer")
+        if not 0 <= self.synthetic_probability <= 1:
+            raise ValueError("synthetic_probability must be in [0, 1]")
+
+
+@dataclass
 class TrainConfig:
     mode: str = "full"
     context_length: int = 256
@@ -71,7 +115,21 @@ class TrainConfig:
     dynamic_role_sampling: bool = False
     role_probabilities: list[float] = field(default_factory=lambda: [0.5, 0.25, 0.25])
 
+    synthetic: SyntheticConfig | None = None
+    stages: list[TrainingStage] = field(default_factory=list)
+
     def __post_init__(self):
+        if isinstance(self.synthetic, dict):
+            self.synthetic = SyntheticConfig(**self.synthetic)
+        if self.synthetic is not None and not isinstance(self.synthetic, SyntheticConfig):
+            raise ValueError("synthetic must be a SyntheticConfig or mapping")
+        self.stages = [TrainingStage(**s) if isinstance(s, dict) else s for s in self.stages]
+        if any(not isinstance(s, TrainingStage) for s in self.stages):
+            raise ValueError("stages must contain TrainingStage values or mappings")
+        if self.stages and sum(s.steps for s in self.stages) != self.max_steps:
+            raise ValueError("Stage steps must sum to max_steps")
+        if any(s.synthetic_probability for s in self.stages) and self.synthetic is None:
+            raise ValueError("Synthetic stages require an explicit synthetic configuration")
         if not 0 <= self.missing_probability <= 1:
             raise ValueError("missing_probability must be in [0, 1]")
         if isinstance(self.missing_max_span, bool) or not isinstance(self.missing_max_span, int) or self.missing_max_span < 1:

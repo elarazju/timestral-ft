@@ -203,6 +203,11 @@ DHF 要求归一化空间损失，数值协变量共享上下文前向；分类�
 两者默认关闭，随机状态分别保存和精确恢复。详见[第三轮示例](examples/report_round3/README.md)和
 [四组完整／缺口历史实验](results/report_round3/README.md)。
 
+新增合成序列先验与分阶段继续训练：`SyntheticConfig`、`TrainingStage`支持逐样本真实/合成混采、
+独立可恢复随机流、固定真实验证和分来源监督曝光记录。
+见[可运行Python/YAML示例](examples/report_round4/README.md)及
+[ETTh1适配/ETTh2冻结迁移证据](results/report_round4/README.md)。生成配方属于项目选择，不是官方预训练复现。
+
 
 归一化、分类编码、数值容差和推理兼容层的细节见[使用指南](docs/guide.zh-CN.md)
 和[英文技术参考](docs/reference.md)。
